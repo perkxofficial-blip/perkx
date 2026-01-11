@@ -6,4 +6,4 @@ RUN npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --im
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"]
+CMD if [ ! -d "node_modules" ]; then npm install; fi && npm run dev -- --hostname 0.0.0.0

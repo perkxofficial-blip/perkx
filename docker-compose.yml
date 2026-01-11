@@ -11,11 +11,15 @@ services:
       - ./api:/app
     environment:
       - NODE_ENV=development
-      - DATABASE_HOST=database
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=perkx
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=perkx
+      - USER_JWT_SECRET=0d8827ff6f9444f1cc050c01b4a860fc780a6d59b4122888f3e40ff3a9bbf422b5aedacbfc7d0650a0cc20a72f35895fa7b2db6f39f7e7eac46317cad51ec7bb
+      - USER_JWT_EXPIRES_IN=7d
+      - ADMIN_JWT_SECRET=3fc37ab44af51432b8027f78d720f45b107703c3e329bc228974e5b29d41187108021677929cd2c4e7a14c9de7b3e1d012a682880f9fb469216ca5840eabec5b
+      - ADMIN_JWT_EXPIRES_IN=1d
       - PORT=80
     depends_on:
       - database
