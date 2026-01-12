@@ -1,0 +1,37 @@
+{
+  "common": {
+    "welcome": "환영합니다",
+    "login": "로그인",
+    "logout": "로그아웃",
+    "dashboard": "대시보드",
+    "profile": "프로필",
+    "settings": "설정",
+    "users": "사용자"
+  },
+  "landing": {
+    "title": "Perkx에 오신 것을 환영합니다",
+    "description": "인증이 포함된 SSR 랜딩 페이지",
+    "heroTitle": "Perkx에 오신 것을 환영합니다",
+    "heroDescription": "인증이 포함된 SSR 랜딩 페이지",
+    "features": "기능",
+    "fastPerformance": "빠른 성능",
+    "fastPerformanceDesc": "속도에 최적화됨",
+    "secure": "보안",
+    "secureDesc": "보안을 고려하여 제작",
+    "scalable": "확장 가능",
+    "scalableDesc": "필요에 따라 성장"
+  },
+  "user": {
+    "dashboard": "사용자 대시보드",
+    "profile": "프로필",
+    "welcome": "다시 오신 것을 환영합니다"
+  },
+  "nav": {
+    "dashboard": "대시보드",
+    "admin": "관리자",
+    "home": "홈"
+  },
+  "footer": {
+    "copyright": "© 2026 Perkx. 모든 권리 보유."
+  }
+}

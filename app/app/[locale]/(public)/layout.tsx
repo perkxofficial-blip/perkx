@@ -1,9 +1,13 @@
-import type { Metadata } from 'next';
+import {getTranslations} from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'Perkx - Landing & User Portal',
-  description: 'Responsive platform for users',
-};
+export async function generateMetadata() {
+  const t = await getTranslations('landing');
+  
+  return {
+    title: `Perkx - ${t('title')}`,
+    description: t('description'),
+  };
+}
 
 export default function PublicLayout({
   children,

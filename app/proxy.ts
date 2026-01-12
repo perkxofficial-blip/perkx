@@ -1,30 +1,36 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import {routing} from './i18n/routing';
+import {NextRequest, NextResponse} from 'next/server';
 
-export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+const intlMiddleware = createMiddleware(routing);
 
-  // Get tokens from cookies
-  const userToken = request.cookies.get('token')?.value;
-  const adminToken = request.cookies.get('admin_token')?.value;
-
-  // Protect user routes
-  if (pathname.startsWith('/user')) {
+export default function proxy(request: NextRequest) {
+  const {pathname} = request.nextUrl;
+  
+  // Skip i18n for admin routes
+  if (pathname.startsWith('/admin')) {
+    // Auth check for admin
+    const adminToken = request.cookies.get('admin_token');
+    if (!adminToken && !pathname.startsWith('/admin/login')) {
+      return NextResponse.redirect(new URL('/admin/login', request.url));
+    }
+    return NextResponse.next();
+  }
+  
+  // Apply i18n middleware for public routes
+  const response = intlMiddleware(request);
+  
+  // Auth check for user routes
+  if (pathname.includes('/user')) {
+    const userToken = request.cookies.get('token');
     if (!userToken) {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
-
-  // Protect admin routes
-  if (pathname.startsWith('/admin')) {
-    if (!adminToken) {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
-  }
-
-  return NextResponse.next();
+  
+  return response;
 }
 
 export const config = {
-  matcher: ['/user/:path*', '/admin/:path*'],
+  matcher: ['/', '/(en|ko)/:path*', '/admin/:path*']
 };

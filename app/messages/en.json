@@ -1,0 +1,37 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "users": "Users"
+  },
+  "landing": {
+    "title": "Welcome to Perkx",
+    "description": "SSR Landing Page with Authentication",
+    "heroTitle": "Welcome to Perkx",
+    "heroDescription": "SSR Landing Page with Authentication",
+    "features": "Features",
+    "fastPerformance": "Fast Performance",
+    "fastPerformanceDesc": "Optimized for speed",
+    "secure": "Secure",
+    "secureDesc": "Built with security in mind",
+    "scalable": "Scalable",
+    "scalableDesc": "Grows with your needs"
+  },
+  "user": {
+    "dashboard": "User Dashboard",
+    "profile": "Profile",
+    "welcome": "Welcome back"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "home": "Home"
+  },
+  "footer": {
+    "copyright": "© 2026 Perkx. All rights reserved."
+  }
+}
