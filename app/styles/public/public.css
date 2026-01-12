@@ -1,0 +1,40 @@
+/* Public/User shared styles - Responsive */
+
+.public-container {
+  @apply container mx-auto px-4;
+}
+
+.public-card {
+  @apply bg-white rounded-lg shadow-sm p-6;
+}
+
+.public-button {
+  @apply px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors;
+}
+
+.public-button-secondary {
+  @apply px-6 py-3 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors;
+}
+
+/* Responsive grid */
+.public-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+/* Responsive text */
+.public-heading-xl {
+  @apply text-3xl md:text-5xl lg:text-6xl font-bold;
+}
+
+.public-heading-lg {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold;
+}
+
+/* Mobile menu */
+.mobile-menu-button {
+  @apply md:hidden p-2 rounded hover:bg-gray-100;
+}
+
+.desktop-menu {
+  @apply hidden md:flex items-center gap-4;
+}
