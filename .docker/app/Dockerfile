@@ -1,8 +1,6 @@
-FROM node:24
+FROM node:24-alpine
 
 WORKDIR /app
-
-RUN npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --import-alias "@/*" --use-npm --yes
 
 EXPOSE 3000
 
