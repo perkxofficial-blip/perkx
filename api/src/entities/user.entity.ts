@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  Index
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
@@ -20,23 +21,38 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
-  firstName: string;
+  // 🔹 nullable
+  @Column({ nullable: true })
+  first_name: string;
 
-  @Column()
-  lastName: string;
+  // 🔹 nullable
+  @Column({ nullable: true })
+  last_name: string;
 
   @Column({ nullable: true })
   phone: string;
 
   @Column({ default: true })
-  isActive: boolean;
+  is_active: boolean;
+
+  // 🔹 required + unique
+  @Column({ unique: true })
+  referral_code: string;
+
+  // 🔹 nullable + index
+  @Index()
+  @Column({ nullable: true })
+  referral_user_id: number;
+
+  // 🔹 nullable datetime
+  @Column({ type: 'timestamp', nullable: true })
+  email_verified_at: Date;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 
   @BeforeInsert()
   @BeforeUpdate()
