@@ -1,0 +1,45 @@
+/* Admin styles - Fixed width, non-responsive */
+
+.admin-container {
+  @apply min-w-[1440px];
+}
+
+.admin-sidebar {
+  @apply w-64 bg-gray-800 text-white fixed min-h-screen;
+}
+
+.admin-main {
+  @apply ml-64 flex-1;
+}
+
+.admin-header {
+  @apply bg-white shadow-sm p-6;
+}
+
+.admin-content {
+  @apply p-8;
+}
+
+.admin-card {
+  @apply bg-white rounded-lg shadow p-6;
+}
+
+.admin-table {
+  @apply w-full bg-white rounded-lg shadow overflow-hidden;
+}
+
+.admin-table th {
+  @apply px-6 py-4 text-left font-semibold bg-gray-50 border-b;
+}
+
+.admin-table td {
+  @apply px-6 py-4 border-b;
+}
+
+.admin-button {
+  @apply px-6 py-2 bg-gray-900 text-white rounded hover:bg-gray-800;
+}
+
+.admin-button-danger {
+  @apply px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700;
+}
