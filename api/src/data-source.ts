@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'password',
   database: process.env.DB_DATABASE || 'perkx_db',
-  entities: [User, Admin],
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
   migrations: ['src/database/migrations/*.ts'],
   synchronize: false, // Tắt auto sync khi dùng migrations
 });

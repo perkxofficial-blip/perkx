@@ -25,7 +25,7 @@ import { AdminModule } from './modules/admin/admin.module';
         username: configService.get<string>('database.username'),
         password: configService.get<string>('database.password'),
         database: configService.get<string>('database.database'),
-        entities: [User, Admin],
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: false, // Set to false in production
       }),
       inject: [ConfigService],
