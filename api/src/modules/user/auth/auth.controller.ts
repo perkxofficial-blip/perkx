@@ -75,11 +75,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Verify user email' })
   async verifyEmail(@Query() query: VerifyDto) {
     const { token } = query;
-    const userId = await this.emailVerificationService.verify(token);
-    await this.authService.markEmailVerified(userId);
-    return {
-      message: 'Email verified successfully',
-    };
+    const user = await this.emailVerificationService.verify(token);
+    return this.authService.login(user);
   }
 
   @Public()

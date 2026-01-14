@@ -23,7 +23,6 @@ export class AuthService {
     @InjectRepository(User)
     @InjectDataSource()
     private userRepository: Repository<User>,
-    private passwordResetRepo: Repository<UserPasswordReset>,
     private jwtService: JwtService,
     private emailVerificationService: EmailVerificationService,
     private dataSource: DataSource,
@@ -96,9 +95,7 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { sub: user.id, email: user.email };
-
     const accessToken = await this.jwtService.signAsync(payload);
-
     return {
       accessToken,
       user: {
@@ -106,6 +103,7 @@ export class AuthService {
         email: user.email,
         first_name: user.first_name,
         last_name: user.last_name,
+        referral_code: user.referral_code,
       },
     };
   }
@@ -116,12 +114,6 @@ export class AuthService {
     });
     if (!user) throw new NotFoundException('User not found');
     return user;
-  }
-
-  async markEmailVerified(userId: number) {
-    await this.userRepository.update(userId, {
-      is_active: true,
-    });
   }
 
   async forgotPassword(email: string) {

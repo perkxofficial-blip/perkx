@@ -57,14 +57,14 @@ export class EmailVerificationService {
 
     const verifyUrl = `${process.env.FRONTEND_URL}/verify?token=${raw}`;
     console.log(verifyUrl);
-    // await this.mailerService.sendMail({
-    //   to: user.email,
-    //   subject: 'PerkX - Verify your email',
-    //   template: 'verify-email',
-    //   context: {
-    //     verifyUrl,
-    //   },
-    // });
+    await this.mailerService.sendMail({
+      to: user.email,
+      subject: 'PerkX - Verify your email',
+      template: 'verify-email',
+      context: {
+        verifyUrl,
+      },
+    });
   }
   async verify(rawToken: string) {
     const hashed = crypto.createHash('sha256').update(rawToken).digest('hex');
@@ -85,16 +85,12 @@ export class EmailVerificationService {
       const now = new Date();
       record.verified_at = now;
       await verifyRepo.save(record);
+      const user = await userRepo.findOneBy({ id: record.user_id });
+      user.is_active = true;
+      user.email_verified_at = now;
+      await userRepo.save(user);
 
-      await userRepo.update(
-        { id: record.user_id },
-        {
-          email_verified_at: now,
-          is_active: true,
-        },
-      );
-
-      return record.user_id;
+      return user;
     });
   }
 }
