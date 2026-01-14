@@ -36,14 +36,14 @@ export default function UserProfilePage() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               First Name
             </label>
-            <p className="text-lg">{profile?.firstName}</p>
+            <p className="text-lg">{profile?.first_name}</p>
           </div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Last Name
             </label>
-            <p className="text-lg">{profile?.lastName}</p>
+            <p className="text-lg">{profile?.last_name}</p>
           </div>
           
           <div>

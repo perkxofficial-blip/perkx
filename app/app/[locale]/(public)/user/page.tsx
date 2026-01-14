@@ -35,7 +35,7 @@ export default function UserDashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-lg shadow">
           <h3 className="text-gray-500 text-sm mb-2">Welcome</h3>
-          <p className="text-xl font-bold">{data?.firstName} {data?.lastName}</p>
+          <p className="text-xl font-bold">{data?.first_name} {data?.last_name}</p>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow">
@@ -46,9 +46,9 @@ export default function UserDashboardPage() {
         <div className="bg-white p-6 rounded-lg shadow">
           <h3 className="text-gray-500 text-sm mb-2">Status</h3>
           <span className={`px-3 py-1 rounded-full text-sm ${
-            data?.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+            data?.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
           }`}>
-            {data?.isActive ? 'Active' : 'Inactive'}
+            {data?.is_active ? 'Active' : 'Inactive'}
           </span>
         </div>
       </div>

@@ -9,7 +9,7 @@ export class UpdateProfileDto {
   })
   @IsString()
   @IsOptional()
-  firstName?: string;
+  first_name?: string;
 
   @ApiProperty({
     description: 'User last name',
@@ -18,7 +18,7 @@ export class UpdateProfileDto {
   })
   @IsString()
   @IsOptional()
-  lastName?: string;
+  last_name?: string;
 
   @ApiProperty({
     description: 'User phone number',
