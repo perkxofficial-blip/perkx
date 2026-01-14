@@ -1,13 +1,6 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableIndex,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableIndex } from 'typeorm';
 
-export class CreateTableOthers1768289140356
-  implements MigrationInterface
-{
+export class CreateTableOthers1768289140356 implements MigrationInterface {
   name = 'CreateTableOthers1768289140356';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -136,7 +129,7 @@ export class CreateTableOthers1768289140356
       }),
     );
 
-        // user_exchanges
+    // user_exchanges
     await queryRunner.createTable(
       new Table({
         name: 'user_exchanges',
@@ -176,7 +169,7 @@ export class CreateTableOthers1768289140356
       true,
     );
 
-     // CREATE INDEX ON exchange_uid
+    // CREATE INDEX ON exchange_uid
     await queryRunner.createIndex(
       'user_exchanges',
       new TableIndex({
@@ -361,7 +354,12 @@ export class CreateTableOthers1768289140356
             isGenerated: true,
             generationStrategy: 'increment',
           },
-          { name: 'ip_address', type: 'varchar', length: '45', isNullable: true },
+          {
+            name: 'ip_address',
+            type: 'varchar',
+            length: '45',
+            isNullable: true,
+          },
           { name: 'reason', type: 'varchar', length: '255', isNullable: true },
           {
             name: 'is_active',

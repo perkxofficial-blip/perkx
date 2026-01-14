@@ -6,7 +6,7 @@ services:
       context: ./.docker/api
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "8088:80"
     volumes:
       - ./api:/app
     environment:
@@ -29,7 +29,7 @@ services:
       context: ./.docker/app
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3100:3000"
     volumes:
       - ./app:/app
     environment:
@@ -41,7 +41,7 @@ services:
   database:
     image: postgres:latest
     ports:
-      - "5432:5432"
+      - "5434:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

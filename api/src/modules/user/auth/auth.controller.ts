@@ -27,7 +27,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Login user' })
   @ApiResponse({ status: 200, description: 'User successfully logged in' })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
-  async login( @Request() req) {
+  async login(@Request() req) {
     return this.authService.login(req.user);
   }
 }
