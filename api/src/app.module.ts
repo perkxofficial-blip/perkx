@@ -8,6 +8,7 @@ import { User, Admin } from './entities';
 import { AuthModule as UserAuthModule } from './modules/user/auth/auth.module';
 import { ProfileModule } from './modules/user/profile/profile.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { PublicModule } from './modules/public/public.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { AdminModule } from './modules/admin/admin.module';
     UserAuthModule,
     ProfileModule,
     AdminModule,
+    PublicModule,
   ],
   controllers: [AppController],
   providers: [AppService],
