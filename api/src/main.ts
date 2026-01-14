@@ -1,15 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { TransformInterceptor, LoggingInterceptor } from './common/interceptors';
+import {
+  TransformInterceptor,
+  LoggingInterceptor,
+} from './common/interceptors';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   // Set global prefix
   app.setGlobalPrefix('api');
-  
+
   // Enable validation
   app.useGlobalPipes(
     new ValidationPipe({
@@ -18,17 +21,19 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  
+
   // Apply global interceptors
   app.useGlobalInterceptors(
     new TransformInterceptor(),
     new LoggingInterceptor(),
   );
-  
+
   // Swagger API Documentation
   const config = new DocumentBuilder()
     .setTitle('Perkx API')
-    .setDescription('API documentation for Perkx with dual authentication system')
+    .setDescription(
+      'API documentation for Perkx with dual authentication system',
+    )
     .setVersion('1.0')
     .addTag('User Auth', 'User authentication endpoints')
     .addTag('User Profile', 'User profile management')
@@ -57,16 +62,20 @@ async function bootstrap() {
       'admin-jwt', // Identifier for admin JWT
     )
     .build();
-  
+
   const document = SwaggerModule.createDocument(app, config);
-  
+
   // Only enable Swagger in development
   if (process.env.NODE_ENV !== 'production') {
     SwaggerModule.setup('docs', app, document);
-    console.log(`📚 API Documentation: http://localhost:${process.env.PORT ?? 3000}/docs`);
+    console.log(
+      `📚 API Documentation: http://localhost:${process.env.PORT ?? 3000}/docs`,
+    );
   }
 
   await app.listen(process.env.PORT ?? 3000);
-  console.log(`🚀 Application is running on: http://localhost:${process.env.PORT ?? 3000}`);
+  console.log(
+    `🚀 Application is running on: http://localhost:${process.env.PORT ?? 3000}`,
+  );
 }
 bootstrap();
