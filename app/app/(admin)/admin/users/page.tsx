@@ -59,11 +59,13 @@ export default function AdminUsersPage() {
                       <td className="px-6 py-4">{user.phone || '-'}</td>
                       <td className="px-6 py-4">
                         <span className={`px-3 py-1 rounded-full text-sm ${
-                          user.is_active 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'
+                          user.status === 'ACTIVE'
+                            ? 'bg-green-100 text-green-800'
+                            : user.status === 'DEACTIVATE'
+                            ? 'bg-red-100 text-red-800'
+                            : 'bg-gray-100 text-gray-800'
                         }`}>
-                          {user.is_active ? 'Active' : 'Inactive'}
+                          {user.status === 'ACTIVE' ? 'Active' : user.status === 'DEACTIVATE' ? 'Deactivate' : 'Inactive'}
                         </span>
                       </td>
                     </tr>

@@ -10,6 +10,12 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
+export enum UserStatus {
+  INACTIVE = 'INACTIVE',
+  ACTIVE = 'ACTIVE',
+  DEACTIVATE = 'DEACTIVATE',
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -32,8 +38,12 @@ export class User {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ default: true })
-  is_active: boolean;
+  @Column({
+    type: 'enum',
+    enum: UserStatus,
+    default: UserStatus.INACTIVE,
+  })
+  status: UserStatus;
 
   // 🔹 required + unique
   @Column({ unique: true })
