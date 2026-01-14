@@ -53,7 +53,7 @@ export class EmailVerificationService {
     });
 
     const verifyUrl = `${process.env.FRONTEND_URL}/verify?token=${raw}`;
-
+    console.log(verifyUrl)
     // await this.mailerService.sendMail({
     //   to: user.email,
     //   subject: 'PerkX - Verify your email',
@@ -65,7 +65,6 @@ export class EmailVerificationService {
   }
   async verify(rawToken: string) {
     const hashed = crypto.createHash('sha256').update(rawToken).digest('hex');
-
     return this.dataSource.transaction(async (manager) => {
       const verifyRepo = manager.getRepository(UserEmailVerification);
       const userRepo = manager.getRepository(User);

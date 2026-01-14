@@ -102,8 +102,8 @@ export class AuthService {
     };
   }
 
-  async findByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+  async findByUnVerifiedEmail(email: string) {
+    const user = await this.userRepository.findOne({ where: { email, is_active: false } });
     if (!user) throw new NotFoundException('User not found');
     return user;
   }

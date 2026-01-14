@@ -5,7 +5,7 @@ import {
   UseGuards,
   Request,
   Get,
-  Query,
+  Query, BadRequestException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto';
@@ -13,6 +13,8 @@ import { LocalAuthGuard } from './guards';
 import { Public } from '../../../common/decorators';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBody } from '@nestjs/swagger';
 import { EmailVerificationService } from './email-verification.service';
+import { VerifyDto } from './dto/verify.dto';
+import { ResendDto } from './dto/resend.dto';
 
 @ApiTags('User Auth')
 @Controller('auth')
@@ -57,7 +59,8 @@ export class AuthController {
   @ApiResponse({ status: 400, description: 'Token expired or already verified'})
   @ApiResponse({ status: 404, description: 'Invalid token', })
   @ApiOperation({ summary: 'Verify user email' })
-  async verifyEmail(@Query('token') token: string) {
+  async verifyEmail(@Query() query: VerifyDto) {
+    const { token } = query;
     const userId = await this.emailVerificationService.verify(token);
     await this.authService.markEmailVerified(userId);
     return {
@@ -70,8 +73,11 @@ export class AuthController {
   @ApiOperation({ summary: 'Resend verification email' })
   @ApiResponse({ status: 200, description: 'Verification email resent successfully'})
   @ApiResponse({ status: 404, description: 'User not found'})
-  async resend(@Body() body: { email: string }) {
-    const user = await this.authService.findByEmail(body.email);
+  async resend(@Body() body: ResendDto) {
+    const user = await this.authService.findByUnVerifiedEmail(body.email);
+    if (!user) {
+      throw new BadRequestException('Email does not exist or already verified');
+    }
     await this.emailVerificationService.reSend({
       id: user.id,
       email: user.email,
