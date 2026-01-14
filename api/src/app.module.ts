@@ -4,10 +4,11 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User, Admin } from './entities';
 import { AuthModule as UserAuthModule } from './modules/user/auth/auth.module';
 import { ProfileModule } from './modules/user/profile/profile.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [

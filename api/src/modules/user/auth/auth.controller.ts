@@ -1,14 +1,26 @@
-import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Request,
+  Get,
+  Query,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto';
 import { LocalAuthGuard } from './guards';
 import { Public } from '../../../common/decorators';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBody } from '@nestjs/swagger';
+import { EmailVerificationService } from './email-verification.service';
 
 @ApiTags('User Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private emailVerificationService: EmailVerificationService,
+  ) {}
 
   @Public()
   @Post('register')
@@ -29,5 +41,44 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   async login(@Request() req) {
     return this.authService.login(req.user);
+  }
+
+  @Public()
+  @Get('verify')
+  @ApiOperation({ summary: 'Verify user email by token' })
+  @ApiQuery({
+    name: 'token',
+    type: String,
+    required: true,
+    example: 'a1b2c3d4e5f6...',
+    description: 'Email verification token sent to user email',
+  })
+  @ApiResponse({ status: 200, description: 'Email verified successfully'})
+  @ApiResponse({ status: 400, description: 'Token expired or already verified'})
+  @ApiResponse({ status: 404, description: 'Invalid token', })
+  @ApiOperation({ summary: 'Verify user email' })
+  async verifyEmail(@Query('token') token: string) {
+    const userId = await this.emailVerificationService.verify(token);
+    await this.authService.markEmailVerified(userId);
+    return {
+      message: 'Email verified successfully',
+    };
+  }
+
+  @Public()
+  @Post('resend')
+  @ApiOperation({ summary: 'Resend verification email' })
+  @ApiResponse({ status: 200, description: 'Verification email resent successfully'})
+  @ApiResponse({ status: 404, description: 'User not found'})
+  async resend(@Body() body: { email: string }) {
+    const user = await this.authService.findByEmail(body.email);
+    await this.emailVerificationService.reSend({
+      id: user.id,
+      email: user.email,
+    });
+
+    return {
+      message: 'Verification email resent',
+    };
   }
 }
