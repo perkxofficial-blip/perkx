@@ -13,8 +13,7 @@ import { LocalAuthGuard } from './guards';
 import { Public } from '../../../common/decorators';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBody } from '@nestjs/swagger';
 import { EmailVerificationService } from './email-verification.service';
-import { VerifyDto } from './dto/verify.dto';
-import { ResendDto } from './dto/resend.dto';
+import { VerifyDto, ResendDto, ForgotPasswordDto, ResetPasswordDto } from './dto';
 
 @ApiTags('User Auth')
 @Controller('auth')
@@ -87,4 +86,20 @@ export class AuthController {
       message: 'Verification email resent',
     };
   }
+  @Public()
+  @Post('forgot-password')
+  @ApiOperation({ summary: 'Send reset password email' })
+  async forgotPassword(@Body() body: ForgotPasswordDto) {
+    await this.authService.forgotPassword(body.email);
+    return { message: 'Reset password email sent' };
+  }
+
+  @Public()
+  @Post('reset-password')
+  @ApiOperation({ summary: 'Reset password with token' })
+  async resetPassword(@Body() body: ResetPasswordDto) {
+    await this.authService.resetPassword(body.token, body.newPassword);
+    return { message: 'Password reset successfully' };
+  }
+
 }
