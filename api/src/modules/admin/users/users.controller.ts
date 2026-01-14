@@ -1,14 +1,15 @@
-import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards, NotFoundException } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AdminJwtAuthGuard } from '../auth/guards';
 import { CurrentAdmin } from '../../../common/decorators';
-import { Admin, UserStatus } from '../../../entities';
+import { Admin, UserStatus, UserGender } from '../../../entities';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
   ApiQuery,
+  ApiParam,
 } from '@nestjs/swagger';
 import { ListUsersQueryDto } from './dto/list-users-query.dto';
 
@@ -30,6 +31,46 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'List of all users retrieved successfully with pagination',
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'number' },
+              email: { type: 'string' },
+              referral_code: { type: 'string' },
+              birthday: { type: 'string', format: 'date', nullable: true },
+              gender: { type: 'string', enum: ['Male', 'Female'], nullable: true },
+              country: { type: 'string', nullable: true },
+              created_at: { type: 'string', format: 'date-time' },
+              referral_by: {
+                type: 'object',
+                nullable: true,
+                properties: {
+                  id: { type: 'number' },
+                  email: { type: 'string' },
+                  referral_code: { type: 'string' },
+                },
+              },
+              status: { type: 'string', enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'] },
+              email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+            },
+          },
+        },
+        pagination: {
+          type: 'object',
+          properties: {
+            total: { type: 'number' },
+            page: { type: 'number' },
+            limit: { type: 'number' },
+            totalPages: { type: 'number' },
+          },
+        },
+      },
+    },
   })
   @ApiResponse({
     status: 401,
@@ -43,14 +84,70 @@ export class UsersController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get user by ID' })
-  @ApiResponse({ status: 200, description: 'User retrieved successfully' })
+  @ApiOperation({ summary: 'Get user detail by ID with referrer, referrals, and exchanges' })
+  @ApiParam({ name: 'id', description: 'User ID', type: Number })
+  @ApiResponse({ 
+    status: 200, 
+    description: 'User detail retrieved successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        email: { type: 'string' },
+        first_name: { type: 'string' },
+        last_name: { type: 'string' },
+        phone: { type: 'string', nullable: true },
+        birthday: { type: 'string', format: 'date', nullable: true },
+        gender: { type: 'string', enum: ['Male', 'Female'], nullable: true },
+        country: { type: 'string', nullable: true },
+        status: { type: 'string', enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'] },
+        referral_code: { type: 'string' },
+        email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+        referrer: {
+          type: 'object',
+          nullable: true,
+          properties: {
+            id: { type: 'number' },
+            name: { type: 'string', nullable: true },
+            email: { type: 'string' },
+          },
+        },
+        referrals: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'number' },
+              email: { type: 'string' },
+              created_at: { type: 'string', format: 'date-time' },
+            },
+          },
+        },
+        exchanges: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              name: { type: 'string' },
+              uid: { type: 'string' },
+            },
+          },
+        },
+      },
+    },
+  })
   @ApiResponse({
     status: 401,
     description: 'Unauthorized - invalid or missing admin token',
   })
   @ApiResponse({ status: 404, description: 'User not found' })
   async findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    const user = await this.usersService.findOne(+id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 }
