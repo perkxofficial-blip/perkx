@@ -5,15 +5,27 @@ import {
   UseGuards,
   Request,
   Get,
-  Query, BadRequestException,
+  Query,
+  BadRequestException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto';
 import { LocalAuthGuard } from './guards';
 import { Public } from '../../../common/decorators';
-import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiQuery,
+  ApiBody,
+} from '@nestjs/swagger';
 import { EmailVerificationService } from './email-verification.service';
-import { VerifyDto, ResendDto, ForgotPasswordDto, ResetPasswordDto } from './dto';
+import {
+  VerifyDto,
+  ResendDto,
+  ForgotPasswordDto,
+  ResetPasswordDto,
+} from './dto';
 
 @ApiTags('User Auth')
 @Controller('auth')
@@ -54,9 +66,12 @@ export class AuthController {
     example: 'a1b2c3d4e5f6...',
     description: 'Email verification token sent to user email',
   })
-  @ApiResponse({ status: 200, description: 'Email verified successfully'})
-  @ApiResponse({ status: 400, description: 'Token expired or already verified'})
-  @ApiResponse({ status: 404, description: 'Invalid token', })
+  @ApiResponse({ status: 200, description: 'Email verified successfully' })
+  @ApiResponse({
+    status: 400,
+    description: 'Token expired or already verified',
+  })
+  @ApiResponse({ status: 404, description: 'Invalid token' })
   @ApiOperation({ summary: 'Verify user email' })
   async verifyEmail(@Query() query: VerifyDto) {
     const { token } = query;
@@ -70,8 +85,11 @@ export class AuthController {
   @Public()
   @Post('resend')
   @ApiOperation({ summary: 'Resend verification email' })
-  @ApiResponse({ status: 200, description: 'Verification email resent successfully'})
-  @ApiResponse({ status: 404, description: 'User not found'})
+  @ApiResponse({
+    status: 200,
+    description: 'Verification email resent successfully',
+  })
+  @ApiResponse({ status: 404, description: 'User not found' })
   async resend(@Body() body: ResendDto) {
     const user = await this.authService.findByUnVerifiedEmail(body.email);
     if (!user) {
@@ -101,5 +119,4 @@ export class AuthController {
     await this.authService.resetPassword(body.token, body.newPassword);
     return { message: 'Password reset successfully' };
   }
-
 }

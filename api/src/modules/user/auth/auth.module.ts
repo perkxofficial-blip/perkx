@@ -19,18 +19,15 @@ import { MailModule } from '../../mail.module';
       signOptions: { expiresIn: '1d' }, // Token expiration time
     }),
     ConfigModule,
-    MailModule
+    MailModule,
   ],
   providers: [
     AuthService,
     EmailVerificationService,
     JwtStrategy,
-    LocalStrategy
+    LocalStrategy,
   ],
   controllers: [AuthController],
-  exports: [
-    AuthService,
-    EmailVerificationService
-  ],
+  exports: [AuthService, EmailVerificationService],
 })
 export class AuthModule {}

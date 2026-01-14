@@ -30,7 +30,10 @@ export class EmailVerificationService {
     manager: EntityManager,
     user: { id: number; email: string },
   ) {
-    await this.createTokenAndDispatch(manager.getRepository(UserEmailVerification), user);
+    await this.createTokenAndDispatch(
+      manager.getRepository(UserEmailVerification),
+      user,
+    );
   }
 
   async reSend(user: { id: number; email: string }) {
@@ -53,7 +56,7 @@ export class EmailVerificationService {
     });
 
     const verifyUrl = `${process.env.FRONTEND_URL}/verify?token=${raw}`;
-    console.log(verifyUrl)
+    console.log(verifyUrl);
     // await this.mailerService.sendMail({
     //   to: user.email,
     //   subject: 'PerkX - Verify your email',

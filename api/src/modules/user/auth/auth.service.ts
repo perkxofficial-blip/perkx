@@ -1,7 +1,9 @@
 import {
   Injectable,
   ConflictException,
-  InternalServerErrorException, NotFoundException, BadRequestException,
+  InternalServerErrorException,
+  NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository, QueryFailedError, IsNull } from 'typeorm';
@@ -57,7 +59,8 @@ export class AuthService {
         });
       } catch (err) {
         // Unique violation (Postgres)
-        if (err instanceof QueryFailedError && (err as any).code === '23505') { // mã 23505 unique_violation của Postgres
+        if (err instanceof QueryFailedError && (err as any).code === '23505') {
+          // mã 23505 unique_violation của Postgres
           const detail = (err as any).detail || '';
           if (detail.includes('email')) {
             throw new ConflictException('Email already exists');
@@ -108,7 +111,9 @@ export class AuthService {
   }
 
   async findByUnVerifiedEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email, is_active: false } });
+    const user = await this.userRepository.findOne({
+      where: { email, is_active: false },
+    });
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
@@ -120,23 +125,29 @@ export class AuthService {
   }
 
   async forgotPassword(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
-    if (!user) return;
-    const { raw, hashed } = this.generateToken();
-    const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 phút
-    await this.passwordResetRepo.save({
-      user_id: user.id,
-      hashed,
-      expires_at: expiresAt
-    });
-    const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password?token=${raw}`;
-    await this.mailerService.sendMail({
-      to: user.email,
-      subject: 'PerkX - Reset your password',
-      template: 'reset-password',
-      context: {
-        resetPasswordUrl,
-      },
+    return await this.dataSource.transaction(async (manager) => {
+      const userRepo = manager.getRepository(User);
+      const passwordResetRepo = manager.getRepository(UserPasswordReset);
+
+      const user = await userRepo.findOne({ where: { email } });
+      if (!user) return;
+      await passwordResetRepo.delete({ user_id: user.id });
+      const { raw, hashed } = this.generateToken();
+
+      await passwordResetRepo.save({
+        user_id: user.id,
+        hashed,
+        expires_at: new Date(Date.now() + 15 * 60 * 1000),
+      });
+      const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password?token=${raw}`;
+      await this.mailerService.sendMail({
+        to: user.email,
+        subject: 'PerkX - Reset your password',
+        template: 'reset-password',
+        context: {
+          resetPasswordUrl,
+        },
+      });
     });
   }
 
@@ -147,22 +158,32 @@ export class AuthService {
   }
 
   async resetPassword(rawToken: string, newPassword: string) {
-    const hashedToken = crypto.createHash('sha256').update(rawToken).digest('hex');
-    const record = await this.passwordResetRepo.findOne({
-      where: { token: hashedToken, used_at: IsNull() },
+    return await this.dataSource.transaction(async (manager) => {
+      const passwordResetRepo = manager.getRepository(UserPasswordReset);
+      const userRepo = manager.getRepository(User);
+      const hashedToken = crypto
+        .createHash('sha256')
+        .update(rawToken)
+        .digest('hex');
+      const record = await passwordResetRepo.findOne({
+        where: { token: hashedToken, used_at: IsNull() },
+        lock: { mode: 'pessimistic_write' },
+      });
+      if (!record) {
+        throw new BadRequestException('Invalid token');
+      }
+      if (record.expires_at < new Date()) {
+        throw new BadRequestException('Token expired');
+      }
+      const user = await userRepo.findOneBy({ id: record.user_id });
+      if (!user) {
+        throw new BadRequestException('User not found');
+      }
+      user.password = newPassword;
+      await userRepo.save(user);
+      await passwordResetRepo.delete({ user_id: user.id });
+
+      return { message: 'Password reset successfully' };
     });
-    if (!record) throw new BadRequestException('Invalid token');
-
-    if (record.expires_at < new Date()) {
-      throw new BadRequestException('Token expired');
-    }
-
-    const user = await this.userRepository.findOneBy({ id: record.user_id });
-    if (!user) throw new BadRequestException('User not found');
-
-    user.password = newPassword;
-    await this.userRepository.save(user);
-    record.used_at = new Date();
-    await this.passwordResetRepo.save(record);
   }
 }
