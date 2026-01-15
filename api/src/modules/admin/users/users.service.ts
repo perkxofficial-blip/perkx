@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User, UserExchange, Exchange } from '../../../entities';
+import { User, UserExchange, Exchange, UserStatus } from '../../../entities';
 import { ListUsersQueryDto } from './dto/list-users-query.dto';
 
 @Injectable()
@@ -196,6 +196,23 @@ export class UsersService {
         name: ex.exchange_name,
         uid: ex.exchange_uid,
       })),
+    };
+  }
+
+  async updateStatus(id: number, status: UserStatus.ACTIVE | UserStatus.DEACTIVATE) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    
+    if (!user) {
+      return null;
+    }
+
+    user.status = status;
+    await this.userRepository.save(user);
+
+    return {
+      id: user.id,
+      email: user.email,
+      status: user.status,
     };
   }
 }

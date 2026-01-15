@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, UseGuards, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards, NotFoundException, Put, Body } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AdminJwtAuthGuard } from '../auth/guards';
 import { CurrentAdmin } from '../../../common/decorators';
@@ -10,8 +10,10 @@ import {
   ApiBearerAuth,
   ApiQuery,
   ApiParam,
+  ApiBody,
 } from '@nestjs/swagger';
 import { ListUsersQueryDto } from './dto/list-users-query.dto';
+import { UpdateUserStatusDto } from './dto/update-user-status.dto';
 
 @ApiTags('Admin Users')
 @ApiBearerAuth('admin-jwt')
@@ -145,6 +147,42 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'User not found' })
   async findOne(@Param('id') id: string) {
     const user = await this.usersService.findOne(+id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
+  @Put(':id/status')
+  @ApiOperation({ summary: 'Update user status (ACTIVE or DEACTIVATE only)' })
+  @ApiParam({ name: 'id', description: 'User ID', type: Number })
+  @ApiBody({ type: UpdateUserStatusDto })
+  @ApiResponse({
+    status: 200,
+    description: 'User status updated successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        email: { type: 'string' },
+        status: { type: 'string', enum: ['ACTIVE', 'DEACTIVATE'] },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - invalid status value',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  async updateStatus(
+    @Param('id') id: string,
+    @Body() updateStatusDto: UpdateUserStatusDto,
+  ) {
+    const user = await this.usersService.updateStatus(+id, updateStatusDto.status);
     if (!user) {
       throw new NotFoundException('User not found');
     }
