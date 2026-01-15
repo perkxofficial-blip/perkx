@@ -16,6 +16,11 @@ export enum UserStatus {
   DEACTIVATE = 'DEACTIVATE',
 }
 
+export enum UserGender {
+  MALE = 'Male',
+  FEMALE = 'Female',
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -37,6 +42,15 @@ export class User {
 
   @Column({ nullable: true })
   phone: string;
+
+  @Column({ type: 'date', nullable: true })
+  birthday: Date;
+
+  @Column({ type: 'enum', enum: UserGender, nullable: true })
+  gender: UserGender;
+
+  @Column({ nullable: true })
+  country: string;
 
   @Column({
     type: 'enum',
