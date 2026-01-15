@@ -50,4 +50,13 @@ export class RegisterDto {
   @IsString()
   @IsOptional()
   phone?: string;
+
+  @ApiProperty({
+    description: 'Referral invite code',
+    example: 'xxxx-xxxxxx',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  referral_code?: string;
 }

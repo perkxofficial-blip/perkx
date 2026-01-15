@@ -42,10 +42,23 @@ export class AuthService {
           if (existing) {
             throw new ConflictException('Email already exists');
           }
+
+          let userInvite = null;
+          if (registerDto.referral_code) {
+             userInvite = await userRepo.findOne({
+              where: { referral_code: registerDto.referral_code },
+              select: ['id'],
+            });
+            if (registerDto.referral_code) {
+              throw new BadRequestException('Invalid referral code');
+            }
+          }
+
           const user = userRepo.create({
             ...registerDto,
             is_active: false,
             referral_code: this.generateReferralCode(),
+            referral_user_id: userInvite?.id || null,
           });
           await userRepo.save(user);
           await this.emailVerificationService.sendWithManager(manager, {
@@ -57,6 +70,7 @@ export class AuthService {
           };
         });
       } catch (err) {
+        console.log(err)
         // Unique violation (Postgres)
         if (err instanceof QueryFailedError && (err as any).code === '23505') {
           // mã 23505 unique_violation của Postgres
@@ -70,6 +84,7 @@ export class AuthService {
           }
         }
         if (err instanceof ConflictException) throw err;
+        if (err instanceof BadRequestException) throw err;
         throw new InternalServerErrorException('Register failed');
       }
     }
