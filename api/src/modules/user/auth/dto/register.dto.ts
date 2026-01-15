@@ -27,31 +27,6 @@ export class RegisterDto {
   password: string;
 
   @ApiProperty({
-    description: 'User first name',
-    example: 'John',
-  })
-  @IsString()
-  @IsNotEmpty()
-  first_name: string;
-
-  @ApiProperty({
-    description: 'User last name',
-    example: 'Doe',
-  })
-  @IsString()
-  @IsNotEmpty()
-  last_name: string;
-
-  @ApiProperty({
-    description: 'User phone number',
-    example: '+84123456789',
-    required: false,
-  })
-  @IsString()
-  @IsOptional()
-  phone?: string;
-
-  @ApiProperty({
     description: 'Referral invite code',
     example: 'xxxx-xxxxxx',
     required: false,
