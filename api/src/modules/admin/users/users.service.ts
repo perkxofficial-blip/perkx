@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserExchange, Exchange, UserStatus } from '../../../entities';
 import { ListUsersQueryDto } from './dto/list-users-query.dto';
+import { MailService } from '../../../mail/mail.service';
 
 @Injectable()
 export class UsersService {
@@ -11,6 +12,7 @@ export class UsersService {
     private userRepository: Repository<User>,
     @InjectRepository(UserExchange)
     private userExchangeRepository: Repository<UserExchange>,
+    private mailService: MailService,
   ) { }
 
   async findAll(queryDto: ListUsersQueryDto) {
@@ -199,15 +201,34 @@ export class UsersService {
     };
   }
 
-  async updateStatus(id: number, status: UserStatus.ACTIVE | UserStatus.DEACTIVATE) {
+
+  async updateStatus(id: number, newStatus: UserStatus.ACTIVE | UserStatus.DEACTIVATE) {
     const user = await this.userRepository.findOne({ where: { id } });
     
     if (!user) {
       return null;
     }
 
-    user.status = status;
+    const oldStatus = user.status;
+    
+    // Only update if status changed
+    if (oldStatus === newStatus) {
+      return {
+        id: user.id,
+        email: user.email,
+        status: user.status,
+        message: 'Status unchanged',
+      };
+    }
+
+    user.status = newStatus;
     await this.userRepository.save(user);
+
+    // Send email notification when status changes
+    await this.mailService.sendMailChangeStatusUser(
+      user.email,
+      newStatus
+    );
 
     return {
       id: user.id,
@@ -215,4 +236,5 @@ export class UsersService {
       status: user.status,
     };
   }
+
 }
