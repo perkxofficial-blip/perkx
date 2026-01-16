@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserExchange, Exchange, UserStatus } from '../../../entities';
-import { ListUsersQueryDto } from './dto/list-users-query.dto';
+import { ListUsersQueryDto, UpdateUserDto } from './dto';
 import { MailService } from '../../../mail/mail.service';
 
 @Injectable()
@@ -201,6 +201,52 @@ export class UsersService {
     };
   }
 
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    
+    if (!user) {
+      return null;
+    }
+
+    // Update only allowed fields (email and referral_user_id are not allowed)
+    if (updateUserDto.first_name !== undefined) {
+      user.first_name = updateUserDto.first_name;
+    }
+    if (updateUserDto.last_name !== undefined) {
+      user.last_name = updateUserDto.last_name;
+    }
+    if (updateUserDto.phone !== undefined) {
+      user.phone = updateUserDto.phone;
+    }
+    if (updateUserDto.birthday !== undefined) {
+      user.birthday = new Date(updateUserDto.birthday);
+    }
+    if (updateUserDto.gender !== undefined) {
+      user.gender = updateUserDto.gender;
+    }
+    if (updateUserDto.country !== undefined) {
+      user.country = updateUserDto.country;
+    }
+
+    await this.userRepository.save(user);
+
+    return {
+      id: user.id,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      phone: user.phone,
+      birthday: user.birthday,
+      gender: user.gender,
+      country: user.country,
+      status: user.status,
+      referral_code: user.referral_code,
+      email_verified_at: user.email_verified_at,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    };
+  }
 
   async updateStatus(id: number, newStatus: UserStatus.ACTIVE | UserStatus.DEACTIVATE) {
     const user = await this.userRepository.findOne({ where: { id } });
