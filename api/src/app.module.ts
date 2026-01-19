@@ -7,8 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule as UserAuthModule } from './modules/user/auth/auth.module';
 import { ProfileModule } from './modules/user/profile/profile.module';
 import { AdminModule } from './modules/admin/admin.module';
-import { MailerModule } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { PublicModule } from './modules/public/public.module';
 
 @Module({
   imports: [
@@ -34,6 +33,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     UserAuthModule,
     ProfileModule,
     AdminModule,
+    PublicModule,
   ],
   controllers: [AppController],
   providers: [AppService],
