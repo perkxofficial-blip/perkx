@@ -30,7 +30,6 @@ import { TwoFatosService } from './two-fatos.service';
       signOptions: { expiresIn: '1d' }, // Token expiration time
     }),
     ConfigModule,
-    MailModule,
   ],
   providers: [
     AuthService,
