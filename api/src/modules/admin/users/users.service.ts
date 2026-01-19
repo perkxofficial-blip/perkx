@@ -13,7 +13,7 @@ export class UsersService {
     @InjectRepository(UserExchange)
     private userExchangeRepository: Repository<UserExchange>,
     private mailService: MailService,
-  ) { }
+  ) {}
 
   async findAll(queryDto: ListUsersQueryDto) {
     const page = queryDto.page || 1;
@@ -22,7 +22,11 @@ export class UsersService {
 
     const queryBuilder = this.userRepository
       .createQueryBuilder('user')
-      .leftJoin(User, 'referral_user', 'user.referral_user_id = referral_user.id')
+      .leftJoin(
+        User,
+        'referral_user',
+        'user.referral_user_id = referral_user.id',
+      )
       .select([
         'user.id AS id',
         'user.email AS email',
@@ -86,10 +90,10 @@ export class UsersService {
       created_at: row.created_at,
       referral_by: row.referral_user_id
         ? {
-          id: row.referral_user_id,
-          email: row.referral_user_email,
-          referral_code: row.referral_user_referral_code,
-        }
+            id: row.referral_user_id,
+            email: row.referral_user_email,
+            referral_code: row.referral_user_referral_code,
+          }
         : null,
       status: row.status,
       email_verified_at: row.email_verified_at,
@@ -164,9 +168,10 @@ export class UsersService {
     const exchanges = await exchangesQuery.getRawMany();
 
     // Format referrer name
-    const referrerName = userResult.referrer_first_name || userResult.referrer_last_name
-      ? `${userResult.referrer_first_name || ''} ${userResult.referrer_last_name || ''}`.trim()
-      : null;
+    const referrerName =
+      userResult.referrer_first_name || userResult.referrer_last_name
+        ? `${userResult.referrer_first_name || ''} ${userResult.referrer_last_name || ''}`.trim()
+        : null;
 
     return {
       id: userResult.user_id,
@@ -201,10 +206,9 @@ export class UsersService {
     };
   }
 
-
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ where: { id } });
-    
+
     if (!user) {
       return null;
     }
@@ -248,15 +252,18 @@ export class UsersService {
     };
   }
 
-  async updateStatus(id: number, newStatus: UserStatus.ACTIVE | UserStatus.DEACTIVATE) {
+  async updateStatus(
+    id: number,
+    newStatus: UserStatus.ACTIVE | UserStatus.DEACTIVATE,
+  ) {
     const user = await this.userRepository.findOne({ where: { id } });
-    
+
     if (!user) {
       return null;
     }
 
     const oldStatus = user.status;
-    
+
     // Only update if status changed
     if (oldStatus === newStatus) {
       return {
@@ -271,10 +278,7 @@ export class UsersService {
     await this.userRepository.save(user);
 
     // Send email notification when status changes
-    await this.mailService.sendMailChangeStatusUser(
-      user.email,
-      newStatus
-    );
+    await this.mailService.sendMailChangeStatusUser(user.email, newStatus);
 
     return {
       id: user.id,
@@ -282,5 +286,4 @@ export class UsersService {
       status: user.status,
     };
   }
-
 }

@@ -6,13 +6,22 @@ export class PageLanguageContent {
   @ApiProperty({ example: 'About Us', description: 'Page title' })
   title: string;
 
-  @ApiProperty({ example: 'Learn about our company', description: 'Page description' })
+  @ApiProperty({
+    example: 'Learn about our company',
+    description: 'Page description',
+  })
   description?: string;
 
-  @ApiProperty({ example: '<h1>Welcome</h1><p>Content...</p>', description: 'Page content (HTML)' })
+  @ApiProperty({
+    example: '<h1>Welcome</h1><p>Content...</p>',
+    description: 'Page content (HTML)',
+  })
   content: string;
 
-  @ApiProperty({ example: true, description: 'Whether this language version is published' })
+  @ApiProperty({
+    example: true,
+    description: 'Whether this language version is published',
+  })
   is_published?: boolean;
 
   @ApiProperty({
@@ -23,9 +32,9 @@ export class PageLanguageContent {
       og_title: 'About Us',
       og_description: 'Learn about our company',
       og_image: 'https://example.com/og-image.jpg',
-      canonical_url: 'https://example.com/about-us'
+      canonical_url: 'https://example.com/about-us',
     },
-    description: 'SEO metadata'
+    description: 'SEO metadata',
   })
   seo?: {
     meta_title?: string;
@@ -53,8 +62,8 @@ export class CreatePageDto {
         is_published: true,
         seo: {
           meta_title: 'About Us',
-          meta_description: 'Learn about our company'
-        }
+          meta_description: 'Learn about our company',
+        },
       },
       ko: {
         title: '회사 소개',
@@ -63,11 +72,11 @@ export class CreatePageDto {
         is_published: true,
         seo: {
           meta_title: '회사 소개',
-          meta_description: '우리 회사에 대해 알아보세요'
-        }
-      }
+          meta_description: '우리 회사에 대해 알아보세요',
+        },
+      },
     },
-    description: 'Content for each language (en, ko, etc.)'
+    description: 'Content for each language (en, ko, etc.)',
   })
   @IsObject()
   @Type(() => Object)

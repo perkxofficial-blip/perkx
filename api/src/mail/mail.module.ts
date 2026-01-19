@@ -1,44 +1,37 @@
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { ConfigService } from '@nestjs/config';
-import { MailService } from './mail.service';
-import * as path from 'path';
+import { join } from 'path';
 
-@Global()
 @Module({
   imports: [
     MailerModule.forRootAsync({
+      imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => (
-        {
-          transport: {
-            host: configService.get('MAIL_HOST'),
-            port: configService.get<number>('MAIL_PORT'),
-            auth: {
-              user: configService.get('MAIL_USERNAME'),
-              pass: configService.get('MAIL_PASSWORD'),
-            },
+      useFactory: (config: ConfigService) => ({
+        transport: {
+          host: config.get('MAIL_HOST'),
+          port: config.get('MAIL_PORT'),
+          secure: false,
+          auth: {
+            user: config.get('MAIL_USERNAME'),
+            pass: config.get('MAIL_PASSWORD'),
           },
-          defaults: {
-            from: configService.get('MAIL_FROM'),
-          },
-          template: {
-            dir: path.join(__dirname, 'templates'),
-            adapter: new HandlebarsAdapter(),
-            options: {
-              strict: true,
-            },
-          },
+        },
+        defaults: {
+          from: `"No Reply" <${config.get('MAIL_FROM')}>`,
+        },
+        template: {
+          dir: join(process.cwd(), 'src/mail/templates'),
+          adapter: new HandlebarsAdapter(),
           options: {
-            partials: {
-              dir: path.join(__dirname, 'templates'),
-            },
-          }
-        }),
+            strict: true,
+          },
+        },
+      }),
     }),
   ],
-  providers: [MailService],
-  exports: [MailService],
+  exports: [MailerModule],
 })
-export class MailModule { }
+export class MailModule {}

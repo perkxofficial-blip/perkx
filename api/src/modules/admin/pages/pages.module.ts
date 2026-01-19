@@ -10,4 +10,4 @@ import { Page } from '../../../entities/page.entity';
   providers: [PagesService],
   exports: [PagesService],
 })
-export class PagesModule { }
+export class PagesModule {}

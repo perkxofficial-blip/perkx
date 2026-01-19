@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Page } from '../../../entities/page.entity';
@@ -9,7 +13,7 @@ export class PagesService {
   constructor(
     @InjectRepository(Page)
     private readonly pageRepository: Repository<Page>,
-  ) { }
+  ) {}
 
   async create(createPageDto: CreatePageDto): Promise<Page> {
     // Check if page with same slug already exists
@@ -36,7 +40,7 @@ export class PagesService {
 
     // Filter by language if specified (check if language exists in content)
     if (language) {
-      return pages.filter(page => page.content[language]);
+      return pages.filter((page) => page.content[language]);
     }
 
     return pages;
@@ -64,12 +68,16 @@ export class PagesService {
     // Check if language version exists
     const languageContent = page.content[language];
     if (!languageContent) {
-      throw new NotFoundException(`Page with slug "${slug}" not found for language "${language}"`);
+      throw new NotFoundException(
+        `Page with slug "${slug}" not found for language "${language}"`,
+      );
     }
 
     // Check if published for this language
     if (!languageContent.is_published) {
-      throw new NotFoundException(`Page with slug "${slug}" is not published for language "${language}"`);
+      throw new NotFoundException(
+        `Page with slug "${slug}" is not published for language "${language}"`,
+      );
     }
 
     // Return page with only requested language content
@@ -125,8 +133,8 @@ export class PagesService {
 
     // Filter and map pages that have published content for the requested language
     return pages
-      .filter(page => page.content[language]?.is_published)
-      .map(page => ({
+      .filter((page) => page.content[language]?.is_published)
+      .map((page) => ({
         id: page.id,
         slug: page.slug,
         title: page.content[language].title,

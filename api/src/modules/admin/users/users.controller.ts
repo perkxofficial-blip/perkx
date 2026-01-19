@@ -1,4 +1,13 @@
-import { Controller, Get, Param, Query, UseGuards, NotFoundException, Put, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  UseGuards,
+  NotFoundException,
+  Put,
+  Body,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AdminJwtAuthGuard } from '../auth/guards';
 import { CurrentAdmin } from '../../../common/decorators';
@@ -23,12 +32,43 @@ export class UsersController {
 
   @Get()
   @ApiOperation({ summary: 'Get all users with filters and pagination' })
-  @ApiQuery({ name: 'search', required: false, description: 'Search by email, referral_code, or referral_code of referral user' })
-  @ApiQuery({ name: 'start_date', required: false, description: 'Start date for date range filter' })
-  @ApiQuery({ name: 'end_date', required: false, description: 'End date for date range filter' })
-  @ApiQuery({ name: 'status', required: false, description: 'Filter by status', enum: UserStatus, example: UserStatus.ACTIVE })
-  @ApiQuery({ name: 'page', required: false, description: 'Page number (default: 1)', type: Number, example: 1 })
-  @ApiQuery({ name: 'limit', required: false, description: 'Number of items per page (default: 50)', type: Number, example: 50 })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    description:
+      'Search by email, referral_code, or referral_code of referral user',
+  })
+  @ApiQuery({
+    name: 'start_date',
+    required: false,
+    description: 'Start date for date range filter',
+  })
+  @ApiQuery({
+    name: 'end_date',
+    required: false,
+    description: 'End date for date range filter',
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    description: 'Filter by status',
+    enum: UserStatus,
+    example: UserStatus.ACTIVE,
+  })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    description: 'Page number (default: 1)',
+    type: Number,
+    example: 1,
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Number of items per page (default: 50)',
+    type: Number,
+    example: 50,
+  })
   @ApiResponse({
     status: 200,
     description: 'List of all users retrieved successfully with pagination',
@@ -44,7 +84,11 @@ export class UsersController {
               email: { type: 'string' },
               referral_code: { type: 'string' },
               birthday: { type: 'string', format: 'date', nullable: true },
-              gender: { type: 'string', enum: ['Male', 'Female'], nullable: true },
+              gender: {
+                type: 'string',
+                enum: ['Male', 'Female'],
+                nullable: true,
+              },
               country: { type: 'string', nullable: true },
               created_at: { type: 'string', format: 'date-time' },
               referral_by: {
@@ -56,8 +100,15 @@ export class UsersController {
                   referral_code: { type: 'string' },
                 },
               },
-              status: { type: 'string', enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'] },
-              email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+              status: {
+                type: 'string',
+                enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'],
+              },
+              email_verified_at: {
+                type: 'string',
+                format: 'date-time',
+                nullable: true,
+              },
             },
           },
         },
@@ -85,10 +136,12 @@ export class UsersController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get user detail by ID with referrer, referrals, and exchanges' })
+  @ApiOperation({
+    summary: 'Get user detail by ID with referrer, referrals, and exchanges',
+  })
   @ApiParam({ name: 'id', description: 'User ID', type: Number })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'User detail retrieved successfully',
     schema: {
       type: 'object',
@@ -103,7 +156,11 @@ export class UsersController {
         country: { type: 'string', nullable: true },
         status: { type: 'string', enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'] },
         referral_code: { type: 'string' },
-        email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+        email_verified_at: {
+          type: 'string',
+          format: 'date-time',
+          nullable: true,
+        },
         created_at: { type: 'string', format: 'date-time' },
         updated_at: { type: 'string', format: 'date-time' },
         referrer: {
@@ -181,7 +238,10 @@ export class UsersController {
     @Param('id') id: string,
     @Body() updateStatusDto: UpdateUserStatusDto,
   ) {
-    const user = await this.usersService.updateStatus(+id, updateStatusDto.status);
+    const user = await this.usersService.updateStatus(
+      +id,
+      updateStatusDto.status,
+    );
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -189,7 +249,10 @@ export class UsersController {
   }
 
   @Put(':id')
-  @ApiOperation({ summary: 'Update user information (email and referral_user_id cannot be updated)' })
+  @ApiOperation({
+    summary:
+      'Update user information (email and referral_user_id cannot be updated)',
+  })
   @ApiParam({ name: 'id', description: 'User ID', type: Number })
   @ApiBody({ type: UpdateUserDto })
   @ApiResponse({
@@ -208,7 +271,11 @@ export class UsersController {
         country: { type: 'string', nullable: true },
         status: { type: 'string', enum: ['ACTIVE', 'INACTIVE', 'DEACTIVATE'] },
         referral_code: { type: 'string' },
-        email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+        email_verified_at: {
+          type: 'string',
+          format: 'date-time',
+          nullable: true,
+        },
         created_at: { type: 'string', format: 'date-time' },
         updated_at: { type: 'string', format: 'date-time' },
       },
@@ -223,10 +290,7 @@ export class UsersController {
     description: 'Unauthorized - invalid or missing admin token',
   })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     const user = await this.usersService.update(+id, updateUserDto);
     if (!user) {
       throw new NotFoundException('User not found');

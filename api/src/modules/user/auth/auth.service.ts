@@ -1,67 +1,93 @@
 import {
-  Injectable,
+  BadRequestException,
   ConflictException,
-  UnauthorizedException,
+  Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
-import { User } from '../../../entities';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { DataSource, IsNull, QueryFailedError, Repository } from 'typeorm';
+import { User, UserPasswordReset, UserStatus } from '../../../entities';
 import { RegisterDto } from './dto';
+import * as crypto from 'crypto';
 import { randomBytes } from 'crypto';
+import { EmailVerificationService } from './email-verification.service';
+import { MailerService } from '@nestjs-modules/mailer';
+import { TwoFatosService } from './two-fatos.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    private jwtService: JwtService,
-    private configService: ConfigService,
+    private emailVerificationService: EmailVerificationService,
+    @InjectDataSource()
+    private dataSource: DataSource,
+    private mailerService: MailerService,
+    private twoFatosService: TwoFatosService,
   ) {}
 
   async register(registerDto: RegisterDto) {
-    const existingUser = await this.userRepository.findOne({
-      where: { email: registerDto.email },
-    });
-    if (existingUser) {
-      throw new ConflictException('Email already exists');
-    }
-    const payload = (user) => ({ sub: user.id, email: user.email });
-    const MAX_RETRY = 5; // Số lần thử tạo mã giới thiệu unique, đảm bảo hơn generate code trước
-    for (let i = 0; i < MAX_RETRY; i++) {
+    const MAX_RETRY = 5;
+    for (let attempt = 1; attempt <= MAX_RETRY; attempt++) {
       try {
-        const user = this.userRepository.create({
-          ...registerDto,
-          referral_code: this.generateReferralCode(),
-        });
-        await this.userRepository.save(user);
-        const accessToken = await this.jwtService.signAsync(payload(user));
-        return {
-          accessToken,
-          user: {
-            id: user.id,
-            email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            referral_code: user.referral_code,
-          },
-        };
-      } catch (e) {
-        if (e?.code === '23505') {
-          if (e?.detail?.includes('email')) {
+        return await this.dataSource.transaction(async (manager) => {
+          const userRepo = manager.getRepository(User);
+          const existing = await userRepo.findOne({
+            where: { email: registerDto.email },
+            select: ['id'],
+          });
+          if (existing) {
             throw new ConflictException('Email already exists');
           }
-          if (e?.detail?.includes('referral_code')) {
-            continue;
+
+          let userInvite = null;
+          if (registerDto.referral_code) {
+            userInvite = await userRepo.findOne({
+              where: { referral_code: registerDto.referral_code },
+              select: ['id'],
+            });
+            if (registerDto.referral_code) {
+              throw new BadRequestException('Invalid referral code');
+            }
+          }
+
+          const user = userRepo.create({
+            ...registerDto,
+            status: UserStatus.INACTIVE,
+            referral_code: this.generateReferralCode(),
+            referral_user_id: userInvite?.id || null,
+          });
+          await userRepo.save(user);
+          await this.emailVerificationService.sendWithManager(manager, {
+            id: user.id,
+            email: user.email,
+          });
+          return {
+            message: 'User registered successfully. Please verify your email.',
+          };
+        });
+      } catch (err) {
+        console.log(err);
+        // Unique violation (Postgres)
+        if (err instanceof QueryFailedError && (err as any).code === '23505') {
+          // mã 23505 unique_violation của Postgres
+          const detail = (err as any).detail || '';
+          if (detail.includes('email')) {
+            throw new ConflictException('Email already exists');
+          }
+          if (detail.includes('referral_code')) {
+            if (attempt === MAX_RETRY) break;
+            continue; // retry
           }
         }
-        throw new InternalServerErrorException();
+        if (err instanceof ConflictException) throw err;
+        if (err instanceof BadRequestException) throw err;
+        throw new InternalServerErrorException('Register failed');
       }
     }
     throw new InternalServerErrorException(
-      'Cannot generate unique referral code, please try again',
+      'Cannot generate unique referral code, please try again later',
     );
   }
 
@@ -81,18 +107,81 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { sub: user.id, email: user.email };
-
-    const accessToken = await this.jwtService.signAsync(payload);
-
+    const otpChecked = await this.twoFatosService.getEmailOtp(user);
     return {
-      accessToken,
-      user: {
-        id: user.id,
-        email: user.email,
-        first_name: user.first_name,
-        last_name: user.last_name,
-      },
+      verified: otpChecked,
+      email: user.email,
     };
+  }
+
+  async findByUnVerifiedEmail(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email, status: UserStatus.INACTIVE },
+    });
+    if (!user) throw new NotFoundException('User not found');
+    return user;
+  }
+
+  async forgotPassword(email: string) {
+    return await this.dataSource.transaction(async (manager) => {
+      const userRepo = manager.getRepository(User);
+      const passwordResetRepo = manager.getRepository(UserPasswordReset);
+
+      const user = await userRepo.findOne({ where: { email } });
+      if (!user) return;
+      await passwordResetRepo.delete({ user_id: user.id });
+      const { raw, hashed } = this.generateToken();
+
+      await passwordResetRepo.save({
+        user_id: user.id,
+        hashed,
+        expires_at: new Date(Date.now() + 15 * 60 * 1000),
+      });
+      const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password?token=${raw}`;
+      await this.mailerService.sendMail({
+        to: user.email,
+        subject: 'PerkX - Reset your password',
+        template: 'reset-password',
+        context: {
+          resetPasswordUrl,
+        },
+      });
+    });
+  }
+
+  private generateToken() {
+    const raw = crypto.randomBytes(32).toString('hex');
+    const hashed = crypto.createHash('sha256').update(raw).digest('hex');
+    return { raw, hashed };
+  }
+
+  async resetPassword(rawToken: string, newPassword: string) {
+    return await this.dataSource.transaction(async (manager) => {
+      const passwordResetRepo = manager.getRepository(UserPasswordReset);
+      const userRepo = manager.getRepository(User);
+      const hashedToken = crypto
+        .createHash('sha256')
+        .update(rawToken)
+        .digest('hex');
+      const record = await passwordResetRepo.findOne({
+        where: { token: hashedToken, used_at: IsNull() },
+        lock: { mode: 'pessimistic_write' },
+      });
+      if (!record) {
+        throw new BadRequestException('Invalid token');
+      }
+      if (record.expires_at < new Date()) {
+        throw new BadRequestException('Token expired');
+      }
+      const user = await userRepo.findOneBy({ id: record.user_id });
+      if (!user) {
+        throw new BadRequestException('User not found');
+      }
+      user.password = newPassword;
+      await userRepo.save(user);
+      await passwordResetRepo.delete({ user_id: user.id });
+
+      return { message: 'Password reset successfully' };
+    });
   }
 }

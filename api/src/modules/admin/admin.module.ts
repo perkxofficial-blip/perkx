@@ -6,4 +6,4 @@ import { PagesModule } from './pages/pages.module';
 @Module({
   imports: [AdminAuthModule, AdminUsersModule, PagesModule],
 })
-export class AdminModule { }
+export class AdminModule {}
