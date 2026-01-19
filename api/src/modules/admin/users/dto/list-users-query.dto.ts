@@ -1,11 +1,19 @@
-import { IsOptional, IsString, IsEnum, IsDateString, IsInt, Min } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsEnum,
+  IsDateString,
+  IsInt,
+  Min,
+} from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { UserStatus } from '../../../../entities';
 
 export class ListUsersQueryDto {
   @ApiPropertyOptional({
-    description: 'Search by email, referral_code, or referral_code of referral user',
+    description:
+      'Search by email, referral_code, or referral_code of referral user',
     example: 'user@example.com',
   })
   @IsOptional()
