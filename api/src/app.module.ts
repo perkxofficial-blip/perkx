@@ -35,9 +35,8 @@ import { MailModule } from './mail/mail.module';
     ProfileModule,
     AdminModule,
     PublicModule,
-    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

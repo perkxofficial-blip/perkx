@@ -7,4 +7,4 @@ import { CampaignsModule } from './campaigns/campaigns.module';
 @Module({
   imports: [AdminAuthModule, AdminUsersModule, PagesModule, CampaignsModule],
 })
-export class AdminModule { }
+export class AdminModule {}
