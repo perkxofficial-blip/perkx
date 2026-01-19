@@ -12,8 +12,7 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
-import { ListUsersQueryDto } from './dto/list-users-query.dto';
-import { UpdateUserStatusDto } from './dto/update-user-status.dto';
+import { ListUsersQueryDto, UpdateUserStatusDto, UpdateUserDto } from './dto';
 
 @ApiTags('Admin Users')
 @ApiBearerAuth('admin-jwt')
@@ -183,6 +182,52 @@ export class UsersController {
     @Body() updateStatusDto: UpdateUserStatusDto,
   ) {
     const user = await this.usersService.updateStatus(+id, updateStatusDto.status);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
+  @Put(':id')
+  @ApiOperation({ summary: 'Update user information (email and referral_user_id cannot be updated)' })
+  @ApiParam({ name: 'id', description: 'User ID', type: Number })
+  @ApiBody({ type: UpdateUserDto })
+  @ApiResponse({
+    status: 200,
+    description: 'User updated successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        email: { type: 'string' },
+        first_name: { type: 'string', nullable: true },
+        last_name: { type: 'string', nullable: true },
+        phone: { type: 'string', nullable: true },
+        birthday: { type: 'string', format: 'date', nullable: true },
+        gender: { type: 'string', enum: ['Male', 'Female'], nullable: true },
+        country: { type: 'string', nullable: true },
+        status: { type: 'string', enum: ['ACTIVE', 'INACTIVE', 'DEACTIVATE'] },
+        referral_code: { type: 'string' },
+        email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - invalid input data',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  async update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const user = await this.usersService.update(+id, updateUserDto);
     if (!user) {
       throw new NotFoundException('User not found');
     }
