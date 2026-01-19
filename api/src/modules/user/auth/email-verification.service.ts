@@ -4,27 +4,26 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { EntityManager, Repository, DataSource } from 'typeorm';
+import { DataSource, EntityManager, Repository } from 'typeorm';
 import { MailerService } from '@nestjs-modules/mailer';
 import * as crypto from 'crypto';
-import { UserEmailVerification } from '../../../entities';
-import { User } from '../../../entities';
+import { User, UserEmailVerification, UserStatus } from '../../../entities';
 
 @Injectable()
 export class EmailVerificationService {
-  constructor(
-    @InjectRepository(UserEmailVerification)
-    @InjectDataSource()
-    private repo: Repository<UserEmailVerification>,
-    private mailerService: MailerService,
-    private dataSource: DataSource,
-  ) {}
-
   private generateToken() {
     const raw = crypto.randomBytes(32).toString('hex');
     const hashed = crypto.createHash('sha256').update(raw).digest('hex');
     return { raw, hashed };
   }
+
+  constructor(
+    @InjectRepository(UserEmailVerification)
+    private repo: Repository<UserEmailVerification>,
+    private mailerService: MailerService,
+    @InjectDataSource()
+    private dataSource: DataSource,
+  ) {}
 
   async sendWithManager(
     manager: EntityManager,
@@ -86,7 +85,7 @@ export class EmailVerificationService {
       record.verified_at = now;
       await verifyRepo.save(record);
       const user = await userRepo.findOneBy({ id: record.user_id });
-      user.is_active = true;
+      user.status = UserStatus.ACTIVE;
       user.email_verified_at = now;
       await userRepo.save(user);
 

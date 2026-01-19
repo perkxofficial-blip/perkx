@@ -1,32 +1,30 @@
 import {
-  Injectable,
+  BadRequestException,
   ConflictException,
+  Injectable,
   InternalServerErrorException,
   NotFoundException,
-  BadRequestException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository, QueryFailedError, IsNull } from 'typeorm';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
-import { User } from '../../../entities';
+import { DataSource, IsNull, QueryFailedError, Repository } from 'typeorm';
+import { User, UserPasswordReset, UserStatus } from '../../../entities';
 import { RegisterDto } from './dto';
+import * as crypto from 'crypto';
 import { randomBytes } from 'crypto';
 import { EmailVerificationService } from './email-verification.service';
-import { UserPasswordReset } from '../../../entities/user_password_reset.entity';
 import { MailerService } from '@nestjs-modules/mailer';
-import * as crypto from 'crypto';
+import { TwoFatosService } from './two-fatos.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
-    @InjectDataSource()
     private userRepository: Repository<User>,
-    private jwtService: JwtService,
     private emailVerificationService: EmailVerificationService,
+    @InjectDataSource()
     private dataSource: DataSource,
     private mailerService: MailerService,
+    private twoFatosService: TwoFatosService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -45,7 +43,7 @@ export class AuthService {
 
           let userInvite = null;
           if (registerDto.referral_code) {
-             userInvite = await userRepo.findOne({
+            userInvite = await userRepo.findOne({
               where: { referral_code: registerDto.referral_code },
               select: ['id'],
             });
@@ -56,7 +54,7 @@ export class AuthService {
 
           const user = userRepo.create({
             ...registerDto,
-            is_active: false,
+            status: UserStatus.INACTIVE,
             referral_code: this.generateReferralCode(),
             referral_user_id: userInvite?.id || null,
           });
@@ -70,7 +68,7 @@ export class AuthService {
           };
         });
       } catch (err) {
-        console.log(err)
+        console.log(err);
         // Unique violation (Postgres)
         if (err instanceof QueryFailedError && (err as any).code === '23505') {
           // mã 23505 unique_violation của Postgres
@@ -109,23 +107,16 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { sub: user.id, email: user.email };
-    const accessToken = await this.jwtService.signAsync(payload);
+    const otpChecked = await this.twoFatosService.getEmailOtp(user);
     return {
-      accessToken,
-      user: {
-        id: user.id,
-        email: user.email,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        referral_code: user.referral_code,
-      },
+      verified: otpChecked,
+      email: user.email,
     };
   }
 
   async findByUnVerifiedEmail(email: string) {
     const user = await this.userRepository.findOne({
-      where: { email, is_active: false },
+      where: { email, status: UserStatus.INACTIVE },
     });
     if (!user) throw new NotFoundException('User not found');
     return user;

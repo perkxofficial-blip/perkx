@@ -26,12 +26,15 @@ import {
   ForgotPasswordDto,
   ResetPasswordDto,
 } from './dto';
+import { VerifyOtpDto } from './dto/verify-otp.dto';
+import { TwoFatosService } from './two-fatos.service';
 
 @ApiTags('User Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
     private authService: AuthService,
+    private twoFactosService: TwoFatosService,
     private emailVerificationService: EmailVerificationService,
   ) {}
 
@@ -50,10 +53,18 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @ApiOperation({ summary: 'Login user' })
-  @ApiResponse({ status: 200, description: 'User successfully logged in' })
+  @ApiResponse({ status: 200, description: 'User successfully and send OTP' })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   async login(@Request() req) {
     return this.authService.login(req.user);
+  }
+
+  @Public()
+  @Post('verify-otp')
+  @ApiOperation({ summary: 'Verify OTP' })
+  @ApiResponse({ status: 200, description: 'Verify TOP successfully logged in' })
+  async verifyOTP(@Body() body: VerifyOtpDto) {
+    return await this.twoFactosService.verifyEmailOtp(body.email, body.otp)
   }
 
   @Public()
