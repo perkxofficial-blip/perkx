@@ -8,6 +8,7 @@ import { AuthModule as UserAuthModule } from './modules/user/auth/auth.module';
 import { ProfileModule } from './modules/user/profile/profile.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { PublicModule } from './modules/public/public.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -34,8 +35,9 @@ import { PublicModule } from './modules/public/public.module';
     ProfileModule,
     AdminModule,
     PublicModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
