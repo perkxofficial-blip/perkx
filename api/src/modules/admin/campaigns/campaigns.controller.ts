@@ -1,0 +1,283 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+  Query,
+  UseGuards,
+  NotFoundException,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+  ApiBody,
+  ApiQuery,
+} from '@nestjs/swagger';
+import { CampaignsService } from './campaigns.service';
+import {
+  CreateCampaignDto,
+  UpdateCampaignDto,
+  ListCampaignsQueryDto,
+  CampaignStatus,
+} from './dto';
+import { AdminJwtAuthGuard } from '../auth/guards';
+import { CampaignCategory } from '../../../entities';
+
+@ApiTags('Admin Campaigns')
+@ApiBearerAuth('admin-jwt')
+@Controller('admin/campaigns')
+@UseGuards(AdminJwtAuthGuard)
+export class CampaignsController {
+  constructor(private readonly campaignsService: CampaignsService) {}
+
+  @Post()
+  @ApiOperation({ summary: 'Create a new campaign' })
+  @ApiBody({ type: CreateCampaignDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Campaign created successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        exchange_id: { type: 'number', nullable: true },
+        title: { type: 'string' },
+        description: { type: 'string' },
+        banner_url: { type: 'string' },
+        redirect_url: { type: 'string', nullable: true },
+        is_active: { type: 'boolean' },
+        preview_start: { type: 'string', format: 'date', nullable: true },
+        preview_end: { type: 'string', format: 'date', nullable: true },
+        launch_start: { type: 'string', format: 'date', nullable: true },
+        launch_end: { type: 'string', format: 'date', nullable: true },
+        archive_start: { type: 'string', format: 'date', nullable: true },
+        archive_end: { type: 'string', format: 'date', nullable: true },
+        featured: { type: 'boolean' },
+        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - invalid input data',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  async create(@Body() createCampaignDto: CreateCampaignDto) {
+    return await this.campaignsService.create(createCampaignDto);
+  }
+
+  @Get()
+  @ApiOperation({
+    summary: 'Get all campaigns with filters and pagination',
+  })
+  @ApiQuery({
+    name: 'exchange_id',
+    required: false,
+    description: 'Filter by exchange ID',
+    type: Number,
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    description: 'Filter by status (active, upcoming, expired)',
+    enum: CampaignStatus,
+  })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    description: 'Page number (default: 1)',
+    type: Number,
+    example: 1,
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Number of items per page (default: 15)',
+    type: Number,
+    example: 15,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'List of campaigns retrieved successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'number' },
+              exchange_id: { type: 'number', nullable: true },
+              title: { type: 'string' },
+              description: { type: 'string' },
+              banner_url: { type: 'string' },
+              redirect_url: { type: 'string', nullable: true },
+              is_active: { type: 'boolean' },
+              preview_start: { type: 'string', format: 'date-time', nullable: true },
+              preview_end: { type: 'string', format: 'date-time', nullable: true },
+              launch_start: { type: 'string', format: 'date-time' },
+              launch_end: { type: 'string', format: 'date-time' },
+              archive_start: { type: 'string', format: 'date-time', nullable: true },
+              archive_end: { type: 'string', format: 'date-time', nullable: true },
+              featured: { type: 'boolean' },
+              category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' },
+              exchange: {
+                type: 'object',
+                nullable: true,
+                properties: {
+                  id: { type: 'number' },
+                  name: { type: 'string' },
+                  code: { type: 'string' },
+                },
+              },
+            },
+          },
+        },
+        pagination: {
+          type: 'object',
+          properties: {
+            total: { type: 'number' },
+            page: { type: 'number' },
+            limit: { type: 'number' },
+            totalPages: { type: 'number' },
+          },
+        },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  async findAll(@Query() queryDto: ListCampaignsQueryDto) {
+    return await this.campaignsService.findAll(queryDto);
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get campaign by ID' })
+  @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'Campaign retrieved successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        exchange_id: { type: 'number', nullable: true },
+        title: { type: 'string' },
+        description: { type: 'string' },
+        banner_url: { type: 'string' },
+        redirect_url: { type: 'string', nullable: true },
+        is_active: { type: 'boolean' },
+        preview_start: { type: 'string', format: 'date', nullable: true },
+        preview_end: { type: 'string', format: 'date', nullable: true },
+        launch_start: { type: 'string', format: 'date', nullable: true },
+        launch_end: { type: 'string', format: 'date', nullable: true },
+        archive_start: { type: 'string', format: 'date', nullable: true },
+        archive_end: { type: 'string', format: 'date', nullable: true },
+        featured: { type: 'boolean' },
+        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  @ApiResponse({ status: 404, description: 'Campaign not found' })
+  async findOne(@Param('id') id: string) {
+    const campaign = await this.campaignsService.findOne(+id);
+    if (!campaign) {
+      throw new NotFoundException('Campaign not found');
+    }
+    return campaign;
+  }
+
+  @Put(':id')
+  @ApiOperation({ summary: 'Update campaign by ID' })
+  @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
+  @ApiBody({ type: UpdateCampaignDto })
+  @ApiResponse({
+    status: 200,
+    description: 'Campaign updated successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        exchange_id: { type: 'number', nullable: true },
+        title: { type: 'string' },
+        description: { type: 'string' },
+        banner_url: { type: 'string' },
+        redirect_url: { type: 'string', nullable: true },
+        is_active: { type: 'boolean' },
+        preview_start: { type: 'string', format: 'date', nullable: true },
+        preview_end: { type: 'string', format: 'date', nullable: true },
+        launch_start: { type: 'string', format: 'date', nullable: true },
+        launch_end: { type: 'string', format: 'date', nullable: true },
+        archive_start: { type: 'string', format: 'date', nullable: true },
+        archive_end: { type: 'string', format: 'date', nullable: true },
+        featured: { type: 'boolean' },
+        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - invalid input data',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  @ApiResponse({ status: 404, description: 'Campaign not found' })
+  async update(
+    @Param('id') id: string,
+    @Body() updateCampaignDto: UpdateCampaignDto,
+  ) {
+    const campaign = await this.campaignsService.update(+id, updateCampaignDto);
+    if (!campaign) {
+      throw new NotFoundException('Campaign not found');
+    }
+    return campaign;
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Delete campaign by ID' })
+  @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
+  @ApiResponse({
+    status: 204,
+    description: 'Campaign deleted successfully',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  @ApiResponse({ status: 404, description: 'Campaign not found' })
+  async remove(@Param('id') id: string) {
+    const deleted = await this.campaignsService.remove(+id);
+    if (!deleted) {
+      throw new NotFoundException('Campaign not found');
+    }
+  }
+}
