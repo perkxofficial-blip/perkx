@@ -62,9 +62,12 @@ export class AuthController {
   @Public()
   @Post('verify-otp')
   @ApiOperation({ summary: 'Verify OTP' })
-  @ApiResponse({ status: 200, description: 'Verify TOP successfully logged in' })
+  @ApiResponse({
+    status: 200,
+    description: 'Verify TOP successfully logged in',
+  })
   async verifyOTP(@Body() body: VerifyOtpDto) {
-    return await this.twoFactosService.verifyEmailOtp(body.email, body.otp)
+    return await this.twoFactosService.verifyEmailOtp(body.email, body.otp);
   }
 
   @Public()
