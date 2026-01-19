@@ -24,7 +24,7 @@ export class Campaign {
   @Index()
   exchange_id: number;
 
-  @ManyToOne(() => Exchange, { nullable: true })
+  @ManyToOne(() => Exchange, { nullable: true, createForeignKeyConstraints: false, })
   @JoinColumn({ name: 'exchange_id' })
   exchange: Exchange;
 
@@ -35,7 +35,7 @@ export class Campaign {
   description: string;
 
   @Column({ type: 'text' })
-  banner_url: string;
+  banner_path: string;
 
   @Column({ type: 'text', nullable: true })
   redirect_url: string;
@@ -43,22 +43,22 @@ export class Campaign {
   @Column({ default: true })
   is_active: boolean;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   preview_start: Date;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   preview_end: Date;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'timestamp' })
   launch_start: Date;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'timestamp' })
   launch_end: Date;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   archive_start: Date;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   archive_end: Date;
 
   @Column({ default: false })

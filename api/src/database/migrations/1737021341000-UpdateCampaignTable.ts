@@ -4,60 +4,69 @@ export class UpdateCampaignTable1737021341000 implements MigrationInterface {
   name = 'UpdateCampaignTable1737021341000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // Create enum type for category
+    /* 1. Create enum type */
     await queryRunner.query(`
-      CREATE TYPE "campaign_category_enum" AS ENUM ('New User', 'Trading Competition')
+      CREATE TYPE "campaign_category_enum"
+      AS ENUM ('New User', 'Trading Competition')
     `);
 
-    // Add columns
+    /* 2. Rename banner_url -> banner_path */
+    await queryRunner.renameColumn(
+      'campaigns',
+      'banner_url',
+      'banner_path',
+    );
+
+    /* 3. Add new columns */
     await queryRunner.addColumns('campaigns', [
       new TableColumn({
         name: 'preview_start',
-        type: 'date',
+        type: 'timestamp',
         isNullable: true,
       }),
       new TableColumn({
         name: 'preview_end',
-        type: 'date',
+        type: 'timestamp',
         isNullable: true,
       }),
       new TableColumn({
         name: 'launch_start',
-        type: 'date',
+        type: 'timestamp',
+        isNullable: false,
       }),
       new TableColumn({
         name: 'launch_end',
-        type: 'date',
+        type: 'timestamp',
+        isNullable: false,
       }),
       new TableColumn({
         name: 'archive_start',
-        type: 'date',
+        type: 'timestamp',
         isNullable: true,
       }),
       new TableColumn({
         name: 'archive_end',
-        type: 'date',
+        type: 'timestamp',
         isNullable: true,
       }),
       new TableColumn({
         name: 'featured',
         type: 'boolean',
+        isNullable: false,
         default: false,
       }),
+      new TableColumn({
+        name: 'category',
+        type: 'campaign_category_enum',
+        isNullable: true,
+      }),
     ]);
-
-    // Add category column with enum type using raw SQL
-    await queryRunner.query(`
-      ALTER TABLE "campaigns" 
-      ADD COLUMN "category" "campaign_category_enum"
-    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropIndex('campaigns', 'IDX_campaigns_launch_end');
-    await queryRunner.dropIndex('campaigns', 'IDX_campaigns_launch_start');
-
+    /* 1. Drop added columns */
     await queryRunner.dropColumns('campaigns', [
+      'category',
       'featured',
       'archive_end',
       'archive_start',
@@ -67,12 +76,14 @@ export class UpdateCampaignTable1737021341000 implements MigrationInterface {
       'preview_start',
     ]);
 
-    // Drop category column
-    await queryRunner.query(`
-      ALTER TABLE "campaigns" DROP COLUMN "category"
-    `);
+    /* 2. Rename banner_path -> banner_url */
+    await queryRunner.renameColumn(
+      'campaigns',
+      'banner_path',
+      'banner_url',
+    );
 
-    // Drop enum type
+    /* 3. Drop enum type */
     await queryRunner.query(`
       DROP TYPE "campaign_category_enum"
     `);

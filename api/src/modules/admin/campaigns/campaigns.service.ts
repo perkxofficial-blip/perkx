@@ -8,6 +8,7 @@ import {
   ListCampaignsQueryDto,
   CampaignStatus,
 } from './dto';
+import { StorageService } from '../../../common/storage/storage.service';
 
 @Injectable()
 export class CampaignsService {
@@ -16,11 +17,30 @@ export class CampaignsService {
     private campaignRepository: Repository<Campaign>,
     @InjectRepository(Exchange)
     private exchangeRepository: Repository<Exchange>,
+    private storageService: StorageService,
   ) {}
 
-  async create(createCampaignDto: CreateCampaignDto): Promise<Campaign> {
-    const campaign = this.campaignRepository.create(createCampaignDto);
-    return await this.campaignRepository.save(campaign);
+  async create(
+    createCampaignDto: CreateCampaignDto,
+    banner: Express.Multer.File,
+  ): Promise<Campaign> {
+    // Upload banner file
+    const { path: bannerPath } =
+      await this.storageService.uploadFile(banner, 'campaigns');
+
+    // Create campaign with banner_path only
+    const campaign = this.campaignRepository.create({
+      ...createCampaignDto,
+      banner_path: bannerPath,
+    });
+
+    const savedCampaign = await this.campaignRepository.save(campaign);
+
+    // Return with banner_url generated from banner_path
+    return {
+      ...savedCampaign,
+      banner_url: this.getBannerUrl(savedCampaign.banner_path),
+    } as Campaign;
   }
 
   async findAll(queryDto: ListCampaignsQueryDto) {
@@ -70,9 +90,10 @@ export class CampaignsService {
 
     const campaigns = await queryBuilder.getMany();
 
-    // Transform to include only needed exchange fields
+    // Transform to include only needed exchange fields and banner_url
     const data = campaigns.map((campaign) => ({
       ...campaign,
+      banner_url: this.getBannerUrl(campaign.banner_path),
       exchange: campaign.exchange
         ? {
             id: campaign.exchange.id,
@@ -105,6 +126,7 @@ export class CampaignsService {
 
     return {
       ...campaign,
+      banner_url: this.getBannerUrl(campaign.banner_path),
       exchange: campaign.exchange
         ? {
             id: campaign.exchange.id,
@@ -118,6 +140,7 @@ export class CampaignsService {
   async update(
     id: number,
     updateCampaignDto: UpdateCampaignDto,
+    banner?: Express.Multer.File,
   ): Promise<Campaign | null> {
     const campaign = await this.campaignRepository.findOne({ where: { id } });
 
@@ -125,11 +148,54 @@ export class CampaignsService {
       return null;
     }
 
+    // If banner is provided, upload new banner and delete old one
+    if (banner) {
+      // Delete old banner file if exists
+      if (campaign.banner_path) {
+        await this.storageService.deleteFile(campaign.banner_path);
+      }
+
+      // Upload new banner
+      const { path: bannerPath } =
+        await this.storageService.uploadFile(banner, 'campaigns');
+
+      updateCampaignDto = {
+        ...updateCampaignDto,
+        banner_path: bannerPath,
+      } as any;
+    }
+
     Object.assign(campaign, updateCampaignDto);
-    return await this.campaignRepository.save(campaign);
+    const savedCampaign = await this.campaignRepository.save(campaign);
+
+    // Return with banner_url generated from banner_path
+    return {
+      ...savedCampaign,
+      banner_url: this.getBannerUrl(savedCampaign.banner_path),
+    } as Campaign;
+  }
+
+  /**
+   * Generate banner URL from banner_path based on storage configuration
+   * @param bannerPath - The banner path stored in database
+   * @returns The full URL to access the banner image
+   */
+  private getBannerUrl(bannerPath: string): string | null {
+    return this.storageService.getFileUrl(bannerPath);
   }
 
   async remove(id: number): Promise<boolean> {
+    const campaign = await this.campaignRepository.findOne({ where: { id } });
+    
+    if (!campaign) {
+      return false;
+    }
+
+    // Delete banner file if exists
+    if (campaign.banner_path) {
+      await this.storageService.deleteFile(campaign.banner_path);
+    }
+
     const result = await this.campaignRepository.delete(id);
     return result.affected !== undefined && result.affected > 0;
   }

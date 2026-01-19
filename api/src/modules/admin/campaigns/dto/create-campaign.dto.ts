@@ -8,7 +8,7 @@ import {
   IsInt,
   MaxLength,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { CampaignCategory } from '../../../../entities';
 
@@ -19,6 +19,7 @@ export class CreateCampaignDto {
     type: Number,
   })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   exchange_id?: number;
 
@@ -38,13 +39,6 @@ export class CreateCampaignDto {
   @IsString()
   description: string;
 
-  @ApiProperty({
-    description: 'Banner image URL',
-    example: 'https://example.com/banner.jpg',
-  })
-  @IsUrl()
-  banner_url: string;
-
   @ApiPropertyOptional({
     description: 'Redirect URL',
     example: 'https://example.com/campaign',
@@ -58,6 +52,15 @@ export class CreateCampaignDto {
     default: true,
   })
   @IsOptional()
+  @Transform(({ value }) => {
+    if (value === 'true' || value === true || value === 1 || value === '1') {
+      return true;
+    }
+    if (value === 'false' || value === false || value === 0 || value === '0') {
+      return false;
+    }
+    return value;
+  })
   @IsBoolean()
   is_active?: boolean;
 
@@ -126,6 +129,15 @@ export class CreateCampaignDto {
     default: false,
   })
   @IsOptional()
+  @Transform(({ value }) => {
+    if (value === 'true' || value === true || value === 1 || value === '1') {
+      return true;
+    }
+    if (value === 'false' || value === false || value === 0 || value === '0') {
+      return false;
+    }
+    return value;
+  })
   @IsBoolean()
   featured?: boolean;
 

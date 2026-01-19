@@ -11,6 +11,13 @@ import {
   NotFoundException,
   HttpCode,
   HttpStatus,
+  UseInterceptors,
+  UploadedFile,
+  BadRequestException,
+  UseFilters,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -20,6 +27,7 @@ import {
   ApiParam,
   ApiBody,
   ApiQuery,
+  ApiConsumes,
 } from '@nestjs/swagger';
 import { CampaignsService } from './campaigns.service';
 import {
@@ -30,6 +38,7 @@ import {
 } from './dto';
 import { AdminJwtAuthGuard } from '../auth/guards';
 import { CampaignCategory } from '../../../entities';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Admin Campaigns')
 @ApiBearerAuth('admin-jwt')
@@ -39,8 +48,35 @@ export class CampaignsController {
   constructor(private readonly campaignsService: CampaignsService) {}
 
   @Post()
+  @UseInterceptors(FileInterceptor('banner'))
   @ApiOperation({ summary: 'Create a new campaign' })
-  @ApiBody({ type: CreateCampaignDto })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      required: ['title', 'description', 'banner'],
+      properties: {
+        banner: {
+          type: 'string',
+          format: 'binary',
+          description: 'Banner image file (required). Allowed types: PNG, JPG, JPEG. Max size: 5MB',
+        },
+        exchange_id: { type: 'number', nullable: true },
+        title: { type: 'string' },
+        description: { type: 'string' },
+        redirect_url: { type: 'string', nullable: true },
+        is_active: { type: 'boolean', nullable: true },
+        preview_start: { type: 'string', format: 'date', nullable: true },
+        preview_end: { type: 'string', format: 'date', nullable: true },
+        launch_start: { type: 'string', format: 'date', nullable: true },
+        launch_end: { type: 'string', format: 'date', nullable: true },
+        archive_start: { type: 'string', format: 'date', nullable: true },
+        archive_end: { type: 'string', format: 'date', nullable: true },
+        featured: { type: 'boolean', nullable: true },
+        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+      },
+    },
+  })
   @ApiResponse({
     status: 201,
     description: 'Campaign created successfully',
@@ -51,6 +87,7 @@ export class CampaignsController {
         exchange_id: { type: 'number', nullable: true },
         title: { type: 'string' },
         description: { type: 'string' },
+        banner_path: { type: 'string' },
         banner_url: { type: 'string' },
         redirect_url: { type: 'string', nullable: true },
         is_active: { type: 'boolean' },
@@ -69,14 +106,28 @@ export class CampaignsController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad request - invalid input data',
+    description: 'Bad request - invalid input data, missing banner file, invalid file type, or file size exceeds 5MB',
   })
   @ApiResponse({
     status: 401,
     description: 'Unauthorized - invalid or missing admin token',
   })
-  async create(@Body() createCampaignDto: CreateCampaignDto) {
-    return await this.campaignsService.create(createCampaignDto);
+  async create(
+    @Body() createCampaignDto: CreateCampaignDto,
+    @UploadedFile(
+    new ParseFilePipe({
+      validators: [
+        new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
+        new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
+      ],
+    }),
+  )
+  banner: Express.Multer.File,
+  ) {
+    if (!banner) {
+      throw new BadRequestException('Banner file is required');
+    }
+    return await this.campaignsService.create(createCampaignDto, banner);
   }
 
   @Get()
@@ -124,6 +175,7 @@ export class CampaignsController {
               exchange_id: { type: 'number', nullable: true },
               title: { type: 'string' },
               description: { type: 'string' },
+              banner_path: { type: 'string' },
               banner_url: { type: 'string' },
               redirect_url: { type: 'string', nullable: true },
               is_active: { type: 'boolean' },
@@ -212,9 +264,35 @@ export class CampaignsController {
   }
 
   @Put(':id')
+  @UseInterceptors(FileInterceptor('banner'))
   @ApiOperation({ summary: 'Update campaign by ID' })
   @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
-  @ApiBody({ type: UpdateCampaignDto })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        banner: {
+          type: 'string',
+          format: 'binary',
+          description: 'Banner image file (optional). Allowed types: PNG, JPG, JPEG. Max size: 5MB',
+        },
+        exchange_id: { type: 'number', nullable: true },
+        title: { type: 'string', nullable: true },
+        description: { type: 'string', nullable: true },
+        redirect_url: { type: 'string', nullable: true },
+        is_active: { type: 'boolean', nullable: true },
+        preview_start: { type: 'string', format: 'date', nullable: true },
+        preview_end: { type: 'string', format: 'date', nullable: true },
+        launch_start: { type: 'string', format: 'date', nullable: true },
+        launch_end: { type: 'string', format: 'date', nullable: true },
+        archive_start: { type: 'string', format: 'date', nullable: true },
+        archive_end: { type: 'string', format: 'date', nullable: true },
+        featured: { type: 'boolean', nullable: true },
+        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+      },
+    },
+  })
   @ApiResponse({
     status: 200,
     description: 'Campaign updated successfully',
@@ -225,6 +303,7 @@ export class CampaignsController {
         exchange_id: { type: 'number', nullable: true },
         title: { type: 'string' },
         description: { type: 'string' },
+        banner_path: { type: 'string' },
         banner_url: { type: 'string' },
         redirect_url: { type: 'string', nullable: true },
         is_active: { type: 'boolean' },
@@ -253,8 +332,9 @@ export class CampaignsController {
   async update(
     @Param('id') id: string,
     @Body() updateCampaignDto: UpdateCampaignDto,
+    @UploadedFile() banner: Express.Multer.File,
   ) {
-    const campaign = await this.campaignsService.update(+id, updateCampaignDto);
+    const campaign = await this.campaignsService.update(+id, updateCampaignDto, banner);
     if (!campaign) {
       throw new NotFoundException('Campaign not found');
     }
