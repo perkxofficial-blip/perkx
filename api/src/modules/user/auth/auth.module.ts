@@ -8,7 +8,8 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy, LocalStrategy } from './strategies';
 import { EmailVerificationService } from './email-verification.service';
-import { MailModule } from '../../mail.module';
+import { MailModule } from '../../../mail/mail.module';
+import { TwoFatosService } from './two-fatos.service';
 
 @Module({
   imports: [
@@ -24,10 +25,15 @@ import { MailModule } from '../../mail.module';
   providers: [
     AuthService,
     EmailVerificationService,
+    TwoFatosService,
     JwtStrategy,
     LocalStrategy,
   ],
   controllers: [AuthController],
-  exports: [AuthService, EmailVerificationService],
+  exports: [
+    AuthService,
+    EmailVerificationService,
+    TwoFatosService
+  ],
 })
 export class AuthModule {}
