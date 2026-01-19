@@ -10,4 +10,15 @@ export default () => ({
     password: process.env.DATABASE_PASSWORD || process.env.DB_PASSWORD,
     database: process.env.DATABASE_NAME || process.env.DB_DATABASE,
   },
+  storage: {
+    diskDriver: process.env.DISK_DRIVER || 'local',
+    localPath: process.env.STORAGE_LOCAL_PATH || './uploads',
+    localBaseUrl: process.env.STORAGE_LOCAL_BASE_URL || 'localhost/uploads',
+    s3: {
+      bucket: process.env.AWS_S3_BUCKET,
+      region: process.env.AWS_REGION || 'us-east-1',
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+  },
 });
