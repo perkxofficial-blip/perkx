@@ -8,9 +8,10 @@ import {
   IsInt,
   MaxLength,
 } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
+import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { CampaignCategory } from '../../../../entities';
+import { TransformBoolean } from '../../../../common/decorators/transform-boolean.decorator';
 
 export class CreateCampaignDto {
   @ApiPropertyOptional({
@@ -52,15 +53,7 @@ export class CreateCampaignDto {
     default: true,
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (value === 'true' || value === true || value === 1 || value === '1') {
-      return true;
-    }
-    if (value === 'false' || value === false || value === 0 || value === '0') {
-      return false;
-    }
-    return value;
-  })
+  @TransformBoolean()
   @IsBoolean()
   is_active?: boolean;
 
@@ -129,15 +122,7 @@ export class CreateCampaignDto {
     default: false,
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (value === 'true' || value === true || value === 1 || value === '1') {
-      return true;
-    }
-    if (value === 'false' || value === false || value === 0 || value === '0') {
-      return false;
-    }
-    return value;
-  })
+  @TransformBoolean()
   @IsBoolean()
   featured?: boolean;
 

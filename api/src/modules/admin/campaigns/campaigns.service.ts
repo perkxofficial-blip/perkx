@@ -10,20 +10,23 @@ import {
 } from './dto';
 import { StorageService } from '../../../common/storage/storage.service';
 
+type CampaignResponse = Campaign & {
+  banner_url: string | null;
+  exchange: { id: number; name: string; code: string } | null;
+};
+
 @Injectable()
 export class CampaignsService {
   constructor(
     @InjectRepository(Campaign)
     private campaignRepository: Repository<Campaign>,
-    @InjectRepository(Exchange)
-    private exchangeRepository: Repository<Exchange>,
     private storageService: StorageService,
   ) {}
 
   async create(
     createCampaignDto: CreateCampaignDto,
     banner: Express.Multer.File,
-  ): Promise<Campaign> {
+  ): Promise<CampaignResponse> {
     // Upload banner file
     const { path: bannerPath } =
       await this.storageService.uploadFile(banner, 'campaigns');
@@ -37,10 +40,7 @@ export class CampaignsService {
     const savedCampaign = await this.campaignRepository.save(campaign);
 
     // Return with banner_url generated from banner_path
-    return {
-      ...savedCampaign,
-      banner_url: this.getBannerUrl(savedCampaign.banner_path),
-    } as Campaign;
+    return this.transformCampaignResponse(savedCampaign);
   }
 
   async findAll(queryDto: ListCampaignsQueryDto) {
@@ -90,18 +90,10 @@ export class CampaignsService {
 
     const campaigns = await queryBuilder.getMany();
 
-    // Transform to include only needed exchange fields and banner_url
-    const data = campaigns.map((campaign) => ({
-      ...campaign,
-      banner_url: this.getBannerUrl(campaign.banner_path),
-      exchange: campaign.exchange
-        ? {
-            id: campaign.exchange.id,
-            name: campaign.exchange.name,
-            code: campaign.exchange.code,
-          }
-        : null,
-    }));
+    // Transform campaigns with banner_url and exchange
+    const data = campaigns.map((campaign) =>
+      this.transformCampaignResponse(campaign),
+    );
 
     return {
       data,
@@ -114,7 +106,7 @@ export class CampaignsService {
     };
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<CampaignResponse | null> {
     const campaign = await this.campaignRepository.findOne({
       where: { id },
       relations: ['exchange'],
@@ -124,24 +116,14 @@ export class CampaignsService {
       return null;
     }
 
-    return {
-      ...campaign,
-      banner_url: this.getBannerUrl(campaign.banner_path),
-      exchange: campaign.exchange
-        ? {
-            id: campaign.exchange.id,
-            name: campaign.exchange.name,
-            code: campaign.exchange.code,
-          }
-        : null,
-    };
+    return this.transformCampaignResponse(campaign);
   }
 
   async update(
     id: number,
     updateCampaignDto: UpdateCampaignDto,
     banner?: Express.Multer.File,
-  ): Promise<Campaign | null> {
+  ): Promise<CampaignResponse | null> {
     const campaign = await this.campaignRepository.findOne({ where: { id } });
 
     if (!campaign) {
@@ -169,10 +151,24 @@ export class CampaignsService {
     const savedCampaign = await this.campaignRepository.save(campaign);
 
     // Return with banner_url generated from banner_path
+    return this.transformCampaignResponse(savedCampaign);
+  }
+
+  /**
+   * Transform campaign entity to response format with banner_url and exchange
+   */
+  private transformCampaignResponse(campaign: Campaign): CampaignResponse {
     return {
-      ...savedCampaign,
-      banner_url: this.getBannerUrl(savedCampaign.banner_path),
-    } as Campaign;
+      ...campaign,
+      banner_url: this.getBannerUrl(campaign.banner_path),
+      exchange: campaign.exchange
+        ? {
+            id: campaign.exchange.id,
+            name: campaign.exchange.name,
+            code: campaign.exchange.code,
+          }
+        : null,
+    } as CampaignResponse;
   }
 
   /**
