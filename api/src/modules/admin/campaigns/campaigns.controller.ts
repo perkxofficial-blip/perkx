@@ -13,12 +13,11 @@ import {
   HttpStatus,
   UseInterceptors,
   UploadedFile,
-  BadRequestException,
-  UseFilters,
   ParseFilePipe,
   MaxFileSizeValidator,
   FileTypeValidator,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiTags,
   ApiOperation,
@@ -38,7 +37,13 @@ import {
 } from './dto';
 import { AdminJwtAuthGuard } from '../auth/guards';
 import { CampaignCategory } from '../../../entities';
-import { FileInterceptor } from '@nestjs/platform-express';
+
+const ImageFileValidationPipe = new ParseFilePipe({
+  validators: [
+    new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
+    new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
+  ],
+});
 
 @ApiTags('Admin Campaigns')
 @ApiBearerAuth('admin-jwt')
@@ -114,19 +119,8 @@ export class CampaignsController {
   })
   async create(
     @Body() createCampaignDto: CreateCampaignDto,
-    @UploadedFile(
-    new ParseFilePipe({
-      validators: [
-        new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
-        new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
-      ],
-    }),
-  )
-  banner: Express.Multer.File,
+    @UploadedFile(ImageFileValidationPipe) banner: Express.Multer.File,
   ) {
-    if (!banner) {
-      throw new BadRequestException('Banner file is required');
-    }
     return await this.campaignsService.create(createCampaignDto, banner);
   }
 
@@ -332,7 +326,8 @@ export class CampaignsController {
   async update(
     @Param('id') id: string,
     @Body() updateCampaignDto: UpdateCampaignDto,
-    @UploadedFile() banner: Express.Multer.File,
+    @UploadedFile(ImageFileValidationPipe)
+    banner?: Express.Multer.File,
   ) {
     const campaign = await this.campaignsService.update(+id, updateCampaignDto, banner);
     if (!campaign) {
