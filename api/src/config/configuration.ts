@@ -15,6 +15,7 @@ export default () => ({
     localPath: process.env.STORAGE_LOCAL_PATH || './uploads',
     localBaseUrl: process.env.STORAGE_LOCAL_BASE_URL || 'localhost/uploads',
     s3: {
+      cdn: process.env.PUBLIC_STATIC_CDN,
       bucket: process.env.AWS_S3_BUCKET,
       region: process.env.AWS_REGION || 'us-east-1',
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,

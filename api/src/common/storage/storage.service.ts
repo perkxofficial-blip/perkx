@@ -11,11 +11,13 @@ export class StorageService {
   private readonly s3Client: S3Client | null = null;
   private readonly s3Bucket: string | undefined;
   private readonly s3Region: string;
+  private readonly cdn: string;
   private readonly localStoragePath: string;
 
   constructor(private configService: ConfigService) {
     this.diskDriver = this.configService.get<string>('storage.diskDriver');
     this.localStoragePath = this.configService.get<string>('storage.localPath');
+    this.cdn = this.configService.get<string>('storage.s3.cdn');
 
     if (this.diskDriver === 's3') {
       this.s3Bucket = this.configService.get<string>('storage.s3.bucket');
@@ -62,15 +64,14 @@ export class StorageService {
 
     const command = new PutObjectCommand({
       Bucket: this.s3Bucket,
-      Key: filePath,
+      Key: 'uploads/' + filePath,
       Body: buffer,
-      ContentType: contentType,
-      ACL: 'public-read',
+      ContentType: contentType
     });
 
     await this.s3Client.send(command);
 
-    const url = `https://${this.s3Bucket}.s3.${this.s3Region}.amazonaws.com/${filePath}`;
+    const url = this.cdn + '/uploads/' + filePath;
 
     return {
       path: filePath,
@@ -138,7 +139,7 @@ export class StorageService {
         throw new Error('S3 configuration is missing');
       }
       // Generate S3 URL
-      return `https://${this.s3Bucket}.s3.${this.s3Region}.amazonaws.com/${filePath}`;
+      return this.cdn + '/uploads/' + filePath;
     } else {
       // Generate local URL
       const baseUrl = this.configService.get<string>('storage.localBaseUrl');
