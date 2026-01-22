@@ -62,7 +62,7 @@ export class CampaignsService {
     // Filter by status
     if (queryDto.status) {
       const today = new Date();
-      today.setHours(0, 0, 0, 0);
+      // today.setHours(0, 0, 0, 0);
 
       switch (queryDto.status) {
         case CampaignStatus.ACTIVE:
