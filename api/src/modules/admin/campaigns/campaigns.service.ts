@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Campaign, Exchange } from '../../../entities';
 import {
   CreateCampaignDto,
   UpdateCampaignDto,
+  UpdateCampaignStatusDto,
   ListCampaignsQueryDto,
   CampaignStatus,
 } from './dto';
@@ -62,7 +63,7 @@ export class CampaignsService {
     // Filter by status
     if (queryDto.status) {
       const today = new Date();
-      today.setHours(0, 0, 0, 0);
+      // today.setHours(0, 0, 0, 0);
 
       switch (queryDto.status) {
         case CampaignStatus.ACTIVE:
@@ -178,6 +179,61 @@ export class CampaignsService {
    */
   private getBannerUrl(bannerPath: string): string | null {
     return this.storageService.getFileUrl(bannerPath);
+  }
+
+  async updateStatus(
+    id: number,
+    updateStatusDto: UpdateCampaignStatusDto,
+  ): Promise<CampaignResponse | null> {
+    const campaign = await this.campaignRepository.findOne({
+      where: { id },
+      relations: ['exchange'],
+    });
+
+    if (!campaign) {
+      return null;
+    }
+
+    // Check featured limit if updating featured to true
+    if (
+      updateStatusDto.featured === true &&
+      campaign.featured !== true
+    ) {
+      // Count current featured campaigns
+      const featuredCount = await this.campaignRepository.count({
+        where: { featured: true },
+      });
+
+      // Maximum 5 featured campaigns allowed
+      if (featuredCount >= 5) {
+        throw new BadRequestException(
+          'Maximum 5 featured campaigns allowed. Please disable another campaign first.',
+        );
+      }
+    }
+
+    // Update only provided fields
+    if (updateStatusDto.featured !== undefined) {
+      campaign.featured = updateStatusDto.featured;
+    }
+    if (updateStatusDto.is_active !== undefined) {
+      campaign.is_active = updateStatusDto.is_active;
+    }
+
+    const savedCampaign = await this.campaignRepository.save(campaign);
+
+    // Reload with exchange relation
+    const reloadedCampaign = await this.campaignRepository.findOne({
+      where: { id: savedCampaign.id },
+      relations: ['exchange'],
+    });
+
+    if (!reloadedCampaign) {
+      return null;
+    }
+
+    // Return with banner_url generated from banner_path
+    return this.transformCampaignResponse(reloadedCampaign);
   }
 
   async remove(id: number): Promise<boolean> {

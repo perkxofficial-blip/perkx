@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { Page } from './api/pages';
+import type { Page } from '@/services/api/pages';
 
 interface GenerateMetadataProps {
   page: Page;
@@ -10,7 +10,7 @@ export function generatePageMetadata({ page, locale }: GenerateMetadataProps): M
   const title = page.metaTitle || page.title;
   const description = page.metaDescription || page.description || '';
   const canonicalUrl = page.canonicalUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/pages/${page.slug}`;
-  
+
   const openGraph = {
     title: page.ogTitle || title,
     description: page.ogDescription || description,
