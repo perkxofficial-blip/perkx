@@ -3,7 +3,8 @@ import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import PartnerSection from "@/components/public/PartnerSection";
 import Image from "next/image";
-// Server-side data fetching (SSR)
+import { getTranslations } from "next-intl/server";
+
 async function getLandingData() {
   try {
     const cookieStore = await cookies();
@@ -23,7 +24,7 @@ async function getLandingData() {
 
 export default async function LandingPage() {
   const data = await getLandingData();
-  
+  const t = await getTranslations();
   return (
     <>
       <Header/>
@@ -68,12 +69,10 @@ export default async function LandingPage() {
             <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
 
             <div className="get-started col-md-6 text-center">
-              <h2>Trade Global Market</h2>
-              <h1>Maximize Your Rebates</h1>
+              <h2>{t("home.trade_global_market")}</h2>
+              <h1>{t("home.maximize_your_rebates")}</h1>
               <p>
-                Join thousands of high-performance traders using PerkX to claim
-                industry-leading cashback on every trade. Professional tools for
-                serious volume.
+                {t("home.hero_section_description")}
               </p>
 
               <div className="mt-3">
@@ -81,7 +80,7 @@ export default async function LandingPage() {
                   href="/get-started"
                   className="btn btn-get-started d-inline-flex align-items-center"
                 >
-                  <span>Get Started Now</span>
+                  <span>{t("home.get_started_now")}</span>
                   <Image
                     src="/images/icon/arrow-right-s-line.svg"
                     alt="Arrow pointing right"
@@ -100,7 +99,7 @@ export default async function LandingPage() {
         {/* Partner Section (Owl Carousel) */}
         <PartnerSection />
       </section>
-
+{/*<Footer/>*/}
     </>
   );
 }

@@ -1,6 +1,8 @@
 import Image from "next/image";
+import {getTranslations} from "next-intl/server";
 
-export default function Header() {
+export default async function Header() {
+  const t = await getTranslations();
   return (
     <header className="hero-banner">
       <div className="container menu-section">
@@ -33,21 +35,31 @@ export default function Header() {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                  <ul className="navbar-nav">
                     <li className="nav-item">
-                      <a className="nav-link active" href="/how-it-works">How it Works</a>
+                      <a className="nav-link" href="/how-it-works">
+                        {t("menu.how_it_works")}
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="/exchanges">Exchanges</a>
+                      <a className="nav-link" href="/exchanges">
+                        {t("menu.exchanges")}
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="/calculator">Calculator</a>
+                      <a className="nav-link" href="/calculator">
+                        {t("menu.calculator")}
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="/campaigns">Campaigns</a>
+                      <a className="nav-link" href="/campaigns">
+                        {t("menu.campaigns")}
+                      </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="/about-us">About Us</a>
+                      <a className="nav-link" href="/about-us">
+                        {t("menu.about_us")}
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -69,22 +81,30 @@ export default function Header() {
                   width={20}
                   height={20}
                 />
-                <span className="ms-1">English</span>
+                <span className="ms-1">{t("language.en")}</span>
               </button>
 
 
               <ul className="dropdown-menu" aria-label="Language selection">
                 <li>
-                  <a className="dropdown-item" href="/en">English</a>
+                  <a className="dropdown-item" href="/en">
+                    {t("language.en")}
+                  </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="/ko">Korea</a>
+                  <a className="dropdown-item" href="/ko">
+                    {t("language.ko")}
+                  </a>
                 </li>
               </ul>
             </div>
 
-            <a href="/login" className="btn btn-login">Login</a>
-            <a href="/register" className="btn btn-register">Register</a>
+            <a href="/login" className="btn btn-login">
+              {t("menu.login")}
+            </a>
+            <a href="/register" className="btn btn-register">
+              {t("menu.register")}
+            </a>
           </div>
         </div>
       </div>
