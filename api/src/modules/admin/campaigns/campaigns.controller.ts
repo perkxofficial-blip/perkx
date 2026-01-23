@@ -3,12 +3,14 @@ import {
   Get,
   Post,
   Put,
+  Patch,
   Delete,
   Param,
   Body,
   Query,
   UseGuards,
   NotFoundException,
+  BadRequestException,
   HttpCode,
   HttpStatus,
   UseInterceptors,
@@ -32,6 +34,7 @@ import { CampaignsService } from './campaigns.service';
 import {
   CreateCampaignDto,
   UpdateCampaignDto,
+  UpdateCampaignStatusDto,
   ListCampaignsQueryDto,
   CampaignStatus,
 } from './dto';
@@ -330,6 +333,98 @@ export class CampaignsController {
     banner?: Express.Multer.File,
   ) {
     const campaign = await this.campaignsService.update(+id, updateCampaignDto, banner);
+    if (!campaign) {
+      throw new NotFoundException('Campaign not found');
+    }
+    return campaign;
+  }
+
+  @Patch(':id/status')
+  @ApiOperation({ summary: 'Update campaign status (featured and/or is_active)' })
+  @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        featured: {
+          type: 'boolean',
+          description: 'Update featured status (optional)',
+          example: true,
+        },
+        is_active: {
+          type: 'boolean',
+          description: 'Update active status (optional)',
+          example: true,
+        },
+      },
+      required: [],
+      minProperties: 1,
+      description: 'At least one field (featured or is_active) must be provided',
+    },
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Campaign status updated successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        exchange_id: { type: 'number', nullable: true },
+        title: { type: 'string' },
+        description: { type: 'string' },
+        banner_path: { type: 'string' },
+        banner_url: { type: 'string' },
+        redirect_url: { type: 'string', nullable: true },
+        is_active: { type: 'boolean' },
+        preview_start: { type: 'string', format: 'date-time', nullable: true },
+        preview_end: { type: 'string', format: 'date-time', nullable: true },
+        launch_start: { type: 'string', format: 'date-time' },
+        launch_end: { type: 'string', format: 'date-time' },
+        archive_start: { type: 'string', format: 'date-time', nullable: true },
+        archive_end: { type: 'string', format: 'date-time', nullable: true },
+        featured: { type: 'boolean' },
+        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+        exchange: {
+          type: 'object',
+          nullable: true,
+          properties: {
+            id: { type: 'number' },
+            name: { type: 'string' },
+            code: { type: 'string' },
+          },
+        },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - at least one field (featured or is_active) must be provided, or maximum 5 featured campaigns exceeded',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing admin token',
+  })
+  @ApiResponse({ status: 404, description: 'Campaign not found' })
+  async updateStatus(
+    @Param('id') id: string,
+    @Body() updateStatusDto: UpdateCampaignStatusDto,
+  ) {
+    // Validate that at least one field is provided
+    if (
+      updateStatusDto.featured === undefined &&
+      updateStatusDto.is_active === undefined
+    ) {
+      throw new BadRequestException(
+        'At least one field (featured or is_active) must be provided',
+      );
+    }
+
+    const campaign = await this.campaignsService.updateStatus(
+      +id,
+      updateStatusDto,
+    );
     if (!campaign) {
       throw new NotFoundException('Campaign not found');
     }
