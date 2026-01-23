@@ -6,7 +6,8 @@ import {routing} from '@/i18n/routing';
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
 }
-
+import '@/styles/public/public.css'
+import BootstrapProvider from "@/components/public/BootstrapProvider";
 export default async function LocaleLayout({
   children,
   params
@@ -25,7 +26,8 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      {children}
+      <BootstrapProvider/>
+        {children}
     </NextIntlClientProvider>
   );
 }

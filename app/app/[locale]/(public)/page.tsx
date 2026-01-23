@@ -1,5 +1,8 @@
 import { cookies } from 'next/headers';
-
+import Header from "@/components/public/Header";
+import Footer from "@/components/public/Footer";
+import PartnerSection from "@/components/public/PartnerSection";
+import Image from "next/image";
 // Server-side data fetching (SSR)
 async function getLandingData() {
   try {
@@ -22,58 +25,82 @@ export default async function LandingPage() {
   const data = await getLandingData();
   
   return (
-    <div className="min-h-screen">
-      {/* Responsive Navbar */}
-      <nav className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Perkx</h1>
-            
-            <div className="hidden md:flex items-center gap-4">
-              <a href="/user" className="px-4 py-2 text-gray-700 hover:text-gray-900">
-                Dashboard
-              </a>
-              <a href="/admin" className="px-4 py-2 text-gray-700 hover:text-gray-900">
-                Admin
-              </a>
+    <>
+      <Header/>
+      <section className="banner-section" aria-label="Hero Section - Trade Global Market">
+        <div className="container-fluid">
+          <div className="row position-relative">
+            {/* Decorative coins */}
+            <Image
+              src="/images/coin1.png"
+              className="coin coin-1"
+              alt="Decorative coin"
+              width={100}
+              height={50}
+              aria-hidden="true"
+              priority={false}
+            />
+            <Image
+              src="/images/coin1.png"
+              className="coin coin-2"
+              alt="Decorative coin"
+              width={162}
+              height={50}
+              aria-hidden="true"
+            />
+            <Image
+              src="/images/coin2.png"
+              className="coin coin-3"
+              alt="Decorative coin"
+              width={170}
+              height={50}
+              aria-hidden="true"
+            />
+            <Image
+              src="/images/coin1.png"
+              className="coin coin-4"
+              alt="Decorative coin"
+              width={105}
+              height={50}
+              aria-hidden="true"
+            />
+
+            <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
+
+            <div className="get-started col-md-6 text-center">
+              <h2>Trade Global Market</h2>
+              <h1>Maximize Your Rebates</h1>
+              <p>
+                Join thousands of high-performance traders using PerkX to claim
+                industry-leading cashback on every trade. Professional tools for
+                serious volume.
+              </p>
+
+              <div className="mt-3">
+                <a
+                  href="/get-started"
+                  className="btn btn-get-started d-inline-flex align-items-center"
+                >
+                  <span>Get Started Now</span>
+                  <Image
+                    src="/images/icon/arrow-right-s-line.svg"
+                    alt="Arrow pointing right"
+                    width={16}
+                    height={16}
+                    className="ms-2"
+                  />
+                </a>
+              </div>
             </div>
-            
-            <button className="md:hidden">☰</button>
+
+            <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
           </div>
         </div>
-      </nav>
 
-      {/* Hero Section - SSR + Responsive */}
-      <section className="container mx-auto px-4 py-12 md:py-24">
-        <div className="text-center">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Welcome to Perkx
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            SSR Landing Page with Authentication
-          </p>
-        </div>
+        {/* Partner Section (Owl Carousel) */}
+        <PartnerSection />
       </section>
 
-      {/* Features Section - Responsive Grid */}
-      <section className="container mx-auto px-4 py-12 bg-gray-50">
-        <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.data?.features?.map((feature: any) => (
-            <div key={feature.id} className="bg-white p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>© 2026 Perkx. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }
