@@ -6,7 +6,12 @@
     "dashboard": "대시보드",
     "profile": "프로필",
     "settings": "설정",
-    "users": "사용자"
+    "users": "사용자",
+    "home": "홈",
+    "readMore": "더 읽기"
+  },
+  "page": {
+    "notFound": "페이지를 찾을 수 없습니다"
   },
   "landing": {
     "title": "Perkx에 오신 것을 환영합니다",

@@ -12,7 +12,24 @@ import { Public } from '../../../common/decorators';
 @ApiTags('Public - Pages')
 @Controller('pages')
 export class PublicPagesController {
-  constructor(private readonly pagesService: PagesService) {}
+  constructor(private readonly pagesService: PagesService) { }
+
+  @Public()
+  @Get()
+  @ApiOperation({ summary: 'Get all published pages by language' })
+  @ApiQuery({
+    name: 'language',
+    required: false,
+    description: 'Language code (default: en)',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Return all published pages for specified language',
+  })
+  findAll(@Query('language') language: string = 'en') {
+    return this.pagesService.getPublishedPages(language);
+  }
+
 
   @Public()
   @Get(':slug')

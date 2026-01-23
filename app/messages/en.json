@@ -6,7 +6,12 @@
     "dashboard": "Dashboard",
     "profile": "Profile",
     "settings": "Settings",
-    "users": "Users"
+    "users": "Users",
+    "home": "Home",
+    "readMore": "Read More"
+  },
+  "page": {
+    "notFound": "Page not found"
   },
   "landing": {
     "title": "Welcome to Perkx",
