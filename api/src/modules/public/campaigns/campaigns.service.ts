@@ -76,6 +76,29 @@ export class PublicCampaignsService {
     return campaigns.map((campaign) => this.transformCampaignResponse(campaign));
   }
 
+  async findOne(id: number): Promise<CampaignResponse | null> {
+    const today = new Date();
+
+    const campaign = await this.campaignRepository
+      .createQueryBuilder('campaign')
+      .leftJoinAndSelect('campaign.exchange', 'exchange')
+      .where('campaign.id = :id', { id })
+      .andWhere('campaign.is_active = :isActive', { isActive: true })
+      .andWhere(
+        '((campaign.launch_start <= :today AND campaign.launch_end >= :today) OR ' +
+        '(campaign.preview_start <= :today AND campaign.preview_end >= :today) OR ' +
+        '(campaign.archive_start <= :today AND campaign.archive_end >= :today))',
+        { today },
+      )
+      .getOne();
+
+    if (!campaign) {
+      return null;
+    }
+
+    return this.transformCampaignResponse(campaign);
+  }
+
   /**
    * Transform campaign entity to response format with banner_url and exchange
    */
