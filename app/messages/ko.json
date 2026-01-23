@@ -70,9 +70,9 @@
     "ko": "한국어"
   },
   "home": {
-    "trade_global_market": "글로벌 시장에서 거래하세요",
-    "maximize_your_rebates": "거래 리베이트를 극대화하세요",
-    "hero_section_description": "PerkX와 함께 수천 명의 고성능 트레이더들이 모든 거래에서 업계 최고 수준의 캐시백을 받고 있습니다. 전문 트레이더를 위한 강력한 도구를 제공합니다.",
+    "intro_1": "혜택은 주어지는 것이 아닙니다.",
+    "intro_2": "협상을 통해 얻는 것입니다.",
+    "hero_section_description": "모든 거래가 최고의 혜택을 받을 수 있도록, 수수료 리베이트, 에어드롭, 할인 혜택을 하나의 포털에 담았습니다.",
     "get_started_now": "지금 시작하기"
   }
 }

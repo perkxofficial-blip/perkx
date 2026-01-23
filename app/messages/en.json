@@ -70,9 +70,9 @@
     "ko": "Korean"
   },
   "home": {
-    "trade_global_market":"Trade Global Market",
-    "maximize_your_rebates": "Maximize Your Rebates",
-    "hero_section_description": "Join thousands of high-performance traders using PerkX to claim industry-leading cashback on every trade. Professional tools for serious volume.",
+    "intro_1":"Perks aren’t given.",
+    "intro_2": "They’re negotiated.",
+    "hero_section_description": "We get the best fee rebates, airdrops, and discounts into one portal — because every trade deserves the best deal.",
     "get_started_now": "Get Started Now"
   }
 }
