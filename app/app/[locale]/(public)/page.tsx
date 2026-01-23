@@ -4,17 +4,18 @@ import Footer from "@/components/public/Footer";
 import PartnerSection from "@/components/public/PartnerSection";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import {renderText} from "@/lib/renderText";
 
 async function getLandingData() {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
-    
+
     const res = await fetch('http://localhost:3000/api/landing/features', {
       cache: 'no-store',
       headers: token ? { 'Authorization': `Bearer ${token}` } : {},
     });
-    
+
     if (!res.ok) return { features: [] };
     return res.json();
   } catch {
@@ -36,7 +37,7 @@ export default async function LandingPage() {
               <Image
                 src="/images/coin1.png"
                 className="coin coin-1"
-                alt="Decorative coin"
+                alt={t("home.coin")}
                 width={100}
                 height={50}
                 aria-hidden="true"
@@ -45,7 +46,7 @@ export default async function LandingPage() {
               <Image
                 src="/images/coin1.png"
                 className="coin coin-2"
-                alt="Decorative coin"
+                alt={t("home.coin")}
                 width={162}
                 height={50}
                 aria-hidden="true"
@@ -53,7 +54,7 @@ export default async function LandingPage() {
               <Image
                 src="/images/coin2.png"
                 className="coin coin-3"
-                alt="Decorative coin"
+                alt={t("home.coin")}
                 width={170}
                 height={50}
                 aria-hidden="true"
@@ -61,7 +62,7 @@ export default async function LandingPage() {
               <Image
                 src="/images/coin1.png"
                 className="coin coin-4"
-                alt="Decorative coin"
+                alt={t("home.coin")}
                 width={105}
                 height={50}
                 aria-hidden="true"
@@ -84,7 +85,7 @@ export default async function LandingPage() {
                     <span>{t("home.get_started_now")}</span>
                     <Image
                       src="/images/icon/arrow-right-s-line.svg"
-                      alt="Arrow pointing right"
+                      alt={t("home.get_started_now")}
                       width={16}
                       height={16}
                       className="ms-2"
@@ -101,7 +102,80 @@ export default async function LandingPage() {
           <PartnerSection />
         </section>
       </div>
+      <section className="how-perk-work">
+        <div className="container">
+          <div className="row">
+            <div className="col-12 text-center how-perk-work-title">
+              <h2>
+                {t.rich('home.how_perkx_works', {
+                  perkx: (chunks) => (
+                    <span className="perkx">{chunks}</span>
+                  ),
+                })}
+              </h2>
+              <p>{t('home.how_perkx_works_description')}</p>
+            </div>
+          </div>
+          <div className="row justify-content-center align-items-center position-relative">
+            <div className="col-md-6 col-md-6 d-flex justify-content-end">
+              <Image
+                src="/images/work1.png"
+                alt={t('home.how_perkx_works_description')}
+                width={564}
+                height={479}
+                priority
+              />
+            </div>
+            <div className="col-md-6">
+              <div className="timeline-block">
+                <div className="d-flex align-items-center timeline-item">
+                  <div className="timeline-icon">
+                    <Image
+                      src="/images/linked.png"
+                      alt={`${t('home.timeline1')} icon`}
+                      width={72}
+                      height={72}
+                    />
+                    <div className="timeline-bottom tb-2"></div>
+                  </div>
+                  <div className="ms-4 ">
+                    <h5 className="mb-0">{t('home.timeline1')}</h5>
+                  </div>
+                </div>
+                <div className="d-flex align-items-center timeline-item">
+                  <div className="timeline-icon">
+                    <Image
+                      src="/images/linked.png"
+                      alt={`${t('home.timeline2')} icon`}
+                      width={72}
+                      height={72}
+                    />
+                    <div className="timeline-bottom"></div>
+                  </div>
+                  <div className="ms-4 ">
+                    <h5 className="mb-1">{t('home.timeline2')}</h5>
+                    <p>{t('home.timeline2_desc')}</p>
+                  </div>
 
+                </div>
+                <div className="d-flex align-items-center timeline-item">
+                  <div className="timeline-icon">
+                    <Image
+                      src="/images/chart.png"
+                      alt={`${t('home.timeline3')} icon`}
+                      width={72}
+                      height={72}
+                    />
+                  </div>
+                  <div className="ms-4 ">
+                    <h5 className="mb-0">{t('home.timeline3')}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 {/*<Footer/>*/}
     </>
   );

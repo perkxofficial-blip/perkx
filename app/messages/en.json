@@ -73,6 +73,13 @@
     "intro_1":"Perks aren’t given.",
     "intro_2": "They’re negotiated.",
     "hero_section_description": "We get the best fee rebates, airdrops, and discounts into one portal — because every trade deserves the best deal.",
-    "get_started_now": "Get Started Now"
+    "get_started_now": "Get Started Now",
+    "coin": "Decorative coin",
+    "how_perkx_works": "How <perkx>PerkX</perkx> Works",
+    "how_perkx_works_description": "Get started in three simple steps and start earning cashback on your trades",
+    "timeline1": "1. Register a PerkX account",
+    "timeline2": "2. Register/ Link your exchange account",
+    "timeline2_desc": "Create exchange account via link provided",
+    "timeline3": "3. Start Trading"
   }
 }
