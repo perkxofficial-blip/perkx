@@ -1,14 +1,13 @@
 'use client'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation } from 'swiper/modules'
-
+import { Autoplay } from 'swiper/modules'
+import Image from "next/image"
 export default function SwiperClient() {
   return (
     <Swiper
-      modules={[Autoplay, Navigation]}
+      modules={[Autoplay]}
       loop
-      navigation
       autoplay={{
         delay: 1000,
         disableOnInteraction: false,
@@ -24,7 +23,14 @@ export default function SwiperClient() {
       {[1, 2, 3, 4, 5, 6, 1, 3, 2,4,5].map((i, index) => (
         <SwiperSlide key={index}>
           <div className="item">
-            <img src={`/images/partner/${i}.png`} alt="" />
+            <Image
+              src={`/images/partner/${i}.png`}
+              alt={`Partner ${i} logo`}
+              width={120}
+              height={50}
+              className="partner-logo"
+              loading="lazy" // lazy load
+            />
           </div>
         </SwiperSlide>
       ))}

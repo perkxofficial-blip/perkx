@@ -86,7 +86,7 @@ a {
       font-size: 68px;
       font-weight: bolder;
     }
-    h4 {
+    p {
       margin-top: 18px;
       font-size: 20px;
       color: var(--white);
@@ -111,6 +111,9 @@ a {
   width: 120px;
   animation: float 6s ease-in-out infinite;
   z-index: 1;
+  img {
+    height: auto;
+  }
 }
 
 .coin-1 {

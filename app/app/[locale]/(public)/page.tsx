@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import PartnerSection from "@/components/public/PartnerSection";
-
+import Image from "next/image";
 // Server-side data fetching (SSR)
 async function getLandingData() {
   try {
@@ -26,45 +26,80 @@ export default async function LandingPage() {
   
   return (
     <>
-      <Header />
-      {/* ===== Banner Section ===== */}
-      <div className="banner-section">
+      <Header/>
+      <section className="banner-section" aria-label="Hero Section - Trade Global Market">
         <div className="container-fluid">
           <div className="row position-relative">
-            <img src="/images/coin1.png" className="coin coin-1" alt="" />
-            <img src="/images/coin1.png" className="coin coin-2" alt="" />
-            <img src="/images/coin2.png" className="coin coin-3" alt="" />
-            <img src="/images/coin1.png" className="coin coin-4" alt="" />
+            {/* Decorative coins */}
+            <Image
+              src="/images/coin1.png"
+              className="coin coin-1"
+              alt="Decorative coin"
+              width={100}
+              height={50}
+              aria-hidden="true"
+              priority={false}
+            />
+            <Image
+              src="/images/coin1.png"
+              className="coin coin-2"
+              alt="Decorative coin"
+              width={162}
+              height={50}
+              aria-hidden="true"
+            />
+            <Image
+              src="/images/coin2.png"
+              className="coin coin-3"
+              alt="Decorative coin"
+              width={170}
+              height={50}
+              aria-hidden="true"
+            />
+            <Image
+              src="/images/coin1.png"
+              className="coin coin-4"
+              alt="Decorative coin"
+              width={105}
+              height={50}
+              aria-hidden="true"
+            />
 
-            <div className="bitcoin-left col-md-3"></div>
+            <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
 
-            <div className="get-started col-md-6">
-              <h2>Trade Global Market.</h2>
+            <div className="get-started col-md-6 text-center">
+              <h2>Trade Global Market</h2>
               <h1>Maximize Your Rebates</h1>
-              <h4>
+              <p>
                 Join thousands of high-performance traders using PerkX to claim
                 industry-leading cashback on every trade. Professional tools for
                 serious volume.
-              </h4>
+              </p>
 
-              <div>
-                <a href="#" className="btn btn-get-started">
-                  Get Started Now
-                  <img
+              <div className="mt-3">
+                <a
+                  href="/get-started"
+                  className="btn btn-get-started d-inline-flex align-items-center"
+                >
+                  <span>Get Started Now</span>
+                  <Image
                     src="/images/icon/arrow-right-s-line.svg"
-                    alt="arrow"
+                    alt="Arrow pointing right"
+                    width={16}
+                    height={16}
+                    className="ms-2"
                   />
                 </a>
               </div>
             </div>
 
-            <div className="bitcoin-left col-md-3"></div>
+            <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
           </div>
         </div>
 
-        {/* ===== Partner Section (Owl Carousel) ===== */}
+        {/* Partner Section (Owl Carousel) */}
         <PartnerSection />
-      </div>
+      </section>
 
     </>
   );
