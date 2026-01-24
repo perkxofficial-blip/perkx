@@ -80,6 +80,9 @@
     "timeline1": "1. PerkX 계정 등록",
     "timeline2": "2. 거래소 계정 등록 또는 연결",
     "timeline2_desc": "제공된 링크를 통해 거래소 계정을 생성하세요",
-    "timeline3": "3. 거래 시작"
+    "timeline3": "3. 거래 시작",
+    "calculator_title": "<perkx>놓치고 있는 혜택</perkx>을 확인하세요",
+    "calculator_desc": "거래량을 기준으로 받을 수 있는 잠재적인 캐시백 수익을 계산해 보세요.",
+    "calculator_btn": "캐시백 계산하기"
   }
 }

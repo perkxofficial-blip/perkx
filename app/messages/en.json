@@ -80,6 +80,9 @@
     "timeline1": "1. Register a PerkX account",
     "timeline2": "2. Register/ Link your exchange account",
     "timeline2_desc": "Create exchange account via link provided",
-    "timeline3": "3. Start Trading"
+    "timeline3": "3. Start Trading",
+    "calculator_title": "See What <perkx>You're Missing</perkx>",
+    "calculator_desc": "Calculate your potential cashback earnings based on your trading volume.",
+    "calculator_btn": "Calculate Cashback"
   }
 }

@@ -197,6 +197,29 @@ export default async function LandingPage() {
           </div>
         </div>
       </section>
+      <section className="calculator">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 offset-md-2 calculator-block">
+              <Image
+                className="calc-img"
+                src="/images/Group.png"
+                alt={`${t('home.calculator_btn')}`}
+                width={308}
+                height={225}
+                priority
+              />
+              <h2>{t.rich('home.calculator_title', {
+                perkx: (chunks) => (
+                  <span className="perkx">{chunks}</span>
+                ),
+              })}</h2>
+              <p>{t('home.calculator_desc')}</p>
+              <a href="" className='calc-btn'>{t('home.calculator_btn')}</a>
+            </div>
+          </div>
+        </div>
+      </section>
 {/*<Footer/>*/}
     </>
   );
