@@ -83,6 +83,8 @@
     "timeline3": "3. Start Trading",
     "calculator_title": "See What <perkx>You're Missing</perkx>",
     "calculator_desc": "Calculate your potential cashback earnings based on your trading volume.",
-    "calculator_btn": "Calculate Cashback"
+    "calculator_btn": "Calculate Cashback",
+    "exclusive_campaigns": "Exclusive Campaigns",
+    "view_all_campaigns": "View all campaigns"
   }
 }

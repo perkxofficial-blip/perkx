@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
-const SwiperClient = dynamic(() => import('./SwiperClient'), {
+const PartnerSectionSlide = dynamic(() => import('././PartnerSectionSlide'), {
   ssr: false,
 })
 
@@ -10,7 +10,7 @@ export default function PartnerSection() {
   return (
     <div className="partner-section">
       <div className="container-fluid">
-        <SwiperClient />
+        <PartnerSectionSlide />
       </div>
     </div>
   )

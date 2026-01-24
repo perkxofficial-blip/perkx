@@ -5,6 +5,7 @@ import PartnerSection from "@/components/public/PartnerSection";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import {renderText} from "@/lib/renderText";
+import CampaignSection from "@/components/public/CampaignSection";
 
 async function getLandingData() {
   try {
@@ -127,27 +128,7 @@ export default async function LandingPage() {
               />
             </div>
             <div className="col-md-6 timeline-wrapper">
-              <Image
-                className="w-coin w-coin1"
-                src="/images/w-coin1.png"
-                alt={`${t('home.coin')}`}
-                width={109}
-                height={98}
-              />
-              <Image
-                className="w-coin w-coin2"
-                src="/images/w-coin2.png"
-                alt={`${t('home.coin')}`}
-                width={69}
-                height={70}
-              />
-              <Image
-                className="w-coin w-coin3"
-                src="/images/w-coin3.png"
-                alt={`${t('home.coin')}`}
-                width={51}
-                height={51}
-              />
+
               <div className="timeline-block">
                 <div className="d-flex align-items-center timeline-item">
                   <div className="timeline-icon">
@@ -203,10 +184,10 @@ export default async function LandingPage() {
             <div className="col-md-8 offset-md-2 calculator-block">
               <Image
                 className="calc-img"
-                src="/images/Group.png"
+                src="/images/Layer 1.svg"
                 alt={`${t('home.calculator_btn')}`}
-                width={308}
-                height={225}
+                width={207}
+                height={224}
                 priority
               />
               <h2>{t.rich('home.calculator_title', {
@@ -218,6 +199,26 @@ export default async function LandingPage() {
               <a href="" className='calc-btn'>{t('home.calculator_btn')}</a>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="campaign-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8">
+              <h2>{t('home.exclusive_campaigns')}</h2>
+            </div>
+            <div className="col-md-4 campaign-view">
+              <a href="">{t('home.view_all_campaigns')}</a>
+              <Image
+                src="/images/arrow-right-s-line.svg"
+                alt="arrow right line"
+                width={20}
+                height={20}
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+          <CampaignSection/>
         </div>
       </section>
 {/*<Footer/>*/}
