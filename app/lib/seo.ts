@@ -1,43 +1,60 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
+import type { Page } from '@/services/api/pages';
 
-type SeoParams = {
-  locale: "en" | "ko";
-  path: string; // /how-it-works
-  title: string;
-  description: string;
-  ogTitle?: string;
-  ogDescription?: string;
-};
+interface GenerateMetadataProps {
+  page: Page;
+  locale: string;
+}
 
-export function generateSeoMetadata({
-                                      locale,
-                                      path,
-                                      title,
-                                      description,
-                                      ogTitle,
-                                      ogDescription
-                                    }: SeoParams): Metadata {
-  const baseUrl = "https://perkx.com";
+export function generatePageMetadata({ page, locale }: GenerateMetadataProps): Metadata {
+  const title = page.metaTitle || page.title;
+  const description = page.metaDescription || page.description || '';
+  const canonicalUrl = page.canonicalUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/pages/${page.slug}`;
+
+  const openGraph = {
+    title: page.ogTitle || title,
+    description: page.ogDescription || description,
+    type: 'article' as const,
+    locale: locale,
+    url: canonicalUrl,
+    ...(page.ogImage && {
+      images: [
+        {
+          url: page.ogImage,
+          alt: page.ogTitle || title,
+        },
+      ],
+    }),
+  };
 
   return {
     title,
     description,
-
+    keywords: page.metaKeywords?.join(', '),
     alternates: {
-      canonical: `${baseUrl}/${locale}${path}`,
-      languages: {
-        en: `${baseUrl}/en${path}`,
-        ko: `${baseUrl}/ko${path}`
-      }
+      canonical: canonicalUrl,
     },
+    openGraph,
+    twitter: {
+      card: 'summary_large_image',
+      title: openGraph.title,
+      description: openGraph.description,
+      ...(page.ogImage && {
+        images: [page.ogImage],
+      }),
+    },
+  };
+}
 
-    openGraph: {
-      title: ogTitle ?? title,
-      description: ogDescription ?? description,
-      url: `${baseUrl}/${locale}${path}`,
-      siteName: "PerkX",
-      locale: locale === "ko" ? "ko_KR" : "en_US",
-      type: "website"
-    }
+export function generateStructuredData(page: Page, locale: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.title,
+    description: page.description,
+    url: page.canonicalUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/pages/${page.slug}`,
+    inLanguage: locale,
+    datePublished: page.createdAt,
+    dateModified: page.updatedAt,
   };
 }
