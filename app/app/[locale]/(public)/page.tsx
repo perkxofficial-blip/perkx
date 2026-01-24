@@ -218,7 +218,7 @@ export default async function LandingPage() {
               />
             </div>
           </div>
-          <CampaignSection/>
+          <CampaignSection campaigns={[]} joinNow={t('home.join_now')}/>
         </div>
       </section>
 {/*<Footer/>*/}

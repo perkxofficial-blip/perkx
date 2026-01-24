@@ -1,13 +1,11 @@
-'use client';
-
 import Image from 'next/image';
-
 export interface CampaignItemProps {
   campaign: any
-  className?: string;
+  joinNow: string
+  className?: string
 }
 
-const CampaignItem = ({campaign, className}: CampaignItemProps) => {
+const CampaignItem = ({campaign, joinNow, className}: CampaignItemProps) => {
   return (
     <div
       className={`campaign-item ${className ?? ''}`}
@@ -27,7 +25,7 @@ const CampaignItem = ({campaign, className}: CampaignItemProps) => {
         </div>
         <p>Trader World Cup</p>
         <span>Win a share of $1,000,000 prize pool and 50% extra rebate for top traders</span>
-        <a href="">Join Now</a>
+        <a href="">{joinNow}</a>
       </div>
     </div>
   );

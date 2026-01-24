@@ -83,6 +83,9 @@
     "timeline3": "3. 거래 시작",
     "calculator_title": "<perkx>놓치고 있는 혜택</perkx>을 확인하세요",
     "calculator_desc": "거래량을 기준으로 받을 수 있는 잠재적인 캐시백 수익을 계산해 보세요.",
-    "calculator_btn": "캐시백 계산하기"
+    "calculator_btn": "캐시백 계산하기",
+    "exclusive_campaigns": "독점 캠페인",
+    "view_all_campaigns": "모든 캠페인 보기",
+    "join_now": "지금 가입"
   }
 }
