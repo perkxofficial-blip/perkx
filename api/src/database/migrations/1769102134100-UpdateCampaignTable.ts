@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm';
 
-export class UpdateCampaignTable1737021341000 implements MigrationInterface {
-  name = 'UpdateCampaignTable1737021341000';
+export class UpdateCampaignTable1769102134100 implements MigrationInterface {
+  name = 'UpdateCampaignTable1769102134100';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     /* 1. Create enum type */

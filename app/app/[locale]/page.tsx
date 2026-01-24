@@ -10,7 +10,7 @@ interface HomePageProps {
 
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'common' });
+  const t = await getTranslations({ locale, namespace: 'menu' });
   const pages = await getAllPages(locale);
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
