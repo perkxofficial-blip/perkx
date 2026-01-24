@@ -61,25 +61,80 @@ header {
   .btn-group {
     padding-right: 24px;
   }
-  .btn-login, .btn-register {
+  .btn-login,
+  .btn-register {
+    position: relative;
     width: 100px;
     height: 40px;
     color: var(--white);
-    border: none;
     border-radius: 10px;
     font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+    transition:
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s ease,
+            background 0.35s ease;
+    will-change: transform;
   }
+
   .btn-login {
-    background: rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.15);
     margin-right: 8px;
   }
+
   .btn-register {
-    border-radius: 10px;
-    background: var(--gr1, linear-gradient(95deg, rgba(239, 115, 209, 0.80) 1.16%, rgba(179, 136, 244, 0.80) 102.96%));
-    box-shadow: 0 1px 2px 0 rgba(55, 93, 251, 0.08);
+    background: linear-gradient(
+                    135deg,
+                    rgba(239, 115, 209, 0.55),
+                    rgba(179, 136, 244, 0.55)
+    );
+    box-shadow:
+            0 4px 16px rgba(179, 136, 244, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .btn-login::before,
+  .btn-register::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+                    120deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.55),
+                    transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .btn-login:hover,
+  .btn-register:hover {
+    transform: translateY(-1.5px) scale(1.03);
+    box-shadow:
+            0 10px 28px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .btn-login:hover::before,
+  .btn-register:hover::before {
+    opacity: 0.35;
+  }
+
+  .btn-login:active,
+  .btn-register:active {
+    transform: scale(0.96);
+    box-shadow:
+            0 3px 10px rgba(0, 0, 0, 0.3) inset;
   }
   padding: 24px 0;
 }
