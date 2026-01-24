@@ -125,25 +125,47 @@ export class StorageService {
   }
 
   /**
+   * Generate local file URL
+   * @param filePath - The file path stored in database
+   * @returns The full local URL to access the file
+   */
+  getFileLocal(filePath: string): string | null {
+    if (!filePath) {
+      return null;
+    }
+
+    const baseUrl = this.configService.get<string>('storage.localBaseUrl');
+    return `${baseUrl}/${filePath}`;
+  }
+
+  /**
+   * Generate S3 file URL
+   * @param filePath - The file path stored in database
+   * @returns The full S3 URL to access the file
+   */
+  getFileS3(filePath: string): string | null {
+    if (!filePath) {
+      return null;
+    }
+
+    if (!this.s3Bucket) {
+      throw new Error('S3 configuration is missing');
+    }
+
+    // Generate S3 URL
+      return this.cdn + '/uploads/' + filePath;
+  }
+
+  /**
    * Generate URL from file path based on storage driver configuration
    * @param filePath - The file path stored in database
    * @returns The full URL to access the file
    */
   getFileUrl(filePath: string): string | null {
-    if (!filePath) {
-      return null;
-    }
-
     if (this.diskDriver === 's3') {
-      if (!this.s3Bucket) {
-        throw new Error('S3 configuration is missing');
-      }
-      // Generate S3 URL
-      return this.cdn + '/uploads/' + filePath;
+      return this.getFileS3(filePath);
     } else {
-      // Generate local URL
-      const baseUrl = this.configService.get<string>('storage.localBaseUrl');
-      return `${baseUrl}/${filePath}`;
+      return this.getFileLocal(filePath);
     }
   }
 }
