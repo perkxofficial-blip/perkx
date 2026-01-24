@@ -99,5 +99,16 @@
       "action": "action"
     },
     "view_all_partners" : "View All Partners"
+  },
+  "footer": {
+    "desc": "The global standard for crypto trading cashback. Helping institutional and retail traders maximize capital efficiency.",
+    "platform": "Platform",
+    "exchange_rebates": "Exchange Rebates",
+    "profit_calculator": "Profit Calculator",
+    "resources": "resources",
+    "help_center": "Help Center",
+    "terms_of_use": "Terms of Use",
+    "copyright": "© 2026 PerkX Global LTD.",
+    "follow_us": "Follow Us"
   }
 }

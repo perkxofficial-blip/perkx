@@ -16,10 +16,10 @@ export default async function Header() {
                   <a className="navbar-brand" href="/">
                     <Image
                       src="/images/logo.png"
-                      alt="Perkx - Your Rewards Platform"
-                      width={123} // chỉnh theo kích thước logo thực tế
+                      alt={t('meta.home.title')}
+                      width={123}
                       height={41}
-                      priority // load sớm cho SEO/LCP
+                      priority
                     />
                   </a>
 
