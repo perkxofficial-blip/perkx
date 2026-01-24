@@ -217,6 +217,26 @@ header {
 }
 
 .how-perk-work {
+  .timeline-wrapper {
+    position: relative;
+
+    .w-coin {
+      position: absolute;
+      z-index: 1;
+    }
+    .w-coin1 {
+      bottom: -15px;
+      right: 85px;
+    }
+    .w-coin2 {
+      bottom: 90px;
+      right: 130px;
+    }
+    .w-coin3 {
+      bottom: 130px;
+      right: 55px;
+    }
+  }
   .timeline-block {
     border-radius: 20px;
     border: 1px solid #FFF;
@@ -227,6 +247,7 @@ header {
     width: 564px;
     height: 386px;
     padding: 42px;
+    position: relative;
   }
   .timeline-item {
     h5 {
