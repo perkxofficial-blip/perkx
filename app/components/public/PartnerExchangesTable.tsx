@@ -68,7 +68,7 @@ export default function PartnerExchangesTable() {
           <td>0.08% / 0.08%</td>
           <td>$2,000</td>
           <td>
-            <button className="pe-btn">
+            <button className="pe-link">
               Register
             </button>
           </td>
@@ -119,7 +119,7 @@ export default function PartnerExchangesTable() {
           <td>0.08% / 0.08%</td>
           <td>$2,000</td>
           <td>
-            <button className="pe-btn">
+            <button className="pe-link">
               Register
             </button>
           </td>
@@ -170,7 +170,7 @@ export default function PartnerExchangesTable() {
           <td>0.08% / 0.08%</td>
           <td>$2,000</td>
           <td>
-            <button className="pe-btn">
+            <button className="pe-link">
               Register
             </button>
           </td>
@@ -221,7 +221,7 @@ export default function PartnerExchangesTable() {
           <td>0.08% / 0.08%</td>
           <td>$2,000</td>
           <td>
-            <button className="pe-btn">
+            <button className="pe-link">
               Register
             </button>
           </td>
