@@ -22,6 +22,9 @@ export class Exchange {
   @Column({ type: 'text' })
   affiliate_link: string;
 
+  @Column({ type: 'text', nullable: true })
+  logo_path: string;
+
   @Column({ default: true })
   is_active: boolean;
 

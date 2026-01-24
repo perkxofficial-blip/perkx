@@ -6,4 +6,7 @@ tmp/
 temp/
 .env
 dist/
-uploads/
+# Ignore all uploads except public directory
+uploads/*
+!uploads/public/
+!uploads/public/**
