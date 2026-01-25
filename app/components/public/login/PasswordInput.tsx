@@ -4,22 +4,23 @@ import { useState } from 'react';
 import Image from "next/image";
 
 interface Props {
+  name: string;
   label: string;
   placeholder: string;
 }
 
-export default function PasswordInput({ label, placeholder }: Props) {
+export default function PasswordInput({name, label, placeholder }: Props) {
   const [show, setShow] = useState(false);
 
   return (
     <div className="mb-3 position-relative">
-      <label htmlFor="password" className="form-label">
+      <label htmlFor={`${name}-input`} className="form-label">
         {label}
       </label>
 
       <input
-        id="password"
-        name="password"
+        id={`${name}-input`}
+        name={name}
         type={show ? 'text' : 'password'}
         className="form-control pe-5"
         placeholder={placeholder}

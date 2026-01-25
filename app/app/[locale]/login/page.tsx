@@ -61,6 +61,7 @@ export default async function LoginPage({ params }: LoginPageProps) {
                 </div>
 
                 <PasswordInput
+                  name='password'
                   label={t('login.password')}
                   placeholder={t('login.password_placeholder')}
                 />
