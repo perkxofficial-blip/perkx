@@ -32,5 +32,13 @@ export default function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|ko)/:path*', '/admin/:path*']
+  matcher: [
+    '/',
+    '/(en|ko)/:path*',
+    '/login',
+    '/register',
+    '/user/:path*',
+    '/admin/:path*'
+  ]
 };
+
