@@ -32,6 +32,7 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
       <main className="login">
         <div className="container">
           <div className="row justify-content-center">
+            <div className="col-md-1 col-lg-1"></div>
             <div className="col-md-8 col-lg-5 login-form">
              <div className="text-center">
                <Image
@@ -96,7 +97,7 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
                 </p>
               </form>
             </div>
-            <div className="col-md-4 col-lg-7">
+            <div className="col-md-3 col-lg-6">
             </div>
           </div>
         </div>
