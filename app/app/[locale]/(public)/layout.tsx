@@ -1,19 +1,20 @@
-import { generateSeoMetadata } from "@/lib/seo";
+import { generatePageMetadata, generateStructuredData } from '@/lib/seo';
 import {getTranslations} from "next-intl/server";
+import {getPageBySlug} from "@/services/api";
 
 // @ts-ignore
 export async function generateMetadata({ params }) {
   const { locale } = params;
-  const t = await getTranslations({ locale });
+  const page = await getPageBySlug('Home', locale);
 
-  return generateSeoMetadata({
-    locale,
-    path: "/",
-    title: t("meta.how_it_works.title"),
-    description: t("meta.how_it_works.description"),
-    ogTitle: t("meta.how_it_works.og_title"),
-    ogDescription: t("meta.how_it_works.og_description")
-  });
+  if (!page) {
+    return {
+      title: 'Home | PerkX',
+      description: 'Learn more about PerkX and our mission',
+    };
+  }
+
+  return generatePageMetadata({ page, locale });
 }
 export default function PublicLayout({
   children,
