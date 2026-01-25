@@ -121,5 +121,25 @@
     "terms_of_use": "Terms of Use",
     "copyright": "© 2026 PerkX Global LTD.",
     "follow_us": "Follow Us"
+  },
+  "login": {
+    "desc": "Enter your email and password to sign in!",
+    "email": "Email Address",
+    "email_placeholder": "name@email.com",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "forgot_password": "Forgot password?",
+    "create_account": "Don't have an account?",
+    "sign_up": "Sign Up"
+  },
+  "register": {
+    "title": "Create Your Account",
+    "desc": "Start your crypto affiliate journey today.",
+    "confirm_password": "Confirm Password",
+    "referral_uid": "Referrer’s UID (Optional)",
+    "referral_uid_placeholder": "Ex: PX-8829",
+    "submit_btn": "Create Account",
+    "already_account": "Already have an account?",
+    "sign_in": "Sign in"
   }
 }
