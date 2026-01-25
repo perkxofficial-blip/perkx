@@ -1,11 +1,15 @@
-import { generatePageMetadata, generateStructuredData } from '@/lib/seo';
-import {getTranslations} from "next-intl/server";
+import { generatePageMetadata } from '@/lib/seo';
 import {getPageBySlug} from "@/services/api";
+import type {Metadata} from "next";
+interface HomePageProps {
+  params: Promise<{
+    locale: string;
+  }>;
+}
 
-// @ts-ignore
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
-  const page = await getPageBySlug('Home', locale);
+  const page = await getPageBySlug('home', locale);
 
   if (!page) {
     return {
