@@ -1,9 +1,9 @@
-import { Controller, Get, Put, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Put, Patch, Body, UseGuards } from '@nestjs/common';
 import { ProfileService } from './profile.service';
-import { UpdateProfileDto } from './dto';
+import { UpdateProfileDto, UpdatePasswordDto } from './dto';
 import { JwtAuthGuard } from '../auth/guards';
 import { CurrentUser } from '../../../common/decorators';
-import { User } from '../../../entities';
+import { User, UserGender, UserStatus } from '../../../entities';
 import {
   ApiTags,
   ApiOperation,
@@ -23,6 +23,25 @@ export class ProfileController {
   @ApiResponse({
     status: 200,
     description: 'User profile retrieved successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        email: { type: 'string' },
+        first_name: { type: 'string', nullable: true },
+        last_name: { type: 'string', nullable: true },
+        phone: { type: 'string', nullable: true },
+        birthday: { type: 'string', format: 'date', nullable: true },
+        gender: { type: 'string', enum: Object.values(UserGender), nullable: true },
+        country: { type: 'string', nullable: true },
+        status: { type: 'string', enum: Object.values(UserStatus) },
+        referral_code: { type: 'string' },
+        referral_user_id: { type: 'number', nullable: true },
+        email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+      },
+    },
   })
   @ApiResponse({
     status: 401,
@@ -34,7 +53,29 @@ export class ProfileController {
 
   @Put()
   @ApiOperation({ summary: 'Update user profile' })
-  @ApiResponse({ status: 200, description: 'Profile updated successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Profile updated successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        email: { type: 'string' },
+        first_name: { type: 'string', nullable: true },
+        last_name: { type: 'string', nullable: true },
+        phone: { type: 'string', nullable: true },
+        birthday: { type: 'string', format: 'date', nullable: true },
+        gender: { type: 'string', enum: Object.values(UserGender), nullable: true },
+        country: { type: 'string', nullable: true },
+        status: { type: 'string', enum: Object.values(UserStatus) },
+        referral_code: { type: 'string' },
+        referral_user_id: { type: 'number', nullable: true },
+        email_verified_at: { type: 'string', format: 'date-time', nullable: true },
+        created_at: { type: 'string', format: 'date-time' },
+        updated_at: { type: 'string', format: 'date-time' },
+      },
+    },
+  })
   @ApiResponse({
     status: 401,
     description: 'Unauthorized - invalid or missing token',
@@ -45,5 +86,32 @@ export class ProfileController {
     @Body() updateProfileDto: UpdateProfileDto,
   ) {
     return this.profileService.updateProfile(user.id, updateProfileDto);
+  }
+
+  @Patch('password')
+  @ApiOperation({ summary: 'Update user password' })
+  @ApiResponse({
+    status: 200,
+    description: 'Password updated successfully',
+    schema: {
+      type: 'object',
+      properties: {
+        message: { type: 'string', example: 'Password updated successfully' },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - current password incorrect or validation failed',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - invalid or missing token',
+  })
+  async updatePassword(
+    @CurrentUser() user: User,
+    @Body() updatePasswordDto: UpdatePasswordDto,
+  ) {
+    return this.profileService.updatePassword(user.id, updatePasswordDto);
   }
 }
