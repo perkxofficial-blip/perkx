@@ -73,9 +73,45 @@
     "ko": "한국어"
   },
   "home": {
-    "trade_global_market": "글로벌 시장에서 거래하세요",
-    "maximize_your_rebates": "거래 리베이트를 극대화하세요",
-    "hero_section_description": "PerkX와 함께 수천 명의 고성능 트레이더들이 모든 거래에서 업계 최고 수준의 캐시백을 받고 있습니다. 전문 트레이더를 위한 강력한 도구를 제공합니다.",
-    "get_started_now": "지금 시작하기"
+    "intro_1": "혜택은 주어지는 것이 아닙니다.",
+    "intro_2": "협상을 통해 얻는 것입니다.",
+    "hero_section_description": "모든 거래가 최고의 혜택을 받을 수 있도록, 수수료 리베이트, 에어드롭, 할인 혜택을 하나의 포털에 담았습니다.",
+    "get_started_now": "지금 시작하기",
+    "coin": "장식용 코인",
+    "how_perkx_works": "<perkx>PerkX</perkx> 작동 방식",
+    "how_perkx_works_description": "세 가지 간단한 단계로 시작하고 거래 캐시백을 적립하세요",
+    "timeline1": "1. PerkX 계정 등록",
+    "timeline2": "2. 거래소 계정 등록 또는 연결",
+    "timeline2_desc": "제공된 링크를 통해 거래소 계정을 생성하세요",
+    "timeline3": "3. 거래 시작",
+    "calculator_title": "<perkx>놓치고 있는 혜택</perkx>을 확인하세요",
+    "calculator_desc": "거래량을 기준으로 받을 수 있는 잠재적인 캐시백 수익을 계산해 보세요.",
+    "calculator_btn": "캐시백 계산하기",
+    "exclusive_campaigns": "독점 캠페인",
+    "view_all_campaigns": "모든 캠페인 보기",
+    "join_now": "지금 가입",
+    "partner_exchanges": "파트너 거래소",
+    "partner_exchanges_desc": "업계 최고 수준의 검증된 리베이트 비율을 제공하는 직접 파트너십.",
+    "table": {
+      "exchanges": "거래소",
+      "product": "상품",
+      "discount_rate": "할인율",
+      "default_taker": "기본 테이커/메이커 수수료",
+      "final_taker": "최종 테이커/메이커 수수료",
+      "ave_rebate": "100만 거래량 기준 평균 리베이트",
+      "action": "액션"
+    },
+    "view_all_partners": "모든 파트너 보기",
+    "footer": {
+      "desc": "암호화폐 거래 캐시백의 글로벌 표준. 기관 및 개인 트레이더가 자본 효율성을 극대화할 수 있도록 지원합니다.",
+      "platform": "플랫폼",
+      "exchange_rebates": "거래소 리베이트",
+      "profit_calculator": "수익 계산기",
+      "resources": "리소스",
+      "help_center": "고객센터",
+      "terms_of_use": "이용 약관",
+      "copyright": "© 2026 PerkX Global LTD.",
+      "follow_us": "팔로우하기"
+    }
   }
 }

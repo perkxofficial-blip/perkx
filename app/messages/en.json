@@ -80,9 +80,45 @@
     "ko": "Korean"
   },
   "home": {
-    "trade_global_market":"Trade Global Market",
-    "maximize_your_rebates": "Maximize Your Rebates",
-    "hero_section_description": "Join thousands of high-performance traders using PerkX to claim industry-leading cashback on every trade. Professional tools for serious volume.",
-    "get_started_now": "Get Started Now"
+    "intro_1":"Perks aren’t given.",
+    "intro_2": "They’re negotiated.",
+    "hero_section_description": "We get the best fee rebates, airdrops, and discounts into one portal — because every trade deserves the best deal.",
+    "get_started_now": "Get Started Now",
+    "coin": "Decorative coin",
+    "how_perkx_works": "How <perkx>PerkX</perkx> Works",
+    "how_perkx_works_description": "Get started in three simple steps and start earning cashback on your trades",
+    "timeline1": "1. Register a PerkX account",
+    "timeline2": "2. Register/ Link your exchange account",
+    "timeline2_desc": "Create exchange account via link provided",
+    "timeline3": "3. Start Trading",
+    "calculator_title": "See What <perkx>You're Missing</perkx>",
+    "calculator_desc": "Calculate your potential cashback earnings based on your trading volume.",
+    "calculator_btn": "Calculate Cashback",
+    "exclusive_campaigns": "Exclusive Campaigns",
+    "view_all_campaigns": "View all campaigns",
+    "join_now": "Join Now",
+    "partner_exchanges": "Partner Exchanges",
+    "partner_exchanges_desc": "Direct partnerships offering the industry’s highest verified rebate rates.",
+    "table": {
+      "exchanges": "Exchanges",
+      "product": "Product",
+      "discount_rate": "Discount Rate",
+      "default_taker": "Default Taker/Maker Fee",
+      "final_taker": "Final Taker/Maker Fee",
+      "ave_rebate": "Ave Rebate For 1M Vol",
+      "action": "action"
+    },
+    "view_all_partners" : "View All Partners"
+  },
+  "footer": {
+    "desc": "The global standard for crypto trading cashback. Helping institutional and retail traders maximize capital efficiency.",
+    "platform": "Platform",
+    "exchange_rebates": "Exchange Rebates",
+    "profit_calculator": "Profit Calculator",
+    "resources": "resources",
+    "help_center": "Help Center",
+    "terms_of_use": "Terms of Use",
+    "copyright": "© 2026 PerkX Global LTD.",
+    "follow_us": "Follow Us"
   }
 }

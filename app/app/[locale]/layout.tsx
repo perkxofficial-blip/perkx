@@ -8,6 +8,7 @@ export function generateStaticParams() {
 }
 import '@/styles/public/public.css'
 import BootstrapProvider from "@/components/public/BootstrapProvider";
+import Script from "next/script";
 export default async function LocaleLayout({
   children,
   params
@@ -28,6 +29,10 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <BootstrapProvider/>
         {children}
+      <Script
+        src="/js/header-observer.js"
+        strategy="afterInteractive"
+      />
     </NextIntlClientProvider>
   );
 }

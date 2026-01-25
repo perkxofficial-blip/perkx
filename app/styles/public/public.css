@@ -5,3 +5,4 @@
 
 /* Public-specific */
 @import './styles.scss';
+@import './responsive.scss';

@@ -34,7 +34,7 @@ services:
       - ./app:/app
     environment:
       - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=http://api:80
+      - NEXT_PUBLIC_API_URL=http://api:8088
     depends_on:
       - api
 
