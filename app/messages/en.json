@@ -63,6 +63,16 @@
     "campaigns": "Campaigns",
     "about_us": "About Us",
     "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "users": "Users",
+    "home": "Home",
+    "readMore": "Read More"
+  },
+  "page": {
+    "notFound": "Page not found",
     "register": "Register"
   },
   "language": {

@@ -1,26 +1,33 @@
-'use client';
-
 export default function AdminSettingsPage() {
   return (
-    <div className="min-w-[1440px]">
-      <div className="flex">
-        {/* Sidebar placeholder */}
-        <div className="w-64"></div>
+    <>
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Settings</h2>
+        <p className="text-gray-600 dark:text-gray-400 mt-1">Manage your admin portal settings</p>
+      </div>
 
-        {/* Main Content */}
-        <div className="flex-1 ml-64">
-          <header className="bg-white shadow-sm p-6">
-            <h2 className="text-2xl font-bold">Admin Settings</h2>
-          </header>
+      <div className="grid grid-cols-1 gap-6">
+        <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">System Settings</h3>
+          <p className="text-gray-600 dark:text-gray-400">
+            Admin settings page - Coming soon
+          </p>
+        </div>
 
-          <main className="p-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-bold mb-4">System Settings</h3>
-              <p className="text-gray-600">Admin settings page - Coming soon</p>
-            </div>
-          </main>
+        <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Notification Settings</h3>
+          <p className="text-gray-600 dark:text-gray-400">
+            Configure email and push notifications
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Security Settings</h3>
+          <p className="text-gray-600 dark:text-gray-400">
+            Manage security and authentication settings
+          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 }

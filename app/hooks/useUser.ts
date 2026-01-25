@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { auth } from '@/services/auth';
-import { apiClient } from '@/services/api';
+import { apiClient } from '@/services/api/client';
 
 export function useUser() {
   const [user, setUser] = useState<any>(null);
@@ -19,7 +19,7 @@ export function useUser() {
         }
 
         const response = await apiClient.get('/profile', token);
-        
+
         if (response.statusCode === 200) {
           setUser(response.data);
         } else {

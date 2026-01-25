@@ -6,49 +6,42 @@
       "og_title": "PerkX – 거래 리베이트 극대화",
       "og_description": "모든 거래에서 캐시백을 적립하세요. 수많은 전문 트레이더가 PerkX를 선택하고 있습니다."
     },
-
     "how_it_works": {
       "title": "PerkX 작동 방식 | 거래 리베이트 안내",
       "description": "PerkX가 어떻게 거래 리베이트와 캐시백을 제공하는지 알아보고 모든 거래에서 혜택을 받아보세요.",
       "og_title": "PerkX 작동 방식",
       "og_description": "PerkX를 통해 거래 리베이트를 적립하는 방법을 확인하세요."
     },
-
     "exchanges": {
       "title": "지원 거래소 | PerkX",
       "description": "PerkX에서 지원하는 글로벌 암호화폐 및 금융 거래소 목록을 확인하세요.",
       "og_title": "PerkX 지원 거래소",
       "og_description": "주요 글로벌 거래소에서 거래하고 리베이트를 적립하세요."
     },
-
     "calculator": {
       "title": "리베이트 계산기 | PerkX",
       "description": "거래량과 수수료를 입력하고 PerkX에서 받을 수 있는 예상 리베이트를 계산해보세요.",
       "og_title": "PerkX 리베이트 계산기",
       "og_description": "간단하게 거래 리베이트를 계산해보세요."
     },
-
     "campaigns": {
       "title": "캠페인 및 프로모션 | PerkX",
       "description": "PerkX의 최신 거래 캠페인과 독점 프로모션을 확인하고 추가 혜택을 받아보세요.",
       "og_title": "PerkX 캠페인 & 프로모션",
       "og_description": "한정 기간 캠페인과 특별 프로모션을 확인하세요."
     },
-
     "about_us": {
       "title": "PerkX 소개 | 회사 정보",
       "description": "PerkX는 전문 트레이더를 위한 거래 리베이트 및 캐시백 솔루션을 제공합니다.",
       "og_title": "PerkX 소개",
       "og_description": "트레이더를 위한 리베이트 플랫폼 PerkX를 알아보세요."
     },
-
     "login": {
       "title": "로그인 | PerkX",
       "description": "PerkX 계정에 로그인하여 거래 리베이트, 캠페인 및 리워드를 관리하세요.",
       "og_title": "PerkX 로그인",
       "og_description": "PerkX 계정에 로그인하고 리베이트를 확인하세요."
     },
-
     "register": {
       "title": "회원가입 | PerkX",
       "description": "PerkX에 가입하고 모든 거래에서 리베이트와 캐시백 혜택을 바로 시작하세요.",
@@ -63,6 +56,16 @@
     "campaigns": "캠페인",
     "about_us": "회사 소개",
     "login": "로그인",
+    "logout": "로그아웃",
+    "dashboard": "대시보드",
+    "profile": "프로필",
+    "settings": "설정",
+    "users": "사용자",
+    "home": "홈",
+    "readMore": "더 읽기"
+  },
+  "page": {
+    "notFound": "페이지를 찾을 수 없습니다",
     "register": "회원가입"
   },
   "language": {
