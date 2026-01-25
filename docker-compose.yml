@@ -34,7 +34,7 @@ services:
       - ./app:/app
     environment:
       - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=http://api:8088
+      - NEXT_PUBLIC_API_URL=http://api:80/api
     depends_on:
       - api
 
@@ -47,7 +47,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=perkx
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
 volumes:
   postgres_data:
