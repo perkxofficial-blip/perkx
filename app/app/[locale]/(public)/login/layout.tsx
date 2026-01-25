@@ -4,7 +4,7 @@ import {getPageBySlug} from "@/services/api";
 
 // @ts-ignore
 export async function generateMetadata({ params }) {
-  const { locale } = params;
+  const { locale } = await params;
   const page = await getPageBySlug('Home', locale);
 
   if (!page) {
