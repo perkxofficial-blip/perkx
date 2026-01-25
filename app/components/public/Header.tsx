@@ -105,7 +105,7 @@ export default async function Header() {
                 {t("menu.login")}
               </a>
               <a href="/register" className="btn btn-register">
-                {t("menu.register")}
+                {t("page.register")}
               </a>
             </div>
           </div>
