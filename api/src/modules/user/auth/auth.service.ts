@@ -65,36 +65,36 @@ export class AuthService {
             referral_user_id: userInvite?.id || null,
           });
           await userRepo.save(user);
-          await this.emailVerificationService.sendWithManager(manager, {
+          const token = await this.emailVerificationService.sendWithManager(manager, {
             id: user.id,
             email: user.email,
           });
+          
           return {
-            message: 'User registered successfully. Please verify your email.',
+            success: true,
+            token: token
           };
         });
       } catch (err) {
-        console.log(err);
         // Unique violation (Postgres)
         if (err instanceof QueryFailedError && (err as any).code === '23505') {
           // mã 23505 unique_violation của Postgres
           const detail = (err as any).detail || '';
           if (detail.includes('email')) {
-            throw new ConflictException('Email already exists');
+            throwValidateError(
+              'email',
+              'validate.email_already_exists',
+              HttpStatus.CONFLICT,
+            );
           }
-          if (detail.includes('referral_code')) {
+          if (detail.includes('referral_user_id')) {
             if (attempt === MAX_RETRY) break;
             continue; // retry
           }
         }
-        if (err instanceof ConflictException) throw err;
-        if (err instanceof BadRequestException) throw err;
-        throw new InternalServerErrorException('Register failed');
+       throw err
       }
     }
-    throw new InternalServerErrorException(
-      'Cannot generate unique referral code, please try again later',
-    );
   }
 
   private generateReferralCode(): string {

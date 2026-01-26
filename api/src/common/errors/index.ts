@@ -1,1 +1,1 @@
-export * from './validate-exception-error';
+export * from './exception-error-response';

@@ -29,7 +29,7 @@ export class EmailVerificationService {
     manager: EntityManager,
     user: { id: number; email: string },
   ) {
-    await this.createTokenAndDispatch(
+    return await this.createTokenAndDispatch(
       manager.getRepository(UserEmailVerification),
       user,
     );
@@ -64,6 +64,8 @@ export class EmailVerificationService {
         verifyUrl,
       },
     });
+
+    return raw
   }
   async verify(rawToken: string) {
     const hashed = crypto.createHash('sha256').update(rawToken).digest('hex');

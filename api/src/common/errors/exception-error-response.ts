@@ -1,8 +1,12 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-
 export interface FieldError {
   field: string;
   message: string;
+}
+
+export interface ErrorResponse {
+  statusCode: number;
+  message: FieldError[];
 }
 
 export const throwValidateError = (
@@ -11,12 +15,15 @@ export const throwValidateError = (
   status: HttpStatus = HttpStatus.BAD_REQUEST,
 ): never => {
   throw new HttpException(
-    [
-      {
-        field,
-        message,
-      },
-    ] satisfies FieldError[],
+    {
+      statusCode: status,
+      message: [
+        {
+          field,
+          message,
+        },
+      ],
+    } satisfies ErrorResponse,
     status,
   );
 };
