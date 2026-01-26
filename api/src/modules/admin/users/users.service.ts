@@ -133,6 +133,7 @@ export class UsersService {
         'referrer.first_name',
         'referrer.last_name',
         'referrer.email',
+        'referrer.status',
       ])
       .where('user.id = :id', { id });
 
@@ -148,6 +149,7 @@ export class UsersService {
       .select([
         'referred_user.id',
         'referred_user.email',
+        'referred_user.status',
         'referred_user.created_at',
       ])
       .where('referred_user.referral_user_id = :id', { id })
@@ -192,11 +194,13 @@ export class UsersService {
             id: userResult.referrer_id,
             name: referrerName,
             email: userResult.referrer_email,
+            status: userResult.referrer_status,
           }
         : null,
       referrals: referrals.map((ref) => ({
         id: ref.referred_user_id,
         email: ref.referred_user_email,
+        status: ref.referred_user_status,
         created_at: ref.referred_user_created_at,
       })),
       exchanges: exchanges.map((ex) => ({

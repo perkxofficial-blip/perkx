@@ -18,13 +18,49 @@ export class ProfileService {
   ) {}
 
   async getProfile(userId: number) {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-    if (!user) {
+    const userQuery = this.userRepository
+      .createQueryBuilder('user')
+      .leftJoin(User, 'referrer', 'user.referral_user_id = referrer.id')
+      .select([
+        'user.id',
+        'user.email',
+        'user.first_name',
+        'user.last_name',
+        'user.phone',
+        'user.birthday',
+        'user.gender',
+        'user.country',
+        'user.status',
+        'user.referral_code',
+        'referrer.referral_code',
+      ])
+      .where('user.id = :userId', { userId });
+
+    const userResult = await userQuery.getRawOne();
+
+    if (!userResult) {
       throw new NotFoundException('User not found');
     }
 
-    // Return only user information, exclude password
-    const { password, ...result } = user;
+    // Format result
+    const result: any = {
+      id: userResult.user_id,
+      email: userResult.user_email,
+      first_name: userResult.user_first_name,
+      last_name: userResult.user_last_name,
+      phone: userResult.user_phone,
+      birthday: userResult.user_birthday,
+      gender: userResult.user_gender,
+      country: userResult.user_country,
+      status: userResult.user_status,
+      referral_code: userResult.user_referral_code,
+    };
+
+    // Add referrer referral_code if exists
+    if (userResult.referrer_referral_code) {
+      result.referrer_referral_code = userResult.referrer_referral_code;
+    }
+
     return result;
   }
 

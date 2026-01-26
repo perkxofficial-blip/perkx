@@ -36,10 +36,7 @@ export class ProfileController {
         country: { type: 'string', nullable: true },
         status: { type: 'string', enum: Object.values(UserStatus) },
         referral_code: { type: 'string' },
-        referral_user_id: { type: 'number', nullable: true },
-        email_verified_at: { type: 'string', format: 'date-time', nullable: true },
-        created_at: { type: 'string', format: 'date-time' },
-        updated_at: { type: 'string', format: 'date-time' },
+        referrer_referral_code: { type: 'string', nullable: true, description: 'Referral code of the user who referred this user' },
       },
     },
   })
