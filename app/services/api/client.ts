@@ -24,12 +24,21 @@ export const apiClient = {
       headers,
     });
 
-    return res.json();
+    const responseData = await res.json();
+    
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 
   // POST request
   async post(endpoint: string, data: any, token?: string) {
-    console.log('this.baseURL', this.baseURL);
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
@@ -44,7 +53,17 @@ export const apiClient = {
       body: JSON.stringify(data),
     });
 
-    return res.json();
+    const responseData = await res.json();
+    
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 
   // PUT request
@@ -63,7 +82,17 @@ export const apiClient = {
       body: JSON.stringify(data),
     });
 
-    return res.json();
+    const responseData = await res.json();
+    
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 
   // DELETE request
@@ -81,6 +110,16 @@ export const apiClient = {
       headers,
     });
 
-    return res.json();
+    const responseData = await res.json();
+    
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 };
