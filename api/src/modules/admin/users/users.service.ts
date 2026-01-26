@@ -133,6 +133,7 @@ export class UsersService {
         'referrer.first_name',
         'referrer.last_name',
         'referrer.email',
+        'referrer.status',
       ])
       .where('user.id = :id', { id });
 
@@ -148,6 +149,7 @@ export class UsersService {
       .select([
         'referred_user.id',
         'referred_user.email',
+        'referred_user.status',
         'referred_user.created_at',
       ])
       .where('referred_user.referral_user_id = :id', { id })
@@ -192,11 +194,13 @@ export class UsersService {
             id: userResult.referrer_id,
             name: referrerName,
             email: userResult.referrer_email,
+            status: userResult.referrer_status,
           }
         : null,
       referrals: referrals.map((ref) => ({
         id: ref.referred_user_id,
         email: ref.referred_user_email,
+        status: ref.referred_user_status,
         created_at: ref.referred_user_created_at,
       })),
       exchanges: exchanges.map((ex) => ({
@@ -213,43 +217,29 @@ export class UsersService {
       return null;
     }
 
-    // Update only allowed fields (email and referral_user_id are not allowed)
-    if (updateUserDto.first_name !== undefined) {
-      user.first_name = updateUserDto.first_name;
-    }
-    if (updateUserDto.last_name !== undefined) {
-      user.last_name = updateUserDto.last_name;
-    }
-    if (updateUserDto.phone !== undefined) {
-      user.phone = updateUserDto.phone;
-    }
-    if (updateUserDto.birthday !== undefined) {
-      user.birthday = new Date(updateUserDto.birthday);
-    }
-    if (updateUserDto.gender !== undefined) {
-      user.gender = updateUserDto.gender;
-    }
-    if (updateUserDto.country !== undefined) {
-      user.country = updateUserDto.country;
+    // Only allow updating: first_name, last_name, phone, gender, birthday, country
+    // Do not allow updating: referral_user_id, email, referral_code
+    const allowedFields = ['first_name', 'last_name', 'phone', 'gender', 'birthday', 'country'];
+    const updateData: Partial<User> = {};
+    
+    for (const field of allowedFields) {
+      if (updateUserDto[field] !== undefined) {
+        updateData[field] = updateUserDto[field];
+      }
     }
 
+    // Convert birthday string to Date if provided
+    if (updateUserDto.birthday) {
+      updateData.birthday = new Date(updateUserDto.birthday);
+    }
+
+    Object.assign(user, updateData);
+
+    Object.assign(user, updateData);
     await this.userRepository.save(user);
 
-    return {
-      id: user.id,
-      email: user.email,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      phone: user.phone,
-      birthday: user.birthday,
-      gender: user.gender,
-      country: user.country,
-      status: user.status,
-      referral_code: user.referral_code,
-      email_verified_at: user.email_verified_at,
-      created_at: user.created_at,
-      updated_at: user.updated_at,
-    };
+    const { password, ...result } = user;
+    return result;
   }
 
   async updateStatus(

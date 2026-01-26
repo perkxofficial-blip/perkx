@@ -2,10 +2,10 @@ import {
   IsEmail,
   IsNotEmpty,
   IsString,
-  MinLength,
+  Matches,
   IsOptional,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class RegisterDto {
   @ApiProperty({
@@ -17,19 +17,20 @@ export class RegisterDto {
   email: string;
 
   @ApiProperty({
-    description: 'User password (minimum 6 characters)',
-    example: 'password123',
-    minLength: 6,
+    description: 'User password (minimum 8 characters, 1 number, 1 uppercase letter)',
+    example: 'Password123',
+    minLength: 8,
   })
   @IsString()
   @IsNotEmpty()
-  @MinLength(6)
+  @Matches(/^(?=.*[A-Z])(?=.*\d).{8,}$/, {
+    message: 'Password needs to be a minimum of 8 characters, 1 number, and 1 uppercase letter',
+  })
   password: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Referral invite code',
     example: 'xxxx-xxxxxx',
-    required: false,
   })
   @IsString()
   @IsOptional()

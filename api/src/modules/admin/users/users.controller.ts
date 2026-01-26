@@ -170,6 +170,10 @@ export class UsersController {
             id: { type: 'number' },
             name: { type: 'string', nullable: true },
             email: { type: 'string' },
+            status: {
+              type: 'string',
+              enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'],
+            },
           },
         },
         referrals: {
@@ -179,6 +183,10 @@ export class UsersController {
             properties: {
               id: { type: 'number' },
               email: { type: 'string' },
+              status: {
+                type: 'string',
+                enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'],
+              },
               created_at: { type: 'string', format: 'date-time' },
             },
           },
