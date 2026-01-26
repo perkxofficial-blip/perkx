@@ -1,6 +1,6 @@
 import {
   BadRequestException,
-  ConflictException,
+  ConflictException, HttpStatus,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -14,6 +14,7 @@ import { randomBytes } from 'crypto';
 import { EmailVerificationService } from './email-verification.service';
 import { MailerService } from '@nestjs-modules/mailer';
 import { TwoFatosService } from './two-fatos.service';
+import { throwValidateError } from '../../../common/errors';
 
 @Injectable()
 export class AuthService {
@@ -37,18 +38,23 @@ export class AuthService {
             where: { email: registerDto.email },
             select: ['id'],
           });
+
           if (existing) {
-            throw new ConflictException('Email already exists');
+            throwValidateError(
+              'email',
+              'validate.email_already_exists',
+              HttpStatus.CONFLICT,
+            );
           }
 
-          let userInvite = null;
-          if (registerDto.referral_code) {
+          let userInvite: Pick<User, 'id'> | null = null;
+          if (registerDto.referral_user_id) {
             userInvite = await userRepo.findOne({
-              where: { referral_code: registerDto.referral_code },
+              where: { referral_code: registerDto.referral_user_id },
               select: ['id'],
             });
-            if (registerDto.referral_code) {
-              throw new BadRequestException('Invalid referral code');
+            if (!userInvite) {
+              throwValidateError('referral_user_id', 'validate.invalid_referral_uid');
             }
           }
 

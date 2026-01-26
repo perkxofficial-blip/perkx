@@ -141,5 +141,25 @@
     "submit_btn": "Create Account",
     "already_account": "Already have an account?",
     "sign_in": "Sign in"
+  },
+  "validate": {
+    "email_required": "Email is required.",
+    "email_invalid": "Invalid email format.",
+    "email_already_exists": "This email is already registered.",
+
+    "password_required": "Password is required.",
+    "password_string": "Password must be a string.",
+    "password_min_6": "Password must be at least 6 characters.",
+    "password_max_16": "Password must not exceed 16 characters.",
+    "password_invalid_format": "Password can only contain letters and numbers.",
+
+    "confirm_password_required": "Confirm password is required.",
+    "confirm_password_string": "Confirm password must be a string.",
+    "password_not_match": "Password and confirm password do not match.",
+
+    "referral_string": "Referral code must be a string.",
+    "invalid_referral_uid": "Invalid referral code.",
+
+    "unknown_error": "Something went wrong. Please try again later."
   }
 }

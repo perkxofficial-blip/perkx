@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import {
   TransformInterceptor,
   LoggingInterceptor,
@@ -35,6 +35,14 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      exceptionFactory: (errors) => {
+        return new BadRequestException(
+          errors.map(err => ({
+            field: err.property,
+            message: Object.values(err.constraints)[0],
+          })),
+        );
+      },
     }),
   );
 
