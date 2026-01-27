@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 export async function resendAction(formData: FormData) {
   const cookieStore = await cookies();
-  let token = formData.get('email')?.toString() ?? '';
+  let token = formData.get('token')?.toString() ?? '';
   const payload = {
     email: formData.get('email')?.toString() ?? '',
   };

@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { DataSource, EntityManager, Repository } from 'typeorm';
+import { DataSource, EntityManager, IsNull, Repository } from 'typeorm';
 import { MailerService } from '@nestjs-modules/mailer';
 import * as crypto from 'crypto';
 import { User, UserEmailVerification, UserStatus } from '../../../entities';
@@ -40,9 +40,10 @@ export class EmailVerificationService {
     const verify = await this.repo.findOne({
       where: {
         token: hashed,
-        verified_at: null
+        verified_at: IsNull()
       },
     });
+    console.log(verify)
     return {
       status: !!verify,
       expired_at : verify?.created_at

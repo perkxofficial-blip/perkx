@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource } from 'typeorm';
+import { Repository, DataSource, IsNull } from 'typeorm';
 import { MailerService } from '@nestjs-modules/mailer';
 import { randomInt } from 'node:crypto';
 import { JwtService } from '@nestjs/jwt';
@@ -58,7 +58,7 @@ export class TwoFatosService {
     const record = await this.otpRepo.findOne({
       where: {
         user_id: user.id,
-        verified_at: null,
+        verified_at: IsNull(),
       },
       order: { created_at: 'DESC' },
     });
@@ -89,7 +89,7 @@ export class TwoFatosService {
       .padStart(length, '0');
   }
 
-  private async getAccessToken(user: User) {
+  public async getAccessToken(user: User) {
     const payload = { sub: user.id, email: user.email };
     const accessToken = await this.jwtService.signAsync(payload);
     return {

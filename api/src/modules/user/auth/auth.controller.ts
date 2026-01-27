@@ -93,7 +93,7 @@ export class AuthController {
   }
 
   @Public()
-  @Get('verify')
+  @Post('verify')
   @ApiOperation({ summary: 'Verify user email by token' })
   @ApiQuery({
     name: 'token',
@@ -109,10 +109,9 @@ export class AuthController {
   })
   @ApiResponse({ status: 404, description: 'Invalid token' })
   @ApiOperation({ summary: 'Verify user email' })
-  async verifyEmail(@Query() query: VerifyDto) {
-    const { token } = query;
-    const user = await this.emailVerificationService.verify(token);
-    return this.authService.login(user);
+  async verifyEmail(@Body() body: VerifyDto) {
+    const user = await this.emailVerificationService.verify(body.token);
+    return this.twoFactosService.getAccessToken(user);
   }
 
   @Public()
