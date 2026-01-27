@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import {
   UserEmailVerification,
   User,
@@ -25,9 +25,15 @@ import { TwoFatosService } from './two-fatos.service';
       UserPasswordReset,
     ]),
     PassportModule,
-    JwtModule.register({
-      secret: process.env.USER_JWT_SECRET,
-      signOptions: { expiresIn: '1d' }, // Token expiration time
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('jwt.userSecret'),
+        signOptions: {
+          expiresIn: "1d",
+        },
+      }),
     }),
     ConfigModule,
   ],

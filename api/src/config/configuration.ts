@@ -1,5 +1,10 @@
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 3000,
+  jwt: {
+    userSecret: process.env.USER_JWT_SECRET || 'user-jwt-secret-key-change-this-in-production',
+    adminSecret: process.env.ADMIN_JWT_SECRET || 'admin-jwt-secret-key-change-this-in-production',
+    expiresIn: process.env.JWT_EXPIRES_IN || '1d',
+  },
   database: {
     host: process.env.DATABASE_HOST || process.env.DB_HOST,
     port:
