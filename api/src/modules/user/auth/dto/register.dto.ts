@@ -1,13 +1,15 @@
 import {
+  IsDefined,
   IsEmail,
   IsNotEmpty,
   IsOptional,
   IsString, Matches, MaxLength,
   MinLength,
-  Validate,
+  Validate, ValidateIf,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Match } from '../../../../common/validators';
+import { Transform } from 'class-transformer';
 
 export class RegisterDto {
   @ApiProperty({

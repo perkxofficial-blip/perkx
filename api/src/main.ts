@@ -36,15 +36,31 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
       exceptionFactory: (errors) => {
+        const priority = [
+          'isNotEmpty'
+        ];
+
         return new BadRequestException(
-          errors.map(err => ({
-            field: err.property,
-            message: Object.values(err.constraints)[0],
-          })),
+          errors.map(err => {
+            let message: any = '';
+
+            if (err.constraints) {
+              const key = priority.find(p => err.constraints[p]);
+              message =
+                err.constraints[key] ??
+                Object.values(err.constraints)[0];
+            }
+
+            return {
+              field: err.property,
+              message,
+            };
+          }),
         );
       },
     }),
   );
+
 
   // Apply global interceptors
   app.useGlobalInterceptors(
