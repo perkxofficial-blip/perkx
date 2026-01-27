@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 export async function resendAction(formData: FormData) {
   const cookieStore = await cookies();
+  let token = formData.get('email')?.toString() ?? '';
   const payload = {
     email: formData.get('email')?.toString() ?? '',
   };
@@ -16,7 +17,8 @@ export async function resendAction(formData: FormData) {
   });
 
   const result: any = await res.json()
-  console.log(result)
+  token = res.ok ? result?.data?.token : token
+
   const message = res.ok ? {
     status: true,
     message: 'message.resend_email_success',
@@ -34,5 +36,5 @@ export async function resendAction(formData: FormData) {
     }
   );
 
-  redirect(`/verify-email?token=${result?.data?.token}`);
+  redirect(`/verify-email?token=${token}`);
 }

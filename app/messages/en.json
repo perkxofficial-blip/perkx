@@ -169,6 +169,8 @@
     "unknown_error": "Something went wrong. Please try again later."
   },
   "message": {
-    "email_not_verified": "Email does not exist or already verified"
+    "email_not_verified": "Email does not exist or already verified",
+    "resend_email_success": "Verification email has been resent successfully. Please check your inbox.",
+    "resend_email_failed": "Failed to resend the verification email. Please try again later."
   }
 }
