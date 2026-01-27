@@ -35,8 +35,22 @@ export class EmailVerificationService {
     );
   }
 
+  async getVerify(token: string) {
+    const hashed = crypto.createHash('sha256').update(token).digest('hex');
+    const verify = await this.repo.findOne({
+      where: {
+        token: hashed,
+        verified_at: null
+      },
+    });
+    return {
+      status: !!verify,
+      expired_at : verify?.created_at
+    }
+  }
+
   async reSend(user: { id: number; email: string }) {
-    await this.createTokenAndDispatch(this.repo, user);
+    return await this.createTokenAndDispatch(this.repo, user);
   }
 
   private async createTokenAndDispatch(

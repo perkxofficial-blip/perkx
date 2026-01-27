@@ -71,6 +71,28 @@ export class AuthController {
   }
 
   @Public()
+  @Get('verify-email')
+  @ApiOperation({ summary: 'Get verify by token' })
+  @ApiQuery({
+    name: 'token',
+    type: String,
+    required: true,
+    example: 'a1b2c3d4e5f6...',
+    description: 'Email verification token sent to user email',
+  })
+  @ApiResponse({ status: 200, description: 'Email verified successfully' })
+  @ApiResponse({
+    status: 400,
+    description: 'Token expired or already verified',
+  })
+  @ApiResponse({ status: 404, description: 'Invalid token' })
+  @ApiOperation({ summary: 'Verify user email' })
+  async getVerify(@Query() query: VerifyDto) {
+    const { token } = query;
+    return await this.emailVerificationService.getVerify(token);
+  }
+
+  @Public()
   @Get('verify')
   @ApiOperation({ summary: 'Verify user email by token' })
   @ApiQuery({
@@ -104,15 +126,15 @@ export class AuthController {
   async resend(@Body() body: ResendDto) {
     const user = await this.authService.findByUnVerifiedEmail(body.email);
     if (!user) {
-      throw new BadRequestException('Email does not exist or already verified');
+      throw new BadRequestException('message.email_not_verified');
     }
-    await this.emailVerificationService.reSend({
+    const token = await this.emailVerificationService.reSend({
       id: user.id,
       email: user.email,
     });
 
     return {
-      message: 'Verification email resent',
+      token: token,
     };
   }
   @Public()

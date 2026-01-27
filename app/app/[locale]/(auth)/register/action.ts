@@ -9,6 +9,8 @@ export async function registerAction(formData: FormData) {
     referral_user_id: formData.get('referral_uid')?.toString() ?? null,
   };
   const cookieStore = await cookies();
+  cookieStore.delete('register')
+  cookieStore.delete('verify-email')
   const res = await fetch(`${API_BASE_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -21,6 +23,7 @@ export async function registerAction(formData: FormData) {
   });
 
   const result = await res.json();
+  const token = result?.data?.token;
   if (!res.ok) {
     cookieStore.set(
       'register',
@@ -37,8 +40,13 @@ export async function registerAction(formData: FormData) {
     );
     redirect('/register');
   }
-
-  // 🎉 success
-  (await cookies()).set('register_success', 'REGISTER_SUCCESS');
-  redirect('/login');
+  cookieStore.set(
+    'verify-email',
+    payload.email,
+    {
+      httpOnly: true,
+      path: '/',
+    }
+  );
+  redirect(`/verify-email?token=${token}`);
 }
