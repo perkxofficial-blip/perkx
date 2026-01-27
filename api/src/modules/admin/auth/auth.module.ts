@@ -15,10 +15,10 @@ import { AdminJwtStrategy, AdminLocalStrategy } from './strategies';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('jwt.adminSecret'),
+      useFactory: (config: ConfigService) => ({
+        secret: config.get<string>('jwt.adminSecret'),
         signOptions: {
-          expiresIn: configService.get<string>('jwt.expiresIn'),
+          expiresIn: "1d",
         },
       }),
     }),
