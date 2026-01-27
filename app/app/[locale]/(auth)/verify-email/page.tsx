@@ -39,7 +39,7 @@ async function verifyEmail(token: string | undefined) {
   }
   const result: any = await res.json();
   if (!result?.data?.status) {
-    // redirect(`/login`);
+    redirect(`/login`);
   }
   return result?.data
 }
@@ -61,7 +61,7 @@ export default async function VerifyEmailPage({ searchParams }: Props) {
     }
   }
   if (!token || !email) {
-    // redirect(`/login`);
+    redirect(`/login`);
   }
   const data = await verifyEmail(token);
   return (
