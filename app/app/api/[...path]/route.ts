@@ -23,18 +23,33 @@ async function proxyRequest(
       headers,
     };
 
-    // Add body for POST/PUT requests
+    // Add body for POST/PUT/PATCH requests if body exists
     if (method !== 'GET' && method !== 'DELETE') {
-      const body = await request.json();
-      options.body = JSON.stringify(body);
+      try {
+        const body = await request.json();
+        options.body = JSON.stringify(body);
+      } catch (e) {
+        // No body or invalid JSON - continue without body
+      }
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+    // Add query params to endpoint
+    const searchParams = request.nextUrl.searchParams.toString();
+    const fullEndpoint = searchParams ? `${endpoint}?${searchParams}` : endpoint;
+
+    console.log(`[Proxy] ${method} ${fullEndpoint}`);
+    const response = await fetch(`${API_BASE_URL}${fullEndpoint}`, options);
+    
     const data = await response.json();
 
     return NextResponse.json(data, { status: response.status });
   } catch (error: any) {
-    console.error('Proxy error:', error);
+    console.error('[Proxy Error]', {
+      method,
+      endpoint,
+      error: error.message,
+      stack: error.stack
+    });
     return NextResponse.json(
       { error: 'Internal server error', message: error.message },
       { status: 500 }
@@ -68,6 +83,15 @@ export async function PUT(
   const { path } = await params;
   const endpoint = '/' + path.join('/');
   return proxyRequest(request, endpoint, 'PUT');
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ path: string[] }> }
+) {
+  const { path } = await params;
+  const endpoint = '/' + path.join('/');
+  return proxyRequest(request, endpoint, 'PATCH');
 }
 
 export async function DELETE(
