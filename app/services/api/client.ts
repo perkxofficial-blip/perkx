@@ -1,11 +1,7 @@
 // API Client Configuration
 // For server-side: use Docker internal URL (http://api:80/api) or localhost
 // For client-side: use Next.js API routes as proxy to avoid CORS issues
-const isServer = typeof window === 'undefined';
-const API_BASE_URL = isServer
-  ? (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api')
-  : '/api'; // Use Next.js API routes as proxy for browser requests
-
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 
 export const apiClient = {
   baseURL: API_BASE_URL,
