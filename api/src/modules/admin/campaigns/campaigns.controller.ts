@@ -218,6 +218,7 @@ export class CampaignsController {
                   id: { type: 'number' },
                   name: { type: 'string' },
                   code: { type: 'string' },
+                  logo_url: { type: 'string', nullable: true },
                 },
               },
             },

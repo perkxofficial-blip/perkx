@@ -199,6 +199,7 @@ export class UsersController {
             properties: {
               name: { type: 'string' },
               uid: { type: 'string' },
+              logo_url: { type: 'string', nullable: true },
             },
           },
         },

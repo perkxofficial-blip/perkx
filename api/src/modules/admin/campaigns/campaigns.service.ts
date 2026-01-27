@@ -12,7 +12,7 @@ import { StorageService } from '../../../common/storage/storage.service';
 
 type CampaignResponse = Campaign & {
   banner_url: string | null;
-  exchange: { id: number; name: string; code: string } | null;
+  exchange: { id: number; name: string; code: string; logo_url: string | null } | null;
 };
 
 @Injectable()
@@ -230,6 +230,9 @@ export class CampaignsService {
             id: campaign.exchange.id,
             name: campaign.exchange.name,
             code: campaign.exchange.code,
+            logo_url: campaign.exchange.logo_path
+              ? this.storageService.getFileUrl(campaign.exchange.logo_path)
+              : null,
           }
         : null,
     } as CampaignResponse;

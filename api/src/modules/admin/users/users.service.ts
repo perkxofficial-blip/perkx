@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User, UserExchange, Exchange, UserStatus } from '../../../entities';
 import { ListUsersQueryDto, UpdateUserDto } from './dto';
 import { MailService } from '../../../mail/mail.service';
+import { StorageService } from '../../../common/storage/storage.service';
 
 @Injectable()
 export class UsersService {
@@ -13,6 +14,7 @@ export class UsersService {
     @InjectRepository(UserExchange)
     private userExchangeRepository: Repository<UserExchange>,
     private mailService: MailService,
+    private storageService: StorageService,
   ) {}
 
   async findAll(queryDto: ListUsersQueryDto) {
@@ -163,6 +165,7 @@ export class UsersService {
       .leftJoin(Exchange, 'exchange', 'user_exchange.exchange_id = exchange.id')
       .select([
         'exchange.name AS exchange_name',
+        'exchange.logo_path AS exchange_logo_path',
         'user_exchange.exchange_uid AS exchange_uid',
       ])
       .where('user_exchange.user_id = :id', { id });
@@ -206,6 +209,9 @@ export class UsersService {
       exchanges: exchanges.map((ex) => ({
         name: ex.exchange_name,
         uid: ex.exchange_uid,
+        logo_url: ex.exchange_logo_path
+          ? this.storageService.getFileUrl(ex.exchange_logo_path)
+          : null,
       })),
     };
   }
