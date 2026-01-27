@@ -139,7 +139,30 @@ export const apiClient = {
       headers,
     });
 
-    const responseData = await res.json();
+    // Handle empty response (204 No Content)
+    if (res.status === 204 || res.headers.get('content-length') === '0') {
+      if (!res.ok) {
+        const error: any = new Error(`HTTP ${res.status}: ${res.statusText}`);
+        error.status = res.status;
+        throw error;
+      }
+      return null;
+    }
+
+    // Try to parse JSON response
+    let responseData;
+    try {
+      responseData = await res.json();
+    } catch (e) {
+      // If no JSON body but request was successful
+      if (res.ok) {
+        return null;
+      }
+      // If error and no JSON body
+      const error: any = new Error(`HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      throw error;
+    }
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
