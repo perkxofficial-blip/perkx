@@ -32,8 +32,20 @@ export default function PagesManagementPage() {
     fetch('/api/admin/pages', {
       headers: { 'Authorization': `Bearer ${token}` },
     })
-      .then(res => res.json())
+      .then(async res => {
+        // Check if response is not ok (includes 500, 401, 403, etc.)
+        if (!res.ok) {
+          if (res.status === 500 || res.status === 401 || res.status === 403) {
+            auth.clearAdminToken();
+            router.push('/admin/login');
+            return null;
+          }
+        }
+        return res.json();
+      })
       .then(data => {
+        if (!data) return; // Early return if redirected
+        
         if (data.statusCode === 200 && Array.isArray(data.data)) {
           setPages(data.data);
         } else {
@@ -43,8 +55,10 @@ export default function PagesManagementPage() {
       })
       .catch(err => {
         console.error('Error fetching pages:', err);
-        setError('An error occurred while loading pages');
-        setIsLoading(false);
+        
+        // Clear token and redirect on any fetch error
+        auth.clearAdminToken();
+        router.push('/admin/login');
       });
   }, [router]);
 

@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import Link from 'next/link';
+import Toast from '@/components/admin/Toast';
 
 interface UserDetail {
   id: number;
@@ -53,6 +54,17 @@ export default function UserDetailPage() {
   const [actionLoading, setActionLoading] = useState(false);
   const [showReferralModal, setShowReferralModal] = useState(false);
 
+  // Toast state
+  const [toast, setToast] = useState<{ show: boolean; message: string; type: 'success' | 'error' | 'warning' | 'info' }>({
+    show: false,
+    message: '',
+    type: 'info',
+  });
+
+  const showToast = (message: string, type: 'success' | 'error' | 'warning' | 'info' = 'info') => {
+    setToast({ show: true, message, type });
+  };
+
   useEffect(() => {
     if (!userId) return;
 
@@ -76,8 +88,15 @@ export default function UserDetailPage() {
       })
       .catch(err => {
         console.error('Error fetching user:', err);
-        setError('Failed to load user details');
-        setLoading(false);
+        
+        // If error status is 500, 401, or 403, clear token and redirect to login
+        if (err.status === 500 || err.status === 401 || err.status === 403) {
+          auth.clearAdminToken();
+          window.location.href = '/admin/login';
+        } else {
+          setError('Failed to load user details');
+          setLoading(false);
+        }
       });
   }, [userId]);
 
@@ -86,15 +105,23 @@ export default function UserDetailPage() {
     const token = auth.getAdminToken();
 
     try {
-      const data = await apiClient.put(`/admin/users/${userId}/status`, { status: newStatus }, token || undefined);
+      const data = await apiClient.patch(`/admin/users/${userId}/status`, { status: newStatus }, token || undefined);
 
       if (data.statusCode === 200 && data.data) {
         setUser(prev => prev ? { ...prev, status: data.data.status } : null);
+        showToast(`User ${newStatus === 'ACTIVE' ? 'activated' : 'deactivated'} successfully`, 'success');
       }
       setShowDeactivateModal(false);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error updating status:', err);
-      alert('Failed to update user status');
+      
+      // If error status is 500, 401, or 403, clear token and redirect to login
+      if (err.status === 500 || err.status === 401 || err.status === 403) {
+        auth.clearAdminToken();
+        window.location.href = '/admin/login';
+      } else {
+        showToast('Failed to update user status', 'error');
+      }
     } finally {
       setActionLoading(false);
     }
@@ -556,6 +583,15 @@ export default function UserDetailPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Toast Notification */}
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast({ ...toast, show: false })}
+        />
       )}
     </>
   );
