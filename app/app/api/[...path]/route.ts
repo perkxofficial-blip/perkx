@@ -10,9 +10,10 @@ async function proxyRequest(
 ) {
   try {
     const token = request.headers.get('authorization');
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
-    };
+    const contentType = request.headers.get('content-type');
+    
+    // Initialize headers without Content-Type
+    const headers: HeadersInit = {};
 
     if (token) {
       headers['Authorization'] = token;
@@ -25,11 +26,28 @@ async function proxyRequest(
 
     // Add body for POST/PUT/PATCH requests if body exists
     if (method !== 'GET' && method !== 'DELETE') {
-      try {
-        const body = await request.json();
-        options.body = JSON.stringify(body);
-      } catch (e) {
-        // No body or invalid JSON - continue without body
+      // Check if this is FormData (multipart/form-data)
+      if (contentType?.includes('multipart/form-data')) {
+        // For FormData, we need to recreate it to forward properly
+        const formData = await request.formData();
+        
+        // Create a new FormData object for the backend request
+        const backendFormData = new FormData();
+        formData.forEach((value, key) => {
+          backendFormData.append(key, value);
+        });
+        
+        options.body = backendFormData as any;
+        // Don't set Content-Type - let fetch set it with proper boundary
+      } else {
+        // For JSON requests, set Content-Type and parse JSON
+        headers['Content-Type'] = 'application/json';
+        try {
+          const body = await request.json();
+          options.body = JSON.stringify(body);
+        } catch (e) {
+          // No body or invalid JSON - continue without body
+        }
       }
     }
 

@@ -57,8 +57,15 @@ export default function AdminUsersPage() {
         })
         .catch(err => {
           console.error('Error fetching users:', err);
-          setError('Failed to load users');
-          setLoading(false);
+          
+          // If error status is 500, 401, or 403, clear token and redirect to login
+          if (err.status === 500 || err.status === 401 || err.status === 403) {
+            auth.clearAdminToken();
+            window.location.href = '/admin/login';
+          } else {
+            setError('Failed to load users');
+            setLoading(false);
+          }
         });
     } else {
       setError('No authentication token found');

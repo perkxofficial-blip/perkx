@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import Link from 'next/link';
+import Toast from '@/components/admin/Toast';
 
 interface UserForm {
   first_name: string;
@@ -32,6 +33,17 @@ export default function EditUserPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [email, setEmail] = useState('');
+
+  // Toast state
+  const [toast, setToast] = useState<{ show: boolean; message: string; type: 'success' | 'error' | 'warning' | 'info' }>({
+    show: false,
+    message: '',
+    type: 'info',
+  });
+
+  const showToast = (message: string, type: 'success' | 'error' | 'warning' | 'info' = 'info') => {
+    setToast({ show: true, message, type });
+  };
 
   useEffect(() => {
     if (!userId) return;
@@ -64,8 +76,15 @@ export default function EditUserPage() {
       })
       .catch(err => {
         console.error('Error fetching user:', err);
-        setError('Failed to load user details');
-        setLoading(false);
+        
+        // If error status is 500, 401, or 403, clear token and redirect to login
+        if (err.status === 500 || err.status === 401 || err.status === 403) {
+          auth.clearAdminToken();
+          window.location.href = '/admin/login';
+        } else {
+          setError('Failed to load user details');
+          setLoading(false);
+        }
       });
   }, [userId]);
 
@@ -92,19 +111,28 @@ export default function EditUserPage() {
       if (form.country?.trim()) cleanedData.country = form.country.trim();
       
       await apiClient.put(`/admin/users/${userId}`, cleanedData, token || undefined);
-      router.push(`/admin/users/${userId}`);
+      showToast('User profile updated successfully!', 'success');
+      setTimeout(() => {
+        router.push(`/admin/users/${userId}`);
+      }, 1500);
     } catch (err: any) {
-      let errorMsg = 'Error updating user';
-      if (err.response?.message) {
-        errorMsg = Array.isArray(err.response.message) 
-          ? err.response.message.join(', ') 
-          : err.response.message;
-      } else if (err.message) {
-        errorMsg = err.message;
+      // If error status is 500, 401, or 403, clear token and redirect to login
+      if (err.status === 500 || err.status === 401 || err.status === 403) {
+        auth.clearAdminToken();
+        window.location.href = '/admin/login';
+      } else {
+        let errorMsg = 'Error updating user';
+        if (err.response?.message) {
+          errorMsg = Array.isArray(err.response.message) 
+            ? err.response.message.join(', ') 
+            : err.response.message;
+        } else if (err.message) {
+          errorMsg = err.message;
+        }
+        
+        showToast(errorMsg, 'error');
+        setSaving(false);
       }
-      
-      setError(errorMsg);
-      setSaving(false);
     }
   };
 
@@ -330,6 +358,15 @@ export default function EditUserPage() {
           </div>
         </form>
       </div>
+
+      {/* Toast Notification */}
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast({ ...toast, show: false })}
+        />
+      )}
     </>
   );
 }
