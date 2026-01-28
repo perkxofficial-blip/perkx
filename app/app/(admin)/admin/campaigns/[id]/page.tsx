@@ -269,9 +269,12 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       );
 
       showToast('Campaign updated successfully!', 'success');
+      
+      // Wait longer if uploading a new banner file to ensure backend completes processing
+      const delayTime = formData.banner ? 5000 : 1500;
       setTimeout(() => {
         router.push('/admin/campaigns');
-      }, 1500);
+      }, delayTime);
     } catch (err: any) {
       console.error('Error updating campaign:', err);
 

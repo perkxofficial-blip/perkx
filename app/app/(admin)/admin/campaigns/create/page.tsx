@@ -240,7 +240,7 @@ export default function CreateCampaignPage() {
       showToast('Campaign created successfully!', 'success');
       setTimeout(() => {
         router.push('/admin/campaigns');
-      }, 1500);
+      }, 5000);
     } catch (err: any) {
       console.error('Error creating campaign:', err);
 
