@@ -248,7 +248,10 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       if (formData.exchange_id) {
         formDataToSend.append('exchange_id', formData.exchange_id.toString());
       }
-      formDataToSend.append('category', formData.category);
+      // Only send category if it's not "All Users" (which means no filter/category)
+      if (formData.category && formData.category !== 'All Users') {
+        formDataToSend.append('category', formData.category);
+      }
       if (formData.redirect_url) {
         formDataToSend.append('redirect_url', formData.redirect_url);
       }
@@ -425,7 +428,8 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
                   onChange={(e) => handleInputChange('category', e.target.value)}
                 >
                   <option value="All Users">All Users</option>
-                  <option value="New user">New user</option>
+                  <option value="New User">New User</option>
+                  <option value="Trading Competition">Trading Competition</option>
                 </select>
               </div>
             </div>
