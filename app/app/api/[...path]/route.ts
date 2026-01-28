@@ -55,13 +55,8 @@ async function proxyRequest(
     const searchParams = request.nextUrl.searchParams.toString();
     const fullEndpoint = searchParams ? `${endpoint}?${searchParams}` : endpoint;
     const fullUrl = `${API_BASE_URL}${fullEndpoint}`;
-
-
-    
     const response = await fetch(fullUrl, options);
-    
-    console.log(`[Proxy Response] Status: ${response.status} ${response.statusText}`);
-    
+
     // Handle empty response (204 No Content)
     if (response.status === 204 || response.headers.get('content-length') === '0') {
       return new NextResponse(null, { status: response.status });
@@ -85,12 +80,6 @@ async function proxyRequest(
 
     return NextResponse.json(data, { status: response.status });
   } catch (error: any) {
-    console.error('[Proxy Error]', {
-      method,
-      endpoint,
-      error: error.message,
-      stack: error.stack
-    });
     return NextResponse.json(
       { error: 'Internal server error', message: error.message, details: `Failed to proxy ${method} ${endpoint}` },
       { status: 500 }

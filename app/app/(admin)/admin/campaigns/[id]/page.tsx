@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Toast from '@/components/admin/Toast';
 import Link from 'next/link';
 
@@ -37,6 +38,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
   const resolvedParams = use(params);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
   const [bannerPreview, setBannerPreview] = useState<string | null>(null);
@@ -82,7 +84,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       
       // Fetch campaign data
       try {
-        const data = await apiClient.get(`/admin/campaigns/${resolvedParams.id}`, token || undefined);
+        const data = await apiClient.get(endpoints.admin.campaignDetail(resolvedParams.id), token || undefined);
         const campaign = data.data;
         
         setFormData({
@@ -121,7 +123,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
 
       // Fetch exchanges list
       try {
-        const exchangesData = await apiClient.get('/admin/exchanges/list', token || undefined);
+        const exchangesData = await apiClient.get(endpoints.admin.exchangesList, token || undefined);
         
         if (exchangesData.statusCode === 200 && Array.isArray(exchangesData.data)) {
           setExchanges(exchangesData.data);
@@ -246,7 +248,10 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       if (formData.exchange_id) {
         formDataToSend.append('exchange_id', formData.exchange_id.toString());
       }
-      formDataToSend.append('category', formData.category);
+      // Only send category if it's not "All Users" (which means no filter/category)
+      if (formData.category && formData.category !== 'All Users') {
+        formDataToSend.append('category', formData.category);
+      }
       if (formData.redirect_url) {
         formDataToSend.append('redirect_url', formData.redirect_url);
       }
@@ -261,39 +266,36 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
         formDataToSend.append('banner', formData.banner);
       }
 
-      const response = await fetch(`/api/admin/campaigns/${resolvedParams.id}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      });
+      await apiClient.patchFormData(
+        endpoints.admin.campaignDetail(resolvedParams.id),
+        formDataToSend,
+        token || undefined,
+      );
 
-      if (!response.ok) {
-        // If error status is 500, 401, or 403, clear token and redirect to login
-        if (response.status === 500 || response.status === 401 || response.status === 403) {
-          auth.clearAdminToken();
-          window.location.href = '/admin/login';
-          return;
-        }
-        
-        const data = await response.json();
-        showToast(data.message || 'Failed to update campaign', 'error');
-        return;
-      }
-
+      // Turn off loading state after API completes
+      setLoading(false);
+      
+      // Show success message and set redirecting state
       showToast('Campaign updated successfully!', 'success');
+      setRedirecting(true);
+      
+      // Wait longer if uploading a new banner file to ensure backend completes processing
+      const delayTime = formData.banner ? 5000 : 1500;
       setTimeout(() => {
         router.push('/admin/campaigns');
-      }, 1500);
+      }, delayTime);
     } catch (err: any) {
       console.error('Error updating campaign:', err);
-      
-      // Clear token and redirect on any fetch error
-      auth.clearAdminToken();
-      window.location.href = '/admin/login';
-    } finally {
+
       setLoading(false);
+      
+      if (err.status === 500 || err.status === 401 || err.status === 403) {
+        auth.clearAdminToken();
+        window.location.href = '/admin/login';
+        return;
+      }
+      const msg = err.response?.message ?? 'Failed to update campaign';
+      showToast(Array.isArray(msg) ? msg[0] : msg, 'error');
     }
   };
 
@@ -302,7 +304,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
     const token = auth.getAdminToken();
 
     try {
-      await apiClient.delete(`/admin/campaigns/${resolvedParams.id}`, token || undefined);
+      await apiClient.delete(endpoints.admin.campaignDetail(resolvedParams.id), token || undefined);
       setShowDeleteModal(false);
       showToast('Campaign deleted successfully', 'success');
       setTimeout(() => {
@@ -426,7 +428,8 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
                   onChange={(e) => handleInputChange('category', e.target.value)}
                 >
                   <option value="All Users">All Users</option>
-                  <option value="New user">New user</option>
+                  <option value="New User">New User</option>
+                  <option value="Trading Competition">Trading Competition</option>
                 </select>
               </div>
             </div>
@@ -634,13 +637,18 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
             </Link>
             <button
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={loading || redirecting}
               className="px-6 py-2.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
             >
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   Saving...
+                </>
+              ) : redirecting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Redirecting...
                 </>
               ) : (
                 'Save & Publish'

@@ -28,6 +28,8 @@ import {
 } from './dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { TwoFatosService } from './two-fatos.service';
+import { LoginDto } from './dto/login.dto';
+import { ResendOtpDto } from './dto/resend-otp.dto';
 
 @ApiTags('User Auth')
 @Controller('auth')
@@ -45,7 +47,6 @@ export class AuthController {
   @ApiResponse({ status: 400, description: 'Bad request - validation failed' })
   @ApiResponse({ status: 409, description: 'Email already exists' })
   async register(@Body() registerDto: RegisterDto) {
-    console.log('Register DTO:', registerDto);
     return this.authService.register(registerDto);
   }
 
@@ -55,7 +56,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Login user' })
   @ApiResponse({ status: 200, description: 'User successfully and send OTP' })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
-  async login(@Request() req) {
+  async login(@Body() _: LoginDto, @Request() req) {
     return this.authService.login(req.user);
   }
 
@@ -71,7 +72,40 @@ export class AuthController {
   }
 
   @Public()
-  @Get('verify')
+  @Post('resend-otp')
+  @ApiOperation({ summary: 'Resend OTP' })
+  @ApiResponse({
+    status: 200,
+    description: 'Verify TOP successfully logged in',
+  })
+  async resendOTP(@Body() body: ResendOtpDto) {
+    return await this.twoFactosService.resendOtp(body.email);
+  }
+
+  @Public()
+  @Get('verify-email')
+  @ApiOperation({ summary: 'Get verify by token' })
+  @ApiQuery({
+    name: 'token',
+    type: String,
+    required: true,
+    example: 'a1b2c3d4e5f6...',
+    description: 'Email verification token sent to user email',
+  })
+  @ApiResponse({ status: 200, description: 'Email verified successfully' })
+  @ApiResponse({
+    status: 400,
+    description: 'Token expired or already verified',
+  })
+  @ApiResponse({ status: 404, description: 'Invalid token' })
+  @ApiOperation({ summary: 'Verify user email' })
+  async getVerify(@Query() query: VerifyDto) {
+    const { token } = query;
+    return await this.emailVerificationService.getVerify(token);
+  }
+
+  @Public()
+  @Post('verify')
   @ApiOperation({ summary: 'Verify user email by token' })
   @ApiQuery({
     name: 'token',
@@ -87,10 +121,9 @@ export class AuthController {
   })
   @ApiResponse({ status: 404, description: 'Invalid token' })
   @ApiOperation({ summary: 'Verify user email' })
-  async verifyEmail(@Query() query: VerifyDto) {
-    const { token } = query;
-    const user = await this.emailVerificationService.verify(token);
-    return this.authService.login(user);
+  async verifyEmail(@Body() body: VerifyDto) {
+    const user = await this.emailVerificationService.verify(body.token);
+    return this.twoFactosService.getAccessToken(user);
   }
 
   @Public()
@@ -104,15 +137,15 @@ export class AuthController {
   async resend(@Body() body: ResendDto) {
     const user = await this.authService.findByUnVerifiedEmail(body.email);
     if (!user) {
-      throw new BadRequestException('Email does not exist or already verified');
+      throw new BadRequestException('message.email_not_verified');
     }
-    await this.emailVerificationService.reSend({
+    const token = await this.emailVerificationService.reSend({
       id: user.id,
       email: user.email,
     });
 
     return {
-      message: 'Verification email resent',
+      token: token,
     };
   }
   @Public()

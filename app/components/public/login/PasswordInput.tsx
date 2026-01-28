@@ -7,9 +7,10 @@ interface Props {
   name: string;
   label: string;
   placeholder: string;
+  error: any;
 }
 
-export default function PasswordInput({name, label, placeholder }: Props) {
+export default function PasswordInput({name, label, placeholder, error = null }: Props) {
   const [show, setShow] = useState(false);
 
   return (
@@ -22,9 +23,10 @@ export default function PasswordInput({name, label, placeholder }: Props) {
         id={`${name}-input`}
         name={name}
         type={show ? 'text' : 'password'}
-        className="form-control pe-5"
         placeholder={placeholder}
         autoComplete="current-password"
+        className={`form-control ${error ? 'is-invalid' : ''}`}
+        defaultValue=""
       />
 
       <button
@@ -41,6 +43,11 @@ export default function PasswordInput({name, label, placeholder }: Props) {
           priority={false}
         />
       </button>
+      {error && (
+        <div className="invalid-feedback">
+          {error}
+        </div>
+      )}
     </div>
   );
 }

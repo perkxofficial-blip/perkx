@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Toast from '@/components/admin/Toast';
 import Link from 'next/link';
 
@@ -35,6 +36,7 @@ interface Exchange {
 export default function CreateCampaignPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
   const [bannerPreview, setBannerPreview] = useState<string | null>(null);
   
@@ -73,7 +75,7 @@ export default function CreateCampaignPage() {
       if (!token) return;
 
       try {
-        const data = await apiClient.get('/admin/exchanges/list', token);
+        const data = await apiClient.get(endpoints.admin.exchangesList, token);
         
         if (data.statusCode === 200 && Array.isArray(data.data)) {
           setExchanges(data.data);
@@ -234,48 +236,32 @@ export default function CreateCampaignPage() {
         formDataToSend.append('banner', formData.banner);
       }
 
-      const response = await fetch('/api/admin/campaigns', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      });
+      await apiClient.postFormData(endpoints.admin.campaigns, formDataToSend, token || undefined);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        // If error status is 500, 401, or 403, clear token and redirect to login
-        if (response.status === 500 || response.status === 401 || response.status === 403) {
-          auth.clearAdminToken();
-          window.location.href = '/admin/login';
-          return;
-        }
-        
-        // Handle validation errors from API
-        if (data.message && Array.isArray(data.message)) {
-          // Display first error message
-          showToast(data.message[0], 'error');
-        } else if (data.message) {
-          showToast(data.message, 'error');
-        } else {
-          showToast('Failed to create campaign', 'error');
-        }
-        return;
-      }
-
+      // Turn off loading state after API completes
+      setLoading(false);
+      
+      // Show success message and set redirecting state
       showToast('Campaign created successfully!', 'success');
+      setRedirecting(true);
+      
+      // Wait longer if uploading banner file to ensure backend completes processing
+      const delayTime = formData.banner ? 5000 : 1500;
       setTimeout(() => {
         router.push('/admin/campaigns');
-      }, 1500);
+      }, delayTime);
     } catch (err: any) {
       console.error('Error creating campaign:', err);
-      
-      // Clear token and redirect on any fetch error
-      auth.clearAdminToken();
-      window.location.href = '/admin/login';
-    } finally {
+
       setLoading(false);
+
+      if (err.status === 500 || err.status === 401 || err.status === 403) {
+        auth.clearAdminToken();
+        window.location.href = '/admin/login';
+        return;
+      }
+      const msg = err.response?.message ?? 'Failed to create campaign';
+      showToast(Array.isArray(msg) ? msg[0] : msg, 'error');
     }
   };
 
@@ -570,13 +556,18 @@ export default function CreateCampaignPage() {
             </Link>
             <button
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={loading || redirecting}
               className="px-6 py-2.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
             >
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   Saving...
+                </>
+              ) : redirecting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Redirecting...
                 </>
               ) : (
                 'Save & Publish'

@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { DataSource, EntityManager, Repository } from 'typeorm';
+import { DataSource, EntityManager, IsNull, Repository } from 'typeorm';
 import { MailerService } from '@nestjs-modules/mailer';
 import * as crypto from 'crypto';
 import { User, UserEmailVerification, UserStatus } from '../../../entities';
@@ -12,9 +12,7 @@ import { User, UserEmailVerification, UserStatus } from '../../../entities';
 @Injectable()
 export class EmailVerificationService {
   private generateToken() {
-    const raw = crypto.randomBytes(32).toString('hex');
-    const hashed = crypto.createHash('sha256').update(raw).digest('hex');
-    return { raw, hashed };
+    return crypto.randomBytes(32).toString('hex');
   }
 
   constructor(
@@ -29,14 +27,28 @@ export class EmailVerificationService {
     manager: EntityManager,
     user: { id: number; email: string },
   ) {
-    await this.createTokenAndDispatch(
+    return await this.createTokenAndDispatch(
       manager.getRepository(UserEmailVerification),
       user,
     );
   }
 
+  async getVerify(token: string) {
+    const verify = await this.repo.findOne({
+      where: {
+        token: token,
+        verified_at: IsNull(),
+      },
+    });
+    console.log(verify);
+    return {
+      status: !!verify,
+      expired_at: verify?.created_at,
+    };
+  }
+
   async reSend(user: { id: number; email: string }) {
-    await this.createTokenAndDispatch(this.repo, user);
+    return await this.createTokenAndDispatch(this.repo, user);
   }
 
   private async createTokenAndDispatch(
@@ -44,18 +56,17 @@ export class EmailVerificationService {
     user: { id: number; email: string },
   ) {
     await repo.delete({ user_id: user.id });
-    const { raw, hashed } = this.generateToken();
+    const token = this.generateToken();
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
 
     await repo.save({
       user_id: user.id,
-      token: hashed,
+      token: token,
       expires_at: expires,
     });
 
-    const verifyUrl = `${process.env.FRONTEND_URL}/verify?token=${raw}`;
-    console.log(verifyUrl);
+    const verifyUrl = `${process.env.FRONTEND_URL}/verify?token=${token}`;
     await this.mailerService.sendMail({
       to: user.email,
       subject: 'PerkX - Verify your email',
@@ -64,15 +75,16 @@ export class EmailVerificationService {
         verifyUrl,
       },
     });
+
+    return token;
   }
-  async verify(rawToken: string) {
-    const hashed = crypto.createHash('sha256').update(rawToken).digest('hex');
+  async verify(token: string) {
     return this.dataSource.transaction(async (manager) => {
       const verifyRepo = manager.getRepository(UserEmailVerification);
       const userRepo = manager.getRepository(User);
 
       const record = await verifyRepo.findOne({
-        where: { token: hashed },
+        where: { token: token },
       });
 
       if (!record) throw new NotFoundException('Invalid token');
@@ -91,5 +103,12 @@ export class EmailVerificationService {
 
       return user;
     });
+  }
+
+  async getOldToken(userId: number) {
+    const record = await this.repo.findOne({
+      where: { user_id: userId },
+    });
+    return record.token;
   }
 }
