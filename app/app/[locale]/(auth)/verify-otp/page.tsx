@@ -3,12 +3,12 @@ import { generatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
-import {resendAction} from "./action";
+import {resendOtpAction, verifyOtpAction} from "./action";
 import {cookies} from "next/headers";
 import OtpInput from "@/app/[locale]/(auth)/verify-otp/OtpInput";
 import {redirect} from "next/navigation";
+import ResendCountdown from "./ResendCountdown";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 export async function generateMetadata({ params }: {
   params: Promise<{
     locale: string;
@@ -57,17 +57,23 @@ export default async function VerifyOtpPage() {
               {message && (
                 <p className='text-danger'>{t(message)}</p>
               )}
-              <form action={resendAction} aria-label="Resend form">
+              <form action={verifyOtpAction} aria-label="Verify form">
                 <input type="hidden" name="email" defaultValue={email}/>
                 <OtpInput/>
                 <button
                   type="submit"
-                  className="btn btn-login w-100 mb-4"
+                  className="btn btn-login w-100 mb-4 btn-otp-submit"
                 >
                   {t('verify_email.confirm')}
                 </button>
               </form>
-              <p className="text-center auth-footer">
+              <form action={resendOtpAction} aria-label="Resend form">
+                <input type="hidden" name="email" defaultValue={email}/>
+               <div className="text-end">
+                 <ResendCountdown />
+               </div>
+              </form>
+              <p className="text-center auth-footer mt-4">
                 <a href="/login" className="signup-link">
                   {' '}{t('verify_email.back_to_login')}
                 </a>
