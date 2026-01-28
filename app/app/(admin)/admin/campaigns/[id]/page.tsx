@@ -38,6 +38,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
   const resolvedParams = use(params);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
   const [bannerPreview, setBannerPreview] = useState<string | null>(null);
@@ -268,7 +269,12 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
         token || undefined,
       );
 
+      // Turn off loading state after API completes
+      setLoading(false);
+      
+      // Show success message and set redirecting state
       showToast('Campaign updated successfully!', 'success');
+      setRedirecting(true);
       
       // Wait longer if uploading a new banner file to ensure backend completes processing
       const delayTime = formData.banner ? 5000 : 1500;
@@ -278,6 +284,8 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
     } catch (err: any) {
       console.error('Error updating campaign:', err);
 
+      setLoading(false);
+      
       if (err.status === 500 || err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
         window.location.href = '/admin/login';
@@ -285,8 +293,6 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       }
       const msg = err.response?.message ?? 'Failed to update campaign';
       showToast(Array.isArray(msg) ? msg[0] : msg, 'error');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -627,13 +633,18 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
             </Link>
             <button
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={loading || redirecting}
               className="px-6 py-2.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
             >
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   Saving...
+                </>
+              ) : redirecting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Redirecting...
                 </>
               ) : (
                 'Save & Publish'
