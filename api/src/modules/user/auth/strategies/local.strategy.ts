@@ -8,14 +8,12 @@ import { UserStatus } from '../../../../entities';
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   constructor(private authService: AuthService) {
     super({
-      usernameField: 'email',
-      passReqToCallback: false,
+      usernameField: 'email'
     });
   }
 
   async validate(email: string, password: string): Promise<any> {
     const user = await this.authService.validateUser(email, password);
-
     if (!user) {
       throw new UnauthorizedException('message.invalid_credentials');
     }

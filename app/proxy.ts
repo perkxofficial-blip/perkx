@@ -39,7 +39,7 @@ export const config = {
     '/register',
     '/verify-email',
     '/verify',
-    '/verify-opt',
+    '/verify-otp',
     '/forgot-password',
     '/reset-password',
     '/user/:path*',

@@ -36,7 +36,7 @@ export async function registerAction(formData: FormData) {
       {
         httpOnly: true,
         path: '/',
-        maxAge: 5
+        maxAge: 10
       }
     );
     redirect('/register');
@@ -47,6 +47,7 @@ export async function registerAction(formData: FormData) {
     {
       httpOnly: true,
       path: '/',
+      maxAge: 30 * 60
     }
   );
   redirect(`/verify-email?token=${token}`);

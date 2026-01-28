@@ -28,11 +28,15 @@ export class RegisterDto {
   })
   @IsString({ message: 'validate.password_string' })
   @IsNotEmpty({ message: 'validate.password_required' })
-  @MinLength(6, { message: 'validate.password_min_6' })
+  @MinLength(8, { message: 'validate.password_min_8' })
   @MaxLength(16, { message: 'validate.password_max_16' })
-  @Matches(/^[a-zA-Z0-9!@#$%^&*()=+-]+$/, {
-    message: 'validate.password_invalid_format',
-  })
+  @Matches(
+    /^(?=.*[A-Z])(?=.*\d).{8,}$/,
+    {
+      message:
+        'validate.password_invalid_format',
+    },
+  )
   password: string;
 
 

@@ -31,7 +31,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
     if (result instanceof Observable) {
       return lastValueFrom(result);
     }
-
+    console.log(result, 'result')
     return result;
   }
 }

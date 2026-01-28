@@ -35,23 +35,23 @@ console.log(result)
       {
         httpOnly: true,
         path: '/',
-        maxAge: 5, // flash cookie
+        maxAge: 10, // flash cookie
       },
     );
     redirect('/login');
   }
-
-  if (result?.data?.verify) {
+  cookieStore.set(
+    'verify-email',
+    payload.email,
+    {
+      httpOnly: true,
+      path: '/',
+      maxAge: 30 * 60
+    },
+  );
+  if (result?.data?.verified) {
     redirect('/verify-otp');
   } else {
-    cookieStore.set(
-      'verify-email',
-      payload.email,
-      {
-        httpOnly: true,
-        path: '/',
-      },
-    );
     redirect(`/verify-email?token=${result?.data?.token}`);
   }
 }

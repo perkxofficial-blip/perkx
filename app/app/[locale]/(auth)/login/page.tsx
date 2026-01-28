@@ -38,7 +38,6 @@ export default async function LoginPage({ params }: LoginPageProps) {
   const t = await getTranslations();
   const cookieStore = await cookies();
   const flashRaw = cookieStore.get('login')?.value;
-  console.log(flashRaw)
   let data: {
     message?: string;
     old?: Record<string, string>;
@@ -52,7 +51,6 @@ export default async function LoginPage({ params }: LoginPageProps) {
       data = null;
     }
   }
-  console.log(data)
   const errorMap = mapErrors(data?.errors)
   return (
     <>
