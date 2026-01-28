@@ -6,6 +6,7 @@ import {
   UseGuards,
   NotFoundException,
   Put,
+  Patch,
   Body,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -170,6 +171,10 @@ export class UsersController {
             id: { type: 'number' },
             name: { type: 'string', nullable: true },
             email: { type: 'string' },
+            status: {
+              type: 'string',
+              enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'],
+            },
           },
         },
         referrals: {
@@ -179,6 +184,10 @@ export class UsersController {
             properties: {
               id: { type: 'number' },
               email: { type: 'string' },
+              status: {
+                type: 'string',
+                enum: ['INACTIVE', 'ACTIVE', 'DEACTIVATE'],
+              },
               created_at: { type: 'string', format: 'date-time' },
             },
           },
@@ -190,6 +199,7 @@ export class UsersController {
             properties: {
               name: { type: 'string' },
               uid: { type: 'string' },
+              logo_url: { type: 'string', nullable: true },
             },
           },
         },
@@ -209,7 +219,7 @@ export class UsersController {
     return user;
   }
 
-  @Put(':id/status')
+  @Patch(':id/status')
   @ApiOperation({ summary: 'Update user status (ACTIVE or DEACTIVATE only)' })
   @ApiParam({ name: 'id', description: 'User ID', type: Number })
   @ApiBody({ type: UpdateUserStatusDto })

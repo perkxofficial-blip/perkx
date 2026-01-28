@@ -23,7 +23,13 @@ export function AdminSidebar({ onLogout }: AdminSidebarProps) {
             href="/admin/users" 
             className="block px-4 py-3 text-white rounded hover:bg-gray-700"
           >
-            👥 Users
+            👥 User Management
+          </a>
+          <a 
+            href="/admin/campaigns" 
+            className="block px-4 py-3 text-white rounded hover:bg-gray-700"
+          >
+            📢 Campaign Management
           </a>
           <a 
             href="/admin/settings" 

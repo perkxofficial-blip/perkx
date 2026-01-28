@@ -34,7 +34,6 @@ import { CampaignsService } from './campaigns.service';
 import {
   CreateCampaignDto,
   UpdateCampaignDto,
-  UpdateCampaignStatusDto,
   ListCampaignsQueryDto,
   CampaignStatus,
 } from './dto';
@@ -42,6 +41,14 @@ import { AdminJwtAuthGuard } from '../auth/guards';
 import { CampaignCategory } from '../../../entities';
 
 const ImageFileValidationPipe = new ParseFilePipe({
+  validators: [
+    new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
+    new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
+  ],
+});
+
+const OptionalImageFileValidationPipe = new ParseFilePipe({
+  fileIsRequired: false,
   validators: [
     new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
     new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
@@ -62,16 +69,22 @@ export class CampaignsController {
   @ApiBody({
     schema: {
       type: 'object',
-      required: ['title', 'description', 'banner'],
+      required: ['title', 'sub_title', 'description', 'banner'],
       properties: {
         banner: {
           type: 'string',
           format: 'binary',
           description: 'Banner image file (required). Allowed types: PNG, JPG, JPEG. Max size: 5MB',
         },
-        exchange_id: { type: 'number', nullable: true },
-        title: { type: 'string' },
-        description: { type: 'string' },
+        exchange_id: {
+          type: 'number',
+          nullable: true,
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
+          example: 1,
+        },
+        title: { type: 'string', description: 'Campaign title (required, max 255 characters)' },
+        sub_title: { type: 'string', description: 'Campaign sub title (required, max 255 characters)' },
+        description: { type: 'string', description: 'Campaign description (required)' },
         redirect_url: { type: 'string', nullable: true },
         is_active: { type: 'boolean', nullable: true },
         preview_start: { type: 'string', format: 'date', nullable: true },
@@ -92,8 +105,14 @@ export class CampaignsController {
       type: 'object',
       properties: {
         id: { type: 'number' },
-        exchange_id: { type: 'number', nullable: true },
+        exchange_id: {
+          type: 'number',
+          nullable: true,
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
+          example: 1,
+        },
         title: { type: 'string' },
+        sub_title: { type: 'string' },
         description: { type: 'string' },
         banner_path: { type: 'string' },
         banner_url: { type: 'string' },
@@ -114,7 +133,7 @@ export class CampaignsController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad request - invalid input data, missing banner file, invalid file type, or file size exceeds 5MB',
+    description: 'Bad request - invalid input data, missing banner file, invalid file type, file size exceeds 5MB, exchange_id does not exist, or exchange is not active',
   })
   @ApiResponse({
     status: 401,
@@ -169,8 +188,14 @@ export class CampaignsController {
             type: 'object',
             properties: {
               id: { type: 'number' },
-              exchange_id: { type: 'number', nullable: true },
+              exchange_id: {
+          type: 'number',
+          nullable: true,
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
+          example: 1,
+        },
               title: { type: 'string' },
+              sub_title: { type: 'string' },
               description: { type: 'string' },
               banner_path: { type: 'string' },
               banner_url: { type: 'string' },
@@ -193,6 +218,7 @@ export class CampaignsController {
                   id: { type: 'number' },
                   name: { type: 'string' },
                   code: { type: 'string' },
+                  logo_url: { type: 'string', nullable: true },
                 },
               },
             },
@@ -228,8 +254,14 @@ export class CampaignsController {
       type: 'object',
       properties: {
         id: { type: 'number' },
-        exchange_id: { type: 'number', nullable: true },
+        exchange_id: {
+          type: 'number',
+          nullable: true,
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
+          example: 1,
+        },
         title: { type: 'string' },
+        sub_title: { type: 'string' },
         description: { type: 'string' },
         banner_url: { type: 'string' },
         redirect_url: { type: 'string', nullable: true },
@@ -260,9 +292,12 @@ export class CampaignsController {
     return campaign;
   }
 
-  @Put(':id')
+  @Patch(':id')
   @UseInterceptors(FileInterceptor('banner'))
-  @ApiOperation({ summary: 'Update campaign by ID' })
+  @ApiOperation({
+    summary: 'Update campaign by ID',
+    description: 'Partially update a campaign. All fields are optional. Only provided fields will be updated.',
+  })
   @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -272,21 +307,22 @@ export class CampaignsController {
         banner: {
           type: 'string',
           format: 'binary',
-          description: 'Banner image file (optional). Allowed types: PNG, JPG, JPEG. Max size: 5MB',
+          description: 'Banner image file (optional). Allowed types: PNG, JPG, JPEG. Max size: 5MB. If provided, the old banner will be replaced.',
         },
-        exchange_id: { type: 'number', nullable: true },
-        title: { type: 'string', nullable: true },
-        description: { type: 'string', nullable: true },
-        redirect_url: { type: 'string', nullable: true },
-        is_active: { type: 'boolean', nullable: true },
-        preview_start: { type: 'string', format: 'date', nullable: true },
-        preview_end: { type: 'string', format: 'date', nullable: true },
-        launch_start: { type: 'string', format: 'date', nullable: true },
-        launch_end: { type: 'string', format: 'date', nullable: true },
-        archive_start: { type: 'string', format: 'date', nullable: true },
-        archive_end: { type: 'string', format: 'date', nullable: true },
-        featured: { type: 'boolean', nullable: true },
-        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+        exchange_id: { type: 'number', nullable: true, description: 'Exchange ID' },
+        title: { type: 'string', nullable: true, description: 'Campaign title (max 255 characters)' },
+        sub_title: { type: 'string', nullable: true, description: 'Campaign sub title (max 255 characters)' },
+        description: { type: 'string', nullable: true, description: 'Campaign description' },
+        redirect_url: { type: 'string', nullable: true, description: 'Redirect URL' },
+        is_active: { type: 'boolean', nullable: true, description: 'Whether the campaign is active' },
+        preview_start: { type: 'string', format: 'date-time', nullable: true, description: 'Preview start date (ISO 8601 format)' },
+        preview_end: { type: 'string', format: 'date-time', nullable: true, description: 'Preview end date (ISO 8601 format)' },
+        launch_start: { type: 'string', format: 'date-time', nullable: true, description: 'Launch start date (ISO 8601 format)' },
+        launch_end: { type: 'string', format: 'date-time', nullable: true, description: 'Launch end date (ISO 8601 format)' },
+        archive_start: { type: 'string', format: 'date-time', nullable: true, description: 'Archive start date (ISO 8601 format)' },
+        archive_end: { type: 'string', format: 'date-time', nullable: true, description: 'Archive end date (ISO 8601 format)' },
+        featured: { type: 'boolean', nullable: true, description: 'Whether the campaign is featured. Maximum 5 featured campaigns allowed.' },
+        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true, description: 'Campaign category' },
       },
     },
   })
@@ -297,8 +333,14 @@ export class CampaignsController {
       type: 'object',
       properties: {
         id: { type: 'number' },
-        exchange_id: { type: 'number', nullable: true },
+        exchange_id: {
+          type: 'number',
+          nullable: true,
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
+          example: 1,
+        },
         title: { type: 'string' },
+        sub_title: { type: 'string' },
         description: { type: 'string' },
         banner_path: { type: 'string' },
         banner_url: { type: 'string' },
@@ -319,7 +361,7 @@ export class CampaignsController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad request - invalid input data',
+    description: 'Bad request - invalid input data, exchange_id does not exist, or exchange is not active',
   })
   @ApiResponse({
     status: 401,
@@ -329,7 +371,7 @@ export class CampaignsController {
   async update(
     @Param('id') id: string,
     @Body() updateCampaignDto: UpdateCampaignDto,
-    @UploadedFile(ImageFileValidationPipe)
+    @UploadedFile(OptionalImageFileValidationPipe)
     banner?: Express.Multer.File,
   ) {
     const campaign = await this.campaignsService.update(+id, updateCampaignDto, banner);
@@ -339,97 +381,6 @@ export class CampaignsController {
     return campaign;
   }
 
-  @Patch(':id/status')
-  @ApiOperation({ summary: 'Update campaign status (featured and/or is_active)' })
-  @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        featured: {
-          type: 'boolean',
-          description: 'Update featured status (optional)',
-          example: true,
-        },
-        is_active: {
-          type: 'boolean',
-          description: 'Update active status (optional)',
-          example: true,
-        },
-      },
-      required: [],
-      minProperties: 1,
-      description: 'At least one field (featured or is_active) must be provided',
-    },
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Campaign status updated successfully',
-    schema: {
-      type: 'object',
-      properties: {
-        id: { type: 'number' },
-        exchange_id: { type: 'number', nullable: true },
-        title: { type: 'string' },
-        description: { type: 'string' },
-        banner_path: { type: 'string' },
-        banner_url: { type: 'string' },
-        redirect_url: { type: 'string', nullable: true },
-        is_active: { type: 'boolean' },
-        preview_start: { type: 'string', format: 'date-time', nullable: true },
-        preview_end: { type: 'string', format: 'date-time', nullable: true },
-        launch_start: { type: 'string', format: 'date-time' },
-        launch_end: { type: 'string', format: 'date-time' },
-        archive_start: { type: 'string', format: 'date-time', nullable: true },
-        archive_end: { type: 'string', format: 'date-time', nullable: true },
-        featured: { type: 'boolean' },
-        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
-        created_at: { type: 'string', format: 'date-time' },
-        updated_at: { type: 'string', format: 'date-time' },
-        exchange: {
-          type: 'object',
-          nullable: true,
-          properties: {
-            id: { type: 'number' },
-            name: { type: 'string' },
-            code: { type: 'string' },
-          },
-        },
-      },
-    },
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Bad request - at least one field (featured or is_active) must be provided, or maximum 5 featured campaigns exceeded',
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Unauthorized - invalid or missing admin token',
-  })
-  @ApiResponse({ status: 404, description: 'Campaign not found' })
-  async updateStatus(
-    @Param('id') id: string,
-    @Body() updateStatusDto: UpdateCampaignStatusDto,
-  ) {
-    // Validate that at least one field is provided
-    if (
-      updateStatusDto.featured === undefined &&
-      updateStatusDto.is_active === undefined
-    ) {
-      throw new BadRequestException(
-        'At least one field (featured or is_active) must be provided',
-      );
-    }
-
-    const campaign = await this.campaignsService.updateStatus(
-      +id,
-      updateStatusDto,
-    );
-    if (!campaign) {
-      throw new NotFoundException('Campaign not found');
-    }
-    return campaign;
-  }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)

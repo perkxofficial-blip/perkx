@@ -10,9 +10,10 @@ async function proxyRequest(
 ) {
   try {
     const token = request.headers.get('authorization');
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
-    };
+    const contentType = request.headers.get('content-type');
+    
+    // Initialize headers without Content-Type
+    const headers: HeadersInit = {};
 
     if (token) {
       headers['Authorization'] = token;
@@ -23,20 +24,75 @@ async function proxyRequest(
       headers,
     };
 
-    // Add body for POST/PUT requests
+    // Add body for POST/PUT/PATCH requests if body exists
     if (method !== 'GET' && method !== 'DELETE') {
-      const body = await request.json();
-      options.body = JSON.stringify(body);
+      // Check if this is FormData (multipart/form-data)
+      if (contentType?.includes('multipart/form-data')) {
+        // For FormData, we need to recreate it to forward properly
+        const formData = await request.formData();
+        
+        // Create a new FormData object for the backend request
+        const backendFormData = new FormData();
+        formData.forEach((value, key) => {
+          backendFormData.append(key, value);
+        });
+        
+        options.body = backendFormData as any;
+        // Don't set Content-Type - let fetch set it with proper boundary
+      } else {
+        // For JSON requests, set Content-Type and parse JSON
+        headers['Content-Type'] = 'application/json';
+        try {
+          const body = await request.json();
+          options.body = JSON.stringify(body);
+        } catch (e) {
+          // No body or invalid JSON - continue without body
+        }
+      }
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
-    const data = await response.json();
+    // Add query params to endpoint
+    const searchParams = request.nextUrl.searchParams.toString();
+    const fullEndpoint = searchParams ? `${endpoint}?${searchParams}` : endpoint;
+    const fullUrl = `${API_BASE_URL}${fullEndpoint}`;
+
+
+    
+    const response = await fetch(fullUrl, options);
+    
+    console.log(`[Proxy Response] Status: ${response.status} ${response.statusText}`);
+    
+    // Handle empty response (204 No Content)
+    if (response.status === 204 || response.headers.get('content-length') === '0') {
+      return new NextResponse(null, { status: response.status });
+    }
+
+    // Try to parse JSON response
+    let data;
+    try {
+      data = await response.json();
+    } catch (e) {
+      // If no JSON body but request was successful (2xx)
+      if (response.ok) {
+        return new NextResponse(null, { status: response.status });
+      }
+      // If error and no JSON body
+      return NextResponse.json(
+        { error: 'Server error', message: response.statusText },
+        { status: response.status }
+      );
+    }
 
     return NextResponse.json(data, { status: response.status });
   } catch (error: any) {
-    console.error('Proxy error:', error);
+    console.error('[Proxy Error]', {
+      method,
+      endpoint,
+      error: error.message,
+      stack: error.stack
+    });
     return NextResponse.json(
-      { error: 'Internal server error', message: error.message },
+      { error: 'Internal server error', message: error.message, details: `Failed to proxy ${method} ${endpoint}` },
       { status: 500 }
     );
   }
@@ -68,6 +124,15 @@ export async function PUT(
   const { path } = await params;
   const endpoint = '/' + path.join('/');
   return proxyRequest(request, endpoint, 'PUT');
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ path: string[] }> }
+) {
+  const { path } = await params;
+  const endpoint = '/' + path.join('/');
+  return proxyRequest(request, endpoint, 'PATCH');
 }
 
 export async function DELETE(

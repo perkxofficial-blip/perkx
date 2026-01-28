@@ -1,31 +1,56 @@
-import { IsString, IsOptional, IsEmail } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsOptional, IsEnum, IsDateString } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { UserGender } from '../../../../entities';
 
 export class UpdateProfileDto {
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'User first name',
     example: 'John',
-    required: false,
   })
   @IsString()
   @IsOptional()
   first_name?: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'User last name',
     example: 'Doe',
-    required: false,
   })
   @IsString()
   @IsOptional()
   last_name?: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'User phone number',
     example: '+84123456789',
-    required: false,
   })
   @IsString()
   @IsOptional()
   phone?: string;
+
+  @ApiPropertyOptional({
+    description: 'User gender',
+    enum: UserGender,
+    example: UserGender.MALE,
+  })
+  @IsEnum(UserGender)
+  @IsOptional()
+  gender?: UserGender;
+
+  @ApiPropertyOptional({
+    description: 'User birthday',
+    example: '1990-01-01',
+    type: String,
+    format: 'date',
+  })
+  @IsDateString()
+  @IsOptional()
+  birthday?: string;
+
+  @ApiPropertyOptional({
+    description: 'User country',
+    example: 'Vietnam',
+  })
+  @IsString()
+  @IsOptional()
+  country?: string;
 }

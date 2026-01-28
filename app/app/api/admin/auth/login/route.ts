@@ -21,11 +21,26 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(body),
     });
 
-    const data = await response.json();
+
+    // Handle empty response
+    if (response.status === 204 || response.headers.get('content-length') === '0') {
+      return new NextResponse(null, { status: response.status });
+    }
+
+    // Try to parse JSON
+    let data;
+    try {
+      const text = await response.text();
+      data = JSON.parse(text);
+    } catch (parseError: any) {
+      return NextResponse.json(
+        { error: 'Invalid JSON response from API', message: parseError.message },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(data, { status: response.status });
   } catch (error: any) {
-    console.error('Proxy error:', error);
     return NextResponse.json(
       { error: 'Internal server error', message: error.message },
       { status: 500 }

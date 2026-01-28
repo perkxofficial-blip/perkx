@@ -24,12 +24,21 @@ export const apiClient = {
       headers,
     });
 
-    return res.json();
+    const responseData = await res.json();
+
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 
   // POST request
   async post(endpoint: string, data: any, token?: string) {
-    console.log('this.baseURL', this.baseURL);
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
@@ -44,7 +53,17 @@ export const apiClient = {
       body: JSON.stringify(data),
     });
 
-    return res.json();
+    const responseData = await res.json();
+
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 
   // PUT request
@@ -63,7 +82,46 @@ export const apiClient = {
       body: JSON.stringify(data),
     });
 
-    return res.json();
+    const responseData = await res.json();
+
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
+  },
+
+  // PATCH request
+  async patch(endpoint: string, data: any, token?: string) {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const res = await fetch(`${this.baseURL}${endpoint}`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify(data),
+    });
+    console.log(res);
+    const responseData = await res.json();
+    console.log(responseData);
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 
   // DELETE request
@@ -81,6 +139,39 @@ export const apiClient = {
       headers,
     });
 
-    return res.json();
+    // Handle empty response (204 No Content)
+    if (res.status === 204 || res.headers.get('content-length') === '0') {
+      if (!res.ok) {
+        const error: any = new Error(`HTTP ${res.status}: ${res.statusText}`);
+        error.status = res.status;
+        throw error;
+      }
+      return null;
+    }
+
+    // Try to parse JSON response
+    let responseData;
+    try {
+      responseData = await res.json();
+    } catch (e) {
+      // If no JSON body but request was successful
+      if (res.ok) {
+        return null;
+      }
+      // If error and no JSON body
+      const error: any = new Error(`HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      throw error;
+    }
+
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
   },
 };

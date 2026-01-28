@@ -1,4 +1,9 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
+// For server-side: use direct API URL
+// For client-side: use Next.js API routes as proxy to avoid CORS issues
+const isServer = typeof window === 'undefined';
+const API_BASE_URL = isServer
+  ? (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api')
+  : '/api'; // Use Next.js API routes as proxy for browser requests
 
 export interface Page {
   id: string;
