@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 import Toast from '@/components/admin/Toast';
 
@@ -75,7 +76,7 @@ export default function UserDetailPage() {
       return;
     }
 
-    apiClient.get(`/admin/users/${userId}`, token || undefined)
+    apiClient.get(endpoints.admin.userDetail(userId), token || undefined)
       .then(data => {
         if (data.statusCode === 200 && data.data) {
           setUser(data.data);
@@ -105,7 +106,7 @@ export default function UserDetailPage() {
     const token = auth.getAdminToken();
 
     try {
-      const data = await apiClient.patch(`/admin/users/${userId}/status`, { status: newStatus }, token || undefined);
+      const data = await apiClient.patch(endpoints.admin.userStatus(userId), { status: newStatus }, token || undefined);
 
       if (data.statusCode === 200 && data.data) {
         setUser(prev => prev ? { ...prev, status: data.data.status } : null);

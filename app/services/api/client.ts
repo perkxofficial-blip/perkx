@@ -110,9 +110,9 @@ export const apiClient = {
       headers,
       body: JSON.stringify(data),
     });
-    console.log(res);
+
     const responseData = await res.json();
-    console.log(responseData);
+
     // If response is not ok, throw error with response body
     if (!res.ok) {
       const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
@@ -121,6 +121,71 @@ export const apiClient = {
       throw error;
     }
 
+    return responseData;
+  },
+
+  // POST FormData (multipart/form-data, e.g. file upload)
+  async postFormData(endpoint: string, formData: FormData, token?: string) {
+    const headers: HeadersInit = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    // Do not set Content-Type; browser sets multipart/form-data with boundary
+
+    const res = await fetch(`${this.baseURL}${endpoint}`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+
+    let responseData: any;
+    try {
+      responseData = await res.json();
+    } catch {
+      if (!res.ok) {
+        const error: any = new Error(`HTTP ${res.status}: ${res.statusText}`);
+        error.status = res.status;
+        throw error;
+      }
+      return null;
+    }
+
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+    return responseData;
+  },
+
+  // PATCH FormData (multipart/form-data, e.g. file upload)
+  async patchFormData(endpoint: string, formData: FormData, token?: string) {
+    const headers: HeadersInit = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const res = await fetch(`${this.baseURL}${endpoint}`, {
+      method: 'PATCH',
+      headers,
+      body: formData,
+    });
+
+    let responseData: any;
+    try {
+      responseData = await res.json();
+    } catch {
+      if (!res.ok) {
+        const error: any = new Error(`HTTP ${res.status}: ${res.statusText}`);
+        error.status = res.status;
+        throw error;
+      }
+      return null;
+    }
+
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
     return responseData;
   },
 
