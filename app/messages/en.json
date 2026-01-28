@@ -5,55 +5,6 @@
       "description": "Maximize your trading rebates on global exchanges with PerkX. A professional cashback platform built for high-volume traders.",
       "og_title": "PerkX – Maximize Your Trading Rebates",
       "og_description": "Earn cashback on every trade. Join thousands of professional traders using PerkX to boost their trading rewards."
-    },
-
-    "how_it_works": {
-      "title": "How PerkX Works | Trading Rebates Explained",
-      "description": "Learn how PerkX provides trading rebates and cashback on every trade across supported global exchanges.",
-      "og_title": "How PerkX Works",
-      "og_description": "Discover how PerkX helps traders earn cashback and rebates on every trade."
-    },
-
-    "exchanges": {
-      "title": "Supported Exchanges | PerkX",
-      "description": "Explore the list of global cryptocurrency and financial exchanges supported by PerkX.",
-      "og_title": "Supported Exchanges on PerkX",
-      "og_description": "Trade on leading global exchanges and earn rebates with PerkX."
-    },
-
-    "calculator": {
-      "title": "Rebate Calculator | PerkX",
-      "description": "Calculate your estimated trading rebates based on volume and fees using the PerkX rebate calculator.",
-      "og_title": "PerkX Rebate Calculator",
-      "og_description": "Estimate your potential trading rebates instantly with the PerkX calculator."
-    },
-
-    "campaigns": {
-      "title": "Campaigns & Promotions | PerkX",
-      "description": "Discover the latest trading campaigns and exclusive promotions available on PerkX.",
-      "og_title": "PerkX Campaigns & Promotions",
-      "og_description": "Join exclusive trading campaigns and promotions on PerkX."
-    },
-
-    "about_us": {
-      "title": "About PerkX | Company Information",
-      "description": "Learn more about PerkX, a cashback and rebate solution designed for professional traders.",
-      "og_title": "About PerkX",
-      "og_description": "PerkX is a professional trading rebate platform built for serious traders."
-    },
-
-    "login": {
-      "title": "Login | PerkX",
-      "description": "Log in to your PerkX account to manage your trading rebates, campaigns, and rewards.",
-      "og_title": "Login to PerkX",
-      "og_description": "Access your PerkX account to track rebates and trading rewards."
-    },
-
-    "register": {
-      "title": "Register | PerkX",
-      "description": "Create a PerkX account today and start earning trading rebates and cashback rewards.",
-      "og_title": "Create a PerkX Account",
-      "og_description": "Sign up for PerkX and start earning cashback on every trade."
     }
   },
   "menu": {
@@ -141,5 +92,45 @@
     "submit_btn": "Create Account",
     "already_account": "Already have an account?",
     "sign_in": "Sign in"
+  },
+  "verify_email": {
+    "title": "Verify Your Email",
+    "title_otp": "Two-Factor Verification",
+    "desc": "Please check your inbox to active your account.",
+    "desc_otp": "A 6-digit verification code has been sent to your email.",
+    "resend": "Resend",
+    "confirm": "Confirm",
+    "back_to_login": "Back to Login"
+  },
+  "validate": {
+    "email_required": "Email is required.",
+    "email_invalid": "Invalid email format.",
+    "email_already_exists": "This email is already registered.",
+
+    "password_required": "Password is required.",
+    "password_string": "Password must be a string.",
+    "password_min_8": "Password must be at least 8 characters.",
+    "password_max_16": "Password must not exceed 16 characters.",
+    "password_invalid_format": "Password needs to be a minimum of 8 characters, 1 number, and 1 uppercase letter.",
+
+    "confirm_password_required": "Confirm password is required.",
+    "confirm_password_string": "Confirm password must be a string.",
+    "password_not_match": "Password and confirm password do not match.",
+
+    "referral_string": "Referral code must be a string.",
+    "invalid_referral_uid": "Invalid referral code.",
+
+    "unknown_error": "Something went wrong. Please try again later."
+  },
+  "message": {
+    "email_not_verified": "Email does not exist or already verified",
+    "resend_email_success": "Verification email has been resent successfully. Please check your inbox.",
+    "resend_email_failed": "Failed to resend the verification email. Please try again later.",
+    "invalid_credentials": "The user credentials were incorrect.",
+    "please_verify_your_email": "Please verify your email",
+    "account_banned": "Your account is banned, please contact to admin for support",
+    "verify_otp_failed": "The verification code is invalid. Please try again.",
+    "resend_otp_success": "Your new verification code is on the way. Please check your inbox.",
+    "resend_otp_failed": "Something went wrong while resending your code. Please try again."
   }
 }

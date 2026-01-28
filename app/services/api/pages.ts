@@ -30,7 +30,6 @@ export async function getPageBySlug(
   language: string = 'en'
 ): Promise<Page | null> {
   try {
-    console.log(`${API_BASE_URL}/pages/${slug}?language=${language}`);
     const response = await fetch(`${API_BASE_URL}/pages/${slug}?language=${language}`, {
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     });

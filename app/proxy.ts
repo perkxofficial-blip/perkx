@@ -37,6 +37,11 @@ export const config = {
     '/(en|ko)/:path*',
     '/login',
     '/register',
+    '/verify-email',
+    '/verify',
+    '/verify-otp',
+    '/forgot-password',
+    '/reset-password',
     '/user/:path*',
     '/admin/:path*'
   ]

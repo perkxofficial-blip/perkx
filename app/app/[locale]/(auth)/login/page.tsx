@@ -5,6 +5,8 @@ import Image from "next/image";
 import {getTranslations} from "next-intl/server";
 import PasswordInput from "@/components/public/login/PasswordInput";
 import ForgotPasswordModal from "@/components/public/login/ForgotPasswordModal";
+import {loginAction} from "./action";
+import {cookies} from "next/headers";
 interface LoginPageProps {
   params: Promise<{
     locale: string;
@@ -25,8 +27,31 @@ export async function generateMetadata({ params }: LoginPageProps): Promise<Meta
   return generatePageMetadata({ page, locale });
 }
 
+function mapErrors(errors?: Array<{ field: string; message: string }>) {
+  if (!errors) return {}
+  return errors.reduce<Record<string, string>>((acc, err) => {
+    acc[err.field] = err.message
+    return acc
+  }, {})
+}
 export default async function LoginPage({ params }: LoginPageProps) {
   const t = await getTranslations();
+  const cookieStore = await cookies();
+  const flashRaw = cookieStore.get('login')?.value;
+  let data: {
+    message?: string;
+    old?: Record<string, string>;
+    errors?: any;
+  } | null = null;
+
+  if (flashRaw) {
+    try {
+      data = JSON.parse(flashRaw);
+    } catch {
+      data = null;
+    }
+  }
+  const errorMap = mapErrors(data?.errors)
   return (
     <>
       <main className="login">
@@ -45,7 +70,8 @@ export default async function LoginPage({ params }: LoginPageProps) {
                <h1>{t('menu.login')}</h1>
                <p>{t('login.desc')}</p>
              </div>
-              <form action="/login" method="POST"  aria-label="Login form">
+              { data?.message && (<p className='text-danger'>{t(data?.message)}</p>)}
+              <form action={loginAction}  aria-label="Login form">
                 <div className="mb-3">
                   <label htmlFor="emailInput" className="form-label">
                     {t('login.email')}
@@ -54,17 +80,23 @@ export default async function LoginPage({ params }: LoginPageProps) {
                     type="email"
                     id="emailInput"
                     name="email"
-                    className="form-control"
                     autoComplete="email"
-                    required
                     placeholder={t('login.email_placeholder')}
+                    defaultValue={data?.old?.email}
+                    className={`form-control ${errorMap?.email ? 'is-invalid' : ''}`}
                   />
+                  {errorMap?.email && (
+                    <div className="invalid-feedback">
+                      {t(errorMap?.email)}
+                    </div>
+                  )}
                 </div>
 
                 <PasswordInput
                   name='password'
                   label={t('login.password')}
                   placeholder={t('login.password_placeholder')}
+                  error={errorMap?.password ? t(errorMap?.password) : ''}
                 />
                 <div className="text-start mb-3">
                   <button
