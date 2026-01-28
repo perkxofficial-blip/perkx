@@ -1,4 +1,5 @@
 import {apiClient} from "@/services/api";
+import { endpoints } from "@/services/endpoints";
 
 export interface ExchangeSlide {
   name: string;
@@ -35,7 +36,7 @@ export interface ExchangeProduct {
 
 export async function getAllExchanges(): Promise<Exchange[]> {
   try {
-    const response = await apiClient.publicGet(`exchanges`);
+    const response = await apiClient.publicGet(endpoints.public.exchanges);
     return response.data;
   } catch (error) {
     console.error('Error fetching exchanges:', error);

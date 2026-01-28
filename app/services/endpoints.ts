@@ -24,5 +24,6 @@ export const endpoints = {
   // Public endpoints
   public: {
     exchanges: '/exchanges',
+    campaigns: '/campaigns',
   },
 };

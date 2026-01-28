@@ -246,7 +246,7 @@ export const apiClient = {
       'Content-Type': 'application/json',
     };
 
-    const res = await fetch(`${this.baseURL}/${endpoint}`, {
+    const res = await fetch(`${this.baseURL}${endpoint}`, {
       method: 'GET',
       headers,
     });

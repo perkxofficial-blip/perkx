@@ -1,4 +1,5 @@
 import {apiClient} from "@/services/api";
+import { endpoints } from "@/services/endpoints";
 
 export interface Campaign {
   id: number;
@@ -10,7 +11,7 @@ export interface Campaign {
 
 export async function getAllCampaigns(): Promise<Campaign[]> {
   try {
-    const response = await apiClient.publicGet(`campaigns`);
+    const response = await apiClient.publicGet(endpoints.public.campaigns);
     return response.data;
   } catch (error) {
     console.error('Error fetching campaigns:', error);
