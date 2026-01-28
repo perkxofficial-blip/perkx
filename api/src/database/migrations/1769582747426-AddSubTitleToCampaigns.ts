@@ -11,6 +11,7 @@ export class AddSubTitleToCampaigns1769582747426 implements MigrationInterface {
         type: 'varchar',
         length: '255',
         isNullable: false,
+        default: null
       }),
     );
   }
