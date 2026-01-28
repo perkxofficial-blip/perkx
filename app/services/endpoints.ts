@@ -13,7 +13,12 @@ export const endpoints = {
   admin: {
     login: '/admin/auth/login',
     users: '/admin/users',
-    userDetail: (id: number) => `/admin/users/${id}`,
+    userDetail: (id: string | number) => `/admin/users/${id}`,
+    userStatus: (id: string | number) => `/admin/users/${id}/status`,
+    campaigns: '/admin/campaigns',
+    campaignDetail: (id: string) => `/admin/campaigns/${id}`,
+    exchangesList: '/admin/exchanges/list',
+    pages: '/admin/pages',
   },
 
   // Public endpoints

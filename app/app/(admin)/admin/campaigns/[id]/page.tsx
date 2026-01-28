@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Toast from '@/components/admin/Toast';
 import Link from 'next/link';
 
@@ -82,7 +83,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       
       // Fetch campaign data
       try {
-        const data = await apiClient.get(`/admin/campaigns/${resolvedParams.id}`, token || undefined);
+        const data = await apiClient.get(endpoints.admin.campaignDetail(resolvedParams.id), token || undefined);
         const campaign = data.data;
         
         setFormData({
@@ -121,7 +122,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
 
       // Fetch exchanges list
       try {
-        const exchangesData = await apiClient.get('/admin/exchanges/list', token || undefined);
+        const exchangesData = await apiClient.get(endpoints.admin.exchangesList, token || undefined);
         
         if (exchangesData.statusCode === 200 && Array.isArray(exchangesData.data)) {
           setExchanges(exchangesData.data);
@@ -261,26 +262,11 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
         formDataToSend.append('banner', formData.banner);
       }
 
-      const response = await fetch(`/api/admin/campaigns/${resolvedParams.id}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      });
-
-      if (!response.ok) {
-        // If error status is 500, 401, or 403, clear token and redirect to login
-        if (response.status === 500 || response.status === 401 || response.status === 403) {
-          auth.clearAdminToken();
-          window.location.href = '/admin/login';
-          return;
-        }
-        
-        const data = await response.json();
-        showToast(data.message || 'Failed to update campaign', 'error');
-        return;
-      }
+      await apiClient.patchFormData(
+        endpoints.admin.campaignDetail(resolvedParams.id),
+        formDataToSend,
+        token || undefined,
+      );
 
       showToast('Campaign updated successfully!', 'success');
       setTimeout(() => {
@@ -288,10 +274,14 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       }, 1500);
     } catch (err: any) {
       console.error('Error updating campaign:', err);
-      
-      // Clear token and redirect on any fetch error
-      auth.clearAdminToken();
-      window.location.href = '/admin/login';
+
+      if (err.status === 500 || err.status === 401 || err.status === 403) {
+        auth.clearAdminToken();
+        window.location.href = '/admin/login';
+        return;
+      }
+      const msg = err.response?.message ?? 'Failed to update campaign';
+      showToast(Array.isArray(msg) ? msg[0] : msg, 'error');
     } finally {
       setLoading(false);
     }
@@ -302,7 +292,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
     const token = auth.getAdminToken();
 
     try {
-      await apiClient.delete(`/admin/campaigns/${resolvedParams.id}`, token || undefined);
+      await apiClient.delete(endpoints.admin.campaignDetail(resolvedParams.id), token || undefined);
       setShowDeleteModal(false);
       showToast('Campaign deleted successfully', 'success');
       setTimeout(() => {

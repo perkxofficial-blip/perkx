@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 import Toast from '@/components/admin/Toast';
 
@@ -55,7 +56,7 @@ export default function EditUserPage() {
       return;
     }
 
-    apiClient.get(`/admin/users/${userId}`, token || undefined)
+    apiClient.get(endpoints.admin.userDetail(userId), token || undefined)
       .then(data => {
         let user = data.statusCode === 200 ? data.data : data;
         
@@ -110,7 +111,7 @@ export default function EditUserPage() {
       if (form.gender) cleanedData.gender = form.gender;
       if (form.country?.trim()) cleanedData.country = form.country.trim();
       
-      await apiClient.put(`/admin/users/${userId}`, cleanedData, token || undefined);
+      await apiClient.put(endpoints.admin.userDetail(userId), cleanedData, token || undefined);
       showToast('User profile updated successfully!', 'success');
       setTimeout(() => {
         router.push(`/admin/users/${userId}`);

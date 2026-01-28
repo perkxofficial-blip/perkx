@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Toast from '@/components/admin/Toast';
 import Link from 'next/link';
 
@@ -73,7 +74,7 @@ export default function CreateCampaignPage() {
       if (!token) return;
 
       try {
-        const data = await apiClient.get('/admin/exchanges/list', token);
+        const data = await apiClient.get(endpoints.admin.exchangesList, token);
         
         if (data.statusCode === 200 && Array.isArray(data.data)) {
           setExchanges(data.data);
@@ -234,35 +235,7 @@ export default function CreateCampaignPage() {
         formDataToSend.append('banner', formData.banner);
       }
 
-      const response = await fetch('/api/admin/campaigns', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        // If error status is 500, 401, or 403, clear token and redirect to login
-        if (response.status === 500 || response.status === 401 || response.status === 403) {
-          auth.clearAdminToken();
-          window.location.href = '/admin/login';
-          return;
-        }
-        
-        // Handle validation errors from API
-        if (data.message && Array.isArray(data.message)) {
-          // Display first error message
-          showToast(data.message[0], 'error');
-        } else if (data.message) {
-          showToast(data.message, 'error');
-        } else {
-          showToast('Failed to create campaign', 'error');
-        }
-        return;
-      }
+      await apiClient.postFormData(endpoints.admin.campaigns, formDataToSend, token || undefined);
 
       showToast('Campaign created successfully!', 'success');
       setTimeout(() => {
@@ -270,10 +243,14 @@ export default function CreateCampaignPage() {
       }, 1500);
     } catch (err: any) {
       console.error('Error creating campaign:', err);
-      
-      // Clear token and redirect on any fetch error
-      auth.clearAdminToken();
-      window.location.href = '/admin/login';
+
+      if (err.status === 500 || err.status === 401 || err.status === 403) {
+        auth.clearAdminToken();
+        window.location.href = '/admin/login';
+        return;
+      }
+      const msg = err.response?.message ?? 'Failed to create campaign';
+      showToast(Array.isArray(msg) ? msg[0] : msg, 'error');
     } finally {
       setLoading(false);
     }

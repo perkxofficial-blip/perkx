@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 import Toast from '@/components/admin/Toast';
 
@@ -74,7 +75,7 @@ export default function AdminCampaignsPage() {
     const token = auth.getAdminToken();
 
     if (token) {
-      apiClient.get('/admin/campaigns', token || undefined)
+      apiClient.get(endpoints.admin.campaigns, token || undefined)
         .then(data => {
           if (data.statusCode === 200 && data.data && Array.isArray(data.data.data)) {
             setCampaigns(data.data.data);
@@ -180,7 +181,7 @@ export default function AdminCampaignsPage() {
     try {
       // Use PATCH /:id endpoint instead of /status endpoint
       const data = await apiClient.patch(
-        `/admin/campaigns/${campaignId}`,
+        endpoints.admin.campaignDetail(String(campaignId)),
         { [field]: !currentValue },
         token || undefined
       );
@@ -222,7 +223,7 @@ export default function AdminCampaignsPage() {
     const token = auth.getAdminToken();
 
     try {
-      await apiClient.delete(`/admin/campaigns/${campaignToDelete.id}`, token || undefined);
+      await apiClient.delete(endpoints.admin.campaignDetail(String(campaignToDelete.id)), token || undefined);
       setCampaigns(prevCampaigns => prevCampaigns.filter(c => c.id !== campaignToDelete.id));
       setShowDeleteModal(false);
       setCampaignToDelete(null);

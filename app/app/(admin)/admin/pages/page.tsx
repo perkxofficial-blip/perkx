@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
+import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 
 interface Page {
@@ -28,38 +30,28 @@ export default function PagesManagementPage() {
       return;
     }
 
-    // Fetch pages from API
-    fetch('/api/admin/pages', {
-      headers: { 'Authorization': `Bearer ${token}` },
-    })
-      .then(async res => {
-        // Check if response is not ok (includes 500, 401, 403, etc.)
-        if (!res.ok) {
-          if (res.status === 500 || res.status === 401 || res.status === 403) {
-            auth.clearAdminToken();
-            router.push('/admin/login');
-            return null;
-          }
-        }
-        return res.json();
-      })
-      .then(data => {
-        if (!data) return; // Early return if redirected
-        
+    const fetchPages = async () => {
+      try {
+        const data = await apiClient.get(endpoints.admin.pages, token);
         if (data.statusCode === 200 && Array.isArray(data.data)) {
           setPages(data.data);
         } else {
           setError('Failed to load pages');
         }
-        setIsLoading(false);
-      })
-      .catch(err => {
+      } catch (err: any) {
         console.error('Error fetching pages:', err);
-        
-        // Clear token and redirect on any fetch error
-        auth.clearAdminToken();
-        router.push('/admin/login');
-      });
+        if (err.status === 500 || err.status === 401 || err.status === 403) {
+          auth.clearAdminToken();
+          router.push('/admin/login');
+          return;
+        }
+        setError('Failed to load pages');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPages();
   }, [router]);
 
   if (isLoading) {

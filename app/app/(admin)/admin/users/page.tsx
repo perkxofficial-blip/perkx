@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
+import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 
 interface User {
@@ -41,7 +42,7 @@ export default function AdminUsersPage() {
     const token = auth.getAdminToken();
 
     if (token) {
-      apiClient.get('/admin/users', token || undefined)
+      apiClient.get(endpoints.admin.users, token || undefined)
         .then(data => {
           // Handle response structure: { statusCode: 200, data: { data: [...], pagination: {...} } }
           if (data.statusCode === 200 && data.data && Array.isArray(data.data.data)) {
