@@ -3,7 +3,12 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import Image from "next/image"
-export default function PartnerSectionSlide() {
+
+interface PartnerSectionSlideProps {
+  exchanges: any[]
+}
+
+export default function PartnerSectionSlide({ exchanges }: PartnerSectionSlideProps) {
   return (
     <Swiper
       modules={[Autoplay]}
@@ -20,16 +25,17 @@ export default function PartnerSectionSlide() {
       }}
       className="partner-slide"
     >
-      {[1, 2, 3, 4, 5, 6, 1, 3, 2,4,5].map((i, index) => (
+      {exchanges.map((exchange, index) => (
         <SwiperSlide key={index}>
           <div className="item">
             <Image
-              src={`/images/partner/${i}.png`}
-              alt={`Partner ${i} logo`}
+              src={exchange.logo_url}
+              alt={exchange.name}
               width={120}
               height={50}
               className="partner-logo"
               loading="lazy" // lazy load
+              unoptimized
             />
           </div>
         </SwiperSlide>

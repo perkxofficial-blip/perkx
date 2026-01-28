@@ -18,6 +18,6 @@ export const endpoints = {
 
   // Public endpoints
   public: {
-    features: '/landing/features',
+    exchanges: '/exchanges',
   },
 };
