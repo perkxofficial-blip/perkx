@@ -34,6 +34,15 @@ export class CreateCampaignDto {
   title: string;
 
   @ApiProperty({
+    description: 'Campaign sub title',
+    example: 'Win amazing prizes',
+    maxLength: 255,
+  })
+  @IsString()
+  @MaxLength(255)
+  sub_title: string;
+
+  @ApiProperty({
     description: 'Campaign description',
     example: 'Join our summer trading competition and win amazing prizes!',
   })

@@ -31,6 +31,9 @@ export class Campaign {
   @Column({ length: 255 })
   title: string;
 
+  @Column({ length: 255 })
+  sub_title: string;
+
   @Column({ type: 'text' })
   description: string;
 
