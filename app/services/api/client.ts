@@ -239,4 +239,28 @@ export const apiClient = {
 
     return responseData;
   },
+
+  // GET request
+  async publicGet(endpoint: string) {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+
+    const res = await fetch(`${this.baseURL}${endpoint}`, {
+      method: 'GET',
+      headers,
+    });
+
+    const responseData = await res.json();
+
+    // If response is not ok, throw error with response body
+    if (!res.ok) {
+      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      error.status = res.status;
+      error.response = responseData;
+      throw error;
+    }
+
+    return responseData;
+  },
 };

@@ -1,6 +1,6 @@
 'use client'
 export interface CampaignsProps {
-  campaigns: any
+  campaigns: any[]
   joinNow: string
 }
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -21,9 +21,9 @@ export default function PartnerSectionSlide({campaigns, joinNow}: CampaignsProps
       }}
       className="campaign-slide"
     >
-      {[1, 2, 1, 2, 1, 2, 1, 2].map((i, index) => (
-        <SwiperSlide key={index} className="campaign-slide-item">
-          <CampaignItem campaign={[]} joinNow={joinNow}/>
+      {campaigns.map((campaign, index) => (
+        <SwiperSlide key={campaign.id || index} className="campaign-slide-item">
+          <CampaignItem campaign={campaign} joinNow={joinNow}/>
         </SwiperSlide>
       ))}
     </Swiper>

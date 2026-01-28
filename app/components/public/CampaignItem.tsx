@@ -11,11 +11,12 @@ const CampaignItem = ({campaign, joinNow, className}: CampaignItemProps) => {
       className={`campaign-item ${className ?? ''}`}
     >
       <Image
-        src={`/images/campaign2.png`}
-        alt="Campaign"
+        src={campaign.banner_url}
+        alt={campaign.title}
         width={280}
         height={362}
         className="campaign-img"
+        unoptimized
       />
       <div className="campaign-box">
         <div className="tags">
@@ -23,9 +24,9 @@ const CampaignItem = ({campaign, joinNow, className}: CampaignItemProps) => {
             ALL USERS
           </div>
         </div>
-        <p>Trader World Cup</p>
-        <span>Win a share of $1,000,000 prize pool and 50% extra rebate for top traders</span>
-        <a href="">{joinNow}</a>
+        <p>{campaign.title}</p>
+        <span>{campaign.description}</span>
+        <a href={campaign.redirect_url}>{joinNow}</a>
       </div>
     </div>
   );

@@ -2,16 +2,20 @@
 
 import dynamic from 'next/dynamic'
 
-const PartnerSectionSlide = dynamic(() => import('././PartnerSectionSlide'), {
-  ssr: false,
+interface PartnerSectionProps {
+    exchanges: any[]
+}
+
+const PartnerSectionSlide = dynamic(() => import('./PartnerSectionSlide'), {
+    ssr: false,
 })
 
-export default function PartnerSection() {
-  return (
-    <div className="partner-section">
-      <div className="container-fluid">
-        <PartnerSectionSlide />
-      </div>
-    </div>
-  )
+export default function PartnerSection({ exchanges }: PartnerSectionProps) {
+    return (
+        <div className="partner-section">
+            <div className="container-fluid">
+                <PartnerSectionSlide exchanges={exchanges} />
+            </div>
+        </div>
+    )
 }

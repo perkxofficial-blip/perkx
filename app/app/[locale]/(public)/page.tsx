@@ -4,25 +4,45 @@ import Footer from "@/components/public/Footer";
 import PartnerSection from "@/components/public/PartnerSection";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import {renderText} from "@/lib/renderText";
 import CampaignSection from "@/components/public/CampaignSection";
 import PartnerExchangesTable from "@/components/public/PartnerExchangesTable";
+import {getAllExchanges, Exchange, ExchangeSlide} from "@/services/api/public/exchange";
+import { Campaign, getAllCampaigns } from '@/services/api/public/campaign';
 
 async function getLandingData() {
+  const result: {
+    exchanges: Exchange[],
+    exchangesForSlide: ExchangeSlide[],
+    campaigns: Campaign[],
+  } = {
+    exchanges: [],
+    exchangesForSlide: [],
+    campaigns: [],
+  };
+
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get('token')?.value;
-
-    const res = await fetch('http://localhost:3000/api/landing/features', {
-      cache: 'no-store',
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-    });
-
-    if (!res.ok) return { features: [] };
-    return res.json();
+    const exchanges = await getAllExchanges();
+    if (exchanges) { 
+      result.exchanges = exchanges.slice(0, 5);
+      result.exchangesForSlide = exchanges.map(exchange => ({
+        name: exchange.name,
+        logo_url: exchange.logo_url, // Assuming logo_url is derived from signup link; adjust as necessary
+      }));
+    }
   } catch {
-    return { features: [] };
+    // Handle errors silently
   }
+
+  try {
+    const campaigns = await getAllCampaigns();
+    if (campaigns) { 
+      result.campaigns = campaigns.slice(0, 8);
+    }
+  } catch {
+    // Handle errors silently
+  }
+
+  return result;
 }
 
 export default async function LandingPage() {
@@ -101,7 +121,7 @@ export default async function LandingPage() {
           </div>
 
           {/* Partner Section (Owl Carousel) */}
-          <PartnerSection />
+          <PartnerSection exchanges={data.exchangesForSlide || []} />
         </section>
       </div>
       <section className="how-perk-work">
@@ -220,7 +240,7 @@ export default async function LandingPage() {
               />
             </div>
           </div>
-          <CampaignSection campaigns={[]} joinNow={t('home.join_now')}/>
+          <CampaignSection campaigns={data.campaigns || []} joinNow={t('home.join_now')}/>
         </div>
       </section>
       <section className='partner-exchanges position-relative'>
@@ -296,7 +316,7 @@ export default async function LandingPage() {
               aria-hidden="true"
             />
             <div className="pe-table">
-              <PartnerExchangesTable/>
+              <PartnerExchangesTable exchanges={data.exchanges || []} />
               <div className=" d-flex justify-content-center mt-4">
                 <div className="pe-btn">
                   <a
