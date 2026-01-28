@@ -6,6 +6,7 @@ import {
   UseGuards,
   NotFoundException,
   Put,
+  Patch,
   Body,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -217,7 +218,7 @@ export class UsersController {
     return user;
   }
 
-  @Put(':id/status')
+  @Patch(':id/status')
   @ApiOperation({ summary: 'Update user status (ACTIVE or DEACTIVATE only)' })
   @ApiParam({ name: 'id', description: 'User ID', type: Number })
   @ApiBody({ type: UpdateUserStatusDto })
