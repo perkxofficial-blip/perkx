@@ -79,7 +79,7 @@ export class CampaignsController {
         exchange_id: {
           type: 'number',
           nullable: true,
-          description: 'Exchange ID. Must exist in the exchange table if provided.',
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
           example: 1,
         },
         title: { type: 'string' },
@@ -107,7 +107,7 @@ export class CampaignsController {
         exchange_id: {
           type: 'number',
           nullable: true,
-          description: 'Exchange ID. Must exist in the exchange table if provided.',
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
           example: 1,
         },
         title: { type: 'string' },
@@ -131,7 +131,7 @@ export class CampaignsController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad request - invalid input data, missing banner file, invalid file type, file size exceeds 5MB, or exchange_id does not exist',
+    description: 'Bad request - invalid input data, missing banner file, invalid file type, file size exceeds 5MB, exchange_id does not exist, or exchange is not active',
   })
   @ApiResponse({
     status: 401,
@@ -189,7 +189,7 @@ export class CampaignsController {
               exchange_id: {
           type: 'number',
           nullable: true,
-          description: 'Exchange ID. Must exist in the exchange table if provided.',
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
           example: 1,
         },
               title: { type: 'string' },
@@ -253,7 +253,7 @@ export class CampaignsController {
         exchange_id: {
           type: 'number',
           nullable: true,
-          description: 'Exchange ID. Must exist in the exchange table if provided.',
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
           example: 1,
         },
         title: { type: 'string' },
@@ -330,7 +330,7 @@ export class CampaignsController {
         exchange_id: {
           type: 'number',
           nullable: true,
-          description: 'Exchange ID. Must exist in the exchange table if provided.',
+          description: 'Exchange ID. Must exist and be active in the exchange table if provided. Use 0 for PerkX (special case).',
           example: 1,
         },
         title: { type: 'string' },
@@ -354,7 +354,7 @@ export class CampaignsController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad request - invalid input data, or exchange_id does not exist',
+    description: 'Bad request - invalid input data, exchange_id does not exist, or exchange is not active',
   })
   @ApiResponse({
     status: 401,
