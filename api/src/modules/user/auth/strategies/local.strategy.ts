@@ -9,6 +9,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   constructor(private authService: AuthService) {
     super({
       usernameField: 'email',
+      passReqToCallback: false,
     });
   }
 
@@ -16,15 +17,11 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     const user = await this.authService.validateUser(email, password);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('message.invalid_credentials');
     }
-    if (user.status === UserStatus.INACTIVE) {
-      throw new UnauthorizedException('Please verify your email');
-    }
+
     if (user.status === UserStatus.DEACTIVATE) {
-      throw new UnauthorizedException(
-        'Your account is banned, please contact to admin for support',
-      );
+      throw new UnauthorizedException('message.account_banned');
     }
 
     return user;

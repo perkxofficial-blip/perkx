@@ -28,6 +28,7 @@ import {
 } from './dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { TwoFatosService } from './two-fatos.service';
+import { LoginDto } from './dto/login.dto';
 
 @ApiTags('User Auth')
 @Controller('auth')
@@ -45,7 +46,6 @@ export class AuthController {
   @ApiResponse({ status: 400, description: 'Bad request - validation failed' })
   @ApiResponse({ status: 409, description: 'Email already exists' })
   async register(@Body() registerDto: RegisterDto) {
-    console.log('Register DTO:', registerDto);
     return this.authService.register(registerDto);
   }
 
@@ -55,7 +55,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Login user' })
   @ApiResponse({ status: 200, description: 'User successfully and send OTP' })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
-  async login(@Request() req) {
+  async login(@Body() _: LoginDto, @Request() req) {
     return this.authService.login(req.user);
   }
 

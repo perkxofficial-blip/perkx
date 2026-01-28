@@ -14,9 +14,11 @@ export default function ResendCountdown({ expiredAt, btnText }: Props) {
   const getRemaining = () =>
     Math.max(0, Math.floor((expiredTime - Date.now()) / 1000));
 
-  const [remaining, setRemaining] = useState(getRemaining);
+  const [remaining, setRemaining] = useState<number | null>(null);
 
   useEffect(() => {
+    setRemaining(getRemaining());
+
     const timer = setInterval(() => {
       setRemaining(getRemaining());
     }, 1000);
@@ -24,15 +26,26 @@ export default function ResendCountdown({ expiredAt, btnText }: Props) {
     return () => clearInterval(timer);
   }, [expiredAt]);
 
-  const isDisabled = remaining > 0;
+  if (remaining === null) {
+    return (
+      <button
+        type="submit"
+        className="btn btn-login w-100 mb-4"
+        disabled
+      >
+        {btnText}
+      </button>
+    );
+  }
 
+  const isDisabled = remaining > 0;
   const minutes = Math.floor(remaining / 60);
   const seconds = remaining % 60;
 
   return (
     <div>
       {isDisabled && (
-        <p className='count-down'>
+        <p className="count-down">
           {minutes}:{seconds.toString().padStart(2, '0')}
         </p>
       )}

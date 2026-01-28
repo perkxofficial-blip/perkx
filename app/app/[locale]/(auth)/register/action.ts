@@ -11,6 +11,7 @@ export async function registerAction(formData: FormData) {
   const cookieStore = await cookies();
   cookieStore.delete('register')
   cookieStore.delete('verify-email')
+
   const res = await fetch(`${API_BASE_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

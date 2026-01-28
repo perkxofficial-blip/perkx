@@ -51,7 +51,6 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
       data = null;
     }
   }
-  console.log(data)
   const errorMap = mapErrors(data?.errors)
 
   return (

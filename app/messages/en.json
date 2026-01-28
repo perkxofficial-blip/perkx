@@ -171,6 +171,9 @@
   "message": {
     "email_not_verified": "Email does not exist or already verified",
     "resend_email_success": "Verification email has been resent successfully. Please check your inbox.",
-    "resend_email_failed": "Failed to resend the verification email. Please try again later."
+    "resend_email_failed": "Failed to resend the verification email. Please try again later.",
+    "invalid_credentials": "The user credentials were incorrect.",
+    "please_verify_your_email": "Please verify your email",
+    "account_banned": "Your account is banned, please contact to admin for support"
   }
 }

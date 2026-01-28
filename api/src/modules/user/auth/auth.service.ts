@@ -113,9 +113,17 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const otpChecked = await this.twoFatosService.getEmailOtp(user);
+    if (user.status === UserStatus.INACTIVE) {
+      const token = await this.emailVerificationService.getOldToken(user.id)
+      return {
+        verified: false,
+        email: user.email,
+        token: token
+      };
+    }
+    await this.twoFatosService.getEmailOtp(user);
     return {
-      verified: otpChecked,
+      verified: true,
       email: user.email,
     };
   }
