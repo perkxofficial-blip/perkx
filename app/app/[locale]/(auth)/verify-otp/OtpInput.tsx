@@ -11,54 +11,78 @@ export default function OtpInput() {
     index: number
   ) => {
     const key = e.key;
+    const input = inputsRef.current[index];
 
-    // Nếu là số → replace value
-    if (/^\d$/.test(key)) {
-      e.preventDefault();
+    if (!input) return;
 
-      const input = inputsRef.current[index];
-      if (!input) return;
-
-      input.value = key;
-
-      if (index < length - 1) {
-        inputsRef.current[index + 1]?.focus();
-      }
-      return;
-    }
-
-    // Backspace
     if (key === 'Backspace') {
-      const input = inputsRef.current[index];
-      if (!input) return;
+      e.preventDefault();
 
       if (input.value) {
         input.value = '';
       } else if (index > 0) {
-        inputsRef.current[index - 1]?.focus();
+        const prevInput = inputsRef.current[index - 1];
+        if (prevInput) {
+          prevInput.value = '';
+          prevInput.focus();
+        }
       }
+      return;
+    }
+
+    if (
+      key === 'Tab' ||
+      key === 'ArrowLeft' ||
+      key === 'ArrowRight'
+    ) {
+      return;
+    }
+
+    if (!/^\d$/.test(key)) {
+      e.preventDefault();
+      return;
+    }
+
+    e.preventDefault();
+    input.value = key;
+
+    if (index < length - 1) {
+      inputsRef.current[index + 1]?.focus();
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const value = e.target.value.replace(/\D/g, '');
+
+    e.target.value = value;
+
+    if (value && index < length - 1) {
+      inputsRef.current[index + 1]?.focus();
     }
   };
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const data = e.clipboardData.getData('text').replace(/\D/g, '');
-    if (!data) return;
 
-    data
-      .split('')
-      .slice(0, length)
-      .forEach((char, i) => {
-        if (inputsRef.current[i]) {
-          inputsRef.current[i]!.value = char;
-        }
-      });
+    const data = e.clipboardData
+      .getData('text')
+      .replace(/\D/g, '')
+      .slice(0, length);
 
-    inputsRef.current[Math.min(data.length, length) - 1]?.focus();
+    data.split('').forEach((char, i) => {
+      if (inputsRef.current[i]) {
+        inputsRef.current[i]!.value = char;
+      }
+    });
+
+    inputsRef.current[data.length - 1]?.focus();
   };
 
   return (
-    <div style={{ display: 'flex', gap: 10 }}>
+    <div style={{ display: 'inline-flex', gap: 10 }}>
       {Array.from({ length }).map((_, i) => (
         <input
           key={i}
@@ -66,8 +90,11 @@ export default function OtpInput() {
           type="text"
           name="numbers[]"
           inputMode="numeric"
+          pattern="[0-9]*"
           maxLength={1}
+          autoComplete="one-time-code"
           onKeyDown={(e) => handleKeyDown(e, i)}
+          onChange={(e) => handleChange(e, i)}
           onPaste={handlePaste}
           style={{
             width: 44.5,

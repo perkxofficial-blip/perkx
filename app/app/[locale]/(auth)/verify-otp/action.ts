@@ -5,7 +5,6 @@ import { cookies } from 'next/headers';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 export async function verifyOtpAction(formData: FormData) {
   const cookieStore = await cookies();
-  let token = formData.get('token')?.toString() ?? '';
   const numbers = formData.getAll('numbers[]') as string[];
   const otp = numbers.join('');
   const payload = {
@@ -21,12 +20,17 @@ export async function verifyOtpAction(formData: FormData) {
 
   if (!res.ok) {
     cookieStore.set(
-      'verify-email-message',
-      'message.verify_otp_failed',
+      'verify-otp-message',
+      JSON.stringify(
+        {
+          status: false,
+          message: 'message.verify_otp_failed',
+        }
+      ),
       {
         httpOnly: true,
         path: '/',
-        maxAge: 10
+        maxAge: 5
       }
     );
     redirect(`/verify-otp`);
@@ -45,6 +49,7 @@ export async function verifyOtpAction(formData: FormData) {
 }
 
 export async function resendOtpAction(formData: FormData) {
+  const cookieStore = await cookies();
   const payload = {
     email: formData.get('email')?.toString() ?? '',
   };
@@ -55,4 +60,20 @@ export async function resendOtpAction(formData: FormData) {
     cache: 'no-store',
   });
 
+  const message = res.ok ? {
+    status: true,
+    message: 'message.resend_otp_success',
+  } : {
+    status: false,
+    message: 'message.resend_otp_failed',
+  }
+  cookieStore.set(
+    'verify-otp-message',
+    JSON.stringify(message),
+    {
+      httpOnly: true,
+      path: '/',
+      maxAge: 5
+    }
+  );
 }

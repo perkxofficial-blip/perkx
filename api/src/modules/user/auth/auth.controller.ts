@@ -29,6 +29,7 @@ import {
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { TwoFatosService } from './two-fatos.service';
 import { LoginDto } from './dto/login.dto';
+import { ResendOtpDto } from './dto/resend-otp.dto';
 
 @ApiTags('User Auth')
 @Controller('auth')
@@ -68,6 +69,17 @@ export class AuthController {
   })
   async verifyOTP(@Body() body: VerifyOtpDto) {
     return await this.twoFactosService.verifyEmailOtp(body.email, body.otp);
+  }
+
+  @Public()
+  @Post('resend-otp')
+  @ApiOperation({ summary: 'Resend OTP' })
+  @ApiResponse({
+    status: 200,
+    description: 'Verify TOP successfully logged in',
+  })
+  async resendOTP(@Body() body: ResendOtpDto) {
+    return await this.twoFactosService.resendOtp(body.email);
   }
 
   @Public()

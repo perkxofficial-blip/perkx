@@ -5,55 +5,6 @@
       "description": "Maximize your trading rebates on global exchanges with PerkX. A professional cashback platform built for high-volume traders.",
       "og_title": "PerkX – Maximize Your Trading Rebates",
       "og_description": "Earn cashback on every trade. Join thousands of professional traders using PerkX to boost their trading rewards."
-    },
-
-    "how_it_works": {
-      "title": "How PerkX Works | Trading Rebates Explained",
-      "description": "Learn how PerkX provides trading rebates and cashback on every trade across supported global exchanges.",
-      "og_title": "How PerkX Works",
-      "og_description": "Discover how PerkX helps traders earn cashback and rebates on every trade."
-    },
-
-    "exchanges": {
-      "title": "Supported Exchanges | PerkX",
-      "description": "Explore the list of global cryptocurrency and financial exchanges supported by PerkX.",
-      "og_title": "Supported Exchanges on PerkX",
-      "og_description": "Trade on leading global exchanges and earn rebates with PerkX."
-    },
-
-    "calculator": {
-      "title": "Rebate Calculator | PerkX",
-      "description": "Calculate your estimated trading rebates based on volume and fees using the PerkX rebate calculator.",
-      "og_title": "PerkX Rebate Calculator",
-      "og_description": "Estimate your potential trading rebates instantly with the PerkX calculator."
-    },
-
-    "campaigns": {
-      "title": "Campaigns & Promotions | PerkX",
-      "description": "Discover the latest trading campaigns and exclusive promotions available on PerkX.",
-      "og_title": "PerkX Campaigns & Promotions",
-      "og_description": "Join exclusive trading campaigns and promotions on PerkX."
-    },
-
-    "about_us": {
-      "title": "About PerkX | Company Information",
-      "description": "Learn more about PerkX, a cashback and rebate solution designed for professional traders.",
-      "og_title": "About PerkX",
-      "og_description": "PerkX is a professional trading rebate platform built for serious traders."
-    },
-
-    "login": {
-      "title": "Login | PerkX",
-      "description": "Log in to your PerkX account to manage your trading rebates, campaigns, and rewards.",
-      "og_title": "Login to PerkX",
-      "og_description": "Access your PerkX account to track rebates and trading rewards."
-    },
-
-    "register": {
-      "title": "Register | PerkX",
-      "description": "Create a PerkX account today and start earning trading rebates and cashback rewards.",
-      "og_title": "Create a PerkX Account",
-      "og_description": "Sign up for PerkX and start earning cashback on every trade."
     }
   },
   "menu": {
@@ -178,6 +129,8 @@
     "invalid_credentials": "The user credentials were incorrect.",
     "please_verify_your_email": "Please verify your email",
     "account_banned": "Your account is banned, please contact to admin for support",
-    "verify_otp_failed": "The verification code is invalid. Please try again."
+    "verify_otp_failed": "The verification code is invalid. Please try again.",
+    "resend_otp_success": "Your new verification code is on the way. Please check your inbox.",
+    "resend_otp_failed": "Something went wrong while resending your code. Please try again."
   }
 }

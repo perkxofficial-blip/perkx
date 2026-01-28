@@ -2,55 +2,13 @@
   "meta": {
     "home": {
       "title": "PerkX | 거래 리베이트 극대화",
-      "description": "PerkX와 함께 글로벌 거래소에서 거래 리베이트를 극대화하세요. 전문 트레이더를 위한 캐시백 플랫폼입니다.",
+      "description": "PerkX와 함께 글로벌 거래소에서 거래 리베이트를 극대화하세요. 고거래량 트레이더를 위한 전문 캐시백 플랫폼입니다.",
       "og_title": "PerkX – 거래 리베이트 극대화",
-      "og_description": "모든 거래에서 캐시백을 적립하세요. 수많은 전문 트레이더가 PerkX를 선택하고 있습니다."
-    },
-    "how_it_works": {
-      "title": "PerkX 작동 방식 | 거래 리베이트 안내",
-      "description": "PerkX가 어떻게 거래 리베이트와 캐시백을 제공하는지 알아보고 모든 거래에서 혜택을 받아보세요.",
-      "og_title": "PerkX 작동 방식",
-      "og_description": "PerkX를 통해 거래 리베이트를 적립하는 방법을 확인하세요."
-    },
-    "exchanges": {
-      "title": "지원 거래소 | PerkX",
-      "description": "PerkX에서 지원하는 글로벌 암호화폐 및 금융 거래소 목록을 확인하세요.",
-      "og_title": "PerkX 지원 거래소",
-      "og_description": "주요 글로벌 거래소에서 거래하고 리베이트를 적립하세요."
-    },
-    "calculator": {
-      "title": "리베이트 계산기 | PerkX",
-      "description": "거래량과 수수료를 입력하고 PerkX에서 받을 수 있는 예상 리베이트를 계산해보세요.",
-      "og_title": "PerkX 리베이트 계산기",
-      "og_description": "간단하게 거래 리베이트를 계산해보세요."
-    },
-    "campaigns": {
-      "title": "캠페인 및 프로모션 | PerkX",
-      "description": "PerkX의 최신 거래 캠페인과 독점 프로모션을 확인하고 추가 혜택을 받아보세요.",
-      "og_title": "PerkX 캠페인 & 프로모션",
-      "og_description": "한정 기간 캠페인과 특별 프로모션을 확인하세요."
-    },
-    "about_us": {
-      "title": "PerkX 소개 | 회사 정보",
-      "description": "PerkX는 전문 트레이더를 위한 거래 리베이트 및 캐시백 솔루션을 제공합니다.",
-      "og_title": "PerkX 소개",
-      "og_description": "트레이더를 위한 리베이트 플랫폼 PerkX를 알아보세요."
-    },
-    "login": {
-      "title": "로그인 | PerkX",
-      "description": "PerkX 계정에 로그인하여 거래 리베이트, 캠페인 및 리워드를 관리하세요.",
-      "og_title": "PerkX 로그인",
-      "og_description": "PerkX 계정에 로그인하고 리베이트를 확인하세요."
-    },
-    "register": {
-      "title": "회원가입 | PerkX",
-      "description": "PerkX에 가입하고 모든 거래에서 리베이트와 캐시백 혜택을 바로 시작하세요.",
-      "og_title": "PerkX 회원가입",
-      "og_description": "지금 가입하고 거래 리베이트 혜택을 누려보세요."
+      "og_description": "모든 거래에서 캐시백을 적립하세요. PerkX를 사용하는 수천 명의 전문 트레이더와 함께 거래 보상을 높이세요."
     }
   },
   "menu": {
-    "how_it_works": "작동 방식",
+    "how_it_works": "이용 방법",
     "exchanges": "거래소",
     "calculator": "계산기",
     "campaigns": "캠페인",
@@ -63,36 +21,36 @@
     "settings": "설정",
     "users": "사용자",
     "home": "홈",
-    "readMore": "더 읽기"
+    "readMore": "더 보기"
   },
   "page": {
     "notFound": "페이지를 찾을 수 없습니다",
     "register": "회원가입"
   },
   "language": {
-    "en": "English",
+    "en": "영어",
     "ko": "한국어"
   },
   "home": {
     "intro_1": "혜택은 주어지는 것이 아닙니다.",
-    "intro_2": "협상을 통해 얻는 것입니다.",
-    "hero_section_description": "모든 거래가 최고의 혜택을 받을 수 있도록, 수수료 리베이트, 에어드롭, 할인 혜택을 하나의 포털에 담았습니다.",
+    "intro_2": "협상으로 얻는 것입니다.",
+    "hero_section_description": "최고의 수수료 리베이트, 에어드롭, 할인 혜택을 하나의 포털에서 제공합니다 — 모든 거래는 최고의 조건을 누릴 자격이 있습니다.",
     "get_started_now": "지금 시작하기",
     "coin": "장식용 코인",
-    "how_perkx_works": "<perkx>PerkX</perkx> 작동 방식",
-    "how_perkx_works_description": "세 가지 간단한 단계로 시작하고 거래 캐시백을 적립하세요",
+    "how_perkx_works": "<perkx>PerkX</perkx> 이용 방법",
+    "how_perkx_works_description": "간단한 3단계로 시작하고 거래 캐시백을 적립하세요",
     "timeline1": "1. PerkX 계정 등록",
-    "timeline2": "2. 거래소 계정 등록 또는 연결",
+    "timeline2": "2. 거래소 계정 등록 / 연동",
     "timeline2_desc": "제공된 링크를 통해 거래소 계정을 생성하세요",
     "timeline3": "3. 거래 시작",
     "calculator_title": "<perkx>놓치고 있는 혜택</perkx>을 확인하세요",
-    "calculator_desc": "거래량을 기준으로 받을 수 있는 잠재적인 캐시백 수익을 계산해 보세요.",
+    "calculator_desc": "거래량을 기준으로 받을 수 있는 캐시백을 계산해보세요.",
     "calculator_btn": "캐시백 계산하기",
     "exclusive_campaigns": "독점 캠페인",
     "view_all_campaigns": "모든 캠페인 보기",
-    "join_now": "지금 가입",
+    "join_now": "지금 참여하기",
     "partner_exchanges": "파트너 거래소",
-    "partner_exchanges_desc": "업계 최고 수준의 검증된 리베이트 비율을 제공하는 직접 파트너십.",
+    "partner_exchanges_desc": "업계 최고 수준의 검증된 리베이트 비율을 제공하는 공식 파트너십",
     "table": {
       "exchanges": "거래소",
       "product": "상품",
@@ -100,33 +58,62 @@
       "default_taker": "기본 테이커/메이커 수수료",
       "final_taker": "최종 테이커/메이커 수수료",
       "ave_rebate": "100만 거래량 기준 평균 리베이트",
-      "action": "액션"
+      "action": "작업"
     },
     "view_all_partners": "모든 파트너 보기"
   },
   "footer": {
-    "desc": "암호화폐 거래 캐시백의 글로벌 표준. 기관 및 개인 트레이더가 자본 효율성을 극대화할 수 있도록 지원합니다.",
+    "desc": "암호화폐 거래 캐시백의 글로벌 표준. 기관 및 개인 트레이더의 자본 효율성을 극대화합니다.",
     "platform": "플랫폼",
     "exchange_rebates": "거래소 리베이트",
     "profit_calculator": "수익 계산기",
-    "resources": "리소스",
-    "help_center": "고객센터",
+    "resources": "자료",
+    "help_center": "고객 지원",
     "terms_of_use": "이용 약관",
     "copyright": "© 2026 PerkX Global LTD.",
     "follow_us": "팔로우하기"
   },
+  "login": {
+    "desc": "이메일과 비밀번호를 입력하여 로그인하세요!",
+    "email": "이메일 주소",
+    "email_placeholder": "name@email.com",
+    "password": "비밀번호",
+    "password_placeholder": "비밀번호를 입력하세요",
+    "forgot_password": "비밀번호를 잊으셨나요?",
+    "create_account": "계정이 없으신가요?",
+    "sign_up": "회원가입"
+  },
+  "register": {
+    "title": "계정 생성",
+    "desc": "지금 바로 암호화폐 제휴 여정을 시작하세요.",
+    "confirm_password": "비밀번호 확인",
+    "referral_uid": "추천인 UID (선택 사항)",
+    "referral_uid_placeholder": "예: PX-8829",
+    "submit_btn": "계정 생성",
+    "already_account": "이미 계정이 있으신가요?",
+    "sign_in": "로그인"
+  },
+  "verify_email": {
+    "title": "이메일 인증",
+    "title_otp": "2단계 인증",
+    "desc": "계정을 활성화하려면 이메일을 확인하세요.",
+    "desc_otp": "이메일로 6자리 인증 코드가 전송되었습니다.",
+    "resend": "재전송",
+    "confirm": "확인",
+    "back_to_login": "로그인으로 돌아가기"
+  },
   "validate": {
-    "email_required": "이메일을 입력해주세요.",
-    "email_invalid": "유효하지 않은 이메일 형식입니다.",
-    "email_already_exists": "이미 가입된 이메일입니다.",
+    "email_required": "이메일은 필수 항목입니다.",
+    "email_invalid": "이메일 형식이 올바르지 않습니다.",
+    "email_already_exists": "이미 등록된 이메일입니다.",
 
-    "password_required": "비밀번호를 입력해주세요.",
+    "password_required": "비밀번호는 필수 항목입니다.",
     "password_string": "비밀번호는 문자열이어야 합니다.",
-    "password_min_6": "비밀번호는 최소 6자 이상이어야 합니다.",
-    "password_max_16": "비밀번호는 최대 16자까지 입력할 수 있습니다.",
-    "password_invalid_format": "비밀번호는 영문자와 숫자만 사용할 수 있습니다.",
+    "password_min_8": "비밀번호는 최소 8자 이상이어야 합니다.",
+    "password_max_16": "비밀번호는 최대 16자를 초과할 수 없습니다.",
+    "password_invalid_format": "비밀번호는 최소 8자 이상이며 숫자 1개와 대문자 1개를 포함해야 합니다.",
 
-    "confirm_password_required": "비밀번호 확인을 입력해주세요.",
+    "confirm_password_required": "비밀번호 확인은 필수 항목입니다.",
     "confirm_password_string": "비밀번호 확인은 문자열이어야 합니다.",
     "password_not_match": "비밀번호가 일치하지 않습니다.",
 
@@ -134,5 +121,16 @@
     "invalid_referral_uid": "유효하지 않은 추천 코드입니다.",
 
     "unknown_error": "문제가 발생했습니다. 잠시 후 다시 시도해주세요."
+  },
+  "message": {
+    "email_not_verified": "이메일이 존재하지 않거나 이미 인증되었습니다.",
+    "resend_email_success": "인증 이메일이 성공적으로 재전송되었습니다. 받은 편지함을 확인하세요.",
+    "resend_email_failed": "인증 이메일 재전송에 실패했습니다. 잠시 후 다시 시도해주세요.",
+    "invalid_credentials": "이메일 또는 비밀번호가 올바르지 않습니다.",
+    "please_verify_your_email": "이메일 인증을 완료해주세요.",
+    "account_banned": "계정이 정지되었습니다. 지원을 위해 관리자에게 문의하세요.",
+    "verify_otp_failed": "인증 코드가 올바르지 않습니다. 다시 시도해주세요.",
+    "resend_otp_success": "새 인증 코드가 전송되었습니다. 이메일을 확인하세요.",
+    "resend_otp_failed": "인증 코드 재전송 중 오류가 발생했습니다. 다시 시도해주세요."
   }
 }

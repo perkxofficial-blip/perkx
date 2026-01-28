@@ -51,6 +51,13 @@ export class TwoFatosService {
       return false;
     }
   }
+
+  async resendOtp(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email, status: UserStatus.ACTIVE }
+    });
+    return await this.getEmailOtp(user)
+  }
   async verifyEmailOtp(email: string, otp: string) {
     const user = await this.userRepository.findOne({
       where: { email, status: UserStatus.ACTIVE },

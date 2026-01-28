@@ -30,8 +30,15 @@ export default async function VerifyOtpPage() {
   const t = await getTranslations();
   const cookieStore = await cookies();
   const email: any = cookieStore.get('verify-email')?.value;
-  const message = cookieStore.get('verify-email-message')?.value;
-
+  const messageRaw: any = cookieStore.get('verify-otp-message')?.value;
+  let message: any;
+  if (messageRaw) {
+    try {
+      message = JSON.parse(messageRaw);
+    } catch {
+      message = null;
+    }
+  }
   if (!email) {
     redirect(`/login`);
   }
@@ -54,12 +61,18 @@ export default async function VerifyOtpPage() {
                <h1>{t('verify_email.title_otp')}</h1>
                <p>{t('verify_email.desc_otp')}</p>
              </div>
-              {message && (
-                <p className='text-danger'>{t(message)}</p>
+              {typeof message?.status === 'boolean' && (
+                message?.status ? (
+                  <p className='text-info'>{t(message?.message)}</p>
+                ) : (
+                  <p className='text-danger'>{t(message?.message)}</p>
+                )
               )}
               <form action={verifyOtpAction} aria-label="Verify form">
                 <input type="hidden" name="email" defaultValue={email}/>
-                <OtpInput/>
+               <div className="justify-content-center text-center otp-input">
+                 <OtpInput/>
+               </div>
                 <button
                   type="submit"
                   className="btn btn-login w-100 mb-4 btn-otp-submit"
