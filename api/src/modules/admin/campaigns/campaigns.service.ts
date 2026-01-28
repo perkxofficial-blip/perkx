@@ -30,14 +30,17 @@ export class CampaignsService {
     banner: Express.Multer.File,
   ): Promise<CampaignResponse> {
     // Validate exchange_id if provided
-    const exchange = await this.exchangeRepository.findOne({
-      where: { id: createCampaignDto.exchange_id },
-    });
+    if (createCampaignDto.exchange_id !== undefined && createCampaignDto.exchange_id !== null) {
+      const exchange = await this.exchangeRepository.findOne({
+        where: { id: createCampaignDto.exchange_id, is_active: true },
+      });
 
-    if (!exchange) {
-      throw new BadRequestException(
-        `Exchange with ID ${createCampaignDto.exchange_id} does not exist`,
-      );
+      if (!exchange) {
+        throw new BadRequestException(
+          `Exchange with ID ${createCampaignDto.exchange_id} does not exist`,
+        );
+      }
+
     }
     // Upload banner file
     const { path: bannerPath } =
@@ -151,14 +154,16 @@ export class CampaignsService {
     }
 
     // Validate exchange_id if provided
-    const exchange = await this.exchangeRepository.findOne({
-      where: { id: updateCampaignDto.exchange_id },
-    });
+    if (updateCampaignDto.exchange_id !== undefined && updateCampaignDto.exchange_id !== null) {
+      const exchange = await this.exchangeRepository.findOne({
+        where: { id: updateCampaignDto.exchange_id, is_active: true },
+      });
 
-    if (!exchange) {
-      throw new BadRequestException(
-        `Exchange with ID ${updateCampaignDto.exchange_id} does not exist`,
-      );
+      if (!exchange) {
+        throw new BadRequestException(
+          `Exchange with ID ${updateCampaignDto.exchange_id} does not exist`,
+        );
+      }
     }
 
     // Check featured limit if updating featured to true
