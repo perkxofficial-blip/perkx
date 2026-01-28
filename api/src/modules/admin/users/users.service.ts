@@ -232,10 +232,8 @@ export class UsersService {
     if (updateUserDto.birthday) {
       updateData.birthday = new Date(updateUserDto.birthday);
     }
-
     Object.assign(user, updateData);
 
-    Object.assign(user, updateData);
     await this.userRepository.save(user);
 
     const { password, ...result } = user;
