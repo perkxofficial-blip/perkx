@@ -24,19 +24,19 @@ services:
     depends_on:
       - database
 
-  # app:
-  #   build:
-  #     context: ./.docker/app
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3100:3000"
-  #   volumes:
-  #     - ./app:/app
-  #   environment:
-  #     - NODE_ENV=development
-  #     - NEXT_PUBLIC_API_URL=http://api:80/api
-  #   depends_on:
-  #     - api
+  app:
+    build:
+      context: ./.docker/app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/app
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://api:80/api
+    depends_on:
+      - api
 
   database:
     image: postgres:latest

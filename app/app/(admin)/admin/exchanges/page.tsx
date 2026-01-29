@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { auth } from '@/services/auth';
+import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
 import Toast from '@/components/admin/Toast';
 
@@ -63,26 +64,7 @@ export default function ExchangePartnerConfigPage() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch(`/api${endpoints.admin.exchangesImport}`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        // If error status is 500, 401, or 403, clear token and redirect to login
-        if (response.status === 500 || response.status === 401 || response.status === 403) {
-          auth.clearAdminToken();
-          window.location.href = '/admin/login';
-          return;
-        }
-
-        throw new Error(data.message || 'Upload failed');
-      }
+      await apiClient.postFormData(endpoints.admin.exchangesImport, formData, token || undefined);
 
       showToast('File uploaded successfully! Exchanges page updated.', 'success');
       setSelectedFile(null);
@@ -93,7 +75,14 @@ export default function ExchangePartnerConfigPage() {
       }
     } catch (err: any) {
       console.error('Upload error:', err);
-      showToast(err.message || 'Failed to upload file', 'error');
+      
+      // If error status is 500, 401, or 403, clear token and redirect to login
+      if (err.status === 500 || err.status === 401 || err.status === 403) {
+        auth.clearAdminToken();
+        window.location.href = '/admin/login';
+      } else {
+        showToast(err.message || 'Failed to upload file', 'error');
+      }
     } finally {
       setUploading(false);
     }
