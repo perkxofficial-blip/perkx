@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import CampaignSection from "@/components/public/CampaignSection";
 import PartnerExchangesTable from "@/components/public/PartnerExchangesTable";
 import {getAllExchanges, Exchange, ExchangeSlide} from "@/services/api/public/exchange";
-import { Campaign, getAllCampaigns } from '@/services/api/public/campaign';
+import { Campaign, getFeaturedCampaigns } from '@/services/api/public/campaign';
 
 async function getLandingData() {
   const result: {
@@ -34,9 +34,9 @@ async function getLandingData() {
   }
 
   try {
-    const campaigns = await getAllCampaigns();
+    const campaigns = await getFeaturedCampaigns();
     if (campaigns) { 
-      result.campaigns = campaigns.slice(0, 8);
+      result.campaigns = campaigns;
     }
   } catch {
     // Handle errors silently
