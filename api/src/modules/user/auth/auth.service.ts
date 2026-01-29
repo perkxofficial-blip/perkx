@@ -185,7 +185,7 @@ export class AuthService {
       }
       const user = await userRepo.findOneBy({ id: record.user_id });
 
-      user.hashPassword(newPassword);
+      await user.hashPassword(newPassword);
       await userRepo.save(user);
       await passwordResetRepo.delete({ user_id: user.id });
 
