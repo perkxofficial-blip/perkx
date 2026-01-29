@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
+import AuthButtons from "./AuthButtons";
 
 export default async function Header() {
   const t = await getTranslations();
@@ -101,12 +102,7 @@ export default async function Header() {
                 </ul>
               </div>
 
-              <a href="/login" className="btn btn-login">
-                {t("menu.login")}
-              </a>
-              <a href="/register" className="btn btn-register">
-                {t("page.register")}
-              </a>
+              <AuthButtons />
             </div>
           </div>
         </div>
