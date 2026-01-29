@@ -7,6 +7,7 @@ import PasswordInput from "@/components/public/login/PasswordInput";
 import ForgotPasswordModal from "@/components/public/login/ForgotPasswordModal";
 import {cookies} from "next/headers";
 import {registerAction} from "./action";
+import SubmitButton from "@/components/public/login/SubmitButton";
 interface RegisterPageProps {
   params: Promise<{
     locale: string;
@@ -122,12 +123,7 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
                   </div>
                 )}
               </div>
-              <button
-                type="submit"
-                className="btn btn-login w-100 mb-4"
-              >
-                {t('register.submit_btn')}
-              </button>
+               <SubmitButton label={t('register.submit_btn')} />
               <p className="text-center auth-footer">
                 {t('register.already_account')}
                 <a href="/login" className="signup-link">
