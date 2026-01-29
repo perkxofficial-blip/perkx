@@ -69,7 +69,7 @@ export class EmailVerificationService {
     const verifyUrl = `${process.env.FRONTEND_URL}/verify?token=${token}`;
     await this.mailerService.sendMail({
       to: user.email,
-      subject: 'PerkX - Verify your email',
+      subject: '[PerkX] Welcome to PerkX - Please verify your email address\n',
       template: 'verify-email',
       context: {
         verifyUrl,
@@ -100,6 +100,14 @@ export class EmailVerificationService {
       user.status = UserStatus.ACTIVE;
       user.email_verified_at = now;
       await userRepo.save(user);
+
+      await this.mailerService.sendMail({
+        to: user.email,
+        subject: '[PerkX] Your Account is Now Active!',
+        template: 'active-email',
+        context: {
+        },
+      });
 
       return user;
     });
