@@ -17,7 +17,9 @@ export const endpoints = {
     userStatus: (id: string | number) => `/admin/users/${id}/status`,
     campaigns: '/admin/campaigns',
     campaignDetail: (id: string) => `/admin/campaigns/${id}`,
+    exchanges: '/admin/exchanges',
     exchangesList: '/admin/exchanges/list',
+    exchangesImport: '/admin/exchanges/import-products',
     pages: '/admin/pages',
   },
 

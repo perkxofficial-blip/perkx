@@ -1,0 +1,11 @@
+exchange_name,exchange_signup_link,product_name,discount,default_fee_maker,default_fee_taker,final_fee_maker,final_fee_taker,ave_rebate
+Binance,https://binance.com/signup,Spot Trading,20,0.1,0.1,0.08,0.08,1200
+Binance,https://binance.com/signup,Futures Trading,10,0.02,0.04,0.018,0.036,850
+OKX,https://okx.com/join,Spot Trading,15,0.08,0.1,0.07,0.085,500
+OKX,https://okx.com/join,Futures Trading,12,0.03,0.05,0.027,0.045,430
+Bybit,https://bybit.com/register,Spot Trading,18,0.1,0.1,0.082,0.082,610
+Bybit,https://bybit.com/register,Derivatives,14,0.04,0.06,0.034,0.051,720
+Gate,https://gate.io/signup,Spot Trading,12,0.15,0.15,0.13,0.13,300
+Gate,https://gate.io/signup,Futures Trading,8,0.05,0.075,0.046,0.069,260
+Kucoin,https://kucoin.com/join,Spot Trading,10,0.1,0.1,0.09,0.09,410
+Kucoin,https://kucoin.com/join,Futures Trading,9,0.02,0.06,0.018,0.054,380
