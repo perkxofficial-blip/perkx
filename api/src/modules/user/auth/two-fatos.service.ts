@@ -37,7 +37,7 @@ export class TwoFatosService {
 
       await this.mailerService.sendMail({
         to: user.email,
-        subject: 'PerkX - Login verification code',
+        subject: '[PerkX] Your verification code to log in',
         template: 'login-otp',
         context: {
           otp,
