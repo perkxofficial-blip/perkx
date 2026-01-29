@@ -99,11 +99,11 @@ export class AdminExchangesService {
 
       // Step 2: If any validation errors, return without inserting anything
       if (errors.length > 0) {
-        return {
+        throw new BadRequestException({
           success: 0,
           failed: records.length,
           errors,
-        };
+        });
       }
 
       // Step 3: All rows are valid - truncate table and insert all
@@ -141,6 +141,9 @@ export class AdminExchangesService {
         },
       );
     } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
       throw new BadRequestException(
         `Failed to parse CSV file: ${error.message}`,
       );
