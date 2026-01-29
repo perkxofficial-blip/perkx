@@ -7,31 +7,32 @@ export async function GET(req: NextRequest) {
   if (!token) {
     return NextResponse.redirect(new URL(`${FRONTEND_URL}/login`));
   }
-  const res = await fetch(`${API_BASE_URL}/auth/verify`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      token: token
-    }),
-    cache: 'no-store',
-  });
-
-  if (res.ok) {
-    const result: any = await res.json()
-    const accessToken = result?.data?.accessToken;
-    const response = NextResponse.redirect(new URL(`${FRONTEND_URL}/user/profile`));
-
-    response.cookies.set({
-      name: 'token',
-      value: accessToken,
-      httpOnly: true,
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 60 * 60 * 24
+  try {
+    const res = await fetch(`${API_BASE_URL}/auth/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: token
+      }),
+      cache: 'no-store',
     });
 
-    return response;
-  }
+    if (res.ok) {
+      const result: any = await res.json()
+      const accessToken = result?.data?.accessToken;
+      const response = NextResponse.redirect(new URL(`${FRONTEND_URL}/user/profile`));
+      response.cookies.set({
+        name: 'token',
+        value: accessToken,
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24
+      });
 
-  return NextResponse.redirect(new URL(`${FRONTEND_URL}/login`));
+      return response;
+    }
+  } catch (err) {
+    return NextResponse.redirect(new URL(`${FRONTEND_URL}/login`));
+  }
 }
