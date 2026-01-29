@@ -1,12 +1,11 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3100';
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token');
   if (!token) {
-    return NextResponse.redirect(
-      new URL('/login', req.url)
-    );
+    return NextResponse.redirect(new URL(`${FRONTEND_URL}/login`));
   }
   const res = await fetch(`${API_BASE_URL}/auth/verify`, {
     method: 'POST',
@@ -20,9 +19,7 @@ export async function GET(req: NextRequest) {
   if (res.ok) {
     const result: any = await res.json()
     const accessToken = result?.data?.accessToken;
-    const response = NextResponse.redirect(
-      new URL('/user/profile', req.url)
-    );
+    const response = NextResponse.redirect(new URL(`${FRONTEND_URL}/user/profile`));
 
     response.cookies.set({
       name: 'token',
@@ -36,5 +33,5 @@ export async function GET(req: NextRequest) {
     return response;
   }
 
-  return NextResponse.redirect(new URL('/login', req.url));
+  return NextResponse.redirect(new URL(`${FRONTEND_URL}/login`));
 }

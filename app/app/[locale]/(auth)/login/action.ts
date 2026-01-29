@@ -20,7 +20,6 @@ export async function loginAction(formData: FormData) {
   });
 
   const result: any = await res.json()
-console.log(result)
   if (!res.ok) {
     const status = result?.statusCode;
     const isValidationError = status === 400;
