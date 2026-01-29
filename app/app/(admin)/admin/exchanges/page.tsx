@@ -9,6 +9,7 @@ import Toast from '@/components/admin/Toast';
 export default function ExchangePartnerConfigPage() {
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadErrors, setUploadErrors] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [toast, setToast] = useState<{ show: boolean; message: string; type: 'success' | 'error' | 'warning' | 'info' }>({
@@ -36,6 +37,9 @@ export default function ExchangePartnerConfigPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Clear previous errors when selecting new file
+    setUploadErrors([]);
+
     // Validate file type
     const validTypes = [
       'text/csv',
@@ -58,6 +62,7 @@ export default function ExchangePartnerConfigPage() {
 
   const handleUpload = async (file: File) => {
     setUploading(true);
+    setUploadErrors([]);
     const token = auth.getAdminToken();
 
     try {
@@ -80,6 +85,27 @@ export default function ExchangePartnerConfigPage() {
       if (err.status === 500 || err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
         window.location.href = '/admin/login';
+      } else if (err.status === 400) {
+        // Handle validation errors (400 Bad Request)
+        const errors: string[] = [];
+        
+        if (err.response?.errors && Array.isArray(err.response.errors)) {
+          // If backend returns errors array
+          errors.push(...err.response.errors);
+        } else if (err.response?.message) {
+          // If backend returns message
+          if (Array.isArray(err.response.message)) {
+            errors.push(...err.response.message);
+          } else {
+            errors.push(err.response.message);
+          }
+        } else if (err.message) {
+          errors.push(err.message);
+        } else {
+          errors.push('Validation error occurred');
+        }
+        
+        setUploadErrors(errors);
       } else {
         showToast(err.message || 'Failed to upload file', 'error');
       }
@@ -124,6 +150,29 @@ export default function ExchangePartnerConfigPage() {
               </svg>
               Download Excel Template
             </button>
+
+            {/* Upload Errors Display */}
+            {uploadErrors.length > 0 && (
+              <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+                <div className="flex items-start gap-2">
+                  <svg className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-semibold text-red-900 dark:text-red-300 mb-2">
+                      Upload Failed - Validation Errors:
+                    </h4>
+                    <ul className="space-y-1">
+                      {uploadErrors.map((error, index) => (
+                        <li key={index} className="text-sm text-red-800 dark:text-red-300">
+                          • {error}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Upload File Area */}
