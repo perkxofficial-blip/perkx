@@ -52,6 +52,15 @@ export default async function LoginPage({ params }: LoginPageProps) {
     }
   }
   const errorMap = mapErrors(data?.errors)
+  const messageRaw: any = cookieStore.get('login-message')?.value;
+  let message: any;
+  if (messageRaw) {
+    try {
+      message = JSON.parse(messageRaw);
+    } catch {
+      message = null;
+    }
+  }
   return (
     <>
       <main className="login">
@@ -70,6 +79,13 @@ export default async function LoginPage({ params }: LoginPageProps) {
                <h1>{t('menu.login')}</h1>
                <p>{t('login.desc')}</p>
              </div>
+              {typeof message?.status === 'boolean' && (
+                message?.status ? (
+                  <p className='text-info'>{t(message?.message)}</p>
+                ) : (
+                  <p className='text-danger'>{t(message?.message)}</p>
+                )
+              )}
               { data?.message && (<p className='text-danger'>{t(data?.message)}</p>)}
               <form action={loginAction}  aria-label="Login form">
                 <div className="mb-3">
@@ -99,14 +115,12 @@ export default async function LoginPage({ params }: LoginPageProps) {
                   error={errorMap?.password ? t(errorMap?.password) : ''}
                 />
                 <div className="text-start mb-3">
-                  <button
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#forgotModal"
+                  <a
+                    href='/forgot-password'
                     className="btn btn-link p-0"
                   >
                     {t('login.forgot_password')}
-                  </button>
+                  </a>
                 </div>
                 <button
                   type="submit"
@@ -125,7 +139,6 @@ export default async function LoginPage({ params }: LoginPageProps) {
             <div className="col-md-3 col-lg-6"></div>
           </div>
         </div>
-        <ForgotPasswordModal />
       </main>
     </>
   );

@@ -160,7 +160,7 @@ export class AuthController {
   @Post('reset-password')
   @ApiOperation({ summary: 'Reset password with token' })
   async resetPassword(@Body() body: ResetPasswordDto) {
-    await this.authService.resetPassword(body.token, body.newPassword);
+    await this.authService.resetPassword(body.token, body.password);
     return { message: 'Password reset successfully' };
   }
 }

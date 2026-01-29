@@ -144,14 +144,14 @@ export class AuthService {
       const user = await userRepo.findOne({ where: { email } });
       if (!user) return;
       await passwordResetRepo.delete({ user_id: user.id });
-      const { raw, hashed } = this.generateToken();
+      const token = this.generateToken();
 
       await passwordResetRepo.save({
         user_id: user.id,
-        hashed,
+        token: token,
         expires_at: new Date(Date.now() + 15 * 60 * 1000),
       });
-      const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password?token=${raw}`;
+      const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
       await this.mailerService.sendMail({
         to: user.email,
         subject: 'PerkX - Reset your password',
@@ -165,33 +165,27 @@ export class AuthService {
 
   private generateToken() {
     const raw = crypto.randomBytes(32).toString('hex');
-    const hashed = crypto.createHash('sha256').update(raw).digest('hex');
-    return { raw, hashed };
+    return crypto.createHash('sha256').update(raw).digest('hex');
   }
 
-  async resetPassword(rawToken: string, newPassword: string) {
+  async resetPassword(token: string, newPassword: string) {
     return await this.dataSource.transaction(async (manager) => {
       const passwordResetRepo = manager.getRepository(UserPasswordReset);
       const userRepo = manager.getRepository(User);
-      const hashedToken = crypto
-        .createHash('sha256')
-        .update(rawToken)
-        .digest('hex');
+
       const record = await passwordResetRepo.findOne({
-        where: { token: hashedToken, used_at: IsNull() },
+        where: { token: token, used_at: IsNull() },
         lock: { mode: 'pessimistic_write' },
       });
       if (!record) {
-        throw new BadRequestException('Invalid token');
+        throw new BadRequestException('message.token_invalid');
       }
       if (record.expires_at < new Date()) {
-        throw new BadRequestException('Token expired');
+        throw new BadRequestException('message.token_expired');
       }
       const user = await userRepo.findOneBy({ id: record.user_id });
-      if (!user) {
-        throw new BadRequestException('User not found');
-      }
-      user.password = newPassword;
+
+      await user.hashPassword(newPassword);
       await userRepo.save(user);
       await passwordResetRepo.delete({ user_id: user.id });
 
