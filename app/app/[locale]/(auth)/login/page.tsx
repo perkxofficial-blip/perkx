@@ -99,14 +99,12 @@ export default async function LoginPage({ params }: LoginPageProps) {
                   error={errorMap?.password ? t(errorMap?.password) : ''}
                 />
                 <div className="text-start mb-3">
-                  <button
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#forgotModal"
+                  <a
+                    href='/forgot-password'
                     className="btn btn-link p-0"
                   >
                     {t('login.forgot_password')}
-                  </button>
+                  </a>
                 </div>
                 <button
                   type="submit"
@@ -125,7 +123,6 @@ export default async function LoginPage({ params }: LoginPageProps) {
             <div className="col-md-3 col-lg-6"></div>
           </div>
         </div>
-        <ForgotPasswordModal />
       </main>
     </>
   );

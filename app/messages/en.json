@@ -102,6 +102,16 @@
     "confirm": "Confirm",
     "back_to_login": "Back to Login"
   },
+  "forgot_password": {
+    "title": "Forgot Password",
+    "desc": "Enter your email address and we will send you a link to reset your password",
+    "btn": "Send"
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "desc": "Enter your new password to reset!",
+    "btn": "Reset"
+  },
   "validate": {
     "email_required": "Email is required.",
     "email_invalid": "Invalid email format.",
@@ -131,6 +141,8 @@
     "account_banned": "Your account is banned, please contact to admin for support",
     "verify_otp_failed": "The verification code is invalid. Please try again.",
     "resend_otp_success": "Your new verification code is on the way. Please check your inbox.",
-    "resend_otp_failed": "Something went wrong while resending your code. Please try again."
+    "resend_otp_failed": "Something went wrong while resending your code. Please try again.",
+    "forgot_email_success": "Password recovery email has been sent successfully. Please check your inbox (including Spam).",
+    "forgot_email_failed": "Failed to send password recovery email. Please verify your email address or try again later."
   }
 }
