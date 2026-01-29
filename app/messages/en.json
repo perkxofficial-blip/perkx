@@ -143,6 +143,9 @@
     "resend_otp_success": "Your new verification code is on the way. Please check your inbox.",
     "resend_otp_failed": "Something went wrong while resending your code. Please try again.",
     "forgot_email_success": "Password recovery email has been sent successfully. Please check your inbox (including Spam).",
-    "forgot_email_failed": "Failed to send password recovery email. Please verify your email address or try again later."
+    "forgot_email_failed": "Failed to send password recovery email. Please verify your email address or try again later.",
+    "reset_password_success": "Your password has been reset successfully. You can now sign in with your new password.",
+    "token_invalid": "This reset token is invalid. Please request a new password reset.",
+    "token_expire": "This reset token has expired. Please request a new password reset."
   }
 }

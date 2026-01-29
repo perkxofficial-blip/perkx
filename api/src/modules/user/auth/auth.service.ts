@@ -178,16 +178,14 @@ export class AuthService {
         lock: { mode: 'pessimistic_write' },
       });
       if (!record) {
-        throw new BadRequestException('Invalid token');
+        throw new BadRequestException('message.token_invalid');
       }
       if (record.expires_at < new Date()) {
-        throw new BadRequestException('Token expired');
+        throw new BadRequestException('message.token_expired');
       }
       const user = await userRepo.findOneBy({ id: record.user_id });
-      if (!user) {
-        throw new BadRequestException('User not found');
-      }
-      user.password = newPassword;
+
+      user.hashPassword(newPassword);
       await userRepo.save(user);
       await passwordResetRepo.delete({ user_id: user.id });
 

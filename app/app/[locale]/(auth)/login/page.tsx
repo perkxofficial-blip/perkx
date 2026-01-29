@@ -52,6 +52,15 @@ export default async function LoginPage({ params }: LoginPageProps) {
     }
   }
   const errorMap = mapErrors(data?.errors)
+  const messageRaw: any = cookieStore.get('login-message')?.value;
+  let message: any;
+  if (messageRaw) {
+    try {
+      message = JSON.parse(messageRaw);
+    } catch {
+      message = null;
+    }
+  }
   return (
     <>
       <main className="login">
@@ -70,6 +79,13 @@ export default async function LoginPage({ params }: LoginPageProps) {
                <h1>{t('menu.login')}</h1>
                <p>{t('login.desc')}</p>
              </div>
+              {typeof message?.status === 'boolean' && (
+                message?.status ? (
+                  <p className='text-info'>{t(message?.message)}</p>
+                ) : (
+                  <p className='text-danger'>{t(message?.message)}</p>
+                )
+              )}
               { data?.message && (<p className='text-danger'>{t(data?.message)}</p>)}
               <form action={loginAction}  aria-label="Login form">
                 <div className="mb-3">
