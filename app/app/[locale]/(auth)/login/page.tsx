@@ -7,6 +7,7 @@ import PasswordInput from "@/components/public/login/PasswordInput";
 import ForgotPasswordModal from "@/components/public/login/ForgotPasswordModal";
 import {loginAction} from "./action";
 import {cookies} from "next/headers";
+import SubmitButton from "@/components/public/login/SubmitButton";
 interface LoginPageProps {
   params: Promise<{
     locale: string;
@@ -122,12 +123,7 @@ export default async function LoginPage({ params }: LoginPageProps) {
                     {t('login.forgot_password')}
                   </a>
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-login w-100 mb-4"
-                >
-                  {t('menu.login')}
-                </button>
+                <SubmitButton label={t('menu.login')} />
                 <p className="text-center auth-footer">
                   {t('login.create_account')}
                   <a href="/register" className="signup-link">

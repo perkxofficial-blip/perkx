@@ -5,6 +5,7 @@ import Image from "next/image";
 import {getTranslations} from "next-intl/server";
 import {cookies} from "next/headers";
 import {forgotPasswordAction} from "./action";
+import SubmitButton from "@/components/public/login/SubmitButton";
 
 export async function generateMetadata({ params }: {
   params: Promise<{
@@ -75,12 +76,8 @@ export default async function ForgotPasswordPage() {
                     className={`form-control`}
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-login w-100 mb-4"
-                >
-                  {t('forgot_password.btn')}
-                </button>
+                <SubmitButton label={t('forgot_password.btn')} />
+
                 <p className="text-center auth-footer">
                   <a href="/login" className="signup-link">
                     {' '}{t('verify_email.back_to_login')}

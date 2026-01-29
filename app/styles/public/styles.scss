@@ -1023,6 +1023,9 @@ header {
     line-height:40px; /* 111.111% */
     letter-spacing:0
   }
+  .text-center p {
+    margin-bottom: 30px;
+  }
   p {
     color: #FFF;
     text-align: center;
@@ -1164,6 +1167,17 @@ header {
     opacity: 1;
   }
 
+  .btn-link {
+    color: #00B2FF;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
   .auth-footer {
     color: #FCFCFC;
     text-align: center;
@@ -1185,7 +1199,7 @@ header {
 .form-control.is-invalid, .was-validated .form-control:invalid {
   background-image: none;
 }
-.btn-otp-submit {
+.btn-otp-submit button {
   margin-bottom: 5px !important;
 }
 .otp-input input {

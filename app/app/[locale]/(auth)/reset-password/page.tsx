@@ -7,6 +7,7 @@ import {redirect} from "next/navigation";
 import {resetAction} from "./action";
 import {cookies} from "next/headers";
 import PasswordInput from "@/components/public/login/PasswordInput";
+import SubmitButton from "@/components/public/login/SubmitButton";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 export async function generateMetadata({ params }: {
@@ -93,12 +94,7 @@ export default async function ResetPasswordPage({ searchParams }: Props) {
                   placeholder={t('register.confirm_password')}
                   error={errorMap?.confirm_password ? t(errorMap?.confirm_password) : ''}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-login w-100 mb-4"
-                >
-                  {t('reset_password.btn')}
-                </button>
+                <SubmitButton label={t('reset_password.btn')} />
                 <p className="text-center auth-footer">
                   <a href="/login" className="signup-link">
                     {' '}{t('verify_email.back_to_login')}
