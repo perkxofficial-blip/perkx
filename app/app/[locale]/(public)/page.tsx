@@ -230,7 +230,7 @@ export default async function LandingPage() {
               <h2>{t('home.exclusive_campaigns')}</h2>
             </div>
             <div className="col-md-4 campaign-view">
-              <a href="">{t('home.view_all_campaigns')}</a>
+              <a href="/campaigns">{t('home.view_all_campaigns')}</a>
               <Image
                 src="/images/arrow-right-s-line.svg"
                 alt="arrow right line"
@@ -320,7 +320,7 @@ export default async function LandingPage() {
               <div className=" d-flex justify-content-center mt-4">
                 <div className="pe-btn">
                   <a
-                    href=""
+                    href="/exchanges"
                     className="d-inline-flex align-items-center gap-2 text-decoration-none"
                   >
                     {t("home.view_all_partners")}
