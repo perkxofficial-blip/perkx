@@ -301,19 +301,28 @@ header {
   margin-top: 100px;
   background: rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(12px);
+  overflow: hidden;
+  
+  .partner-slide-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+  
   .partner-slide {
     display: flex;
     height: 85px;
-    padding: 0 24px;
     align-items: center;
     gap: 40px;
-    flex-shrink: 0;
-    align-self: stretch;
+    animation: scroll 30s linear infinite;
+    width: fit-content;
+    
     .item {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 85px;
+      min-width: 120px;
+      padding: 0 24px;
 
       img {
         max-height: 100%;
@@ -321,6 +330,19 @@ header {
         object-fit: contain;
       }
     }
+  }
+  
+  .partner-slide:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
