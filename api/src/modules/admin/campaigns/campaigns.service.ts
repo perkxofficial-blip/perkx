@@ -80,7 +80,7 @@ export class CampaignsService {
 
   async findAll(queryDto: ListCampaignsQueryDto) {
     const page = queryDto.page || 1;
-    const limit = queryDto.limit || 15;
+    const limit = queryDto.limit || 10;
     const skip = (page - 1) * limit;
 
     const queryBuilder = this.campaignRepository

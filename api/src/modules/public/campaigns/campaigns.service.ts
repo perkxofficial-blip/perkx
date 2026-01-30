@@ -32,7 +32,7 @@ export class PublicCampaignsService {
   async findAll(queryDto: PublicListCampaignsQueryDto): Promise<PaginatedCampaignResponse> {
     const today = new Date();
     const page = queryDto.page || 1;
-    const limit = queryDto.limit || 15;
+    const limit = queryDto.limit || 10;
     const skip = (page - 1) * limit;
 
     const queryBuilder = this.campaignRepository
