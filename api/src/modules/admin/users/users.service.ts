@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User, UserExchange, Exchange, UserStatus } from '../../../entities';
+import { User, UserExchange, Exchange, UserStatus, AccessLog } from '../../../entities';
 import { ListUsersQueryDto, UpdateUserDto } from './dto';
 import { MailService } from '../../../mail/mail.service';
 import { StorageService } from '../../../common/storage/storage.service';
@@ -13,6 +13,8 @@ export class UsersService {
     private userRepository: Repository<User>,
     @InjectRepository(UserExchange)
     private userExchangeRepository: Repository<UserExchange>,
+    @InjectRepository(AccessLog)
+    private accessLogRepository: Repository<AccessLog>,
     private mailService: MailService,
     private storageService: StorageService,
   ) {}
@@ -172,6 +174,12 @@ export class UsersService {
 
     const exchanges = await exchangesQuery.getRawMany();
 
+    // Get last login info from access_log
+    const lastLogin = await this.accessLogRepository.findOne({
+      where: { user_id: id },
+      order: { id: 'DESC' },
+    });
+
     // Format referrer name
     const referrerName =
       userResult.referrer_first_name || userResult.referrer_last_name
@@ -192,6 +200,8 @@ export class UsersService {
       email_verified_at: userResult.user_email_verified_at,
       created_at: userResult.user_created_at,
       updated_at: userResult.user_updated_at,
+      last_login: lastLogin?.created_at || null,
+      ip_address: lastLogin?.ip_address || null,
       referrer: userResult.referrer_id
         ? {
             id: userResult.referrer_id,

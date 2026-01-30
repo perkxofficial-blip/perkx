@@ -7,3 +7,4 @@ export { Exchange } from './exchange.entity';
 export { UserExchange } from './user_exchange.entity';
 export { Campaign, CampaignCategory } from './campaign.entity';
 export { ExchangeProduct } from './exchange_product.entity';
+export { AccessLog } from './access_log.entity';
