@@ -39,7 +39,7 @@ export class PublicCampaignsController {
   @ApiQuery({
     name: 'category',
     required: false,
-    description: 'Filter by campaign category (New User or Trading Competition)',
+    description: 'Filter by campaign category (new_user or trading_competition)',
     enum: CampaignCategory,
     example: CampaignCategory.NEW_USER,
   })
@@ -92,6 +92,7 @@ export class PublicCampaignsController {
               archive_end: { type: 'string', format: 'date-time', nullable: true },
               featured: { type: 'boolean' },
               category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+              status: { type: 'string', enum: Object.values(CampaignStatus), description: 'Campaign status: upcoming, active, or expired' },
               created_at: { type: 'string', format: 'date-time' },
               updated_at: { type: 'string', format: 'date-time' },
               exchange: {
@@ -151,19 +152,20 @@ export class PublicCampaignsController {
         launch_end: { type: 'string', format: 'date-time' },
         archive_start: { type: 'string', format: 'date-time', nullable: true },
         archive_end: { type: 'string', format: 'date-time', nullable: true },
-        featured: { type: 'boolean' },
-        category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
-        created_at: { type: 'string', format: 'date-time' },
-        updated_at: { type: 'string', format: 'date-time' },
-        exchange: {
-          type: 'object',
-          nullable: true,
-          properties: {
-            id: { type: 'number' },
-            name: { type: 'string' },
-            code: { type: 'string' },
-          },
-        },
+              featured: { type: 'boolean' },
+              category: { type: 'string', enum: Object.values(CampaignCategory), nullable: true },
+              status: { type: 'string', enum: Object.values(CampaignStatus), description: 'Campaign status: upcoming, active, or expired' },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' },
+              exchange: {
+                type: 'object',
+                nullable: true,
+                properties: {
+                  id: { type: 'number' },
+                  name: { type: 'string' },
+                  code: { type: 'string' },
+                },
+              },
       },
     },
   })

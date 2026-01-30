@@ -67,8 +67,18 @@ export class AuthController {
     status: 200,
     description: 'Verify TOP successfully logged in',
   })
-  async verifyOTP(@Body() body: VerifyOtpDto) {
-    return await this.twoFactosService.verifyEmailOtp(body.email, body.otp);
+  async verifyOTP(@Body() body: VerifyOtpDto, @Request() req) {
+    // Extract IP address from request
+    const ipAddress = 
+      (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
+      req.ip ||
+      req.socket?.remoteAddress ||
+      'unknown';
+    
+    // Extract user agent from request
+    const userAgent = req.headers['user-agent'] || 'unknown';
+    
+    return await this.twoFactosService.verifyEmailOtp(body.email, body.otp, ipAddress, userAgent);
   }
 
   @Public()

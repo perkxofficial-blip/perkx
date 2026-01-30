@@ -39,7 +39,7 @@ export class PublicListCampaignsQueryDto {
   })
   @IsOptional()
   @IsEnum(CampaignCategory, {
-    message: 'Category must be one of: New User, Trading Competition',
+    message: 'Category must be one of: new_user, trading_competition',
   })
   category?: CampaignCategory;
 

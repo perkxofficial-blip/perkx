@@ -4,7 +4,7 @@ import { Repository, DataSource, IsNull } from 'typeorm';
 import { MailerService } from '@nestjs-modules/mailer';
 import { randomInt } from 'node:crypto';
 import { JwtService } from '@nestjs/jwt';
-import { User, UserLoginOtp, UserStatus } from '../../../entities';
+import { User, UserLoginOtp, UserStatus, AccessLog } from '../../../entities';
 
 @Injectable()
 export class TwoFatosService {
@@ -13,6 +13,8 @@ export class TwoFatosService {
     private otpRepo: Repository<UserLoginOtp>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(AccessLog)
+    private accessLogRepo: Repository<AccessLog>,
     private jwtService: JwtService,
     private mailerService: MailerService,
     @InjectDataSource()
@@ -58,10 +60,15 @@ export class TwoFatosService {
     });
     return await this.getEmailOtp(user)
   }
-  async verifyEmailOtp(email: string, otp: string) {
+  async verifyEmailOtp(email: string, otp: string, ipAddress: string, userAgent: string) {
     const user = await this.userRepository.findOne({
       where: { email, status: UserStatus.ACTIVE },
     });
+    
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    
     const record = await this.otpRepo.findOne({
       where: {
         user_id: user.id,
@@ -85,6 +92,13 @@ export class TwoFatosService {
     }
     await this.otpRepo.update(record.id, {
       verified_at: new Date(),
+    });
+    
+    // Insert access log after successful login
+    await this.accessLogRepo.save({
+      user_id: user.id,
+      ip_address: ipAddress,
+      user_agent: userAgent,
     });
 
     return this.getAccessToken(user);
