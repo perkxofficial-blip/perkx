@@ -42,4 +42,81 @@
       }
     }
   }
+
+  .exchanges-page {
+    padding: 40px 0;
+
+    .exchanges-hero {
+      padding: 0 20px 40px;
+
+      .exchanges-title {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+
+      .exchanges-subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+    }
+
+    .exchanges-table-section {
+      padding: 0 20px;
+    }
+
+    .exchanges-table-container {
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    .exchanges-table {
+      min-width: 800px;
+
+      .table-header {
+        padding: 8px 16px;
+        gap: 12px;
+
+        .header-cell {
+          font-size: 12px;
+        }
+      }
+
+      .table-body {
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .exchange-row {
+        padding: 8px 16px;
+        gap: 12px;
+
+        .exchange-logo {
+          width: 28px;
+          height: 28px;
+        }
+
+        .exchange-name {
+          font-size: 14px;
+        }
+
+        .product-cell .product-name {
+          font-size: 12px;
+        }
+
+        .data-cell {
+          font-size: 12px;
+        }
+
+        .action-cell {
+          width: 80px;
+          flex: 0 0 80px;
+        }
+
+        .btn-register {
+          padding: 8px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
