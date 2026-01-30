@@ -1,3 +1,4 @@
+import Footer from '@/components/public/Footer';
 import { generatePageMetadata } from '@/lib/seo';
 import {getPageBySlug} from "@/services/api";
 import type {Metadata} from "next";
@@ -26,6 +27,9 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>{children}</>
+    <>
+      {children}
+      <Footer/>
+    </>
   );
 }

@@ -31,19 +31,25 @@ export default function proxy(request: NextRequest) {
   return response;
 }
 
+// export const config = {
+//   matcher: [
+//     '/',
+//     '/(en|ko)/:path*',
+//     '/login',
+//     '/register',
+//     '/verify-email',
+//     '/verify',
+//     '/verify-otp',
+//     '/forgot-password',
+//     '/reset-password',
+//     '/user/:path*',
+//     '/admin/:path*'
+//   ]
+// };
+
 export const config = {
   matcher: [
-    '/',
-    '/(en|ko)/:path*',
-    '/login',
-    '/register',
-    '/verify-email',
-    '/verify',
-    '/verify-otp',
-    '/forgot-password',
-    '/reset-password',
-    '/user/:path*',
-    '/admin/:path*'
+    '/((?!api|_next/static|_next/image|favicon.ico|images|js).*)',
   ]
 };
 

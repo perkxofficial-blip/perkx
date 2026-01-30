@@ -338,7 +338,6 @@ export default async function LandingPage() {
           </div>
         </div>
       </section>
-      <Footer/>
     </>
   );
 }
