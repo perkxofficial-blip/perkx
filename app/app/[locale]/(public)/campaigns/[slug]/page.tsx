@@ -76,7 +76,7 @@ export default async function CampaignDetailPage({ params }: CampaignDetailPageP
             </div>
 
             <div className="campaign-detail-content">
-              <p>{campaign.description}</p>
+              <div dangerouslySetInnerHTML={{ __html: campaign.description }} />
             </div>
 
             <div className="campaign-detail-actions">
