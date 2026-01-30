@@ -29,3 +29,13 @@ export async function getFeaturedCampaigns(): Promise<Campaign[]> {
     return [];
   }
 }
+
+export async function getCampaign(slug: string): Promise<Campaign[]> {
+  try {
+    const response = await apiClient.publicGet(endpoints.public.campaigns + '/' + slug);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching campaign slug ' + slug + ':', error);
+    return [];
+  }
+}

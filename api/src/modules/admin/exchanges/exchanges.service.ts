@@ -30,9 +30,9 @@ export class AdminExchangesService {
       order: { name: 'ASC' },
     });
 
-    // Add PerkX as first item with id: null
+    // Add PerkX as first item with id: 0
     const perkXItem: ExchangeListItem = {
-      id: null,
+      id: 0,
       name: 'PerkX',
     };
 

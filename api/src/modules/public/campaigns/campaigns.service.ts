@@ -10,6 +10,16 @@ type CampaignResponse = Campaign & {
   exchange: { id: number; name: string; code: string; logo_url: string | null } | null;
 };
 
+type PaginatedCampaignResponse = {
+  data: CampaignResponse[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+};
+
 @Injectable()
 export class PublicCampaignsService {
   constructor(
@@ -18,8 +28,11 @@ export class PublicCampaignsService {
     private storageService: StorageService,
   ) {}
 
-  async findAll(queryDto: PublicListCampaignsQueryDto): Promise<CampaignResponse[]> {
+  async findAll(queryDto: PublicListCampaignsQueryDto): Promise<PaginatedCampaignResponse> {
     const today = new Date();
+    const page = queryDto.page || 1;
+    const limit = queryDto.limit || 15;
+    const skip = (page - 1) * limit;
 
     const queryBuilder = this.campaignRepository
       .createQueryBuilder('campaign')
@@ -67,22 +80,55 @@ export class PublicCampaignsService {
       queryBuilder.andWhere('campaign.featured = :featured', { featured: true });
     }
 
-    // Order by created_at DESC
-    queryBuilder.orderBy('campaign.created_at', 'DESC');
+    // Filter by category if provided
+    if (queryDto.category) {
+      queryBuilder.andWhere('campaign.category = :category', {
+        category: queryDto.category,
+      });
+    }
+
+    // Filter by exchange if provided
+    if (queryDto.exchange) {
+      if (queryDto.exchange.toLowerCase() === 'perkx') {
+        // PerkX campaigns have exchange_id = 0
+        queryBuilder.andWhere('campaign.exchange_id = 0');
+      } else {
+        // Filter by exchange code
+        queryBuilder.andWhere('exchange.code = :exchangeCode', {
+          exchangeCode: queryDto.exchange.toLowerCase(),
+        });
+      }
+    }
+
+    // Count total before pagination
+    const total = await queryBuilder.getCount();
+
+    // Apply pagination and ordering
+    queryBuilder.skip(skip).take(limit).orderBy('campaign.created_at', 'DESC');
 
     const campaigns = await queryBuilder.getMany();
 
     // Transform campaigns with banner_url and exchange
-    return campaigns.map((campaign) => this.transformCampaignResponse(campaign));
+    const data = campaigns.map((campaign) => this.transformCampaignResponse(campaign));
+
+    return {
+      data,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
   }
 
-  async findOne(id: number): Promise<CampaignResponse | null> {
+  async findOneBySlug(slug: string): Promise<CampaignResponse | null> {
     const today = new Date();
 
     const campaign = await this.campaignRepository
       .createQueryBuilder('campaign')
       .leftJoinAndSelect('campaign.exchange', 'exchange')
-      .where('campaign.id = :id', { id })
+      .where('campaign.slug = :slug', { slug })
       .andWhere('campaign.is_active = :isActive', { isActive: true })
       .andWhere(
         '((campaign.launch_start <= :today AND campaign.launch_end >= :today) OR ' +
