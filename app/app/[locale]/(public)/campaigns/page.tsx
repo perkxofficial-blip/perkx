@@ -104,7 +104,7 @@ export default async function CampaignPage({ searchParams }: Props) {
           </div>
         </section>
       </div>
-      <section className="campaign-section">
+      <section className="campaign-section position-relative">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-3">
@@ -163,13 +163,19 @@ export default async function CampaignPage({ searchParams }: Props) {
             ))}
           </div>
           {pagination && (
-            <div className="row pagination">
-              <div className="col-md-6">
-                <div className="d-flex align-items-center  gap-3">
+            <div className="row align-items-center pagination">
+              <div className="col-md-6 d-flex">
+                <div className="d-flex align-items-center gap-3">
                   <p className="mb-0">
                     {t.rich('paging.showing_to_of', {
-                      from: pagination.total === 0 ? 0 : (pagination.page - 1) * pagination.limit + 1,
-                      to: Math.min(pagination.page * pagination.limit, pagination.total),
+                      from:
+                        pagination.total === 0
+                          ? 0
+                          : (pagination.page - 1) * pagination.limit + 1,
+                      to: Math.min(
+                        pagination.page * pagination.limit,
+                        pagination.total
+                      ),
                       total: pagination.total,
                       bold: (chunks) => <strong>{chunks}</strong>,
                     })}
@@ -179,11 +185,37 @@ export default async function CampaignPage({ searchParams }: Props) {
                   <SelectSearch name="limit" options={perPages} />
                 </div>
               </div>
-              <div className="col-md-6">
-               <Pagination pagination={pagination} />
+
+              <div className="col-md-6 d-flex justify-content-end">
+                <Pagination pagination={pagination} />
               </div>
             </div>
+
           )}
+        </div>
+        <div className="bg-bottom-left">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="867"
+            height="742"
+            viewBox="0 0 867 742"
+            fill="none"
+          >
+            <defs>
+              <radialGradient id="bg-radial-bottom-left" cx="51.28%" cy="48.67%" r="46%">
+                <stop offset="7.21%" stopColor="#F579E0" stopOpacity="0.5" />
+                <stop offset="51.44%" stopColor="#251611" stopOpacity="0.48" />
+                <stop offset="100%" stopColor="#000" />
+              </radialGradient>
+            </defs>
+
+            <path
+              d="M86.7814 1229.83C517.408 1229.83 866.5 954.526 866.5 614.917C866.5 275.308 517.408 0 86.7814 0C-343.845 0 -692.937 275.308 -692.937 614.917C-692.937 954.526 -343.845 1229.83 86.7814 1229.83Z"
+              fill="url(#bg-radial-bottom-left)"
+              opacity="0.7"
+              style={{ mixBlendMode: "screen" }}
+            />
+          </svg>
         </div>
       </section>
     </>

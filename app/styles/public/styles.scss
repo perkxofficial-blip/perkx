@@ -968,6 +968,8 @@ header {
 
 .footer{
   padding: 80px 0;
+  border-top: 1px solid #585858;
+  background: #000030;
   .footer-title {
     color: #FCFCFC;
     font-size: 16px;
@@ -1450,13 +1452,18 @@ header {
     font-weight: 400;
     line-height: 20px;
   }
-  .form-select {
+  select {
     display: flex;
     width: 156.333px;
     flex-direction: column;
     align-items: center;
+    padding: 8px 12px !important;
     gap: 4px;
+    height: 40px;
   }
+}
+.pagination-dark{
+  margin-top: 18px;
 }
 .pagination-dark .page-link {
   background: transparent;
@@ -1787,4 +1794,17 @@ header {
     height: 44px;
     background-image: url('../../public/images/exchanges/bybit.svg');
   }
+}
+.bg-bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.bg-top-right svg,
+.bg-bottom-left svg {
+  width: 100%;
+  height: 100%;
 }

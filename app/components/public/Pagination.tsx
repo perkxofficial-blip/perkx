@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type PaginationData = {
   total: number;
@@ -9,29 +11,31 @@ type PaginationData = {
 
 type PaginationProps = {
   pagination: PaginationData;
-  onPageChange?: (page: number) => void;
+  pageParam?: string; // default: "page"
 };
 
-const Pagination: React.FC<PaginationProps> = ({
-                                                 pagination,
-                                                 onPageChange
-                                               }) => {
+export default function Pagination({
+                                     pagination,
+                                     pageParam = 'page'
+                                   }: PaginationProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { page, totalPages } = pagination;
 
-  if (totalPages <= 1) return null;
-
-  const handleChange = (p: number) => {
+  const changePage = (p: number) => {
     if (p < 1 || p > totalPages || p === page) return;
-    onPageChange?.(p);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(pageParam, String(p));
+
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   const renderPages = () => {
     const pages: (number | 'dots')[] = [];
 
     if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
       if (page <= 3) {
         pages.push(1, 2, 3, 'dots', totalPages);
@@ -42,29 +46,28 @@ const Pagination: React.FC<PaginationProps> = ({
       }
     }
 
-    return pages.map((p, index) => {
+    return pages.map((p, i) => {
       if (p === 'dots') {
         return (
-          <li key={index} className="page-item disabled">
+          <li key={`dots-${i}`} className="page-item disabled">
             <span className="page-link dots">…</span>
           </li>
         );
       }
 
+      const isActive = p === page;
+
       return (
-        <li
-          key={p}
-          className={`page-item ${p === page ? 'active' : ''}`}
-        >
-          {p === page ? (
+        <li key={p} className={`page-item ${isActive ? 'active' : ''}`}>
+          {isActive ? (
             <span className="page-link">{p}</span>
           ) : (
             <a
-              className="page-link"
               href="#"
+              className="page-link"
               onClick={(e) => {
                 e.preventDefault();
-                handleChange(p);
+                changePage(p);
               }}
             >
               {p}
@@ -81,12 +84,12 @@ const Pagination: React.FC<PaginationProps> = ({
         {/* Previous */}
         <li className={`page-item ${page === 1 ? 'disabled' : ''}`}>
           <a
-            className="page-link"
             href="#"
+            className="page-link"
             aria-label="Previous"
             onClick={(e) => {
               e.preventDefault();
-              handleChange(page - 1);
+              changePage(page - 1);
             }}
           >
             &lsaquo;
@@ -98,12 +101,12 @@ const Pagination: React.FC<PaginationProps> = ({
         {/* Next */}
         <li className={`page-item ${page === totalPages ? 'disabled' : ''}`}>
           <a
-            className="page-link"
             href="#"
+            className="page-link"
             aria-label="Next"
             onClick={(e) => {
               e.preventDefault();
-              handleChange(page + 1);
+              changePage(page + 1);
             }}
           >
             &rsaquo;
@@ -112,6 +115,4 @@ const Pagination: React.FC<PaginationProps> = ({
       </ul>
     </nav>
   );
-};
-
-export default Pagination;
+}
