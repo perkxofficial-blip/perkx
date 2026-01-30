@@ -147,5 +147,12 @@
     "reset_password_success": "비밀번호가 성공적으로 재설정되었습니다. 새 비밀번호로 로그인할 수 있습니다.",
     "token_invalid": "유효하지 않은 재설정 토큰입니다. 다시 요청해주세요.",
     "token_expire": "재설정 토큰이 만료되었습니다. 새로 요청해주세요."
+  },
+  "campaign": {
+    "breadcrumb_home": "홈",
+    "breadcrumb_campaigns": "캠페인",
+    "join_campaign": "캠페인 참여하기",
+    "not_found_title": "캠페인을 찾을 수 없습니다",
+    "not_found_description": "찾으시는 캠페인이 존재하지 않습니다"
   }
 }

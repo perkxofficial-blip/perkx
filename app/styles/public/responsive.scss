@@ -6,4 +6,40 @@
   .campaign-slide-item {
     width: 200px;
   }
+
+  .campaign-detail-page {
+    padding: 30px 0 60px;
+
+    .campaign-breadcrumb {
+      margin-bottom: 20px;
+
+      .breadcrumb {
+        font-size: 12px;
+      }
+    }
+
+    .campaign-detail-title {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .campaign-detail-hero {
+      height: 300px;
+      margin-bottom: 30px;
+    }
+
+    .campaign-detail-content {
+      font-size: 14px;
+      line-height: 22px;
+      margin-bottom: 30px;
+    }
+
+    .campaign-detail-actions {
+      .btn-campaign-join {
+        width: 100%;
+        padding: 12px 24px;
+        font-size: 16px;
+      }
+    }
+  }
 }

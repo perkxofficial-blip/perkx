@@ -1205,3 +1205,107 @@ header {
 .otp-input input {
  color: #fff;
 }
+
+.campaign-detail-page {
+  padding: 40px 0 80px;
+
+  .campaign-breadcrumb {
+    margin-bottom: 24px;
+
+    .breadcrumb {
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+
+      .breadcrumb-item {
+        color: #737373;
+
+        a {
+          color: #737373;
+          text-decoration: none;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: var(--white);
+          }
+        }
+
+        &.active {
+          color: var(--white);
+        }
+
+        + .breadcrumb-item::before {
+          content: '›';
+          color: #737373;
+          padding: 0 8px;
+        }
+      }
+    }
+  }
+
+  .campaign-detail-title {
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #fcfcfc;
+    margin-bottom: 40px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .campaign-detail-hero {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 40px;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .campaign-detail-content {
+    margin-bottom: 40px;
+    color: #fcfcfc;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+
+    p {
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .campaign-detail-actions {
+    display: flex;
+    justify-content: center;
+
+    .btn-campaign-join {
+      width: 20%;
+      display: inline-block;
+      padding: 10px 24px;
+      background: linear-gradient(105.43deg, rgba(239, 115, 209, 0.8) 1.16%, rgba(179, 136, 244, 0.8) 102.96%);
+      border: none;
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0px 1px 2px 0px rgba(55, 93, 251, 0.08);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(179, 136, 244, 0.4);
+        color: var(--white);
+      }
+    }
+  }
+}
