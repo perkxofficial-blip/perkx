@@ -45,14 +45,14 @@ export class ListCampaignsQueryDto {
 
   @ApiPropertyOptional({
     description: 'Number of items per page (default: 15)',
-    example: 15,
+    example: 10,
     type: Number,
     minimum: 1,
-    default: 15,
+    default: 10,
   })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  limit?: number = 15;
+  limit?: number = 10
 }
