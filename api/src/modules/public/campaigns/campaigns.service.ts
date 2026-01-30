@@ -76,13 +76,13 @@ export class PublicCampaignsService {
     return campaigns.map((campaign) => this.transformCampaignResponse(campaign));
   }
 
-  async findOne(id: number): Promise<CampaignResponse | null> {
+  async findOneBySlug(slug: string): Promise<CampaignResponse | null> {
     const today = new Date();
 
     const campaign = await this.campaignRepository
       .createQueryBuilder('campaign')
       .leftJoinAndSelect('campaign.exchange', 'exchange')
-      .where('campaign.id = :id', { id })
+      .where('campaign.slug = :slug', { slug })
       .andWhere('campaign.is_active = :isActive', { isActive: true })
       .andWhere(
         '((campaign.launch_start <= :today AND campaign.launch_end >= :today) OR ' +

@@ -9,6 +9,7 @@ import {
   CampaignStatus,
 } from './dto';
 import { StorageService } from '../../../common/storage/storage.service';
+import { generateSlug, generateUniqueSlug } from '../../../common/utils/slug.util';
 
 type CampaignResponse = Campaign & {
   banner_url: string | null;
@@ -46,10 +47,23 @@ export class CampaignsService {
     const { path: bannerPath } =
       await this.storageService.uploadFile(banner, 'campaigns');
 
-    // Create campaign with banner_path only
+    // Generate slug from title
+    const baseSlug = generateSlug(createCampaignDto.title);
+    const slug = await generateUniqueSlug(
+      baseSlug,
+      async (slug) => {
+        const existing = await this.campaignRepository.findOne({
+          where: { slug },
+        });
+        return !!existing;
+      },
+    );
+
+    // Create campaign with banner_path and slug
     const campaign = this.campaignRepository.create({
       ...createCampaignDto,
       banner_path: bannerPath,
+      slug,
     });
 
     const savedCampaign = await this.campaignRepository.save(campaign);
@@ -182,6 +196,24 @@ export class CampaignsService {
           'Maximum 5 featured campaigns allowed. Please disable another campaign first.',
         );
       }
+    }
+
+    // Generate slug from title if title is being updated
+    if (updateCampaignDto.title && updateCampaignDto.title !== campaign.title) {
+      const baseSlug = generateSlug(updateCampaignDto.title);
+      const slug = await generateUniqueSlug(
+        baseSlug,
+        async (slug) => {
+          const existing = await this.campaignRepository.findOne({
+            where: { slug },
+          });
+          return !!existing && existing.id !== id;
+        },
+      );
+      updateCampaignDto = {
+        ...updateCampaignDto,
+        slug,
+      } as any;
     }
 
     // If banner is provided, upload new banner and delete old one

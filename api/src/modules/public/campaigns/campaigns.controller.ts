@@ -47,6 +47,7 @@ export class PublicCampaignsController {
           id: { type: 'number' },
           exchange_id: { type: 'number', nullable: true },
           title: { type: 'string' },
+          slug: { type: 'string' },
           description: { type: 'string' },
           banner_path: { type: 'string' },
           banner_url: { type: 'string' },
@@ -81,12 +82,12 @@ export class PublicCampaignsController {
   }
 
   @Public()
-  @Get(':id')
+  @Get(':slug')
   @ApiOperation({
-    summary: 'Get campaign detail by ID (public, no authentication required)',
+    summary: 'Get campaign detail by slug (public, no authentication required)',
     description: 'Returns campaign detail if it is active and within launch/preview/archive periods.',
   })
-  @ApiParam({ name: 'id', description: 'Campaign ID', type: Number })
+  @ApiParam({ name: 'slug', description: 'Campaign slug', type: String })
   @ApiResponse({
     status: 200,
     description: 'Campaign retrieved successfully',
@@ -96,6 +97,7 @@ export class PublicCampaignsController {
         id: { type: 'number' },
         exchange_id: { type: 'number', nullable: true },
         title: { type: 'string' },
+        slug: { type: 'string' },
         description: { type: 'string' },
         banner_path: { type: 'string' },
         banner_url: { type: 'string' },
@@ -124,8 +126,8 @@ export class PublicCampaignsController {
     },
   })
   @ApiResponse({ status: 404, description: 'Campaign not found or not available' })
-  async findOne(@Param('id') id: string) {
-    const campaign = await this.campaignsService.findOne(+id);
+  async findOne(@Param('slug') slug: string) {
+    const campaign = await this.campaignsService.findOneBySlug(slug);
     if (!campaign) {
       throw new NotFoundException('Campaign not found or not available');
     }
