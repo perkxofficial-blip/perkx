@@ -174,5 +174,23 @@
     "hero_title_gradient": "Trading Cashback.",
     "hero_subtitle": "Compare and join top-tier global exchanges with PerkX.",
     "get_started": "Get Started"
+  },
+  "calculator": {
+    "hero_title_part1": "See What ",
+    "hero_title_gradient": "You're Missing",
+    "hero_subtitle": "Calculate your potential cashback earnings based on your trading volume",
+    "volume_title": "Monthly Trading Volume USDT",
+    "select_exchange": "Select Exchange",
+    "select_product": "Product Type",
+    "select_fee_type": "Fee Type",
+    "product_spot": "Spot",
+    "product_futures": "Futures",
+    "product_margin": "Margin",
+    "fee_taker": "Taker",
+    "fee_maker": "Maker",
+    "monthly_cashback": "MONTHLY CASHBACK",
+    "annual_savings": "ANNUAL SAVINGS",
+    "claim_rebate_btn": "Claim This Rebate Now",
+    "choose_exchange": "Choose an exchange"
   }
 }
