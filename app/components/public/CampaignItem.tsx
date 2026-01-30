@@ -1,14 +1,14 @@
 import Image from 'next/image';
+import {useTranslations} from "next-intl";
 export interface CampaignItemProps {
   campaign: any
-  joinNow: string
-  className?: string
 }
 
-const CampaignItem = ({campaign, joinNow, className}: CampaignItemProps) => {
+const CampaignItem = ({campaign}: CampaignItemProps) => {
+  const t = useTranslations();
   return (
     <div
-      className={`campaign-item ${className ?? ''}`}
+      className={`campaign-item`}
     >
       <Image
         src={campaign.banner_url}
@@ -19,14 +19,17 @@ const CampaignItem = ({campaign, joinNow, className}: CampaignItemProps) => {
         unoptimized
       />
       <div className="campaign-box">
-        <div className="tags">
-          <div className="tag all-user">
-            ALL USERS
+        <div className="tags d-flex align-items-center gap-2">
+          <div className={`tag ${campaign.category}`}>
+            {t(`campaign.category_${campaign.category}`)}
+          </div>
+          <div className={`tag ${campaign.status}`}>
+            {t(`campaign.status_${campaign.status}`)}
           </div>
         </div>
         <p>{campaign.title}</p>
-        <span>{campaign.description}</span>
-        <a href={campaign.redirect_url}>{joinNow}</a>
+        <span className='campaign-desc'>{campaign.description}</span>
+        <a href={`/campaigns/${campaign.slug}`}>{t('campaign.btn_name')}</a>
       </div>
     </div>
   );

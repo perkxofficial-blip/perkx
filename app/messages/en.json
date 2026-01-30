@@ -116,20 +116,16 @@
     "email_required": "Email is required.",
     "email_invalid": "Invalid email format.",
     "email_already_exists": "This email is already registered.",
-
     "password_required": "Password is required.",
     "password_string": "Password must be a string.",
     "password_min_8": "Password must be at least 8 characters.",
     "password_max_16": "Password must not exceed 16 characters.",
     "password_invalid_format": "Password needs to be a minimum of 8 characters, 1 number, and 1 uppercase letter.",
-
     "confirm_password_required": "Confirm password is required.",
     "confirm_password_string": "Confirm password must be a string.",
     "password_not_match": "Password and confirm password do not match.",
-
     "referral_string": "Referral code must be a string.",
     "invalid_referral_uid": "Invalid referral code.",
-
     "unknown_error": "Something went wrong. Please try again later."
   },
   "message": {
@@ -149,18 +145,34 @@
     "token_expire": "This reset token has expired. Please request a new password reset."
   },
   "campaign": {
+    "title": "<perkx>PerkX</perkx> Exclusive Campaigns",
+    "desc": "High-density overview of active trading competitions and rewards.",
+    "campaign_holder": "Campaign Holder",
+    "all_campaign_holder": "All Campaign Holders",
+    "category": "Category",
+    "all_category": "All Category",
+    "campaign_status": "Campaign Status",
+    "all_campaign_status": "All Campaign Status",
+    "category_new_user": "New User",
+    "category_trading_competition": "Trading Competition",
+    "status_active": "Active",
+    "status_upcoming": "Upcoming",
+    "status_expired": "Ended",
+    "btn_name": "See Details",
     "breadcrumb_home": "Home",
     "breadcrumb_campaigns": "Campaigns",
     "join_campaign": "Join Campaign",
     "not_found_title": "Campaign Not Found",
-    "not_found_description": "The campaign you are looking for does not exist"  },
+    "not_found_description": "The campaign you are looking for does not exist"
+  },
+  "paging": {
+    "showing_to_of": "Showing <bold>{from}</bold> to <bold>{to}</bold> of <bold>{total}</bold> campaigns",
+    "result_per_page": "Result per page"
+  },
   "exchanges": {
     "hero_title_part1": "Maximize Your Crypto",
     "hero_title_gradient": "Trading Cashback.",
     "hero_subtitle": "Compare and join top-tier global exchanges with PerkX.",
-<<<<<<< Updated upstream
-    "get_started": "Get Started"  }
-=======
     "get_started": "Get Started"
   },
   "calculator": {
@@ -181,5 +193,4 @@
     "claim_rebate_btn": "Claim This Rebate Now",
     "choose_exchange": "Choose an exchange"
   }
->>>>>>> Stashed changes
 }

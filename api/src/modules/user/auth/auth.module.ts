@@ -8,6 +8,7 @@ import {
   User,
   UserLoginOtp,
   UserPasswordReset,
+  AccessLog,
 } from '../../../entities';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
@@ -23,6 +24,7 @@ import { TwoFatosService } from './two-fatos.service';
       UserEmailVerification,
       UserLoginOtp,
       UserPasswordReset,
+      AccessLog,
     ]),
     PassportModule,
     JwtModule.registerAsync({

@@ -347,8 +347,8 @@ export default function CreateCampaignPage() {
                   onChange={(e) => handleInputChange('category', e.target.value)}
                 >
                   <option value="All Users">All Users</option>
-                  <option value="New User">New User</option>
-                  <option value="Trading Competition">Trading Competition</option>
+                  <option value="new_user">New User</option>
+                  <option value="trading_competition">Trading Competition</option>
                 </select>
               </div>
             </div>
