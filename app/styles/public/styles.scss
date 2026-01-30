@@ -149,6 +149,14 @@ header {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.img-bg-exchanges {
+  height: 588px;
+  background-image: url("../../public/images/bg-source-exchange.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .banner-section {
   .get-started {
     padding: 150px 0 24px 0;
@@ -224,6 +232,31 @@ header {
               inset 0 0 0 1px rgba(255, 255, 255, 0.45);
 
       transform: translateY(-1px);
+    }
+    .exchange-hero_title_gradient {
+      background: var(--gr3, linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: "DM Sans";
+      font-size: 68px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .exchange-hero_title {
+      background: linear-gradient(270deg, #C2C1C8 6.15%, #FCFBFC 98.98%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      font-family: "DM Sans";
+      font-size: 68px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
     }
   }
 }
@@ -1458,4 +1491,300 @@ header {
 
 .pagination-dark .page-item {
   margin: 0 4px;
+}
+.exchanges-page {
+  padding: 80px 0;
+
+  .exchanges-hero {
+    text-align: center;
+    padding: 0 120px 80px;
+    position: relative;
+
+    .exchanges-title {
+      font-size: 68px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 26px;
+      background: linear-gradient(to right, #fcfbfc 6.15%, #c2c1c8 98.982%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+      .gradient-text {
+        background: linear-gradient(-90deg, #89efff 6.15%, #ed73d2 53.905%, #8aafff 98.982%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .gradient-text-exchange {
+        background: var(--gr3, linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: "DM Sans";
+        font-size: 68px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+    }
+
+    .exchanges-subtitle {
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 26px;
+    }
+
+    .btn-get-started {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px;
+      background: linear-gradient(105.43deg, rgba(239, 115, 209, 0.8) 1.16%, rgba(179, 136, 244, 0.8) 102.96%);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0px 1px 2px 0px rgba(55, 93, 251, 0.08);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(179, 136, 244, 0.4);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .exchanges-table-section {
+    padding: 0 120px;
+  }
+
+  .exchanges-table-container {
+    background: rgba(219, 159, 207, 0.16);
+    backdrop-filter: blur(6px);
+    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 32px 40px;
+  }
+
+  .exchanges-table {
+    .table-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 24px;
+      background: transparent;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      .header-cell {
+        flex: 1;
+        font-size: 14px;
+        font-weight: 400;
+        color: #c3c3c3;
+        text-transform: uppercase;
+        line-height: 18px;
+
+        &.text-center {
+          text-align: center;
+          width: 100px;
+          flex: 0 0 100px;
+        }
+      }
+    }
+
+    .table-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .exchange-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+
+      &.highlighted {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid #ffe680;
+      }
+
+      &:not(.highlighted) {
+        background: transparent;
+        border: 1px solid transparent;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+      }
+
+      .exchange-cell {
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .exchange-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .exchange-logo {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #ffd868;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .exchange-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: #fcfcfc;
+      }
+
+      .highlighted .exchange-name {
+        font-weight: 700;
+      }
+
+      .product-cell {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .product-name {
+          font-size: 14px;
+          font-weight: 700;
+          color: #fcfcfc;
+        }
+
+        .product-dropdown {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          transform: rotate(90deg);
+          color: #fcfcfc;
+        }
+      }
+
+      .data-cell {
+        flex: 1;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fcfcfc;
+
+        &.hidden-data {
+          color: transparent;
+        }
+      }
+
+      .highlighted .data-cell {
+        font-weight: 700;
+      }
+
+      .action-cell {
+        width: 100px;
+        flex: 0 0 100px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .btn-register {
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+.exchange-avatar {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &.exchange-avatar-bitget {
+    right: 277px;
+    top: 135px;
+    background: url('../../public/images/exchanges/bitget.png') lightgray 9.807px 5.754px / 308.391% 95.502% no-repeat, rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(2px)
+  }
+
+  &.exchange-avatar-okx {
+    right: 220px;
+    top: 265px;
+    width: 54px;
+    height: 54px;
+    background-image: url('../../public/images/exchanges/okx.svg');
+  }
+
+  &.exchange-avatar-weex {
+    right: 296px;
+    top: 373px;
+    width: 44px;
+    height: 44px;
+    background-image: url('../../public/images/exchanges/weex.svg');
+  }
+
+  &.exchange-avatar-binance {
+    left: 255px;
+    top: 114px;
+    background: url('../../public/images/exchanges/binance.png') lightgray 8.47px 8.47px / 71.768% 71.768% no-repeat, rgba(255, 255, 255, 0.20);
+  }
+
+  &.exchange-avatar-bingx {
+    left: 188px;
+    top: 251px;
+    width: 54px;
+    height: 54px;
+    background-image: url('../../public/images/exchanges/bingx.png');
+  }
+
+  &.exchange-avatar-bybit {
+    left: 243px;
+    top: 388px;
+    width: 44px;
+    height: 44px;
+    background-image: url('../../public/images/exchanges/bybit.svg');
+  }
 }

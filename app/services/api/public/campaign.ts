@@ -23,7 +23,7 @@ export async function getAllCampaigns(params: any): Promise<Campaign[]> {
 export async function getFeaturedCampaigns(): Promise<Campaign[]> {
   try {
     const response = await apiClient.publicGet(endpoints.public.campaigns + '?featured=true');
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('Error fetching campaigns:', error);
     return [];

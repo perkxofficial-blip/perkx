@@ -168,5 +168,11 @@
   "paging": {
     "showing_to_of": "Showing <bold>{from}</bold> to <bold>{to}</bold> of <bold>{total}</bold> campaigns",
     "result_per_page": "Result per page"
+  },
+  "exchanges": {
+    "hero_title_part1": "Maximize Your Crypto",
+    "hero_title_gradient": "Trading Cashback.",
+    "hero_subtitle": "Compare and join top-tier global exchanges with PerkX.",
+    "get_started": "Get Started"
   }
 }
