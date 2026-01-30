@@ -157,6 +157,30 @@
   "exchanges": {
     "hero_title_part1": "암호화폐 거래",
     "hero_title_gradient": "캐시백을 극대화하세요.",
+<<<<<<< Updated upstream
     "hero_subtitle": "PerkX와 함께 최고의 글로벌 거래소를 비교하고 가입하세요.",
     "get_started": "시작하기"  }
+=======
+    "hero_subtitle": "PerkX와 함께 글로벌 최상위 거래소를 비교하고 참여하세요.",
+    "get_started": "시작하기"
+  },
+  "calculator": {
+    "hero_title_part1": "놓치고 있는 ",
+    "hero_title_gradient": "수익을 확인하세요",
+    "hero_subtitle": "거래량을 기준으로 예상 캐시백 수익을 계산해보세요",
+    "volume_title": "월간 거래량 USDT",
+    "select_exchange": "거래소 선택",
+    "select_product": "상품 유형",
+    "select_fee_type": "수수료 유형",
+    "product_spot": "현물",
+    "product_futures": "선물",
+    "product_margin": "마진",
+    "fee_taker": "테이커",
+    "fee_maker": "메이커",
+    "monthly_cashback": "월간 캐시백",
+    "annual_savings": "연간 절감액",
+    "claim_rebate_btn": "지금 리베이트 받기",
+    "choose_exchange": "거래소를 선택하세요"
+  }
+>>>>>>> Stashed changes
 }
