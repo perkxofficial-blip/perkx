@@ -41,7 +41,7 @@ async function getLandingData() {
   } catch {
     // Handle errors silently
   }
-
+  console.log("Landing Data:", result);
   return result;
 }
 
