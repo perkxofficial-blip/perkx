@@ -30,9 +30,7 @@ export default function ExchangePartnerConfigPage() {
       return;
     }
 
-    const link = document.createElement('a');
-    link.href = templateUrl;
-    link.click();
+    window.open(templateUrl, '_blank');
     showToast('Template downloaded successfully', 'success');
   };
 
