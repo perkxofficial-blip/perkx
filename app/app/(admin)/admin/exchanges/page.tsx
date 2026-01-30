@@ -23,13 +23,16 @@ export default function ExchangePartnerConfigPage() {
   };
 
   const handleDownloadTemplate = () => {
-    // Download the template file from public folder
+    const templateUrl = process.env.NEXT_PUBLIC_EXCHANGE_TEMPLATE_URL;
+    
+    if (!templateUrl) {
+      showToast('Template URL not configured', 'error');
+      return;
+    }
+
     const link = document.createElement('a');
-    link.href = '/templates/partner_exchange_import_template.csv';
-    link.download = 'partner_exchange_import_template.csv';
-    document.body.appendChild(link);
+    link.href = templateUrl;
     link.click();
-    document.body.removeChild(link);
     showToast('Template downloaded successfully', 'success');
   };
 
