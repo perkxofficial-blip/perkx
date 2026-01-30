@@ -153,6 +153,10 @@
     "breadcrumb_campaigns": "Campaigns",
     "join_campaign": "Join Campaign",
     "not_found_title": "Campaign Not Found",
-    "not_found_description": "The campaign you are looking for does not exist"
-  }
+    "not_found_description": "The campaign you are looking for does not exist"  },
+  "exchanges": {
+    "hero_title_part1": "Maximize Your Crypto",
+    "hero_title_gradient": "Trading Cashback.",
+    "hero_subtitle": "Compare and join top-tier global exchanges with PerkX.",
+    "get_started": "Get Started"  }
 }

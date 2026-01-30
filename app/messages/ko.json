@@ -153,6 +153,10 @@
     "breadcrumb_campaigns": "캠페인",
     "join_campaign": "캠페인 참여하기",
     "not_found_title": "캠페인을 찾을 수 없습니다",
-    "not_found_description": "찾으시는 캠페인이 존재하지 않습니다"
-  }
+    "not_found_description": "찾으시는 캠페인이 존재하지 않습니다"  },
+  "exchanges": {
+    "hero_title_part1": "암호화폐 거래",
+    "hero_title_gradient": "캐시백을 극대화하세요.",
+    "hero_subtitle": "PerkX와 함께 최고의 글로벌 거래소를 비교하고 가입하세요.",
+    "get_started": "시작하기"  }
 }

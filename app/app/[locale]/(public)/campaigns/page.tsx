@@ -1,6 +1,5 @@
 import { getTranslations } from 'next-intl/server';
 import Header from '@/components/public/Header';
-import Footer from '@/components/public/Footer';
 import type { Metadata } from 'next';
 
 interface CampaignsPageProps {
@@ -31,7 +30,6 @@ export default async function CampaignsPage({ params }: CampaignsPageProps) {
           <p>This is a test campaigns page - Locale: {locale}</p>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
