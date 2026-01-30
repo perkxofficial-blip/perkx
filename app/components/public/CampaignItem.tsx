@@ -1,11 +1,13 @@
 import Image from 'next/image';
 export interface CampaignItemProps {
   campaign: any
-  joinNow: string
+  btnName: string
   className?: string
+  isDetail: boolean
 }
 
-const CampaignItem = ({campaign, joinNow, className}: CampaignItemProps) => {
+const CampaignItem = ({campaign, btnName, className, isDetail = false}: CampaignItemProps) => {
+  const link = isDetail ? `/campaigns/${campaign.slug}` : campaign.redirect_url
   return (
     <div
       className={`campaign-item ${className ?? ''}`}
@@ -26,7 +28,7 @@ const CampaignItem = ({campaign, joinNow, className}: CampaignItemProps) => {
         </div>
         <p>{campaign.title}</p>
         <span>{campaign.description}</span>
-        <a href={campaign.redirect_url}>{joinNow}</a>
+        <a href={link}>{btnName}</a>
       </div>
     </div>
   );

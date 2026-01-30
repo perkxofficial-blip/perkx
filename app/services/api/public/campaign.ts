@@ -9,10 +9,11 @@ export interface Campaign {
   banner_url: string;
 }
 
-export async function getAllCampaigns(): Promise<Campaign[]> {
+export async function getAllCampaigns(params: any): Promise<Campaign[]> {
   try {
-    const response = await apiClient.publicGet(endpoints.public.campaigns);
-    return response.data.data;
+    const query = new URLSearchParams(params).toString();
+    const response = await apiClient.publicGet(`${endpoints.public.campaigns}?${query}`);
+    return response.data;
   } catch (error) {
     console.error('Error fetching campaigns:', error);
     return [];

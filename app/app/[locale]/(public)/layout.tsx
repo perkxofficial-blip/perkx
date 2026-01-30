@@ -10,11 +10,11 @@ interface HomePageProps {
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
-  const page = await getPageBySlug('home', locale);
+  const page = await getPageBySlug('campaign', locale);
 
   if (!page) {
     return {
-      title: 'Home | PerkX',
+      title: 'Campaign | PerkX',
       description: 'Learn more about PerkX and our mission',
     };
   }
