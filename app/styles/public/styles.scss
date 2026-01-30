@@ -1409,3 +1409,53 @@ header {
     }
   }
 }
+.pagination {
+  p {
+    color: #FCFCFC;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .form-select {
+    display: flex;
+    width: 156.333px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+}
+.pagination-dark .page-link {
+  background: transparent;
+  border: none;
+  color: #cfd3ff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.pagination-dark .page-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.pagination-dark .page-item.active .page-link {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.pagination-dark .page-item.disabled .page-link {
+  color: #777;
+  background: transparent;
+  pointer-events: none;
+}
+
+.pagination-dark .dots {
+  cursor: default;
+}
+
+.pagination-dark .page-item {
+  margin: 0 4px;
+}

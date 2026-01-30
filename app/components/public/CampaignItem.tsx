@@ -7,7 +7,7 @@ export interface CampaignItemProps {
 }
 
 const CampaignItem = ({campaign, btnName, className, isDetail = false}: CampaignItemProps) => {
-  const link = isDetail ? `/campaigns/${campaign.id}` : campaign.redirect_url
+  const link = isDetail ? `/campaigns/${campaign.slug}` : campaign.redirect_url
   return (
     <div
       className={`campaign-item ${className ?? ''}`}

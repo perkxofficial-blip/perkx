@@ -166,7 +166,7 @@
     "not_found_description": "The campaign you are looking for does not exist"
   },
   "paging": {
-    "showing_to_of": "Showing {from} to {to} of {total} campaigns",
+    "showing_to_of": "Showing <bold>{from}</bold> to <bold>{to}</bold> of <bold>{total}</bold> campaigns",
     "result_per_page": "Result per page"
   }
 }
