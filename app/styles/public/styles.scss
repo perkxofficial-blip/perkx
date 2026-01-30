@@ -1242,11 +1242,7 @@ header {
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.32);
 
-    background: linear-gradient(
-                    95deg,
-                    rgba(239, 115, 209, 0.20) 1.16%,
-                    rgba(179, 136, 244, 0.20) 102.96%
-    );
+    background: linear-gradient(95deg, rgba(239, 115, 209, 0.80) 1.16%, rgba(179, 136, 244, 0.80) 102.96%);
 
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
