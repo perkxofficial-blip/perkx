@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
+import Image from "next/image";
 
 type PaginationData = {
   total: number;
@@ -92,7 +93,12 @@ export default function Pagination({
               changePage(page - 1);
             }}
           >
-            &lsaquo;
+            <Image
+              src="/images/chevron-left.svg"
+              alt="Next"
+              width={16}
+              height={16}
+            />
           </a>
         </li>
 
@@ -109,7 +115,12 @@ export default function Pagination({
               changePage(page + 1);
             }}
           >
-            &rsaquo;
+            <Image
+              src="/images/chevron-right.svg"
+              alt="Next"
+              width={16}
+              height={16}
+            />
           </a>
         </li>
       </ul>

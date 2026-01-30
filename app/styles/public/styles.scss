@@ -606,7 +606,7 @@ header {
   }
 
   .campaign-item {
-
+    height: 365px;
     .campaign-box {
       position: absolute;
       bottom: 0;
@@ -652,7 +652,7 @@ header {
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        line-height: 18px; /* 128.571% */
+        line-height: 20px; /* 128.571% */
         margin-bottom: 5px;
       }
       a {
@@ -711,6 +711,70 @@ header {
             background 0.25s ease,
             box-shadow 0.25s ease,
             border 0.25s ease;
+
+    .campaign-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.5em;
+      height: calc(1.5em * 3);
+    }
+
+    .all_user{
+      color: #00A2E8;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 14.4px */
+      letter-spacing: 0.36px;
+      text-transform: uppercase;
+    }
+    .trading_competition{
+      color: #A152CB;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 14.4px */
+      letter-spacing: 0.36px;
+      text-transform: uppercase;
+      border-radius: 60px;
+      background: #F1E2FF;
+    }
+    .active{
+      border-radius: 60px;
+      background: #E2FFF1;
+      color: #1B794C;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 14.4px */
+      letter-spacing: 0.36px;
+      text-transform: uppercase;
+    }
+    .upcoming{
+      border-radius: 60px;
+      background: #BEEBFF;
+      color: #005A82;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 14.4px */
+      letter-spacing: 0.36px;
+      text-transform: uppercase;
+    }
+    .expired {
+      border-radius: 60px;
+      background: #CDCDCD;
+      color: #424242;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 14.4px */
+      letter-spacing: 0.36px;
+      text-transform: uppercase;
+    }
   }
   .campaign-item:hover {
     .campaign-item:hover {

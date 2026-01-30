@@ -1,13 +1,11 @@
 'use client'
 export interface CampaignsProps {
   campaigns: any[]
-  joinNow: string
 }
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import Image from "next/image"
-import CampaignItem, {CampaignItemProps} from "@/components/public/CampaignItem";
-export default function PartnerSectionSlide({campaigns, joinNow}: CampaignsProps) {
+import CampaignItem from "@/components/public/CampaignItem";
+export default function PartnerSectionSlide({campaigns}: CampaignsProps) {
   return (
     <Swiper
       modules={[Autoplay]}
@@ -23,7 +21,7 @@ export default function PartnerSectionSlide({campaigns, joinNow}: CampaignsProps
     >
       {campaigns.map((campaign, index) => (
         <SwiperSlide key={campaign.id || index} className="campaign-slide-item">
-          <CampaignItem campaign={campaign} btnName={joinNow} isDetail={false}/>
+          <CampaignItem campaign={campaign}/>
         </SwiperSlide>
       ))}
     </Swiper>

@@ -6,12 +6,13 @@ const CampaignSectionSlide = dynamic(() => import('././CampaignSectionSlide'), {
 })
 export interface CampaignsProps {
   campaigns: any
-  joinNow: string
 }
-export default function CampaignSection({campaigns, joinNow}: CampaignsProps) {
+export default function CampaignSection({campaigns}: CampaignsProps) {
   return (
     <div>
-      <CampaignSectionSlide campaigns={campaigns} joinNow={joinNow}/>
+      <CampaignSectionSlide
+        campaigns={campaigns}
+      />
     </div>
   )
 }
