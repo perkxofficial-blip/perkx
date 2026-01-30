@@ -29,8 +29,7 @@ export default function PasswordInput({name, label, placeholder, error = null }:
         defaultValue=""
       />
 
-      <button
-        type="button"
+      <div
         className="password-toggle"
         aria-label={show ? 'Hide password' : 'Show password'}
         onClick={() => setShow(!show)}
@@ -42,7 +41,7 @@ export default function PasswordInput({name, label, placeholder, error = null }:
           height={20}
           priority={false}
         />
-      </button>
+      </div>
       {error && (
         <div className="invalid-feedback">
           {error}
