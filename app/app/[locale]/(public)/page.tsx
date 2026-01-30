@@ -1,6 +1,4 @@
-import { cookies } from 'next/headers';
 import Header from "@/components/public/Header";
-import Footer from "@/components/public/Footer";
 import PartnerSection from "@/components/public/PartnerSection";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
@@ -240,7 +238,7 @@ export default async function LandingPage() {
               />
             </div>
           </div>
-          <CampaignSection campaigns={data.campaigns || []} joinNow={t('home.join_now')}/>
+          <CampaignSection campaigns={data.campaigns || []}/>
         </div>
       </section>
       <section className='partner-exchanges position-relative'>

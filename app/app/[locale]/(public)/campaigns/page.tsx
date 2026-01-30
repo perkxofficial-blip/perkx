@@ -56,13 +56,13 @@ export default async function CampaignPage({ searchParams }: Props) {
   const categories = [
     {value:'', label: t('campaign.all_category')},
     {value:'new_user', label: t('campaign.category_new_user')},
-    {value:'trading_competition ', label: t('campaign.category_trading')},
+    {value:'trading_competition ', label: t('campaign.category_trading_competition')},
   ]
   const statuses = [
     {value:'', label: t('campaign.all_campaign_status')},
     {value:'active', label: t('campaign.status_active')},
     {value:'upcoming', label: t('campaign.status_upcoming')},
-    {value:'ended', label: t('campaign.status_ended')},
+    {value:'expired', label: t('campaign.status_expired')},
   ]
   const exchangeOptions: any = [
     { value: '', label: t('campaign.all_campaign_holder') },
@@ -112,7 +112,7 @@ export default async function CampaignPage({ searchParams }: Props) {
                 <label htmlFor="holderInput" className="form-label">
                   {t('campaign.campaign_holder')}
                 </label>
-                <SelectSearch name='holder' options={exchangeOptions} />
+                <SelectSearch name='exchange' options={exchangeOptions} />
 
                 <Image
                   src="/images/arrow-down.svg"
@@ -158,7 +158,7 @@ export default async function CampaignPage({ searchParams }: Props) {
           <div className="row">
             {data?.campaigns?.data && data?.campaigns?.data.map((campaign: any) => (
               <div className='col-md-3' key={campaign.id}>
-                <CampaignItem campaign={campaign} btnName={t('campaign.btn_name')}  isDetail={true}/>
+                <CampaignItem campaign={campaign}/>
               </div>
             ))}
           </div>
