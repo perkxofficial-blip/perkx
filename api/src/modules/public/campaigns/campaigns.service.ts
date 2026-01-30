@@ -7,6 +7,7 @@ import { StorageService } from '../../../common/storage/storage.service';
 
 type CampaignResponse = Campaign & {
   banner_url: string | null;
+  status: CampaignStatus;
   exchange: { id: number; name: string; code: string; logo_url: string | null } | null;
 };
 
@@ -146,12 +147,39 @@ export class PublicCampaignsService {
   }
 
   /**
-   * Transform campaign entity to response format with banner_url and exchange
+   * Calculate campaign status based on current date and periods
+   */
+  private calculateStatus(campaign: Campaign): CampaignStatus | null {
+    const today = new Date();
+
+    if (
+      today >= campaign.launch_start &&
+      today <= campaign.launch_end
+    ) {
+      return CampaignStatus.ACTIVE;
+    }
+
+    if (campaign.launch_end && today > campaign.launch_end) {
+      return CampaignStatus.EXPIRED;
+    }
+
+    if (
+      today >= campaign.preview_start &&
+      today <= campaign.preview_end
+    ) {
+      return CampaignStatus.UPCOMING;
+    }
+    return null;
+  }
+
+  /**
+   * Transform campaign entity to response format with banner_url, status, and exchange
    */
   private transformCampaignResponse(campaign: Campaign): CampaignResponse {
     return {
       ...campaign,
       banner_url: this.getBannerUrl(campaign.banner_path),
+      status: this.calculateStatus(campaign),
       exchange: campaign.exchange
         ? {
             id: campaign.exchange.id,
