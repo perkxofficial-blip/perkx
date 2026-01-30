@@ -260,7 +260,6 @@ export const apiClient = {
       error.response = responseData;
       throw error;
     }
-
     return responseData;
   },
 };

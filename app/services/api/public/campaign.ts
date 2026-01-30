@@ -12,7 +12,7 @@ export interface Campaign {
 export async function getAllCampaigns(): Promise<Campaign[]> {
   try {
     const response = await apiClient.publicGet(endpoints.public.campaigns);
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('Error fetching campaigns:', error);
     return [];
@@ -22,7 +22,7 @@ export async function getAllCampaigns(): Promise<Campaign[]> {
 export async function getFeaturedCampaigns(): Promise<Campaign[]> {
   try {
     const response = await apiClient.publicGet(endpoints.public.campaigns + '?featured=true');
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('Error fetching campaigns:', error);
     return [];
