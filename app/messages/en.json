@@ -147,5 +147,12 @@
     "reset_password_success": "Your password has been reset successfully. You can now sign in with your new password.",
     "token_invalid": "This reset token is invalid. Please request a new password reset.",
     "token_expire": "This reset token has expired. Please request a new password reset."
+  },
+  "campaign": {
+    "breadcrumb_home": "Home",
+    "breadcrumb_campaigns": "Campaigns",
+    "join_campaign": "Join Campaign",
+    "not_found_title": "Campaign Not Found",
+    "not_found_description": "The campaign you are looking for does not exist"
   }
 }
