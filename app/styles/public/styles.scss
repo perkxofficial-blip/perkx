@@ -144,6 +144,11 @@ header {
   background-position: 0 -350px;
   background-repeat: no-repeat;
 }
+.page-img-bg {
+  background-image: url("../../public/images/page-bg2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .banner-section {
   .get-started {
     padding: 150px 0 24px 0;
@@ -1204,4 +1209,98 @@ header {
 }
 .otp-input input {
  color: #fff;
+}
+.campaign-page {
+  .banner-section {
+    .get-started {
+      h1 {
+        text-align: center;
+        text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        font-size: 68px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        background: linear-gradient(270deg, #C2C1C8 6.15%, #FCFBFC 98.98%);
+        background-clip: text;
+        color: #FCFBFC;
+      }
+
+      .perkx {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 68px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        background: var(--gr3, linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%));
+        background-clip: text;
+      }
+      p {
+        color: #FFF;
+        text-align: center;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+      padding-top: 100px !important;
+      padding-bottom: 100px !important;
+    }
+  }
+}
+.campaign-section {
+  padding: 80px 0;
+  .img-icon {
+    position: absolute;
+    top: 47px;
+    right: 18px;
+  }
+  .form-label {
+    color: #C9C9C9;
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.084px;
+  }
+  input, select {
+    display: flex;
+    padding: 14px 10px 14px 12px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 10px;
+    border: 0.5px solid #595959;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 1px 2px 0 rgba(228, 229, 231, 0.24);
+    backdrop-filter: blur(6px);
+    color: #FCFCFC;
+  }
+  select option {
+    background-color: #1F1F49;
+    color: #FCFCFC;
+    padding: 12px 10px;
+    overflow: hidden;
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+    letter-spacing: -0.096px;
+    border-radius: 10px;
+  }
+
+  input::placeholder {
+    overflow: hidden;
+    color: #FCFCFC;
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+    letter-spacing: -0.096px;
+  }
 }

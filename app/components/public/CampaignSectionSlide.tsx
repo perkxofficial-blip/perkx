@@ -23,7 +23,7 @@ export default function PartnerSectionSlide({campaigns, joinNow}: CampaignsProps
     >
       {campaigns.map((campaign, index) => (
         <SwiperSlide key={campaign.id || index} className="campaign-slide-item">
-          <CampaignItem campaign={campaign} joinNow={joinNow}/>
+          <CampaignItem campaign={campaign} btnName={joinNow}/>
         </SwiperSlide>
       ))}
     </Swiper>
