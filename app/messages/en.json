@@ -227,7 +227,8 @@
     "footer_note": {
       "title": "We believe Web3 shouldn’t feel like decoding the Matrix.",
       "description": "It should feel like walking into a buffet where everything’s already paid for with free cashback and referral bonuses you didn’t know you had.",
-      "tldr": "TL;DR: We find the perks. You claim them. Everyone’s happy. (Except that guy still paying full fees. RIP.)"
+      "tldr": "TL;DR: We find the perks. You claim them. Everyone’s happy.",
+      "tldr_note": "(Except that one person still paying full fees. RIP.)"
     }  },
   "how-it-works": {
     "meta": {

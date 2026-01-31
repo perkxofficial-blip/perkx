@@ -1,195 +1,352 @@
 // About Us Page Styles
-// Separate SCSS file to avoid conflicts with other styles
-.page-img-bg {
+.about-us-page {
   background-image: url("../../public/images/bg-source-about.png");
   background-size: cover;
   background-repeat: no-repeat;
-}
-.about-page {
+
+  
+
   .banner-section {
     padding-bottom: 80px;
+    position: relative;
+    z-index: 1;
   }
+
   .get-started {
-    h1 {
-      background: var(--gr3, linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%));
+    h1.gradient-title {
+      background: linear-gradient(-89.9999998439288deg, rgb(137, 239, 255) 6.1497%, rgb(237, 115, 210) 53.905%, rgb(138, 175, 255) 98.982%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-family: "DM Sans";
+      font-size: 68px;
+      font-weight: 500;
+      line-height: normal;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin: 0;
     }
+
     p {
       font-family: "DM Sans";
       font-size: 24px;
+      font-weight: 400;
+      line-height: normal;
+      color: #FFFFFF;
+      margin-top: 26px;
     }
   }
 }
-.campaign-section {
-  .about-content-wrapper {
+
+.content-section {
+  position: relative;
+  padding: 40px 0 80px;
+  overflow: hidden;
+
+  .container {
     position: relative;
     z-index: 1;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+  }
+
+  // Intro Section
+  .intro-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 80px;
+
+    .intro-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      color: #FCFCFC;
+
+      h2 {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.32px;
+        margin: 0;
+        max-width: 468px;
+      }
+
+      .intro-description {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        max-width: 613px;
+
+        p {
+          margin-bottom: 0;
+
+          &:not(:last-child) {
+            margin-bottom: 16px;
+          }
+        }
+      }
+    }
+
+    .intro-image {
+      flex-shrink: 0;
+      width: 513.469px;
+      height: 340px;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  // Cards Section
+  .cards-wrapper {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  .info-card {
+    flex: 1;
+    background: rgba(216, 128, 220, 0.12);
+    backdrop-filter: blur(75px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 80px;
-  }
+    padding: 32px 40px;
+    color: #FCFCFC;
 
-  .about-intro {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 16px;
-
-    .about-intro-title {
-      width: 100%;
-      text-align: center;
-      color: #FCFCFC;
+    h3 {
+      font-family: 'DM Sans', sans-serif;
       font-size: 32px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      letter-spacing: 0.32px;
-      word-wrap: break-word;
-      margin: 0;
-    }
-
-    .about-intro-description {
-      width: 100%;
-      text-align: center;
-      color: #FCFCFC;
-      font-size: 16px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      line-height: 24px;
-      word-wrap: break-word;
-      margin: 0;
-    }
-  }
-
-  .about-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-
-    .about-section-title {
-      width: 100%;
-      text-align: center;
-      color: #FCFCFC;
-      font-size: 32px;
-      font-family: 'DM Sans', sans-serif;
       font-weight: 500;
-      line-height: 32px;
-      word-wrap: break-word;
-      margin: 0;
+      line-height: 1;
+      margin: 0 0 16px 0;
     }
 
-    .about-section-list {
+    .bullet-list {
       list-style: none;
       padding: 0;
       margin: 0;
-      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
+      gap: 12px;
 
-    .about-section-item {
-      text-align: center;
-      color: #FCFCFC;
-      font-size: 16px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      line-height: 24px;
-      word-wrap: break-word;
-      margin: 0;
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+
+        &::before {
+          content: '';
+          width: 10px;
+          height: 10px;
+          border-radius: 60px;
+          flex-shrink: 0;
+          margin-top: 7px;
+          border: 3px solid transparent;
+        }
+      }
+
+      &.cyan-bullets li::before {
+        background: #88EFFE;
+        border-color: rgba(136, 239, 254, 0.2);
+      }
+
+      &.pink-bullets li::before {
+        background: #D880DC;
+        border-color: rgba(216, 128, 220, 0.2);
+      }
     }
   }
 
-  .about-footer-note {
-    width: 100%;
+  // Footer Note Section
+  .footer-note-section {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     gap: 16px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
 
-    .about-footer-note-title {
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-size: 32px;
+    h3 {
       font-family: 'DM Sans', sans-serif;
+      font-size: 32px;
       font-weight: 600;
-      word-wrap: break-word;
+      line-height: normal;
       margin: 0;
+      width: 100%;
     }
 
-    .about-footer-note-description {
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-size: 20px;
+    .footer-note-description {
       font-family: 'DM Sans', sans-serif;
+      font-size: 20px;
       font-weight: 300;
-      word-wrap: break-word;
-      margin: 0;
-      line-height: 1.6;
+      line-height: normal;
+      max-width: 836px;
+
+      p {
+        margin: 0;
+
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+
+  // Background Decorations
+  .bg-decoration {
+    position: absolute;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+
+    &.bg-left {
+      bottom: -639.59px;
+      left: -792.94px;
+      width: 1559.437px;
+      height: 1229.834px;
+      background: radial-gradient(circle, rgba(245, 121, 224, 0.5) 0%, rgba(37, 22, 17, 0.48) 50%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    &.bg-right {
+      top: -304.04px;
+      right: -242.48px;
+      width: 1041.143px;
+      height: 1132.076px;
+      background: radial-gradient(circle, rgba(138, 175, 255, 0.4) 0%, rgba(37, 22, 17, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
     }
   }
 }
 
 // Responsive Design
 @media (max-width: 1200px) {
-  .campaign-section {
-    .about-content-wrapper {
-      padding: 60px 0;
-      gap: 60px;
+  .about-us-page {
+    .get-started {
+      h1.gradient-title {
+        font-size: 56px;
+      }
+
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .content-section {
+    .intro-wrapper {
+      gap: 30px;
+      margin-bottom: 60px;
+
+      .intro-text {
+        h2 {
+          font-size: 28px;
+        }
+      }
+
+      .intro-image {
+        width: 400px;
+        height: 265px;
+      }
+    }
+
+    .cards-wrapper {
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .info-card {
+      h3 {
+        font-size: 28px;
+      }
+    }
+
+    .footer-note-section {
+      h3 {
+        font-size: 28px;
+      }
+
+      .footer-note-description {
+        font-size: 18px;
+      }
     }
   }
 }
 
 @media (max-width: 768px) {
-  .campaign-section {
-    .about-content-wrapper {
-      padding: 40px 0;
-      gap: 40px;
-      border-radius: 20px;
+  .about-us-page {
+    .get-started {
+      h1.gradient-title {
+        font-size: 36px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 16px;
+      }
+    }
+  }
+
+  .content-section {
+    padding: 30px 0 60px;
+
+    .intro-wrapper {
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 40px;
+
+      .intro-text {
+        h2 {
+          font-size: 24px;
+        }
+
+        .intro-description {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+
+      .intro-image {
+        width: 100%;
+        height: auto;
+      }
     }
 
-    .about-intro {
-      .about-intro-title {
+    .cards-wrapper {
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .info-card {
+      padding: 24px;
+
+      h3 {
         font-size: 24px;
       }
 
-      .about-intro-description {
-        font-size: 14px;
+      .bullet-list {
+        li {
+          font-size: 14px;
+          line-height: 20px;
+        }
       }
     }
 
-    .about-section {
-      .about-section-title {
+    .footer-note-section {
+      h3 {
         font-size: 24px;
       }
 
-      .about-section-item {
-        font-size: 14px;
-      }
-    }
-
-    .about-footer-note {
-      .about-footer-note-title {
-        font-size: 24px;
-      }
-
-      .about-footer-note-description {
+      .footer-note-description {
         font-size: 16px;
       }
     }
@@ -197,30 +354,39 @@
 }
 
 @media (max-width: 480px) {
-  .campaign-section {
-    .about-content-wrapper {
-      padding: 30px 0;
-      gap: 30px;
+  .about-us-page {
+    .get-started {
+      h1.gradient-title {
+        font-size: 28px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .content-section {
+    .intro-wrapper {
+      .intro-text {
+        h2 {
+          font-size: 20px;
+        }
+      }
     }
 
-    .about-intro {
-      .about-intro-title {
+    .info-card {
+      h3 {
         font-size: 20px;
       }
     }
 
-    .about-section {
-      .about-section-title {
-        font-size: 20px;
-      }
-    }
-
-    .about-footer-note {
-      .about-footer-note-title {
+    .footer-note-section {
+      h3 {
         font-size: 20px;
       }
 
-      .about-footer-note-description {
+      .footer-note-description {
         font-size: 14px;
       }
     }
