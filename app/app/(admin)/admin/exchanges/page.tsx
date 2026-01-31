@@ -32,7 +32,6 @@ export default function ExchangePartnerConfigPage() {
 
     const link = document.createElement('a');
     link.href = templateUrl;
-    link.download = 'exchange-template.xlsx';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

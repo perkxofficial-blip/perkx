@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Exchange, ExchangeProduct } from '@/services/api/public/exchange';
+import { Exchange } from '@/services/api/public/exchange';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
