@@ -39,9 +39,9 @@ export class PublicCampaignsController {
   @ApiQuery({
     name: 'category',
     required: false,
-    description: 'Filter by campaign category (new_user or trading_competition)',
+    description: 'Filter by campaign category (all_user or new_user)',
     enum: CampaignCategory,
-    example: CampaignCategory.NEW_USER,
+    example: CampaignCategory.ALL_USER,
   })
   @ApiQuery({
     name: 'exchange',
@@ -60,9 +60,9 @@ export class PublicCampaignsController {
   @ApiQuery({
     name: 'limit',
     required: false,
-    description: 'Number of items per page (default: 15)',
+    description: 'Number of items per page (default: 20)',
     type: Number,
-    example: 15,
+    example: 20,
   })
   @ApiResponse({
     status: 200,
