@@ -202,29 +202,6 @@
     }
   }
 
-  // Background Decorations
-  .bg-decoration {
-    position: absolute;
-    mix-blend-mode: screen;
-    pointer-events: none;
-    z-index: 0;
-
-    &.bg-left {
-      bottom: -639.59px;
-      left: -792.94px;
-      width: 1559.437px;
-      height: 1229.834px;
-      background: radial-gradient(circle, rgba(245, 121, 224, 0.5) 0%, rgba(37, 22, 17, 0.48) 50%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    &.bg-right {
-      top: -304.04px;
-      right: -242.48px;
-      width: 1041.143px;
-      height: 1132.076px;
-      background: radial-gradient(circle, rgba(138, 175, 255, 0.4) 0%, rgba(37, 22, 17, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
-    }
-  }
 }
 
 // Responsive Design
