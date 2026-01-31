@@ -98,10 +98,7 @@ export default function UserProfilePage() {
 
   const loadProfile = async () => {
     try {
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('token='))
-        ?.split('=')[1];
+      const token = auth.getUserToken();
 
       if (!token) {
         router.push('/login');
@@ -141,10 +138,7 @@ export default function UserProfilePage() {
     setMessage(null);
 
     try {
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('token='))
-        ?.split('=')[1];
+      const token = auth.getUserToken();
 
       if (!token) {
         auth.clearUserToken();
@@ -199,10 +193,7 @@ export default function UserProfilePage() {
     }
 
     try {
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('token='))
-        ?.split('=')[1];
+      const token = auth.getUserToken();
 
       if (!token) {
         auth.clearUserToken();
