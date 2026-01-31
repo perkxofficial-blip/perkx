@@ -4,24 +4,24 @@ export class UpdateCampaignCategoryEnumToAllUser1769871350301 implements Migrati
   name = 'UpdateCampaignCategoryEnumToAllUser1769871350301';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // 1. First, migrate existing trading_competition data to all_user
+    // 1. Convert column to text temporarily to allow value updates
+    await queryRunner.query(`
+      ALTER TABLE campaigns
+      ALTER COLUMN category TYPE text
+      USING category::text
+    `);
+
+    // 2. Update existing trading_competition data to all_user (now it's text, so this works)
     await queryRunner.query(`
       UPDATE campaigns
       SET category = 'all_user'
       WHERE category = 'trading_competition'
     `);
 
-    // 2. Create new enum type with updated values (all_user, new_user)
+    // 3. Create new enum type with updated values (all_user, new_user)
     await queryRunner.query(`
       CREATE TYPE "campaign_category_enum_new"
       AS ENUM ('all_user', 'new_user')
-    `);
-
-    // 3. Convert column to text temporarily to update values
-    await queryRunner.query(`
-      ALTER TABLE campaigns
-      ALTER COLUMN category TYPE text
-      USING category::text
     `);
 
     // 4. Alter the column to use the new enum type
