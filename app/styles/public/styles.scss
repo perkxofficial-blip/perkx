@@ -625,6 +625,8 @@ header {
   }
 
   .campaign-item {
+    height: 400px;
+    overflow: hidden;
     .campaign-box-padding {
       padding: 12px;
       width: 100%;
@@ -844,7 +846,7 @@ header {
     border-radius: 0 54px 54px 0;
   }
   .glass-shape:hover{
-    
+
     background: linear-gradient(
                     180deg,
                     #EF73D1 0%,
