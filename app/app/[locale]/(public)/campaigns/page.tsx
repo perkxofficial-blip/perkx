@@ -157,7 +157,7 @@ export default async function CampaignPage({ searchParams }: Props) {
           </div>
           <div className="row">
             {data?.campaigns?.data && data?.campaigns?.data.map((campaign: any) => (
-              <div className='col-md-3' key={campaign.id}>
+              <div className='col-md-3 mb-4' key={campaign.id}>
                 <CampaignItem campaign={campaign}/>
               </div>
             ))}
