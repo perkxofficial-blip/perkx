@@ -8,7 +8,7 @@ export async function registerAction(formData: FormData) {
     email: formData.get('email')?.toString() ?? '',
     referral_user_id: formData.get('referral_uid')?.toString() ?? null,
   };
-  await cookieUtil.delete(['login', 'verify-email'])
+  await cookieUtil.delete(['login', 'register', 'verify-email'])
   const res = await register({
     ...payload,
     password: formData.get('password'),
@@ -22,7 +22,7 @@ export async function registerAction(formData: FormData) {
       message: 'REGISTER_FAILED',
       old: payload,
       errors: result?.message ?? []
-    })
+    }, {ttl: 10})
     redirect('/register');
   }
   await cookieUtil.set('verify-email', payload.email, {ttl: 30 * 60})

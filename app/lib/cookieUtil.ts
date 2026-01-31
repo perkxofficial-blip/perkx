@@ -43,7 +43,10 @@ export const cookieUtil = {
     const cookieStore = await cookies()
     const keyList = Array.isArray(keys) ? keys : [keys]
     keyList.forEach((key) => {
-      cookieStore.delete(key)
+      cookieStore.delete({
+        name: key,
+        path: '/',
+      })
     })
   },
 }

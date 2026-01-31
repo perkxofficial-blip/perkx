@@ -8,7 +8,7 @@ export async function loginAction(formData: FormData) {
     email: formData.get('email')?.toString() ?? '',
     password: formData.get('password')?.toString() ?? null,
   };
-  await cookieUtil.delete(['login', 'verify-email'])
+  await cookieUtil.delete(['login', 'register', 'verify-email'])
   const res = await login(payload)
   const result: any = await res.json()
   if (!res.ok) {
