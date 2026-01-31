@@ -604,20 +604,36 @@ header {
     }
   }
   .campaign-slide {
-    padding: 0 80px; /* giống stagePadding của owl */
+    padding: 0 80px;
+  }
+
+  .campaign-slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
   }
 
   .campaign-slide-item {
-    width: 280px; /* BẮT BUỘC */
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .campaign-card {
+    height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
   }
 
   .campaign-item {
-    height: 365px;
-    .campaign-box {
+    .campaign-box-padding {
+      padding: 12px;
+      width: 100%;
       position: absolute;
       bottom: 0;
-      margin: 12px;
+      left: 0;
+      display: flex;
+    }
+    .campaign-box {
       display: flex;
       padding: 16px;
       flex-direction: column;
@@ -628,6 +644,7 @@ header {
       border: 1px solid rgba(255, 255, 255, 0.14);
       background: linear-gradient(180deg, rgba(24, 10, 85, 0.00) 0%, rgba(0, 0, 0, 0.70) 100%);
       backdrop-filter: blur(12px);
+      width: 100%;
       .tag{
         display: flex;
         padding: 2px 10px;
@@ -784,6 +801,7 @@ header {
     }
     img {
       margin: 0 auto;
+      width: 100%;
     }
   }
   .campaign-item:hover {

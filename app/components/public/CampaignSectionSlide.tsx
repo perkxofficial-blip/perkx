@@ -3,9 +3,11 @@ export interface CampaignsProps {
   campaigns: any[]
 }
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay } from 'swiper/modules'
+import {Autoplay, Navigation} from 'swiper/modules'
 import CampaignItem from "@/components/public/CampaignItem";
 export default function PartnerSectionSlide({campaigns}: CampaignsProps) {
+  const loopCampaigns =
+    campaigns.length >= 5 ? [...campaigns, ...campaigns] : campaigns;
   return (
     <Swiper
       modules={[Autoplay]}
@@ -13,18 +15,21 @@ export default function PartnerSectionSlide({campaigns}: CampaignsProps) {
       centeredSlides
       slidesPerView="auto"
       spaceBetween={20}
+      speed={800}
       autoplay={{
-        delay: 1000,
-        disableOnInteraction: true,
+        delay: 2500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
       }}
-      className="campaign-slide"
+      className="campaign-slider"
     >
-      {campaigns.map((campaign, index) => (
-        <SwiperSlide key={campaign.id || index} className="campaign-slide-item">
-          <CampaignItem campaign={campaign}/>
+      {loopCampaigns.map((campaign, index) => (
+        <SwiperSlide key={index} className="campaign-slide-item">
+          <div className="campaign-card">
+            <CampaignItem campaign={campaign} />
+          </div>
         </SwiperSlide>
       ))}
     </Swiper>
-
   )
 }
