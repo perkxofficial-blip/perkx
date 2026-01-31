@@ -322,32 +322,38 @@ header {
   .partner-slide-wrapper {
     width: 100%;
     overflow: hidden;
-  }
-  
-  .partner-slide {
-    display: flex;
-    height: 85px;
-    align-items: center;
-    gap: 40px;
-    animation: scroll 30s linear infinite;
-    width: fit-content;
-    
-    .item {
+    .partner-slide {
       display: flex;
-      align-items: center;
-      justify-content: center;
       height: 85px;
-      min-width: 120px;
-      padding: 0 24px;
+      align-items: center;
+      gap: 40px;
+      animation: scroll 30s linear infinite;
+      width: fit-content;
+      
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 85px;
+        min-width: 120px;
+        padding: 0 24px;
 
-      img {
-        max-height: 100%;
-        width: auto;
-        object-fit: contain;
+        img {
+          max-height: 100%;
+          width: auto;
+          object-fit: contain;
+          margin-left: 50px;
+        }
+        
+        .partner-label {
+          color: #FFFFFF;
+          margin-left: 10px;
+          opacity: 0.7;
+        }
       }
     }
   }
-  
+
   .partner-slide:hover {
     animation-play-state: paused;
   }
