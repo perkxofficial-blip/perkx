@@ -27,7 +27,6 @@ export async function generateMetadata({ params }: {
 export default async function ForgotPasswordPage() {
   const t = await getTranslations();
   const cookieStore = await cookies();
-  const email: any = cookieStore.get('verify-email')?.value;
   const messageRaw: any = cookieStore.get('forgot-password-message')?.value;
   let message: any;
   if (messageRaw) {

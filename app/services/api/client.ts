@@ -307,4 +307,53 @@ export const apiClient = {
     }
     return responseData;
   },
+
+  // POST request
+  async authPost(endpoint: string, payload: {}) {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    return await fetch(`${this.baseURL}${endpoint}`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(payload),
+      cache: 'no-store',
+    });
+  },
+
+  async authGet(
+    endpoint: string,
+    query?: Record<string, any>,
+    options?: RequestInit
+  ) {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      ...(options?.headers || {}),
+    }
+    const queryString = buildQuery(query)
+    return fetch(`${this.baseURL}${endpoint}${queryString}`, {
+      method: 'GET',
+      headers,
+      cache: 'no-store',
+      ...options,
+    })
+  }
 };
+
+function buildQuery(query?: Record<string, any>) {
+  if (!query || Object.keys(query).length === 0) return ''
+
+  const params = new URLSearchParams()
+
+  Object.entries(query).forEach(([key, value]) => {
+    if (value === undefined || value === null) return
+
+    if (Array.isArray(value)) {
+      value.forEach(v => params.append(key, String(v)))
+    } else {
+      params.append(key, String(value))
+    }
+  })
+
+  return `?${params.toString()}`
+}

@@ -1,8 +1,6 @@
 import {
-  BadRequestException,
-  ConflictException, HttpStatus,
+  BadRequestException, HttpStatus,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
@@ -12,9 +10,9 @@ import { RegisterDto } from './dto';
 import * as crypto from 'crypto';
 import { randomBytes } from 'crypto';
 import { EmailVerificationService } from './email-verification.service';
-import { MailerService } from '@nestjs-modules/mailer';
 import { TwoFatosService } from './two-fatos.service';
 import { throwValidateError } from '../../../common/errors';
+import { MailService } from '../../../mail/mail.service';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +22,7 @@ export class AuthService {
     private emailVerificationService: EmailVerificationService,
     @InjectDataSource()
     private dataSource: DataSource,
-    private mailerService: MailerService,
+    private mailerService: MailService,
     private twoFatosService: TwoFatosService,
   ) {}
 
@@ -152,14 +150,7 @@ export class AuthService {
         expires_at: new Date(Date.now() + 15 * 60 * 1000),
       });
       const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
-      await this.mailerService.sendMail({
-        to: user.email,
-        subject: 'PerkX - Reset your password',
-        template: 'reset-password',
-        context: {
-          resetPasswordUrl,
-        },
-      });
+      await this.mailerService.sendMailResetPassword(user.email, resetPasswordUrl)
     });
   }
 

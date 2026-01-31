@@ -106,7 +106,7 @@ export default async function CampaignPage({ searchParams }: Props) {
       </div>
       <section className="campaign-section position-relative">
         <div className="container">
-          <div className="row justify-content-center">
+          <div className="row justify-content-center mb-5">
             <div className="col-md-3">
               <div className="mb-3 position-relative">
                 <label htmlFor="holderInput" className="form-label">

@@ -7,6 +7,7 @@ import {redirect} from "next/navigation";
 import {resendAction} from "./action";
 import {cookies} from "next/headers";
 import ResendCountdown from "./ResendCountdown";
+import {verifyInfo} from "@/services/api/public/auth";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 export async function generateMetadata({ params }: {
@@ -27,21 +28,12 @@ export async function generateMetadata({ params }: {
   return generatePageMetadata({ page, locale });
 }
 async function verifyEmail(token: string | undefined) {
-  const res = await fetch(
-    `${API_BASE_URL}/auth/verify-email?token=${token}`,
-    {
-      method: 'GET',
-      cache: 'no-store',
-    }
-  );
-  if (!res.ok) {
-    redirect(`/login`);
-  }
+  const res = await verifyInfo({ token: token })
   const result: any = await res.json();
-  if (!result?.data?.status) {
+  if (!res.ok || !result?.data?.status) {
     redirect(`/login`);
   }
-  return result?.data
+  return result.data
 }
 interface Props {
   searchParams: { token?: string }

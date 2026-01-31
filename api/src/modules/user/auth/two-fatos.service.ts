@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, IsNull } from 'typeorm';
-import { MailerService } from '@nestjs-modules/mailer';
 import { randomInt } from 'node:crypto';
 import { JwtService } from '@nestjs/jwt';
 import { User, UserLoginOtp, UserStatus, AccessLog } from '../../../entities';
+import { MailService } from '../../../mail/mail.service';
 
 @Injectable()
 export class TwoFatosService {
@@ -16,7 +16,7 @@ export class TwoFatosService {
     @InjectRepository(AccessLog)
     private accessLogRepo: Repository<AccessLog>,
     private jwtService: JwtService,
-    private mailerService: MailerService,
+    private mailerService: MailService,
     @InjectDataSource()
     private dataSource: DataSource,
   ) {}
@@ -37,15 +37,7 @@ export class TwoFatosService {
         });
       });
 
-      await this.mailerService.sendMail({
-        to: user.email,
-        subject: '[PerkX] Your verification code to log in',
-        template: 'login-otp',
-        context: {
-          otp,
-          expiresIn: 10,
-        },
-      });
+      await this.mailerService.sendMailVerifyOtp(user.email, otp)
 
       return true;
     } catch (err) {

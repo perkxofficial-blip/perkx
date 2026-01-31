@@ -5,6 +5,12 @@ export const endpoints = {
   user: {
     register: '/auth/register',
     login: '/auth/login',
+    forgotPassword: '/auth/forgot-password',
+    resetPassword: '/auth/reset-password',
+    verifyEmail: '/auth/verify-email',
+    resendEmail: '/auth/resend',
+    verifyOtp: '/auth/verify-otp',
+    resendOtp: '/auth/resend-otp',
     profile: '/profile',
     updateProfile: '/profile',
   },

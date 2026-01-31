@@ -1,20 +1,13 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
+import {forgotPassword} from "@/services/api/public/auth";
+import {cookieUtil} from "@/lib/cookieUtil";
 export async function forgotPasswordAction(formData: FormData) {
-  const cookieStore = await cookies();
   const payload = {
     email: formData.get('email')?.toString() ?? '',
   };
-  const res = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-    cache: 'no-store',
-  });
-  console.log(res.json())
+  const res = await forgotPassword(payload)
 
   const message = res.ok ? {
     status: true,
@@ -23,15 +16,6 @@ export async function forgotPasswordAction(formData: FormData) {
     status: false,
     message: 'message.forgot_email_failed',
   }
-  cookieStore.set(
-    'forgot-password-message',
-    JSON.stringify(message),
-    {
-      httpOnly: true,
-      path: '/',
-      maxAge: 5
-    }
-  );
-
+  await cookieUtil.set('forgot-password-message', message, {ttl: 10})
   redirect(`/forgot-password`);
 }
