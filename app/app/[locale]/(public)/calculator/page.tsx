@@ -1,9 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import Header from '@/components/public/Header';
 import type { Metadata } from 'next';
-import { getAllExchanges, Exchange, ExchangeProduct } from '@/services/api/public/exchange';
-import Image from 'next/image';
-import PartnerExchangesTable from '@/components/public/PartnerExchangesTable';
+import { getAllExchanges, Exchange } from '@/services/api/public/exchange';
 import CalculatorCard from '@/components/public/CalculatorCard';
 
 interface ExchangesPageProps {
@@ -19,11 +17,6 @@ export async function generateMetadata({ params }: ExchangesPageProps): Promise<
     title: 'Calculator | PerkX',
     description: 'View Calculator Page',
   };
-}
-
-interface ExchangeRowProps {
-  exchange: Exchange;
-  t: any;
 }
 
 export default async function CalculatorPage({ params }: ExchangesPageProps) {
