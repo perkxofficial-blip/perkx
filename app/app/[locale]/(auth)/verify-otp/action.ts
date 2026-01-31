@@ -23,7 +23,11 @@ export async function verifyOtpAction(formData: FormData) {
   }
 
   const result: any = await res.json()
-  await cookieUtil.set('token', result?.data?.accessToken)
+  // Set token cookie with httpOnly: false so client-side JavaScript can access it
+  await cookieUtil.set('token', result?.data?.accessToken, {
+    httpOnly: false,
+    ttl: 7 * 24 * 60 * 60 // 7 days
+  })
   redirect(`/user/profile`);
 }
 

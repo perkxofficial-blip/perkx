@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { apiClient } from '@/services/api/client';
 import { endpoints } from '@/services/endpoints';
+import { auth } from '@/services/auth';
 
 export default function UserLayout({
   children,
@@ -15,28 +16,34 @@ export default function UserLayout({
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    // Check authentication (CSR)
-    const token = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('token='))
-      ?.split('=')[1];
-    
-    if (!token) {
-      router.push('/login');
-      return;
-    }
+    const loadUser = async () => {
+      const token = auth.getUserToken();
 
-    // Validate token
-    apiClient.get(endpoints.user.profile, token)
-      .then(data => {
+      if (!token) {
+        // This shouldn't happen as middleware already checked, but just in case
+        router.push('/login');
+        return;
+      }
+
+      try {
+        const data = await apiClient.get(endpoints.user.profile, token);
         if (data.statusCode === 200 || data.data) {
           setUser(data.data);
-          setIsLoading(false);
         } else {
+          // Invalid token
+          auth.clearUserToken();
           router.push('/login');
         }
-      })
-      .catch(() => router.push('/login'));
+      } catch (error) {
+        // Token expired or invalid
+        auth.clearUserToken();
+        router.push('/login');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadUser();
   }, [router]);
 
   if (isLoading) {
