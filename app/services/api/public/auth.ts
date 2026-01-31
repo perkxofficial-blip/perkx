@@ -6,7 +6,7 @@ export async function login(payload: any): Promise<Response> {
 }
 
 export async function verifyInfo(query: any): Promise<Response> {
-  return await apiClient.get(endpoints.user.verifyEmail, query);
+  return await apiClient.authGet(endpoints.user.verifyEmail, query);
 }
 
 export async function resend(payload: any): Promise<Response> {
@@ -15,4 +15,12 @@ export async function resend(payload: any): Promise<Response> {
 
 export async function register(payload: any): Promise<Response> {
   return await apiClient.authPost(endpoints.user.register, payload);
+}
+
+export async function verifyOtp(payload: any): Promise<Response> {
+  return await apiClient.authPost(endpoints.user.verifyOtp, payload);
+}
+
+export async function resendOtp(payload: any): Promise<Response> {
+  return await apiClient.authPost(endpoints.user.resendOtp, payload);
 }

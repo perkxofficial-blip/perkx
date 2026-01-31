@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: {
   return generatePageMetadata({ page, locale });
 }
 async function verifyEmail(token: string | undefined) {
-  const res = await verifyInfo({ token })
+  const res = await verifyInfo({ token: token })
   const result: any = await res.json();
   if (!res.ok || !result?.data?.status) {
     redirect(`/login`);

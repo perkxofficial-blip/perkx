@@ -10,7 +10,7 @@ export const endpoints = {
     verifyEmail: '/auth/verify-email',
     resendEmail: '/auth/resend',
     verifyOtp: '/auth/verify-otp',
-    resendOtp: '/auth/resend',
+    resendOtp: '/auth/resend-otp',
     profile: '/profile',
     updateProfile: '/profile',
   },

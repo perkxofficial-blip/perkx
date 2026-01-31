@@ -16,11 +16,11 @@ export async function generateMetadata({ params }: {
   }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const page = await getPageBySlug('verify-email', locale);
+  const page = await getPageBySlug('verify-otp', locale);
 
   if (!page) {
     return {
-      title: 'Verify Email | PerkX',
+      title: 'Verify OTP | PerkX',
       description: 'Learn more about PerkX and our mission',
     };
   }
