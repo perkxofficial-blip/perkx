@@ -22,7 +22,7 @@ export default function ExchangePartnerConfigPage() {
     setToast({ show: true, message, type });
   };
 
-  const handleDownloadTemplate = async () => {
+  const handleDownloadTemplate = () => {
     const templateUrl = process.env.NEXT_PUBLIC_EXCHANGE_TEMPLATE_URL;
     
     if (!templateUrl) {
@@ -30,43 +30,12 @@ export default function ExchangePartnerConfigPage() {
       return;
     }
 
-    try {
-      showToast('Downloading template...', 'info');
-      
-      // Fetch the file with cors mode to handle cross-origin and mixed content
-      const response = await fetch(templateUrl, {
-        mode: 'cors',
-        credentials: 'omit'
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch template');
-      }
-      
-      // Get the blob
-      const blob = await response.blob();
-      
-      // Create a blob URL
-      const blobUrl = window.URL.createObjectURL(blob);
-      
-      // Create and trigger download
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = 'partner_exchange_import_template.csv';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Clean up the blob URL after a short delay
-      setTimeout(() => {
-        window.URL.revokeObjectURL(blobUrl);
-      }, 100);
-      
-      showToast('Template downloaded successfully', 'success');
-    } catch (error) {
-      console.error('Download error:', error);
-      showToast('Failed to download template. Please try again.', 'error');
-    }
+    const link = document.createElement('a');
+    link.href = templateUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Template downloaded successfully', 'success');
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {

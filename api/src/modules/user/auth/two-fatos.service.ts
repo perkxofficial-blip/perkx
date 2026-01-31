@@ -61,30 +61,30 @@ export class TwoFatosService {
       throw new BadRequestException('User not found');
     }
     
-    // const record = await this.otpRepo.findOne({
-    //   where: {
-    //     user_id: user.id,
-    //     verified_at: IsNull(),
-    //   },
-    //   order: { created_at: 'DESC' },
-    // });
+    const record = await this.otpRepo.findOne({
+      where: {
+        user_id: user.id,
+        verified_at: IsNull(),
+      },
+      order: { created_at: 'DESC' },
+    });
 
-    // if (!record) throw new BadRequestException('OTP not found');
-    // if (record.expires_at < new Date()) {
-    //   throw new BadRequestException('OTP expired');
-    // }
-    // if (record.attempt_count >= 5) {
-    //   throw new BadRequestException('Too many attempts');
-    // }
-    // if (record.otp_code !== otp) {
-    //   await this.otpRepo.update(record.id, {
-    //     attempt_count: record.attempt_count + 1,
-    //   });
-    //   throw new BadRequestException('Invalid OTP');
-    // }
-    // await this.otpRepo.update(record.id, {
-    //   verified_at: new Date(),
-    // });
+    if (!record) throw new BadRequestException('OTP not found');
+    if (record.expires_at < new Date()) {
+      throw new BadRequestException('OTP expired');
+    }
+    if (record.attempt_count >= 5) {
+      throw new BadRequestException('Too many attempts');
+    }
+    if (record.otp_code !== otp) {
+      await this.otpRepo.update(record.id, {
+        attempt_count: record.attempt_count + 1,
+      });
+      throw new BadRequestException('Invalid OTP');
+    }
+    await this.otpRepo.update(record.id, {
+      verified_at: new Date(),
+    });
     
     // Insert access log after successful login
     await this.accessLogRepo.save({
