@@ -158,7 +158,6 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                   value={selectedProduct}
                   onChange={(e) => setSelectedProduct(e.target.value)}
                   className="calculator-select"
-                  disabled={!selectedExchange || availableProducts.length === 0}
                 >
                   <option value="">{selectedExchange ? t('calculator.select_product') : t('calculator.select_product')}</option>
                   {availableProducts.map((product) => (
