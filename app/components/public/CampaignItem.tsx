@@ -14,7 +14,7 @@ const CampaignItem = ({campaign}: CampaignItemProps) => {
         src={campaign.banner_url}
         alt={campaign.title}
         width={280}
-        height={362}
+        height={365}
         className="campaign-img"
         unoptimized
       />
