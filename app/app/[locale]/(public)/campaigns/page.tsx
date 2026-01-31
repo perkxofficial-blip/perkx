@@ -73,9 +73,9 @@ export default async function CampaignPage({ searchParams }: Props) {
     })),
   ];
   const perPages = [
-    {value:'10', label: '10'},
     {value:'20', label: '20'},
-    {value:'50', label: '50'},
+    {value:'40', label: '40'},
+    {value:'80', label: '80'},
   ]
   const pagination: any = data?.campaigns?.pagination ?? {}
   return (
