@@ -228,6 +228,29 @@
       "title": "We believe Web3 shouldn’t feel like decoding the Matrix.",
       "description": "It should feel like walking into a buffet where everything’s already paid for with free cashback and referral bonuses you didn’t know you had.",
       "tldr": "TL;DR: We find the perks. You claim them. Everyone’s happy. (Except that guy still paying full fees. RIP.)"
-    }
-  }
+    }  },
+  "how-it-works": {
+    "meta": {
+      "title": "How It Works | PerkX",
+      "description": "Learn how PerkX cashback rewards work"
+    },
+    "hero": {
+      "title_part1": "Unlock Better Trading ",
+      "title_gradient": "Perkx",
+      "subtitle": "Follow three simple steps to unlock better fees and rewards on every trade."
+    },
+    "steps": {
+      "step1": {
+        "title": "1. Register a PerkX account",
+        "description": "Create your free PerkX account in under 1 minute. Just enter your email and set a password to get started."
+      },
+      "step2": {
+        "title": "2. Create exchange account via link provided",
+        "description": "Create exchange account via link provided"
+      },
+      "step3": {
+        "title": "3. Start Trading",
+        "description": "Create your free PerkX account in under 1 minute. Just enter your email and set a password to get started."
+      }
+    }  }
 }

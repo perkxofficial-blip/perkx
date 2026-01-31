@@ -1,0 +1,239 @@
+// How It Works Page Styles
+.how-it-works-page {
+  background-image: url("../../public/images/bg-source-exchange.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .banner-section {
+    padding-bottom: 80px;
+  }
+
+  .get-started {
+    h1 {
+      font-family: "DM Sans";
+      font-size: 68px;
+      font-weight: 700;
+      line-height: normal;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin: 0;
+
+      .gradient-text {
+        background: linear-gradient(-89.9999998439288deg, rgb(137, 239, 255) 6.1497%, rgb(237, 115, 210) 53.905%, rgb(138, 175, 255) 98.982%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .regular-text {
+        background: linear-gradient(270deg, #C2C1C8 6.15%, #FCFBFC 98.98%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    p {
+      font-family: "DM Sans";
+      font-size: 24px;
+      font-weight: 400;
+      line-height: normal;
+      color: #FFFFFF;
+      margin-top: 26px;
+    }
+  }
+}
+
+.steps-section {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+
+  .step-item {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 80px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.reverse {
+      flex-direction: row-reverse;
+      gap: 55px;
+    }
+
+    .step-image {
+      flex-shrink: 0;
+      width: 549.953px;
+      height: 382.53px;
+      border-radius: 32px;
+      border: 1.5px solid #000000;
+      overflow: hidden;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .step-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #FCFCFC;
+
+      h3 {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.32px;
+        margin: 0;
+      }
+
+      p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: -0.12px;
+        margin: 0;
+      }
+    }
+  }
+
+  // Background decoration
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -640px;
+    left: -792.94px;
+    width: 1559.437px;
+    height: 1229.834px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1559 1230'%3E%3Cdefs%3E%3CradialGradient id='bg-gradient'%3E%3Cstop offset='0%25' stop-color='%23F579E0' stop-opacity='0.5'/%3E%3Cstop offset='50%25' stop-color='%23251611' stop-opacity='0.48'/%3E%3Cstop offset='100%25' stop-color='%23000'/%3E%3C/radialGradient%3E%3C/defs%3E%3C/svg%3E") no-repeat center;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+  .how-it-works-page {
+    .get-started {
+      h1 {
+        font-size: 56px;
+      }
+
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .steps-section {
+    padding: 60px 0;
+
+    .step-item {
+      gap: 40px;
+      margin-bottom: 60px;
+
+      &.reverse {
+        gap: 40px;
+      }
+
+      .step-image {
+        width: 450px;
+        height: 315px;
+      }
+
+      .step-content {
+        h3 {
+          font-size: 28px;
+        }
+
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .how-it-works-page {
+    .get-started {
+      h1 {
+        font-size: 36px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 16px;
+      }
+    }
+  }
+
+  .steps-section {
+    padding: 40px 0;
+
+    .step-item {
+      flex-direction: column !important;
+      gap: 24px !important;
+      margin-bottom: 40px;
+
+      .step-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1.44;
+      }
+
+      .step-content {
+        h3 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .how-it-works-page {
+    .get-started {
+      h1 {
+        font-size: 28px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .steps-section {
+    .step-item {
+      .step-content {
+        h3 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
