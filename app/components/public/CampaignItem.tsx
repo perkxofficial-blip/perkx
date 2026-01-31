@@ -14,7 +14,7 @@ const CampaignItem = ({campaign}: CampaignItemProps) => {
         src={campaign.banner_url}
         alt={campaign.title}
         width={280}
-        height={362}
+        height={365}
         className="campaign-img"
         unoptimized
       />
@@ -28,7 +28,7 @@ const CampaignItem = ({campaign}: CampaignItemProps) => {
               {t(`campaign.status_${campaign.status}`)}
             </div>
           </div>
-          <p>{campaign.title}</p>
+          <p className="campaign-title">{campaign.title}</p>
           <span className='campaign-desc'>{campaign.description}</span>
           <a href={`/campaigns/${campaign.slug}`}>{t('campaign.btn_name')}</a>
         </div>

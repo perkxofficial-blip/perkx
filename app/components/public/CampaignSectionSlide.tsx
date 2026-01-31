@@ -41,11 +41,11 @@ export default function PartnerSectionSlide({campaigns}: CampaignsProps) {
         slidesPerView="auto"
         spaceBetween={20}
         speed={800}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        //   pauseOnMouseEnter: true,
+        // }}
         navigation={{
           prevEl: '.campaign-prev',
           nextEl: '.campaign-next',
