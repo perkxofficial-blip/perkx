@@ -11,8 +11,8 @@ import {
 import { Exchange } from './exchange.entity';
 
 export enum CampaignCategory {
+  ALL_USER = 'all_user',
   NEW_USER = 'new_user',
-  TRADING_COMPETITION = 'trading_competition',
 }
 
 @Entity('campaigns')

@@ -39,7 +39,7 @@ export class PublicListCampaignsQueryDto {
   })
   @IsOptional()
   @IsEnum(CampaignCategory, {
-    message: 'Category must be one of: new_user, trading_competition',
+    message: 'Category must be one of: all_user, new_user',
   })
   category?: CampaignCategory;
 
@@ -66,15 +66,15 @@ export class PublicListCampaignsQueryDto {
   page?: number = 1;
 
   @ApiPropertyOptional({
-    description: 'Number of items per page (default: 15)',
-    example: 10,
+    description: 'Number of items per page (default: 20)',
+    example: 20,
     type: Number,
     minimum: 1,
-    default: 10,
+    default: 20,
   })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  limit?: number = 10;
+  limit?: number = 20;
 }

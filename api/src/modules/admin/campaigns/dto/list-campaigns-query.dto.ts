@@ -44,7 +44,7 @@ export class ListCampaignsQueryDto {
   page?: number = 1;
 
   @ApiPropertyOptional({
-    description: 'Number of items per page (default: 15)',
+    description: 'Number of items per page (default: 10)',
     example: 10,
     type: Number,
     minimum: 1,

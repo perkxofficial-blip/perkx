@@ -138,7 +138,7 @@ export class CreateCampaignDto {
   @ApiPropertyOptional({
     description: 'Campaign category',
     enum: CampaignCategory,
-    example: CampaignCategory.NEW_USER,
+    example: CampaignCategory.ALL_USER,
   })
   @IsOptional()
   @IsEnum(CampaignCategory)

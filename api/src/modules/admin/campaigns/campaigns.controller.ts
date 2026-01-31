@@ -172,9 +172,9 @@ export class CampaignsController {
   @ApiQuery({
     name: 'limit',
     required: false,
-    description: 'Number of items per page (default: 15)',
+    description: 'Number of items per page (default: 10)',
     type: Number,
-    example: 15,
+    example: 10,
   })
   @ApiResponse({
     status: 200,
