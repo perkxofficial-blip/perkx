@@ -39,12 +39,12 @@ export default function CreateCampaignPage() {
   const [redirecting, setRedirecting] = useState(false);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
   const [bannerPreview, setBannerPreview] = useState<string | null>(null);
-  
+
   const [formData, setFormData] = useState<FormData>({
     title: '',
     subtitle: '',
     exchange_id: null,
-    category: 'All Users',
+    category: 'all_user',
     redirect_url: '',
     description: '',
     preview_start: '',
@@ -76,7 +76,7 @@ export default function CreateCampaignPage() {
 
       try {
         const data = await apiClient.get(endpoints.admin.exchangesList, token);
-        
+
         if (data.statusCode === 200 && Array.isArray(data.data)) {
           setExchanges(data.data);
         } else if (Array.isArray(data)) {
@@ -84,7 +84,7 @@ export default function CreateCampaignPage() {
         }
       } catch (err: any) {
         console.error('Error fetching exchanges:', err);
-        
+
         // If error status is 500, 401, or 403, clear token and redirect to login
         if (err.status === 500 || err.status === 401 || err.status === 403) {
           auth.clearAdminToken();
@@ -223,14 +223,11 @@ export default function CreateCampaignPage() {
       const formDataToSend = new FormData();
       formDataToSend.append('title', formData.title);
       formDataToSend.append('sub_title', formData.subtitle);
-      
+
       if (formData.exchange_id) {
         formDataToSend.append('exchange_id', formData.exchange_id.toString());
       }
-      // Only send category if it's not "All Users"
-      if (formData.category && formData.category !== 'All Users') {
-        formDataToSend.append('category', formData.category);
-      }
+      formDataToSend.append('category', formData.category);
       if (formData.redirect_url.trim()) {
         formDataToSend.append('redirect_url', formData.redirect_url);
       }
@@ -249,11 +246,11 @@ export default function CreateCampaignPage() {
 
       // Turn off loading state after API completes
       setLoading(false);
-      
+
       // Show success message and set redirecting state
       showToast('Campaign created successfully!', 'success');
       setRedirecting(true);
-      
+
       // Wait longer if uploading banner file to ensure backend completes processing
       const delayTime = formData.banner ? 5000 : 1500;
       setTimeout(() => {
@@ -355,9 +352,8 @@ export default function CreateCampaignPage() {
                   value={formData.category}
                   onChange={(e) => handleInputChange('category', e.target.value)}
                 >
-                  <option value="All Users">All Users</option>
+                  <option value="all_user">All Users</option>
                   <option value="new_user">New User</option>
-                  <option value="trading_competition">Trading Competition</option>
                 </select>
               </div>
             </div>
