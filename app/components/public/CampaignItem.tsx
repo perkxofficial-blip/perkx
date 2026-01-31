@@ -32,7 +32,15 @@ const CampaignItem = ({campaign}: CampaignItemProps) => {
             {campaign.title}
           </p>
           <span className='campaign-desc'>{campaign.description}</span>
-          <a href={`/campaigns/${campaign.slug}`}>{t('campaign.btn_name')}</a>
+          {campaign.status === 'expired' ? (
+            <a
+              href={undefined}
+              className="btn-disabled"
+              aria-disabled="true"
+            >{t('campaign.status_expired')}</a>
+            ) : (
+            <a href={`/campaigns/${campaign.slug}`}>{t('campaign.btn_name')}</a>
+          )}
         </div>
       </div>
     </div>
