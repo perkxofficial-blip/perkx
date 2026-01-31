@@ -70,7 +70,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
           <div className="step-item reverse">
             <div className="step-image">
               <Image
-                src="/images/step2-linked-exchange.png"
+                src="/images/step2-link-exchange.png"
                 alt={t('steps.step2.title')}
                 width={550}
                 height={383}
