@@ -181,7 +181,7 @@
     "hero_subtitle": "Calculate your potential cashback earnings based on your trading volume",
     "volume_title": "Monthly Trading Volume USDT",
     "select_exchange": "Select Exchange",
-    "select_product": "Product Type",
+    "select_product": "Select product",
     "select_fee_type": "Fee Type",
     "product_spot": "Spot",
     "product_futures": "Futures",
@@ -191,7 +191,7 @@
     "monthly_cashback": "MONTHLY CASHBACK",
     "annual_savings": "ANNUAL SAVINGS",
     "claim_rebate_btn": "Claim This Rebate Now",
-    "choose_exchange": "Choose an exchange"
+    "choose_exchange": "Select exchange"
   },
   "about": {
     "meta": {

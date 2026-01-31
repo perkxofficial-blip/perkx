@@ -137,12 +137,13 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
             {/* Dropdown Inputs */}
             <div className="calculator-inputs">
               <div className="input-group">
+                <p className="input-label">{t('calculator.select_exchange')}</p>
                 <select
                   value={selectedExchange}
                   onChange={handleExchangeChange}
                   className="calculator-select"
                 >
-                  <option value="">{t('calculator.choose_exchange')}</option>
+                  <option value="">{t('calculator.select_exchange')}</option>
                   {exchanges.map((exchange) => (
                     <option key={exchange.id} value={exchange.id}>
                       {exchange.name}
@@ -152,6 +153,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
               </div>
 
               <div className="input-group">
+                <p className="input-label">{t('calculator.select_product')}</p>
                 <select
                   value={selectedProduct}
                   onChange={(e) => setSelectedProduct(e.target.value)}
@@ -168,6 +170,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
               </div>
 
               <div className="input-group">
+                <p className="input-label">{t('calculator.select_fee_type')}</p>
                 <select
                   value={selectedFeeType}
                   onChange={(e) => setSelectedFeeType(e.target.value)}
