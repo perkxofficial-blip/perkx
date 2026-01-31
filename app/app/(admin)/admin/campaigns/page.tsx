@@ -72,38 +72,73 @@ export default function AdminCampaignsPage() {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    const token = auth.getAdminToken();
+    const fetchAllCampaigns = async () => {
+      const token = auth.getAdminToken();
 
-    if (token) {
-      apiClient.get(endpoints.admin.campaigns, token || undefined)
-        .then(data => {
-          if (data.statusCode === 200 && data.data && Array.isArray(data.data.data)) {
-            setCampaigns(data.data.data);
-          } else if (data.statusCode === 200 && Array.isArray(data.data)) {
-            setCampaigns(data.data);
-          } else if (Array.isArray(data)) {
-            setCampaigns(data);
-          } else {
-            setCampaigns([]);
-          }
-          setLoading(false);
-        })
-        .catch(err => {
-          console.error('Error fetching campaigns:', err);
+      if (!token) {
+        setError('No authentication token found');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        let allCampaigns: Campaign[] = [];
+        let page = 1;
+        let hasMore = true;
+        const limit = 100; // Fetch 100 items per page
+
+        // Fetch all pages until no more data
+        while (hasMore) {
+          const data = await apiClient.get(
+            `${endpoints.admin.campaigns}?page=${page}&limit=${limit}`,
+            token
+          );
           
-          // If error status is 500, 401, or 403, clear token and redirect to login
-          if (err.status === 500 || err.status === 401 || err.status === 403) {
-            auth.clearAdminToken();
-            window.location.href = '/admin/login';
-          } else {
-            setError('Failed to load campaigns');
-            setLoading(false);
+          let campaigns: Campaign[] = [];
+          let total = 0;
+
+          // Handle different response structures
+          if (data.statusCode === 200 && data.data) {
+            if (Array.isArray(data.data.data)) {
+              campaigns = data.data.data;
+              total = data.data.total || data.data.data.length;
+            } else if (Array.isArray(data.data)) {
+              campaigns = data.data;
+              total = data.data.length;
+            }
+          } else if (Array.isArray(data)) {
+            campaigns = data;
+            total = data.length;
           }
-        });
-    } else {
-      setError('No authentication token found');
-      setLoading(false);
-    }
+
+          allCampaigns = [...allCampaigns, ...campaigns];
+
+          // Check if there are more pages
+          // If current batch is less than limit, we've reached the end
+          if (campaigns.length < limit || allCampaigns.length >= total) {
+            hasMore = false;
+          } else {
+            page++;
+          }
+        }
+
+        setCampaigns(allCampaigns);
+        setLoading(false);
+      } catch (err: any) {
+        console.error('Error fetching campaigns:', err);
+        
+        // Only redirect to login for authentication errors
+        if (err.status === 401 || err.status === 403) {
+          auth.clearAdminToken();
+          window.location.href = '/admin/login';
+        } else {
+          setError('Failed to load campaigns');
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchAllCampaigns();
   }, []);
 
   // Determine timeline status based on dates
@@ -200,13 +235,12 @@ export default function AdminCampaignsPage() {
     } catch (err: any) {
       console.error(`Error updating ${field}:`, err);
       
-      // If error status is 500, 401, or 403, clear token and redirect to login
-      if (err.status === 500 || err.status === 401 || err.status === 403) {
+      // Only redirect to login for authentication errors
+      if (err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
         window.location.href = '/admin/login';
       } else {
-        const errorMsg = err.response?.message || `Failed to update ${field}`;
-        showToast(errorMsg, 'error');
+        showToast(err.message || `Failed to update ${field}`, 'error');
       }
     }
   };
@@ -231,12 +265,12 @@ export default function AdminCampaignsPage() {
     } catch (err: any) {
       console.error('Error deleting campaign:', err);
       
-      // If error status is 500, 401, or 403, clear token and redirect to login
-      if (err.status === 500 || err.status === 401 || err.status === 403) {
+      // Only redirect to login for authentication errors
+      if (err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
         window.location.href = '/admin/login';
       } else {
-        showToast('Failed to delete campaign', 'error');
+        showToast(err.message || 'Failed to delete campaign', 'error');
       }
     } finally {
       setDeleting(false);

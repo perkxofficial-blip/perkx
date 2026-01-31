@@ -158,6 +158,15 @@ export default function CreateCampaignPage() {
       newErrors.banner = 'This is a required field.';
     }
 
+    // Validate redirect_url if provided
+    if (formData.redirect_url.trim()) {
+      try {
+        new URL(formData.redirect_url);
+      } catch {
+        newErrors.redirect_url = 'Please enter a valid URL (e.g., https://example.com)';
+      }
+    }
+
     // Preview duration validation
     if (!formData.preview_start) {
       newErrors.preview_start = 'This is a required field.';
@@ -218,11 +227,11 @@ export default function CreateCampaignPage() {
       if (formData.exchange_id) {
         formDataToSend.append('exchange_id', formData.exchange_id.toString());
       }
-      // Only send category if it's not "All Users" (which means no filter/category)
+      // Only send category if it's not "All Users"
       if (formData.category && formData.category !== 'All Users') {
         formDataToSend.append('category', formData.category);
       }
-      if (formData.redirect_url) {
+      if (formData.redirect_url.trim()) {
         formDataToSend.append('redirect_url', formData.redirect_url);
       }
       formDataToSend.append('description', formData.description);
@@ -252,16 +261,19 @@ export default function CreateCampaignPage() {
       }, delayTime);
     } catch (err: any) {
       console.error('Error creating campaign:', err);
+      console.error('Error status:', err.status);
+      console.error('Error response:', err.response);
 
       setLoading(false);
 
-      if (err.status === 500 || err.status === 401 || err.status === 403) {
+      // Only redirect to login for authentication/authorization errors, not server errors
+      if (err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
         window.location.href = '/admin/login';
         return;
       }
-      const msg = err.response?.message ?? 'Failed to create campaign';
-      showToast(Array.isArray(msg) ? msg[0] : msg, 'error');
+      // Error message is already formatted in client.ts
+      showToast(err.message || 'Failed to create campaign', 'error');
     }
   };
 
@@ -285,9 +297,6 @@ export default function CreateCampaignPage() {
         {/* Section 1: Basic Information */}
         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center text-xl font-bold">
-              1
-            </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Basic Information</h3>
           </div>
 
@@ -360,10 +369,11 @@ export default function CreateCampaignPage() {
               <input
                 type="text"
                 placeholder="https://exchange.com/ref..."
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 transition-colors"
+                className={`w-full px-4 py-2.5 rounded-lg border ${errors.redirect_url ? 'border-red-500' : 'border-gray-300'} bg-white text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 transition-colors`}
                 value={formData.redirect_url}
                 onChange={(e) => handleInputChange('redirect_url', e.target.value)}
               />
+              {errors.redirect_url && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.redirect_url}</p>}
             </div>
 
             <div>
@@ -385,9 +395,6 @@ export default function CreateCampaignPage() {
         {/* Section 2: Timeline & Lifecycle */}
         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center text-xl font-bold">
-              2
-            </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Timeline & Lifecycle</h3>
           </div>
 
@@ -496,9 +503,6 @@ export default function CreateCampaignPage() {
         {/* Section 3: Campaign Banner */}
         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center text-xl font-bold">
-              3
-            </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Campaign Banner</h3>
           </div>
 
