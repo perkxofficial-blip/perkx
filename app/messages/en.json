@@ -192,5 +192,65 @@
     "annual_savings": "ANNUAL SAVINGS",
     "claim_rebate_btn": "Claim This Rebate Now",
     "choose_exchange": "Choose an exchange"
-  }
+  },
+  "about": {
+    "meta": {
+      "title": "About Us | PerkX",
+      "description": "Learn more about PerkX and our mission"
+    },
+    "hero": {
+      "title": "About Us",
+      "subtitle": "High-density overview of active trading competitions and rewards."
+    },
+    "intro": {
+      "title": "PerkX is where crypto meets perks - minus the complicated stuff.",
+      "description": "We’re not a DEX, not a CEX, not your ex. We sniff out every juicy Web3 deal, from hidden signup rewards to staking sweeteners and surprise airdrops and slap them neatly in one spot. Like a crypto coupon aunt, but cooler."
+    },
+    "sections": {
+      "what_we_do": {
+        "title": "What We Actually Do:",
+        "items": [
+          "Collect all the CeFi + DeFi deals, promos, rewards, and bonuses in one place",
+          "Translate all that fine print into something your non-crypto friend might actually understand",
+          "Help you feel like a crypto genius without lifting a finger (or signing 5 MetaMask transactions)"
+        ]
+      },
+      "what_we_dont_do": {
+        "title": "What We Don't Do:",
+        "items": [
+          "Handle your funds (you keep your coins, we keep our hands to ourselves)",
+          "Ask you to “ape in” or “diamond hand” anything",
+          "Force you into weird Discord cults to unlock benefits"
+        ]
+      }
+    },
+    "footer_note": {
+      "title": "We believe Web3 shouldn’t feel like decoding the Matrix.",
+      "description": "It should feel like walking into a buffet where everything’s already paid for with free cashback and referral bonuses you didn’t know you had.",
+      "tldr": "TL;DR: We find the perks. You claim them. Everyone’s happy. (Except that guy still paying full fees. RIP.)"
+    }  },
+  "how-it-works": {
+    "meta": {
+      "title": "How It Works | PerkX",
+      "description": "Learn how PerkX cashback rewards work"
+    },
+    "hero": {
+      "title_part1": "Unlock Better Trading ",
+      "title_gradient": "Perkx",
+      "subtitle": "Follow three simple steps to unlock better fees and rewards on every trade."
+    },
+    "steps": {
+      "step1": {
+        "title": "1. Register a PerkX account",
+        "description": "Create your free PerkX account in under 1 minute. Just enter your email and set a password to get started."
+      },
+      "step2": {
+        "title": "2. Create exchange account via link provided",
+        "description": "Create exchange account via link provided"
+      },
+      "step3": {
+        "title": "3. Start Trading",
+        "description": "Create your free PerkX account in under 1 minute. Just enter your email and set a password to get started."
+      }
+    }  }
 }

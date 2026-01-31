@@ -1,0 +1,228 @@
+// About Us Page Styles
+// Separate SCSS file to avoid conflicts with other styles
+.page-img-bg {
+  background-image: url("../../public/images/bg-source-about.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.about-page {
+  .banner-section {
+    padding-bottom: 80px;
+  }
+  .get-started {
+    h1 {
+      background: var(--gr3, linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: "DM Sans";
+    }
+    p {
+      font-family: "DM Sans";
+      font-size: 24px;
+    }
+  }
+}
+.campaign-section {
+  .about-content-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .about-intro {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 16px;
+
+    .about-intro-title {
+      width: 100%;
+      text-align: center;
+      color: #FCFCFC;
+      font-size: 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.32px;
+      word-wrap: break-word;
+      margin: 0;
+    }
+
+    .about-intro-description {
+      width: 100%;
+      text-align: center;
+      color: #FCFCFC;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 24px;
+      word-wrap: break-word;
+      margin: 0;
+    }
+  }
+
+  .about-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    .about-section-title {
+      width: 100%;
+      text-align: center;
+      color: #FCFCFC;
+      font-size: 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      line-height: 32px;
+      word-wrap: break-word;
+      margin: 0;
+    }
+
+    .about-section-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .about-section-item {
+      text-align: center;
+      color: #FCFCFC;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      line-height: 24px;
+      word-wrap: break-word;
+      margin: 0;
+    }
+  }
+
+  .about-footer-note {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 16px;
+
+    .about-footer-note-title {
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      word-wrap: break-word;
+      margin: 0;
+    }
+
+    .about-footer-note-description {
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      word-wrap: break-word;
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+  .campaign-section {
+    .about-content-wrapper {
+      padding: 60px 0;
+      gap: 60px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .campaign-section {
+    .about-content-wrapper {
+      padding: 40px 0;
+      gap: 40px;
+      border-radius: 20px;
+    }
+
+    .about-intro {
+      .about-intro-title {
+        font-size: 24px;
+      }
+
+      .about-intro-description {
+        font-size: 14px;
+      }
+    }
+
+    .about-section {
+      .about-section-title {
+        font-size: 24px;
+      }
+
+      .about-section-item {
+        font-size: 14px;
+      }
+    }
+
+    .about-footer-note {
+      .about-footer-note-title {
+        font-size: 24px;
+      }
+
+      .about-footer-note-description {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .campaign-section {
+    .about-content-wrapper {
+      padding: 30px 0;
+      gap: 30px;
+    }
+
+    .about-intro {
+      .about-intro-title {
+        font-size: 20px;
+      }
+    }
+
+    .about-section {
+      .about-section-title {
+        font-size: 20px;
+      }
+    }
+
+    .about-footer-note {
+      .about-footer-note-title {
+        font-size: 20px;
+      }
+
+      .about-footer-note-description {
+        font-size: 14px;
+      }
+    }
+  }
+}
