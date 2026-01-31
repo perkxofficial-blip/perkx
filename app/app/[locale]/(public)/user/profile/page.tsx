@@ -12,7 +12,7 @@ interface UserProfile {
   first_name?: string;
   last_name?: string;
   phone?: string;
-  gender?: 'male' | 'female' | 'other';
+  gender?: 'male' | 'female';
   birthday?: string;
   country?: string;
   referral_code?: string;
