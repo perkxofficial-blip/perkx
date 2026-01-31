@@ -24,3 +24,11 @@ export async function verifyOtp(payload: any): Promise<Response> {
 export async function resendOtp(payload: any): Promise<Response> {
   return await apiClient.authPost(endpoints.user.resendOtp, payload);
 }
+
+export async function forgotPassword(payload: any): Promise<Response> {
+  return await apiClient.authPost(endpoints.user.forgotPassword, payload);
+}
+
+export async function resetPassword(payload: any): Promise<Response> {
+  return await apiClient.authPost(endpoints.user.resetPassword, payload);
+}

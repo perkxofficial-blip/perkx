@@ -2,7 +2,8 @@
 
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
+import {resetPassword} from "@/services/api/public/auth";
+import {cookieUtil} from "@/lib/cookieUtil";
 export async function resetAction(formData: FormData) {
   const cookieStore = await cookies();
   const payload = {
@@ -10,56 +11,31 @@ export async function resetAction(formData: FormData) {
     password: formData.get('password')?.toString() ?? '',
     confirm_password: formData.get('confirm_password')?.toString() ?? '',
   };
-  const res = await fetch(`${API_BASE_URL}/auth/reset-password`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-    cache: 'no-store',
-  });
+  const res = await resetPassword(payload)
 
   const result: any = await res.json()
   if (!res.ok) {
     if (result.statusCode === 400) {
-      cookieStore.set(
-        'login-message',
-        JSON.stringify({
-          status: false,
-          message: result?.message
-        }),
-        {
-          httpOnly: true,
-          path: '/',
-          maxAge: 5
-        }
-      )
+      await cookieUtil.set('login-message', {
+        status: false,
+        message: result?.message
+      }, {ttl: 10})
+
       redirect(`/login`);
     }
-    cookieStore.set(
-      'reset',
-      JSON.stringify({
-        message: 'RESET_FAILED',
-        old: payload,
-        errors: result?.message ?? []
-      }),
-      {
-        httpOnly: true,
-        path: '/',
-        maxAge: 10
-      }
-    );
+    await cookieUtil.set('reset', {
+      message: 'RESET_FAILED',
+      old: payload,
+      errors: result?.message ?? []
+    }, {ttl: 10})
+
     redirect(`/reset-password?token=${payload.token}`);
   }
-  cookieStore.set(
-    'login-message',
-    JSON.stringify({
-      status: true,
-      message: 'message.reset_password_success',
-    }),
-    {
-      httpOnly: true,
-      path: '/',
-      maxAge: 5
-    }
-  )
+
+  await cookieUtil.set('login-message', {
+    status: true,
+    message: 'message.reset_password_success',
+  }, {ttl: 10})
+
   redirect(`/login`);
 }
