@@ -7,6 +7,29 @@ const API_BASE_URL = isServer
   : '/api'; // Use Next.js API routes as proxy for browser requests
 
 
+// Helper function to parse error messages from API responses
+function parseErrorMessage(responseData: any, status: number, statusText: string): string {
+  let message = responseData.message;
+
+  if (Array.isArray(message) && message.length > 0) {
+    // If array contains objects with 'message' property, extract messages
+    const messages = message.map((item: any) => {
+      if (typeof item === 'object' && item.message) {
+        return item.field ? `${item.field}: ${item.message}` : item.message;
+      }
+      return item;
+    });
+    return messages.join(', ');
+  } else if (typeof message === 'object' && message !== null) {
+    // If message is an object, try to extract string representation
+    return message.message || JSON.stringify(message);
+  }
+
+  return message || `HTTP ${status}: ${statusText}`;
+}
+
+
+
 export const apiClient = {
   baseURL: API_BASE_URL,
   // GET request
@@ -28,13 +51,8 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      let message = responseData.message;
-      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
-        // If array contains objects with 'message' property, extract the first one
-        const firstItem = responseData.message[0];
-        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
-      }
-      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
+      const message = parseErrorMessage(responseData, res.status, res.statusText);
+      const error: any = new Error(message);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -63,13 +81,8 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      let message = responseData.message;
-      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
-        // If array contains objects with 'message' property, extract the first one
-        const firstItem = responseData.message[0];
-        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
-      }
-      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
+      const message = parseErrorMessage(responseData, res.status, res.statusText);
+      const error: any = new Error(message);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -98,13 +111,8 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      let message = responseData.message;
-      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
-        // If array contains objects with 'message' property, extract the first one
-        const firstItem = responseData.message[0];
-        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
-      }
-      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
+      const message = parseErrorMessage(responseData, res.status, res.statusText);
+      const error: any = new Error(message);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -133,8 +141,8 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      const message = Array.isArray(responseData.message) 
-        ? responseData.message.join(', ') 
+      const message = Array.isArray(responseData.message)
+        ? responseData.message.join(', ')
         : (typeof responseData.message === 'object' ? JSON.stringify(responseData.message) : responseData.message);
       const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
