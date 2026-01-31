@@ -29,14 +29,14 @@ export default async function Footer() {
           <div className="col-md-4"><p>{t('footer.desc')}</p></div>
           <div className="col-md-4">
             <ul>
-              <li><a href="">{t('footer.exchange_rebates')}</a></li>
-              <li><a href="">{t('footer.profit_calculator')}</a></li>
+              <li><a href="/exchanges">{t('footer.exchange_rebates')}</a></li>
+              <li><a href="/calculator">{t('footer.profit_calculator')}</a></li>
             </ul>
           </div>
           <div className="col-md-4">
             <ul>
-              <li><a href="">{t('footer.help_center')}</a></li>
-              <li><a href="">{t('footer.terms_of_use')}</a></li>
+              <li><a href="/help-center">{t('footer.help_center')}</a></li>
+              <li><a href="/term-of-use">{t('footer.terms_of_use')}</a></li>
             </ul>
           </div>
         </div>

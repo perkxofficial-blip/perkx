@@ -229,7 +229,8 @@
       "description": "It should feel like walking into a buffet where everything’s already paid for with free cashback and referral bonuses you didn’t know you had.",
       "tldr": "TL;DR: We find the perks. You claim them. Everyone’s happy.",
       "tldr_note": "(Except that one person still paying full fees. RIP.)"
-    }  },
+    }  
+  },
   "how-it-works": {
     "meta": {
       "title": "How It Works | PerkX",
@@ -253,5 +254,26 @@
         "title": "3. Start Trading",
         "description": "Create your free PerkX account in under 1 minute. Just enter your email and set a password to get started."
       }
-    }  }
+    }  
+  },
+  "terms-of-use": {
+    "meta": {
+      "title": "Terms of Use | PerkX",
+      "description": "Read the terms of use for PerkX"
+    },
+    "hero": {
+      "title": "Terms of Use",
+      "subtitle": "Please read these Terms of Use carefully before using the PerkX website and services."
+    }
+  },
+  "help-center": {
+    "meta": {
+      "title": "Help Center | PerkX",
+      "description": "Find answers to common questions about PerkX"
+    },
+    "hero": {
+      "title": "Help Center",
+      "subtitle": "Find answers to common questions about PerkX"
+    }
+  }
 }
