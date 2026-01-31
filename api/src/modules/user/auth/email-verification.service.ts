@@ -5,9 +5,9 @@ import {
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, EntityManager, IsNull, Repository } from 'typeorm';
-import { MailerService } from '@nestjs-modules/mailer';
 import * as crypto from 'crypto';
 import { User, UserEmailVerification, UserStatus } from '../../../entities';
+import { MailService } from '../../../mail/mail.service';
 
 @Injectable()
 export class EmailVerificationService {
@@ -18,7 +18,7 @@ export class EmailVerificationService {
   constructor(
     @InjectRepository(UserEmailVerification)
     private repo: Repository<UserEmailVerification>,
-    private mailerService: MailerService,
+    private mailerService: MailService,
     @InjectDataSource()
     private dataSource: DataSource,
   ) {}
@@ -67,15 +67,7 @@ export class EmailVerificationService {
     });
 
     const verifyUrl = `${process.env.FRONTEND_URL}/verify?token=${token}`;
-    await this.mailerService.sendMail({
-      to: user.email,
-      subject: '[PerkX] Welcome to PerkX - Please verify your email address\n',
-      template: 'verify-email',
-      context: {
-        verifyUrl,
-      },
-    });
-
+    await this.mailerService.sendMailRegister(user.email, verifyUrl)
     return token;
   }
   async verify(token: string) {
@@ -101,13 +93,7 @@ export class EmailVerificationService {
       user.email_verified_at = now;
       await userRepo.save(user);
 
-      await this.mailerService.sendMail({
-        to: user.email,
-        subject: '[PerkX] Your Account is Now Active!',
-        template: 'active-email',
-        context: {
-        },
-      });
+      await this.mailerService.sendMailActive(user.email)
 
       return user;
     });
