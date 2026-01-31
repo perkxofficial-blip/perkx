@@ -80,22 +80,8 @@ export class PublicExchangesService {
 
     return {
       ...exchange,
-      logo_url: this.getLogoUrl(exchange.logo_path),
+      logo_url: this.storageService.getFileUrl(exchange.logo_path),
       products,
     } as ExchangeResponse;
-  }
-
-  /**
-   * Generate logo URL from logo_path (always local)
-   * @param logoPath - The logo path stored in database
-   * @returns The full URL to access the logo image (always local)
-   */
-  private getLogoUrl(logoPath: string | null): string | null {
-    if (!logoPath) {
-      return null;
-    }
-
-    // Always use local URL (baseUrl already includes uploads folder)
-    return this.storageService.getFileLocal(logoPath);
   }
 }
