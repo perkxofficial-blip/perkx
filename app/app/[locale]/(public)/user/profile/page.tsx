@@ -25,6 +25,10 @@ export default function UserProfilePage() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  // Field-level errors
+  const [profileErrors, setProfileErrors] = useState<Record<string, string>>({});
+  const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>({});
+
   // Profile form state
   const [profileForm, setProfileForm] = useState({
     first_name: '',
@@ -49,6 +53,21 @@ export default function UserProfilePage() {
   });
 
   const [isCopied, setIsCopied] = useState(false);
+
+  // Helper function to parse field errors from API response
+  const parseFieldErrors = (error: any): Record<string, string> => {
+    const fieldErrors: Record<string, string> = {};
+
+    if (error.response?.message && Array.isArray(error.response.message)) {
+      error.response.message.forEach((item: any) => {
+        if (typeof item === 'object' && item.field && item.message) {
+          fieldErrors[item.field] = item.message;
+        }
+      });
+    }
+
+    return fieldErrors;
+  };
 
   // Ref for date picker
   const datePickerRef = useRef<HTMLInputElement>(null);
@@ -136,12 +155,33 @@ export default function UserProfilePage() {
       await apiClient.put(endpoints.user.updateProfile, profileForm, token);
 
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
+      setProfileErrors({}); // Clear all field errors on success
       await loadProfile();
     } catch (error: any) {
-      setMessage({
-        type: 'error',
-        text: error.response?.message || 'Failed to update profile' 
-      });
+      console.error('Profile update error:', error);
+
+      // Check for 401 Unauthorized - session expired
+      if (error.status === 401) {
+        auth.clearUserToken();
+        router.push('/');
+        return;
+      }
+
+      // Parse field-specific errors
+      const fieldErrors = parseFieldErrors(error);
+
+      if (Object.keys(fieldErrors).length > 0) {
+        // Has field-specific errors - display them below fields
+        setProfileErrors(fieldErrors);
+        setMessage(null); // Clear general message
+      } else {
+        // General error - display in banner
+        setMessage({
+          type: 'error',
+          text: error.message || 'Failed to update profile'
+        });
+        setProfileErrors({}); // Clear field errors
+      }
     } finally {
       setSaving(false);
     }
@@ -173,6 +213,7 @@ export default function UserProfilePage() {
       await apiClient.patch(endpoints.user.updatePassword, passwordForm, token);
 
       setMessage({ type: 'success', text: 'Password updated successfully!' });
+      setPasswordErrors({}); // Clear all field errors on success
       setPasswordForm({
         current_password: '',
         new_password: '',
@@ -181,39 +222,35 @@ export default function UserProfilePage() {
     } catch (error: any) {
       console.error('Password update error:', error);
 
-      // Handle different error scenarios
-      let errorMessage = 'Failed to update password';
-
-      if (error.status === 400) {
-        errorMessage = error.response?.message || error.message || 'Invalid password. Please check your current password and try again.';
-      } else if (error.status === 401) {
-        // Session expired or wrong password - clear token and redirect to home
+      // Check for 401 Unauthorized - session expired
+      if (error.status === 401) {
         auth.clearUserToken();
         router.push('/');
         return;
-      } else if (error.status === 403) {
-        errorMessage = 'You do not have permission to update password.';
-      } else if (error.status === 404) {
-        errorMessage = 'User not found.';
-      } else if (error.status >= 500) {
-        errorMessage = 'Server error. Please try again later.';
-      } else if (error.response?.message) {
-        errorMessage = error.response.message;
-      } else if (error.message) {
-        errorMessage = error.message;
       }
 
-      setMessage({
-        type: 'error',
-        text: errorMessage
-      });
+      // Parse field-specific errors
+      const fieldErrors = parseFieldErrors(error);
+
+      if (Object.keys(fieldErrors).length > 0) {
+        // Has field-specific errors - display them below fields
+        setPasswordErrors(fieldErrors);
+        setMessage(null); // Clear general message
+      } else {
+        // General error - display in banner
+        setMessage({
+          type: 'error',
+          text: error.message || 'Failed to update password'
+        });
+        setPasswordErrors({}); // Clear field errors
+      }
     } finally {
       setSaving(false);
     }
   };
 
   const handleLogout = () => {
-    document.cookie = 'token=; Max-Age=0';
+    auth.clearUserToken();
     router.push('/');
   };
 
@@ -511,10 +548,18 @@ export default function UserProfilePage() {
                       <input
                         type="text"
                         value={profileForm.first_name}
-                        onChange={(e) => setProfileForm({ ...profileForm, first_name: e.target.value })}
+                        onChange={(e) => {
+                          setProfileForm({ ...profileForm, first_name: e.target.value });
+                          if (profileErrors.first_name) {
+                            setProfileErrors({ ...profileErrors, first_name: '' });
+                          }
+                        }}
                         placeholder="Jane Thompson"
                         className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                       />
+                      {profileErrors.first_name && (
+                        <p className="text-red-400 text-sm mt-1">{profileErrors.first_name}</p>
+                      )}
                     </div>
 
                     {/* Last Name */}
@@ -525,10 +570,18 @@ export default function UserProfilePage() {
                       <input
                         type="text"
                         value={profileForm.last_name}
-                        onChange={(e) => setProfileForm({ ...profileForm, last_name: e.target.value })}
+                        onChange={(e) => {
+                          setProfileForm({ ...profileForm, last_name: e.target.value });
+                          if (profileErrors.last_name) {
+                            setProfileErrors({ ...profileErrors, last_name: '' });
+                          }
+                        }}
                         placeholder="Jane Thompson"
                         className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                       />
+                      {profileErrors.last_name && (
+                        <p className="text-red-400 text-sm mt-1">{profileErrors.last_name}</p>
+                      )}
                     </div>
 
                     {/* Email Address */}
@@ -552,10 +605,18 @@ export default function UserProfilePage() {
                       <input
                         type="tel"
                         value={profileForm.phone}
-                        onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
+                        onChange={(e) => {
+                          setProfileForm({ ...profileForm, phone: e.target.value });
+                          if (profileErrors.phone) {
+                            setProfileErrors({ ...profileErrors, phone: '' });
+                          }
+                        }}
                         placeholder="+1-9293-764-8903"
                         className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                       />
+                      {profileErrors.phone && (
+                        <p className="text-red-400 text-sm mt-1">{profileErrors.phone}</p>
+                      )}
                     </div>
 
                     {/* Gender */}
@@ -566,18 +627,25 @@ export default function UserProfilePage() {
                       <div className="relative">
                         <select
                           value={profileForm.gender}
-                          onChange={(e) => setProfileForm({ ...profileForm, gender: e.target.value })}
+                          onChange={(e) => {
+                            setProfileForm({ ...profileForm, gender: e.target.value });
+                            if (profileErrors.gender) {
+                              setProfileErrors({ ...profileErrors, gender: '' });
+                            }
+                          }}
                           className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm appearance-none focus:outline-none focus:border-purple-500 [&>option]:bg-[#18163C] [&>option]:text-white"
                         >
                           <option value="" className="bg-[#18163C] text-white">Select gender</option>
-                          <option value="male" className="bg-[#18163C] text-white">Male</option>
-                          <option value="female" className="bg-[#18163C] text-white">Female</option>
-                          <option value="other" className="bg-[#18163C] text-white">Other</option>
+                          <option value="Male" className="bg-[#18163C] text-white">Male</option>
+                          <option value="Female" className="bg-[#18163C] text-white">Female</option>
                         </select>
                         <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none" fill="#C9C9C9" viewBox="0 0 20 20">
                           <path d="M10.0001 10.8785L13.7126 7.16602L14.7731 8.22652L10.0001 12.9995L5.22705 8.22652L6.28755 7.16602L10.0001 10.8785Z" />
                         </svg>
                       </div>
+                      {profileErrors.gender && (
+                        <p className="text-red-400 text-sm mt-1">{profileErrors.gender}</p>
+                      )}
                     </div>
 
                     {/* Birthday */}
@@ -591,7 +659,12 @@ export default function UserProfilePage() {
                           ref={datePickerRef}
                           type="date"
                           value={profileForm.birthday}
-                          onChange={(e) => setProfileForm({ ...profileForm, birthday: e.target.value })}
+                          onChange={(e) => {
+                            setProfileForm({ ...profileForm, birthday: e.target.value });
+                            if (profileErrors.birthday) {
+                              setProfileErrors({ ...profileErrors, birthday: '' });
+                            }
+                          }}
                           style={{
                             position: 'absolute',
                             top: 0,
@@ -637,6 +710,9 @@ export default function UserProfilePage() {
                           </svg>
                         </div>
                       </div>
+                      {profileErrors.birthday && (
+                        <p className="text-red-400 text-sm mt-1">{profileErrors.birthday}</p>
+                      )}
                     </div>
 
                     {/* Country */}
@@ -647,7 +723,12 @@ export default function UserProfilePage() {
                       <div className="relative">
                         <select
                           value={profileForm.country}
-                          onChange={(e) => setProfileForm({ ...profileForm, country: e.target.value })}
+                          onChange={(e) => {
+                            setProfileForm({ ...profileForm, country: e.target.value });
+                            if (profileErrors.country) {
+                              setProfileErrors({ ...profileErrors, country: '' });
+                            }
+                          }}
                           className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm appearance-none focus:outline-none focus:border-purple-500 [&>option]:bg-[#18163C] [&>option]:text-white"
                         >
                           <option value="" className="bg-[#18163C] text-white">Select country</option>
@@ -661,6 +742,9 @@ export default function UserProfilePage() {
                           <path d="M10.0001 10.8785L13.7126 7.16602L14.7731 8.22652L10.0001 12.9995L5.22705 8.22652L6.28755 7.16602L10.0001 10.8785Z" />
                         </svg>
                       </div>
+                      {profileErrors.country && (
+                        <p className="text-red-400 text-sm mt-1">{profileErrors.country}</p>
+                      )}
                     </div>
 
                     {/* Action Buttons */}

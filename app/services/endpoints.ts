@@ -13,6 +13,7 @@ export const endpoints = {
     resendOtp: '/auth/resend-otp',
     profile: '/profile',
     updateProfile: '/profile',
+    updatePassword: '/profile/change-password',
   },
 
   // Admin endpoints
