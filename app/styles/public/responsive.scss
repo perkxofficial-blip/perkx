@@ -120,3 +120,32 @@
     }
   }
 }
+@media (max-width: 1024px) {
+  .campaign-slide-item {
+    width: 240px;
+  }
+
+  .campaign-card {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .campaign-slide-item {
+    width: 200px;
+  }
+
+  .campaign-card {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .campaign-slide-item {
+    width: 160px;
+  }
+
+  .campaign-card {
+    height: 240px;
+  }
+}

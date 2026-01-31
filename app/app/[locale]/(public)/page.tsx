@@ -99,7 +99,7 @@ export default async function LandingPage() {
 
                 <div className="mt-3">
                   <a
-                    href="/get-started"
+                    href="/register"
                     className="btn btn-get-started d-inline-flex align-items-center"
                   >
                     <span>{t("home.get_started_now")}</span>
@@ -216,7 +216,7 @@ export default async function LandingPage() {
                 ),
               })}</h2>
               <p>{t('home.calculator_desc')}</p>
-              <a href="" className='calc-btn'>{t('home.calculator_btn')}</a>
+              <a href="/calculator" className='calc-btn'>{t('home.calculator_btn')}</a>
             </div>
           </div>
         </div>
