@@ -22,7 +22,7 @@ export default function PartnerSectionSlide({ exchanges }: PartnerSectionSlidePr
               className="partner-logo"
               loading="lazy"
               unoptimized
-            />
+            /> <span className="partner-label">{exchange.name}</span>
           </div>
         ))}
       </div>
