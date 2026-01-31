@@ -43,6 +43,10 @@ header {
       padding: 0 8px;
       a {
         color: var(--white);
+        
+        &.active {
+          color: #89EFFF;
+        }
       }
     }
   }
