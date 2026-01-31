@@ -140,7 +140,7 @@ export class ProfileService {
       code: row.exchange_code,
       logo_path: row.exchange_logo_path,
       logo_url: row.exchange_logo_path
-        ? this.storageService.getFileLocal(row.exchange_logo_path)
+        ? this.storageService.getFileUrl(row.exchange_logo_path)
         : null,
       exchange_uid: row.exchange_uid,
       linked_at: row.linked_at,
