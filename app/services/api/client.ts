@@ -28,7 +28,13 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      let message = responseData.message;
+      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
+        // If array contains objects with 'message' property, extract the first one
+        const firstItem = responseData.message[0];
+        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
+      }
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -57,7 +63,13 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      let message = responseData.message;
+      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
+        // If array contains objects with 'message' property, extract the first one
+        const firstItem = responseData.message[0];
+        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
+      }
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -86,7 +98,13 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      let message = responseData.message;
+      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
+        // If array contains objects with 'message' property, extract the first one
+        const firstItem = responseData.message[0];
+        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
+      }
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -115,7 +133,10 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      const message = Array.isArray(responseData.message) 
+        ? responseData.message.join(', ') 
+        : (typeof responseData.message === 'object' ? JSON.stringify(responseData.message) : responseData.message);
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -149,7 +170,13 @@ export const apiClient = {
     }
 
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      let message = responseData.message;
+      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
+        // If array contains objects with 'message' property, extract the first one
+        const firstItem = responseData.message[0];
+        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
+      }
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -181,7 +208,13 @@ export const apiClient = {
     }
 
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      let message = responseData.message;
+      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
+        // If array contains objects with 'message' property, extract the first one
+        const firstItem = responseData.message[0];
+        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
+      }
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -231,7 +264,13 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      let message = responseData.message;
+      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
+        // If array contains objects with 'message' property, extract the first one
+        const firstItem = responseData.message[0];
+        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
+      }
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;
@@ -255,7 +294,13 @@ export const apiClient = {
 
     // If response is not ok, throw error with response body
     if (!res.ok) {
-      const error: any = new Error(responseData.message || `HTTP ${res.status}: ${res.statusText}`);
+      let message = responseData.message;
+      if (Array.isArray(responseData.message) && responseData.message.length > 0) {
+        // If array contains objects with 'message' property, extract the first one
+        const firstItem = responseData.message[0];
+        message = typeof firstItem === 'object' && firstItem.message ? firstItem.message : firstItem;
+      }
+      const error: any = new Error(message || `HTTP ${res.status}: ${res.statusText}`);
       error.status = res.status;
       error.response = responseData;
       throw error;

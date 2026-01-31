@@ -30,7 +30,12 @@ export default function ExchangePartnerConfigPage() {
       return;
     }
 
-    window.open(templateUrl, '_blank');
+    const link = document.createElement('a');
+    link.href = templateUrl;
+    link.download = 'exchange-template.xlsx';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     showToast('Template downloaded successfully', 'success');
   };
 
