@@ -262,4 +262,17 @@ export const apiClient = {
     }
     return responseData;
   },
+
+  // POST request
+  async authPost(endpoint: string, payload: []) {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    return await fetch(`${this.baseURL}${endpoint}`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(payload),
+      cache: 'no-store',
+    });
+  },
 };
