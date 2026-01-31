@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
 import AuthButtons from "./AuthButtons";
+import Navigation from "./Navigation";
 
 export default async function Header() {
   const t = await getTranslations();
@@ -38,33 +39,7 @@ export default async function Header() {
                   </button>
 
                   <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li className="nav-item">
-                        <a className="nav-link" href="/how-it-works">
-                          {t("menu.how_it_works")}
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="/exchanges">
-                          {t("menu.exchanges")}
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="/calculator">
-                          {t("menu.calculator")}
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="/campaigns">
-                          {t("menu.campaigns")}
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="/about-us">
-                          {t("menu.about_us")}
-                        </a>
-                      </li>
-                    </ul>
+                    <Navigation />
                   </div>
                 </div>
               </nav>
