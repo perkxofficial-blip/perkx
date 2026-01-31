@@ -28,7 +28,9 @@ const CampaignItem = ({campaign}: CampaignItemProps) => {
               {t(`campaign.status_${campaign.status}`)}
             </div>
           </div>
-          <p className="campaign-title">{campaign.title}</p>
+          <p className="campaign-title">
+            {campaign.title}
+          </p>
           <span className='campaign-desc'>{campaign.description}</span>
           <a href={`/campaigns/${campaign.slug}`}>{t('campaign.btn_name')}</a>
         </div>
