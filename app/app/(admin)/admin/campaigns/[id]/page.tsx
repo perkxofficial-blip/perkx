@@ -45,12 +45,12 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const hasFetched = useRef(false);
-  
+
   const [formData, setFormData] = useState<FormData>({
     title: '',
     subtitle: '',
     exchange_id: null,
-    category: 'All Users',
+    category: 'all_user',
     redirect_url: '',
     description: '',
     preview_start: '',
@@ -81,17 +81,17 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
 
     const fetchData = async () => {
       const token = auth.getAdminToken();
-      
+
       // Fetch campaign data
       try {
         const data = await apiClient.get(endpoints.admin.campaignDetail(resolvedParams.id), token || undefined);
         const campaign = data.data;
-        
+
         setFormData({
           title: campaign.title || '',
           subtitle: campaign.sub_title || campaign.subtitle || '',
           exchange_id: campaign.exchange_id || null,
-          category: campaign.category || 'All Users',
+          category: campaign.category || 'all_user',
           redirect_url: campaign.redirect_url || '',
           description: campaign.description || '',
           preview_start: formatDateTimeLocal(campaign.preview_start),
@@ -109,7 +109,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
         }
       } catch (err: any) {
         console.error('Error fetching campaign:', err);
-        
+
         // If error status is 500, 401, or 403, clear token and redirect to login
         if (err.status === 500 || err.status === 401 || err.status === 403) {
           auth.clearAdminToken();
@@ -124,7 +124,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       // Fetch exchanges list
       try {
         const exchangesData = await apiClient.get(endpoints.admin.exchangesList, token || undefined);
-        
+
         if (exchangesData.statusCode === 200 && Array.isArray(exchangesData.data)) {
           setExchanges(exchangesData.data);
         } else if (Array.isArray(exchangesData)) {
@@ -132,7 +132,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
         }
       } catch (err: any) {
         console.error('Error fetching exchanges:', err);
-        
+
         // If error status is 500, 401, or 403, clear token and redirect to login
         if (err.status === 500 || err.status === 401 || err.status === 403) {
           auth.clearAdminToken();
@@ -257,10 +257,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       if (formData.exchange_id) {
         formDataToSend.append('exchange_id', formData.exchange_id.toString());
       }
-      // Only send category if it's not "All Users"
-      if (formData.category && formData.category !== 'All Users') {
-        formDataToSend.append('category', formData.category);
-      }
+      formDataToSend.append('category', formData.category);
       if (formData.redirect_url.trim()) {
         formDataToSend.append('redirect_url', formData.redirect_url);
       }
@@ -283,11 +280,11 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
 
       // Turn off loading state after API completes
       setLoading(false);
-      
+
       // Show success message and set redirecting state
       showToast('Campaign updated successfully!', 'success');
       setRedirecting(true);
-      
+
       // Wait longer if uploading a new banner file to ensure backend completes processing
       const delayTime = formData.banner ? 5000 : 1500;
       setTimeout(() => {
@@ -299,7 +296,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       console.error('Error response:', err.response);
 
       setLoading(false);
-      
+
       // Only redirect to login for authentication/authorization errors, not server errors
       if (err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
@@ -324,7 +321,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       }, 1500);
     } catch (err: any) {
       console.error('Error deleting campaign:', err);
-      
+
       // If error status is 500, 401, or 403, clear token and redirect to login
       if (err.status === 500 || err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
@@ -436,9 +433,8 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
                   value={formData.category}
                   onChange={(e) => handleInputChange('category', e.target.value)}
                 >
-                  <option value="All Users">All Users</option>
+                  <option value="all_user">All Users</option>
                   <option value="new_user">New User</option>
-                  <option value="trading_competition">Trading Competition</option>
                 </select>
               </div>
             </div>
