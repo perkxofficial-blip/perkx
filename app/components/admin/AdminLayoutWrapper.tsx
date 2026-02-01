@@ -90,7 +90,7 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
             <div>
               <h3 className="mb-4 ml-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">MENU</h3>
               <ul className="mb-6 flex flex-col gap-1.5">
-                <li>
+                {/* <li>
                   <Link
                     href="/admin"
                     className={`group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out ${pathname === '/admin'
@@ -103,7 +103,7 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
                     </svg>
                     Dashboard
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     href="/admin/users"

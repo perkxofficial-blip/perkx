@@ -14,6 +14,7 @@ interface User {
   phone?: string;
   status: string;
   country?: string;
+  referral_code?: string;
   referrer_email?: string;
   created_at?: string;
 }
@@ -58,7 +59,7 @@ export default function AdminUsersPage() {
         })
         .catch(err => {
           console.error('Error fetching users:', err);
-          
+
           // If error status is 500, 401, or 403, clear token and redirect to login
           if (err.status === 500 || err.status === 401 || err.status === 403) {
             auth.clearAdminToken();
@@ -143,11 +144,11 @@ export default function AdminUsersPage() {
   const formatDate = (dateString?: string) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
+    const day = String(date.getDate()).padStart(2, '0');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
   };
 
   // Pagination numbers to display
@@ -327,7 +328,7 @@ export default function AdminUsersPage() {
                   {paginatedUsers.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                       <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">{user.email}</td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{user.id}</td>
+                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{user.referral_code}</td>
                       <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(user.created_at)}</td>
                       <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.referrer_email || '-'}</td>
                       <td className="px-6 py-4">

@@ -19,6 +19,8 @@ export const endpoints = {
   // Admin endpoints
   admin: {
     login: '/admin/auth/login',
+    forgotPassword: '/admin/auth/forgot-password',
+    resetPassword: '/admin/auth/reset-password',
     users: '/admin/users',
     userDetail: (id: string | number) => `/admin/users/${id}`,
     userStatus: (id: string | number) => `/admin/users/${id}/status`,

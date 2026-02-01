@@ -93,7 +93,7 @@ export default function AdminCampaignsPage() {
             `${endpoints.admin.campaigns}?page=${page}&limit=${limit}`,
             token
           );
-          
+
           let campaigns: Campaign[] = [];
           let total = 0;
 
@@ -126,7 +126,7 @@ export default function AdminCampaignsPage() {
         setLoading(false);
       } catch (err: any) {
         console.error('Error fetching campaigns:', err);
-        
+
         // Only redirect to login for authentication errors
         if (err.status === 401 || err.status === 403) {
           auth.clearAdminToken();
@@ -229,12 +229,12 @@ export default function AdminCampaignsPage() {
             : campaign
         )
       );
-      
+
       // Show success toast
       showToast(`Campaign ${field === 'featured' ? 'featured status' : 'publish status'} updated successfully`, 'success');
     } catch (err: any) {
       console.error(`Error updating ${field}:`, err);
-      
+
       // Only redirect to login for authentication errors
       if (err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
@@ -264,7 +264,7 @@ export default function AdminCampaignsPage() {
       showToast('Campaign deleted successfully', 'success');
     } catch (err: any) {
       console.error('Error deleting campaign:', err);
-      
+
       // Only redirect to login for authentication errors
       if (err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
@@ -280,11 +280,11 @@ export default function AdminCampaignsPage() {
   const formatDate = (dateString?: string) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
+    const day = String(date.getDate()).padStart(2, '0');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
   };
 
   const getPageNumbers = () => {
@@ -440,41 +440,36 @@ export default function AdminCampaignsPage() {
                           {formatDate(campaign.launch_start)} - {formatDate(campaign.launch_end)}
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
-                            timelineStatus === 'ACTIVE'
+                          <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${timelineStatus === 'ACTIVE'
                               ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                               : timelineStatus === 'UPCOMING'
-                              ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                              : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
-                          }`}>
+                                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
+                                : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
+                            }`}>
                             {timelineStatus === 'ACTIVE' ? 'Active' : timelineStatus === 'UPCOMING' ? 'Upcoming' : 'Ended'}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-center">
                           <button
                             onClick={() => handleToggleStatus(campaign.id, 'is_active', campaign.is_active)}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                              campaign.is_active ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
-                            }`}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${campaign.is_active ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+                              }`}
                           >
                             <span
-                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                campaign.is_active ? 'translate-x-6' : 'translate-x-1'
-                              }`}
+                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${campaign.is_active ? 'translate-x-6' : 'translate-x-1'
+                                }`}
                             />
                           </button>
                         </td>
                         <td className="px-6 py-4 text-center">
                           <button
                             onClick={() => handleToggleStatus(campaign.id, 'featured', campaign.featured)}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                              campaign.featured ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
-                            }`}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${campaign.featured ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+                              }`}
                           >
                             <span
-                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                campaign.featured ? 'translate-x-6' : 'translate-x-1'
-                              }`}
+                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${campaign.featured ? 'translate-x-6' : 'translate-x-1'
+                                }`}
                             />
                           </button>
                         </td>

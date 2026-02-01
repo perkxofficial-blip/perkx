@@ -89,7 +89,7 @@ export default function UserDetailPage() {
       })
       .catch(err => {
         console.error('Error fetching user:', err);
-        
+
         // If error status is 500, 401, or 403, clear token and redirect to login
         if (err.status === 500 || err.status === 401 || err.status === 403) {
           auth.clearAdminToken();
@@ -115,7 +115,7 @@ export default function UserDetailPage() {
       setShowDeactivateModal(false);
     } catch (err: any) {
       console.error('Error updating status:', err);
-      
+
       // If error status is 500, 401, or 403, clear token and redirect to login
       if (err.status === 500 || err.status === 401 || err.status === 403) {
         auth.clearAdminToken();
@@ -131,24 +131,24 @@ export default function UserDetailPage() {
   const formatDate = (dateString?: string) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit'
-    });
+    const day = String(date.getDate()).padStart(2, '0');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
   };
 
   const formatDateTime = (dateString?: string) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
+    const day = String(date.getDate()).padStart(2, '0');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds}`;
   };
 
   if (loading) {
