@@ -7,6 +7,7 @@ import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 import Toast from '@/components/admin/Toast';
+import { COUNTRIES } from '@/lib/countries';
 
 interface UserForm {
   first_name: string;
@@ -21,7 +22,7 @@ export default function EditUserPage() {
   const params = useParams();
   const router = useRouter();
   const userId = params?.id as string;
-  
+
   const [form, setForm] = useState<UserForm>({
     first_name: '',
     last_name: '',
@@ -59,7 +60,7 @@ export default function EditUserPage() {
     apiClient.get(endpoints.admin.userDetail(userId), token || undefined)
       .then(data => {
         let user = data.statusCode === 200 ? data.data : data;
-        
+
         if (user && user.id) {
           setEmail(user.email);
           setForm({
@@ -77,7 +78,7 @@ export default function EditUserPage() {
       })
       .catch(err => {
         console.error('Error fetching user:', err);
-        
+
         // If error status is 500, 401, or 403, clear token and redirect to login
         if (err.status === 500 || err.status === 401 || err.status === 403) {
           auth.clearAdminToken();
@@ -103,14 +104,14 @@ export default function EditUserPage() {
     try {
       // Clean up form data - remove empty strings
       const cleanedData: any = {};
-      
+
       if (form.first_name?.trim()) cleanedData.first_name = form.first_name.trim();
       if (form.last_name?.trim()) cleanedData.last_name = form.last_name.trim();
       if (form.phone?.trim()) cleanedData.phone = form.phone.trim();
       if (form.birthday) cleanedData.birthday = form.birthday;
       if (form.gender) cleanedData.gender = form.gender;
       if (form.country?.trim()) cleanedData.country = form.country.trim();
-      
+
       await apiClient.put(endpoints.admin.userDetail(userId), cleanedData, token || undefined);
       showToast('User profile updated successfully!', 'success');
       setTimeout(() => {
@@ -124,13 +125,13 @@ export default function EditUserPage() {
       } else {
         let errorMsg = 'Error updating user';
         if (err.response?.message) {
-          errorMsg = Array.isArray(err.response.message) 
-            ? err.response.message.join(', ') 
+          errorMsg = Array.isArray(err.response.message)
+            ? err.response.message.join(', ')
             : err.response.message;
         } else if (err.message) {
           errorMsg = err.message;
         }
-        
+
         showToast(errorMsg, 'error');
         setSaving(false);
       }
@@ -314,15 +315,20 @@ export default function EditUserPage() {
               <label htmlFor="country" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Country
               </label>
-              <input
+              <select
                 id="country"
                 name="country"
-                type="text"
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 transition-colors"
-                placeholder="United States"
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-blue-500 transition-colors"
                 value={form.country}
                 onChange={handleChange}
-              />
+              >
+                <option value="">Select country</option>
+                {COUNTRIES.map((country) => (
+                  <option key={country.value} value={country.value}>
+                    {country.label}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

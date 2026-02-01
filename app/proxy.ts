@@ -11,7 +11,10 @@ export default function proxy(request: NextRequest) {
   if (pathname.startsWith('/admin')) {
     // Auth check for admin
     const adminToken = request.cookies.get('admin_token');
-    if (!adminToken && !pathname.startsWith('/admin/login')) {
+    if (!adminToken && 
+        !pathname.startsWith('/admin/login') && 
+        !pathname.startsWith('/admin/forgot-password') &&
+        !pathname.startsWith('/admin/reset-password')) {
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
     return NextResponse.next();

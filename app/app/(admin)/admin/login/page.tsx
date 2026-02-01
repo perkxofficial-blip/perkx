@@ -189,12 +189,18 @@ export default function AdminLoginPage() {
                       Keep me logged in
                     </span>
                   </label>
+                  <Link
+                    href="/admin/forgot-password"
+                    className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                  >
+                    Forgot Password?
+                  </Link>
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={isLoading || !formData.username.trim() || !formData.password.trim()}
                   className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
                 >
                   {isLoading ? 'Signing in...' : 'Sign in'}
