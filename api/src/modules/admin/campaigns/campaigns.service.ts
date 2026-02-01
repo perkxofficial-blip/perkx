@@ -30,18 +30,22 @@ export class CampaignsService {
     createCampaignDto: CreateCampaignDto,
     banner: Express.Multer.File,
   ): Promise<CampaignResponse> {
-    // Validate exchange_id if provided
-    if (createCampaignDto.exchange_id !== undefined && createCampaignDto.exchange_id !== null) {
+    // Set default exchange_id to 0 if null or undefined
+    if (createCampaignDto.exchange_id === null || createCampaignDto.exchange_id === undefined) {
+      createCampaignDto.exchange_id = 0;
+    }
+
+    // Validate exchange_id only if it's not 0
+    if (createCampaignDto.exchange_id !== 0) {
       const exchange = await this.exchangeRepository.findOne({
         where: { id: createCampaignDto.exchange_id, is_active: true },
       });
 
       if (!exchange) {
         throw new BadRequestException(
-          `Exchange with ID ${createCampaignDto.exchange_id} does not exist`,
+          `Exchange with ID ${createCampaignDto.exchange_id} does not exist or is not active`,
         );
       }
-
     }
     // Upload banner file
     const { path: bannerPath } =
@@ -167,16 +171,23 @@ export class CampaignsService {
       return null;
     }
 
-    // Validate exchange_id if provided
-    if (updateCampaignDto.exchange_id !== undefined && updateCampaignDto.exchange_id !== null) {
-      const exchange = await this.exchangeRepository.findOne({
-        where: { id: updateCampaignDto.exchange_id, is_active: true },
-      });
+    // Set default exchange_id to 0 if null or undefined (only if exchange_id is provided in the update)
+    if (updateCampaignDto.exchange_id !== undefined) {
+      if (updateCampaignDto.exchange_id === null) {
+        updateCampaignDto.exchange_id = 0;
+      }
 
-      if (!exchange) {
-        throw new BadRequestException(
-          `Exchange with ID ${updateCampaignDto.exchange_id} does not exist`,
-        );
+      // Validate exchange_id only if it's not 0
+      if (updateCampaignDto.exchange_id !== 0) {
+        const exchange = await this.exchangeRepository.findOne({
+          where: { id: updateCampaignDto.exchange_id, is_active: true },
+        });
+
+        if (!exchange) {
+          throw new BadRequestException(
+            `Exchange with ID ${updateCampaignDto.exchange_id} does not exist or is not active`,
+          );
+        }
       }
     }
 
