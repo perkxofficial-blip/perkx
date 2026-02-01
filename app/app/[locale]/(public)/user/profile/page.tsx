@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { apiClient } from '@/services/api/client';
 import { endpoints } from '@/services/endpoints';
 import { auth } from '@/services/auth';
+import { COUNTRIES } from '@/lib/countries';
 
 interface UserProfile {
   id: number;
@@ -723,11 +724,11 @@ export default function UserProfilePage() {
                           className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm appearance-none focus:outline-none focus:border-purple-500 [&>option]:bg-[#18163C] [&>option]:text-white"
                         >
                           <option value="" className="bg-[#18163C] text-white">Select country</option>
-                          <option value="Vietnam" className="bg-[#18163C] text-white">Vietnam</option>
-                          <option value="United States" className="bg-[#18163C] text-white">United States</option>
-                          <option value="United Kingdom" className="bg-[#18163C] text-white">United Kingdom</option>
-                          <option value="Singapore" className="bg-[#18163C] text-white">Singapore</option>
-                          <option value="Japan" className="bg-[#18163C] text-white">Japan</option>
+                          {COUNTRIES.map((country) => (
+                            <option key={country.value} value={country.value} className="bg-[#18163C] text-white">
+                              {country.label}
+                            </option>
+                          ))}
                         </select>
                         <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none" fill="#C9C9C9" viewBox="0 0 20 20">
                           <path d="M10.0001 10.8785L13.7126 7.16602L14.7731 8.22652L10.0001 12.9995L5.22705 8.22652L6.28755 7.16602L10.0001 10.8785Z" />
