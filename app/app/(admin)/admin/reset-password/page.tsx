@@ -53,7 +53,7 @@ function ResetPasswordForm() {
         try {
             const response = await apiClient.post(endpoints.admin.resetPassword, {
                 token: token,
-                password: formData.password,
+                newPassword: formData.password,
             });
 
             if (response.statusCode === 200 || response.statusCode === 201) {
