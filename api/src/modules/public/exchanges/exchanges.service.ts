@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { Exchange, ExchangeProduct } from '../../../entities';
 import { StorageService } from '../../../common/storage/storage.service';
 
@@ -35,19 +35,44 @@ export class PublicExchangesService {
   ) {}
 
   async findAll(): Promise<ExchangeResponse[]> {
-    const exchanges = await this.exchangeRepository.find({
-      where: { is_active: true },
-      order: { name: 'ASC' },
+    // Get all exchange products first
+    const allProducts = await this.exchangeProductRepository.find({
+      order: { id: 'ASC' },
     });
 
-    // Get all exchange products
-    const allProducts = await this.exchangeProductRepository.find({
-      order: { product_name: 'ASC' },
+    // Get unique exchange codes from products (only exchanges that have products)
+    const exchangeCodesSet = new Set(
+      allProducts.map((product) => product.exchange_name.toLowerCase()),
+    );
+
+    if (exchangeCodesSet.size === 0) {
+      return [];
+    }
+
+    // Query only exchanges that have products and are active
+    const exchanges = await this.exchangeRepository.find({
+      where: {
+        is_active: true,
+        code: In(Array.from(exchangeCodesSet)),
+      },
     });
+
+    // Group products by exchange_name in a Map for O(1) lookup
+    const productsByExchangeName = new Map<string, ExchangeProduct[]>();
+    for (const product of allProducts) {
+      const key = product.exchange_name.toLowerCase();
+      if (!productsByExchangeName.has(key)) {
+        productsByExchangeName.set(key, []);
+      }
+      productsByExchangeName.get(key)!.push(product);
+    }
 
     // Transform exchanges with logo_url and products
     return exchanges.map((exchange) =>
-      this.transformExchangeResponse(exchange, allProducts),
+      this.transformExchangeResponse(
+        exchange,
+        productsByExchangeName.get(exchange.code.toLowerCase()) || [],
+      ),
     );
   }
 
@@ -56,32 +81,22 @@ export class PublicExchangesService {
    */
   private transformExchangeResponse(
     exchange: Exchange,
-    allProducts: ExchangeProduct[],
+    products: ExchangeProduct[],
   ): ExchangeResponse {
-    const products = allProducts
-      .filter(
-        (product) =>
-          product.exchange_name.toLowerCase() === exchange.code.toLowerCase(),
-      )
-      .map((product) => ({
-        id: product.id,
-        exchange_name: product.exchange_name,
-        exchange_signup_link: product.exchange_signup_link,
-        product_name: product.product_name,
-        discount: Number(product.discount),
-        default_fee_maker: Number(product.default_fee_maker),
-        default_fee_taker: Number(product.default_fee_taker),
-        final_fee_maker: Number(product.final_fee_maker),
-        final_fee_taker: Number(product.final_fee_taker),
-        ave_rebate: product.ave_rebate ? Number(product.ave_rebate) : null,
-        created_at: product.created_at,
-        updated_at: product.updated_at,
-      }));
+    const productResponses = products.map((product) => ({
+      ...product,
+      discount: typeof product.discount === 'string' ? Number(product.discount) : product.discount,
+      default_fee_maker: typeof product.default_fee_maker === 'string' ? Number(product.default_fee_maker) : product.default_fee_maker,
+      default_fee_taker: typeof product.default_fee_taker === 'string' ? Number(product.default_fee_taker) : product.default_fee_taker,
+      final_fee_maker: typeof product.final_fee_maker === 'string' ? Number(product.final_fee_maker) : product.final_fee_maker,
+      final_fee_taker: typeof product.final_fee_taker === 'string' ? Number(product.final_fee_taker) : product.final_fee_taker,
+      ave_rebate: product.ave_rebate ? (typeof product.ave_rebate === 'string' ? Number(product.ave_rebate) : product.ave_rebate) : null,
+    }));
 
     return {
       ...exchange,
       logo_url: this.storageService.getFileUrl(exchange.logo_path),
-      products,
+      products: productResponses,
     } as ExchangeResponse;
   }
 }
