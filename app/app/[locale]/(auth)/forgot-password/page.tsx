@@ -75,8 +75,10 @@ export default async function ForgotPasswordPage() {
                     className={`form-control`}
                   />
                 </div>
-                <SubmitButton label={t('forgot_password.btn')} />
-
+                <SubmitButton
+                  label={t('menu.login')}
+                  watch={['email']}
+                />
                 <p className="text-center auth-footer">
                   <a href="/login" className="signup-link">
                     {' '}{t('verify_email.back_to_login')}

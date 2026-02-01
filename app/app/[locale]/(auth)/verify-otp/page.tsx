@@ -76,7 +76,10 @@ export default async function VerifyOtpPage() {
                </div>
 
                 <div className="btn-otp-submit">
-                  <SubmitButton label={t('verify_email.confirm')} />
+                  <SubmitButton
+                    label={t('menu.login')}
+                    watch={['numbers[]']}
+                  />
                 </div>
 
               </form>
