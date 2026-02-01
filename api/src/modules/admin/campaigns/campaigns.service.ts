@@ -277,7 +277,7 @@ export class CampaignsService {
               ? this.storageService.getFileUrl(campaign.exchange.logo_path)
               : null,
           }
-        : null,
+        : (campaign.exchange_id == 0 ? {name: 'PerkX'} : null),
     } as CampaignResponse;
   }
 
