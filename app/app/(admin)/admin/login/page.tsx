@@ -22,7 +22,7 @@ export default function AdminLoginPage() {
   useEffect(() => {
     const token = auth.getAdminToken();
     if (token) {
-      router.push('/admin');
+      router.push('/admin/users');
     }
   }, [router]);
 
@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
 
       if (response.statusCode === 201 && response.data?.accessToken) {
         auth.setAdminToken(response.data.accessToken);
-        router.push('/admin');
+        router.push('/admin/users');
       } else if (response.error || response.message) {
         setError(response.message || response.error || 'Login failed');
       } else {

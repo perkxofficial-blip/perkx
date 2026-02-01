@@ -43,7 +43,7 @@ export default function CreateCampaignPage() {
   const [formData, setFormData] = useState<FormData>({
     title: '',
     subtitle: '',
-    exchange_id: null,
+    exchange_id: 0,
     category: 'all_user',
     redirect_url: '',
     description: '',
@@ -224,7 +224,7 @@ export default function CreateCampaignPage() {
       formDataToSend.append('title', formData.title);
       formDataToSend.append('sub_title', formData.subtitle);
 
-      if (formData.exchange_id) {
+      if (formData.exchange_id !== null) {
         formDataToSend.append('exchange_id', formData.exchange_id.toString());
       }
       formDataToSend.append('category', formData.category);
