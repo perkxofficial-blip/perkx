@@ -259,12 +259,183 @@
   },
   "terms-of-use": {
     "meta": {
-      "title": "Terms of Use | PerkX",
+      "title": "PerkX Terms of Use",
       "description": "Read the terms of use for PerkX"
     },
     "hero": {
-      "title": "Terms of Use",
-      "subtitle": "Please read these Terms of Use carefully before using the PerkX website and services."
+      "title": "PerkX Terms of Use",
+      "subtitle": ""
+    },
+    "effective_date": "Effective Date:",
+    "intro": {
+      "paragraph1": "These Terms of Use (\"Terms\") set forth the rights, obligations, and responsibilities between PerkX and users of the Service. The Service is operated by [Company Legal Name], a company incorporated in [Jurisdiction] (\"PerkX,\" \"we,\" \"us,\" or \"our\").",
+      "paragraph2": "By accessing or using the PerkX website, application, or any related services (collectively, the \"Service\"), you (\"User,\" \"you,\" or \"your\") confirm that you have read, understood, and agreed to be legally bound by these Terms and our Privacy Policy. If you do not agree, you must not access or use the Service."
+    },
+    "sections": {
+      "definitions": {
+        "title": "1. Definitions",
+        "intro": "For purposes of these Terms:",
+        "items": [
+          "<strong>Account</strong> means a registered PerkX user account.",
+          "<strong>Member</strong> means a User who has successfully registered an Account.",
+          "<strong>Non-Member</strong> means a User who accesses the Service without registration.",
+          "<strong>Partner Exchange</strong> means a third-party virtual asset exchange, trading platform, or service provider that offers referral-based benefits, rebates, rewards, or promotions under its own terms.",
+          "<strong>Referral Code / Referral Link</strong> means a code or link used by a Partner Exchange to attribute a User's registration or activity to PerkX or to another Member.",
+          "<strong>Benefit(s)</strong> means any rebate, fee discount, reward, commission, campaign incentive, or similar advantage provided <strong>solely by a Partner Exchange</strong>.",
+          "<strong>UID</strong> means the user identifier issued by a Partner Exchange."
+        ]
+      },
+      "eligibility": {
+        "title": "2. Eligibility",
+        "items": [
+          "You must be at least <strong>sixteen (16) years old</strong>, or the minimum legal age required in your jurisdiction, whichever is higher.",
+          "You must have full legal capacity to enter into a binding agreement.",
+          "You must not be prohibited from using the Service under applicable laws, regulations, sanctions, or Partner Exchange rules.",
+          "The Service is not intended for Users located in jurisdictions where access or use would be illegal or restricted."
+        ]
+      },
+      "registration": {
+        "title": "3. Registration and Account Management",
+        "items": [
+          "To access certain features, you may be required to register as a Member and create an Account.",
+          "You agree to provide accurate, complete, and up-to-date information.",
+          "You are solely responsible for maintaining the confidentiality of your Account credentials and for all activities conducted under your Account.",
+          "You must notify PerkX immediately if you suspect unauthorized access or security breaches.",
+          "PerkX shall not be liable for losses resulting from your failure to safeguard your Account credentials."
+        ]
+      },
+      "nature_of_service": {
+        "title": "4. Nature of the Service",
+        "items": [
+          "<strong>Referral and information platform only.</strong> PerkX provides referral links, informational listings, and tools that allow Users to discover and access Partner Exchange offers.",
+          "<strong>No cashback or rewards provided by PerkX.</strong> PerkX does <strong>not</strong> accept, hold, distribute, or pay any cashback, rebate, reward, or commission to Users.",
+          "<strong>No control over Partner Exchanges.</strong> All Benefits are provided, calculated, and administered <strong>solely by Partner Exchanges</strong>, under their own systems and rules."
+        ]
+      },
+      "no_custody": {
+        "title": "4A. No Custody, No Payments, No Money Transmission",
+        "items": [
+          "PerkX does <strong>not</strong> hold, receive, store, transmit, manage, control, or custody any fiat currency, virtual assets, digital assets, stablecoins, or other value on behalf of Users.",
+          "PerkX does <strong>not</strong> process payments, payouts, settlements, or withdrawals of any kind.",
+          "PerkX is <strong>not</strong> a bank, payment institution, money services business, remittance provider, e-money issuer, broker, dealer, or investment adviser.",
+          "All Benefits are issued directly by Partner Exchanges into the User's Partner Exchange account.",
+          "PerkX has no authority to access, freeze, reverse, delay, claw back, or otherwise affect any User funds or Benefits."
+        ]
+      },
+      "partner_offers": {
+        "title": "4B. Partner Offers and Accuracy Disclaimer",
+        "items": [
+          "Information displayed regarding Partner Exchanges or Benefits is provided for <strong>general informational and marketing purposes only</strong>.",
+          "Partner Exchange offers may change, expire, be suspended, or be region-restricted at any time without notice.",
+          "PerkX does not guarantee:",
+          "In case of any discrepancy, <strong>Partner Exchange terms shall prevail</strong>.",
+          "Listing a Partner Exchange does not imply endorsement, partnership, agency, or guarantee."
+        ],
+        "sub_items": [
+          "the accuracy or completeness of offer information,",
+          "eligibility for any Benefit, or",
+          "successful referral attribution."
+        ]
+      },
+      "partner_exchanges": {
+        "title": "5. Partner Exchanges and Benefits",
+        "items": [
+          "Your use of any Partner Exchange is governed solely by that Partner Exchange's terms, policies, and compliance requirements.",
+          "Partner Exchanges determine:",
+          "PerkX bears no responsibility for Partner Exchange decisions or system failures."
+        ],
+        "sub_items": [
+          "eligibility for Benefits,",
+          "attribution rules,",
+          "calculation methods,",
+          "payout schedules, and",
+          "reversals or clawbacks."
+        ]
+      },
+      "uid_linking": {
+        "title": "6. UID Linking and Attribution",
+        "items": [
+          "If UID linking is supported, Users may link only UIDs that belong to them.",
+          "Attribution depends entirely on Partner Exchange tracking logic and technical systems.",
+          "PerkX may reject or remove UID links if misuse or abuse is suspected."
+        ]
+      },
+      "prohibited_conduct": {
+        "title": "7. Prohibited Conduct",
+        "intro": "Users must not:",
+        "items": [
+          "Abuse referral systems or Benefits through wash trading, self-trading, or manipulative behavior.",
+          "Use bots, crawlers, or automated tools without authorization.",
+          "Attempt unauthorized access, hacking, or security testing.",
+          "Provide false information or impersonate others.",
+          "Violate Partner Exchange terms or applicable laws.",
+          "Interfere with Service operations or other Users' access."
+        ],
+        "conclusion": "PerkX may investigate violations and take appropriate action."
+      },
+      "service_availability": {
+        "title": "8. Service Availability and Modification",
+        "items": [
+          "The Service is provided on a best-effort basis without guarantee of uninterrupted availability.",
+          "PerkX may suspend, modify, or discontinue any part of the Service for operational, legal, or technical reasons.",
+          "Partner Exchanges may be added or removed at any time."
+        ]
+      },
+      "no_investment_advice": {
+        "title": "9. No Investment Advice; Risk Disclosure",
+        "items": [
+          "PerkX does not provide financial, investment, tax, or legal advice.",
+          "Trading digital assets involves significant risk, including loss of funds.",
+          "Partner Exchanges operate independently and may be subject to outages, policy changes, or insolvency."
+        ]
+      },
+      "intellectual_property": {
+        "title": "10. Intellectual Property",
+        "items": [
+          "All intellectual property rights in the Service belong to PerkX or its licensors.",
+          "Users receive a limited, non-exclusive, revocable license to use the Service.",
+          "Users may not copy, modify, distribute, or reverse engineer the Service without permission."
+        ]
+      },
+      "suspension_termination": {
+        "title": "11. Suspension and Termination",
+        "items": [
+          "Users may stop using the Service at any time.",
+          "PerkX may suspend or terminate access if Users violate these Terms, applicable laws, or Partner Exchange rules.",
+          "Termination of PerkX access does not affect Partner Exchange Benefits already issued or denied."
+        ]
+      },
+      "disclaimers": {
+        "title": "12. Disclaimers",
+        "items": [
+          "The Service is provided \"as is\" and \"as available.\"",
+          "PerkX disclaims all warranties, including merchantability and fitness for a particular purpose.",
+          "PerkX does not warrant Partner Exchange performance, accuracy, or availability."
+        ]
+      },
+      "limitation_liability": {
+        "title": "13. Limitation of Liability",
+        "items": [
+          "To the maximum extent permitted by law, PerkX shall not be liable for indirect, incidental, consequential, or punitive damages.",
+          "PerkX is not liable for missed Benefits, trading losses, or Partner Exchange actions.",
+          "Where liability cannot be excluded, PerkX's total liability shall be limited to <strong>[cap amount]</strong>."
+        ]
+      },
+      "indemnification": {
+        "title": "14. Indemnification",
+        "content": "You agree to indemnify and hold harmless PerkX from claims arising from your misuse of the Service, violation of these Terms, or violation of law."
+      },
+      "privacy": {
+        "title": "15. Privacy",
+        "paragraph1": "Personal data collected or processed in connection with the Service shall be handled in accordance with the <strong>PerkX Privacy Policy</strong>, which forms an integral part of these Terms.",
+        "paragraph2": "In the event of any inconsistency between these Terms and the Privacy Policy with respect to personal data, the Privacy Policy shall prevail."
+      },
+      "amendments": {
+        "title": "16. Amendments, Governing Law and Jurisdiction",
+        "paragraph1": "PerkX may update these Terms at any time. Continued use after updates constitutes acceptance.",
+        "paragraph2": "These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which PerkX's operating entity is incorporated, without regard to conflict of law principles.",
+        "paragraph3": "Any dispute, claim, or controversy arising out of or in connection with these Terms or the Service shall be subject to the exclusive jurisdiction of the competent courts of such jurisdiction."
+      }
     }
   },
   "help-center": {
