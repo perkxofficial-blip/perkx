@@ -78,7 +78,7 @@ export default function ExchangePartnerConfigPage() {
 
       showToast('File uploaded successfully! Exchanges page updated.', 'success');
       setSelectedFile(null);
-      
+      setUploadErrors([]);
       // Reset file input
       if (fileInputRef.current) {
         fileInputRef.current.value = '';

@@ -336,7 +336,6 @@ export default function CreateCampaignPage() {
                   value={formData.exchange_id || ''}
                   onChange={(e) => handleInputChange('exchange_id', e.target.value ? parseInt(e.target.value) : null)}
                 >
-                  <option value="">Select Exchange</option>
                   {exchanges.map(ex => (
                     <option key={ex.id} value={ex.id}>{ex.name}</option>
                   ))}

@@ -258,9 +258,8 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
         formDataToSend.append('exchange_id', formData.exchange_id.toString());
       }
       formDataToSend.append('category', formData.category);
-      if (formData.redirect_url.trim()) {
-        formDataToSend.append('redirect_url', formData.redirect_url);
-      }
+      // Always send redirect_url, even if empty, to allow clearing it
+      formDataToSend.append('redirect_url', formData.redirect_url.trim());
       formDataToSend.append('description', formData.description);
       formDataToSend.append('preview_start', formData.preview_start);
       formDataToSend.append('preview_end', formData.preview_end);
@@ -417,7 +416,6 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
                   value={formData.exchange_id || ''}
                   onChange={(e) => handleInputChange('exchange_id', e.target.value ? parseInt(e.target.value) : null)}
                 >
-                  <option value="">Select Exchange</option>
                   {exchanges.map(ex => (
                     <option key={ex.id} value={ex.id}>{ex.name}</option>
                   ))}
