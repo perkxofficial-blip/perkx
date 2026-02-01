@@ -123,7 +123,11 @@ export default async function LoginPage({ params }: LoginPageProps) {
                     {t('login.forgot_password')}
                   </a>
                 </div>
-                <SubmitButton label={t('menu.login')} />
+                <SubmitButton
+                  label={t('menu.login')}
+                  watch={['email', 'password']}
+                />
+
                 <p className="text-center auth-footer">
                   {t('login.create_account')}
                   <a href="/register" className="signup-link">

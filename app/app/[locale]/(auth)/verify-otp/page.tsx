@@ -5,10 +5,9 @@ import Image from "next/image";
 import {getTranslations} from "next-intl/server";
 import {resendOtpAction, verifyOtpAction} from "./action";
 import {cookies} from "next/headers";
-import OtpInput from "@/app/[locale]/(auth)/verify-otp/OtpInput";
 import {redirect} from "next/navigation";
 import ResendCountdown from "./ResendCountdown";
-import SubmitButton from "@/components/public/login/SubmitButton";
+import OtpInputWithSubmit from "@/app/[locale]/(auth)/verify-otp/OtpInputWithSubmit";
 
 export async function generateMetadata({ params }: {
   params: Promise<{
@@ -71,14 +70,7 @@ export default async function VerifyOtpPage() {
               )}
               <form action={verifyOtpAction} aria-label="Verify form">
                 <input type="hidden" name="email" defaultValue={email}/>
-               <div className="justify-content-center text-center otp-input">
-                 <OtpInput/>
-               </div>
-
-                <div className="btn-otp-submit">
-                  <SubmitButton label={t('verify_email.confirm')} />
-                </div>
-
+                <OtpInputWithSubmit submitLabel={t('verify_email.confirm')} />
               </form>
               <form action={resendOtpAction} aria-label="Resend form">
                 <input type="hidden" name="email" defaultValue={email}/>

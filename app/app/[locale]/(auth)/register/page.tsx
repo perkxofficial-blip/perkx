@@ -123,7 +123,10 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
                   </div>
                 )}
               </div>
-               <SubmitButton label={t('register.submit_btn')} />
+                <SubmitButton
+                  label={t('register.submit_btn')}
+                  watch={['email', 'password', 'confirm_password']}
+                />
               <p className="text-center auth-footer">
                 {t('register.already_account')}
                 <a href="/login" className="signup-link">
