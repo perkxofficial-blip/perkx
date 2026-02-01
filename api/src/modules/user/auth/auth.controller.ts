@@ -71,7 +71,7 @@ export class AuthController {
     // Extract IP address from request
     console.log('Request headers:', req.headers);
     const ipAddress = 
-      (req.headers['x-client-ip'] as string) ||
+      (req.headers['x-real-ip'] as string) ||
       (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
       'unknown';
     
