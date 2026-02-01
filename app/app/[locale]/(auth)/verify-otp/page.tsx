@@ -51,13 +51,15 @@ export default async function VerifyOtpPage() {
             <div className="col-md-1 col-lg-1"></div>
             <div className="col-md-8 col-lg-5 login-form">
              <div className="text-center">
-               <Image
-                 src="/images/logo-login.png"
-                 alt={t('meta.home.title')}
-                 width={168}
-                 height={55}
-                 priority
-               />
+               <a href="/">
+                 <Image
+                   src="/images/logo-login.png"
+                   alt={t('meta.home.title')}
+                   width={168}
+                   height={55}
+                   priority
+                 />
+               </a>
                <h1>{t('verify_email.title_otp')}</h1>
                <p>{t('verify_email.desc_otp')}</p>
              </div>

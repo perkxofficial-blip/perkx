@@ -17,8 +17,8 @@ export async function register(payload: any): Promise<Response> {
   return await apiClient.authPost(endpoints.user.register, payload);
 }
 
-export async function verifyOtp(payload: any): Promise<Response> {
-  return await apiClient.authPost(endpoints.user.verifyOtp, payload);
+export async function verifyOtp(payload: any, headers: any): Promise<Response> {
+  return await apiClient.authPost(endpoints.user.verifyOtp, payload, headers);
 }
 
 export async function resendOtp(payload: any): Promise<Response> {
@@ -31,4 +31,8 @@ export async function forgotPassword(payload: any): Promise<Response> {
 
 export async function resetPassword(payload: any): Promise<Response> {
   return await apiClient.authPost(endpoints.user.resetPassword, payload);
+}
+
+export async function verify(payload: any, headers: any): Promise<Response> {
+  return await apiClient.authPost(endpoints.user.verifyEmail, payload, headers);
 }

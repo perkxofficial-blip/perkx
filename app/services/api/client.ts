@@ -317,9 +317,10 @@ export const apiClient = {
   },
 
   // POST request
-  async authPost(endpoint: string, payload: {}) {
+  async authPost(endpoint: string, payload: Record<string, any>, headersOption?: HeadersInit) {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
+      ...(headersOption ?? {}),
     };
     return await fetch(`${this.baseURL}${endpoint}`, {
       method: 'POST',
