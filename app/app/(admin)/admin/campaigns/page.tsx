@@ -452,12 +452,20 @@ export default function AdminCampaignsPage() {
                         <td className="px-6 py-4 text-center">
                           <button
                             onClick={() => handleToggleStatus(campaign.id, 'is_active', campaign.is_active)}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${campaign.is_active ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
-                              }`}
+                            disabled={timelineStatus === 'ENDED'}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                              timelineStatus === 'ENDED'
+                                ? 'bg-gray-200 dark:bg-gray-600 cursor-not-allowed opacity-50'
+                                : campaign.is_active 
+                                  ? 'bg-blue-600' 
+                                  : 'bg-gray-300 dark:bg-gray-600'
+                            }`}
+                            title={timelineStatus === 'ENDED' ? 'Cannot modify ended campaigns' : ''}
                           >
                             <span
-                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${campaign.is_active ? 'translate-x-6' : 'translate-x-1'
-                                }`}
+                              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                campaign.is_active ? 'translate-x-6' : 'translate-x-1'
+                              }`}
                             />
                           </button>
                         </td>

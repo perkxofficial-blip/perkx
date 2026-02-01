@@ -7,6 +7,7 @@ import {
   IsEnum,
   IsInt,
   MaxLength,
+  ValidateIf,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
@@ -54,7 +55,8 @@ export class CreateCampaignDto {
     example: 'https://example.com/campaign',
   })
   @IsOptional()
-  @IsUrl()
+  @ValidateIf((object, value) => value !== '' && value != null)
+  @IsUrl({}, { message: 'redirect_url must be a valid URL' })
   redirect_url?: string;
 
   @ApiPropertyOptional({
