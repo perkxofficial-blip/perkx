@@ -124,7 +124,7 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
                 )}
               </div>
                 <SubmitButton
-                  label={t('menu.login')}
+                  label={t('register.submit_btn')}
                   watch={['email', 'password', 'confirm_password']}
                 />
               <p className="text-center auth-footer">

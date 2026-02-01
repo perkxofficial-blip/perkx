@@ -95,7 +95,7 @@ export default async function ResetPasswordPage({ searchParams }: Props) {
                   error={errorMap?.confirm_password ? t(errorMap?.confirm_password) : ''}
                 />
                 <SubmitButton
-                  label={t('menu.login')}
+                  label={t('reset_password.btn')}
                   watch={['password', 'confirm_password']}
                 />
                 <p className="text-center auth-footer">
