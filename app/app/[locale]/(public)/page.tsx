@@ -153,12 +153,12 @@ export default async function LandingPage() {
                 <div className="d-flex align-items-center timeline-item">
                   <div className="timeline-icon">
                     <Image
-                      src="/images/linked.png"
+                      src="/images/people.svg"
                       alt={`${t('home.timeline1')} icon`}
                       width={72}
                       height={72}
                     />
-                    <div className="timeline-bottom tb-2"></div>
+                    <div className="timeline-bottom tb-1"></div>
                   </div>
                   <div className="ms-4 ">
                     <h5 className="mb-0">{t('home.timeline1')}</h5>
@@ -172,7 +172,7 @@ export default async function LandingPage() {
                       width={72}
                       height={72}
                     />
-                    <div className="timeline-bottom"></div>
+                    <div className="timeline-bottom tb-2"></div>
                   </div>
                   <div className="ms-4 ">
                     <h5 className="mb-1">{t('home.timeline2')}</h5>

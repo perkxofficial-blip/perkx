@@ -436,7 +436,7 @@ header {
     }
     .timeline-bottom {
       width: 3px;        /* đáy rộng 2px */
-      height: 60px;
+      height: 55px;
       background: linear-gradient(
                       90deg,
                       rgba(56, 235, 255, 0) 0%,
@@ -450,11 +450,14 @@ header {
                       100% 100%
       );
       position: absolute;
-      top: 61px;
+      top: 67px;
       left: 31px;
     }
+    .tb-1 {
+        top: 70px;
+      }
     .tb-2 {
-      top: 63px;
+      top: 67px;
     }
   }
   .how-perk-work-title {
