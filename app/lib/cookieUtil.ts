@@ -27,7 +27,7 @@ export const cookieUtil = {
       name: key,
       value: typeof value === 'string' ? value : JSON.stringify(value),
       path: options?.path ?? '/',
-      httpOnly: options?.httpOnly ?? true,
+      httpOnly: options?.httpOnly ?? false,
       secure: options?.secure ?? process.env.NODE_ENV === 'production',
       sameSite: options?.sameSite ?? 'lax',
     }
