@@ -156,13 +156,17 @@ export default async function CampaignPage({ searchParams }: Props) {
             </div>
           </div>
           <div className="row">
-            {data?.campaigns?.data && data?.campaigns?.data.map((campaign: any) => (
+            {data?.campaigns?.data &&  data?.campaigns?.data.length > 0 ? data?.campaigns?.data.map((campaign: any) => (
               <div className='col-md-3 mb-4' key={campaign.id}>
                 <CampaignItem campaign={campaign}/>
               </div>
-            ))}
+            )) : (
+              <div className='col-md-12 mb-4 text-not-found'>
+                {t('campaign.no_campaign_not_found')}
+              </div>
+            )}
           </div>
-          {pagination && (
+          {pagination && pagination?.total > 0 && (
             <div className="row align-items-center pagination">
               <div className="col-md-6 d-flex">
                 <div className="d-flex align-items-center gap-3">

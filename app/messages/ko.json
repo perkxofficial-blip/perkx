@@ -163,7 +163,8 @@
     "breadcrumb_campaigns": "캠페인",
     "join_campaign": "캠페인 참여",
     "not_found_title": "캠페인을 찾을 수 없습니다",
-    "not_found_description": "요청하신 캠페인이 존재하지 않습니다."
+    "not_found_description": "요청하신 캠페인이 존재하지 않습니다.",
+    "no_campaign_not_found": "이 선택에 대한 캠페인을 찾을 수 없습니다"
   },
   "paging": {
     "showing_to_of": "<bold>{from}</bold>부터 <bold>{to}</bold>까지 / 총 <bold>{total}</bold>개 캠페인",
