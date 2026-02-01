@@ -6,7 +6,6 @@ const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
   const {pathname} = request.nextUrl;
-  
   // Skip i18n for admin routes
   if (pathname.startsWith('/admin')) {
     // Auth check for admin
