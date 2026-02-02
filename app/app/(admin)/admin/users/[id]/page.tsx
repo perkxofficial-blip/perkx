@@ -395,8 +395,8 @@ export default function UserDetailPage() {
                     key={referral.id}
                     className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className={`w-2 h-2 rounded-full ${referral.status?.toUpperCase() === 'ACTIVE'
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${referral.status?.toUpperCase() === 'ACTIVE'
                         ? 'bg-green-500'
                         : referral.status?.toUpperCase() === 'INACTIVE'
                           ? 'bg-yellow-500'
@@ -404,7 +404,16 @@ export default function UserDetailPage() {
                             ? 'bg-red-500'
                             : 'bg-gray-500'
                         }`}></div>
-                      <span className="text-sm text-gray-900 dark:text-white">{referral.email}</span>
+                      <div className="relative group flex-1 min-w-0">
+                        <span className={`text-sm truncate block ${referral.status?.toUpperCase() === 'DEACTIVATE' 
+                          ? 'text-gray-500 dark:text-gray-400' 
+                          : 'text-gray-900 dark:text-white'
+                        }`}>{referral.email}</span>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                          {referral.email}
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                        </div>
+                      </div>
                     </div>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {formatDate(referral.created_at)}
@@ -550,7 +559,18 @@ export default function UserDetailPage() {
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
                     {user.referrals.map((referral) => (
                       <tr key={referral.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">{referral.email}</td>
+                        <td className="px-6 py-4">
+                          <div className="relative group max-w-xs">
+                            <span className={`text-sm truncate block ${referral.status?.toUpperCase() === 'DEACTIVATE' 
+                              ? 'text-gray-500 dark:text-gray-400' 
+                              : 'text-gray-900 dark:text-white'
+                            }`}>{referral.email}</span>
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                              {referral.email}
+                              <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                            </div>
+                          </div>
+                        </td>
                         <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{referral.id}</td>
                         <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(referral.created_at)}</td>
                         <td className="px-6 py-4">
