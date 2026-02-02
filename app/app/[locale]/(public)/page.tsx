@@ -339,10 +339,10 @@ export default async function LandingPage() {
               <div className="pe-table">
                 <PartnerExchangesTable exchanges={data.exchanges || []} />
                 <div className=" d-flex justify-content-center mt-4">
-                  <div className="pe-btn">
+                  <div>
                     <a
                       href="/exchanges"
-                      className="d-inline-flex align-items-center gap-2 text-decoration-none"
+                      className="perk-primary-btn d-inline-flex align-items-center gap-2 text-decoration-none"
                     >
                       {t("home.view_all_partners")}
                       <Image
