@@ -62,7 +62,7 @@ export default function Toast({ message, type = 'info', onClose, duration = 3000
           {icons[type]}
         </div>
         <div className="flex-1">
-          <p className={`text-sm font-medium ${textColors[type]}`}>
+          <p className={`text-sm font-medium mb-0 ${textColors[type]}`}>
             {message}
           </p>
         </div>
