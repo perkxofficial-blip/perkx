@@ -40,10 +40,17 @@ export class PublicExchangesService {
       order: { id: 'ASC' },
     });
 
-    // Get unique exchange codes from products (only exchanges that have products)
-    const exchangeCodesSet = new Set(
-      allProducts.map((product) => product.exchange_name.toLowerCase()),
-    );
+    // Get unique exchange codes from products in order of first appearance
+    // This preserves the order based on exchange_product table
+    const exchangeOrder: string[] = [];
+    const exchangeCodesSet = new Set<string>();
+    for (const product of allProducts) {
+      const key = product.exchange_name.toLowerCase();
+      if (!exchangeCodesSet.has(key)) {
+        exchangeCodesSet.add(key);
+        exchangeOrder.push(key);
+      }
+    }
 
     if (exchangeCodesSet.size === 0) {
       return [];
@@ -67,8 +74,15 @@ export class PublicExchangesService {
       productsByExchangeName.get(key)!.push(product);
     }
 
+    // Sort exchanges according to the order they appear in exchange_product
+    const sortedExchanges = exchanges.sort((a, b) => {
+      const indexA = exchangeOrder.indexOf(a.code.toLowerCase());
+      const indexB = exchangeOrder.indexOf(b.code.toLowerCase());
+      return indexA - indexB;
+    });
+
     // Transform exchanges with logo_url and products
-    return exchanges.map((exchange) =>
+    return sortedExchanges.map((exchange) =>
       this.transformExchangeResponse(
         exchange,
         productsByExchangeName.get(exchange.code.toLowerCase()) || [],
