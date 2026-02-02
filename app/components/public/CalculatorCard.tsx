@@ -141,7 +141,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                 <select
                   value={selectedExchange}
                   onChange={handleExchangeChange}
-                  className="calculator-select"
+                  className="calculator-select perkx-selector"
                 >
                   <option value="">{t('calculator.select_exchange')}</option>
                   {exchanges.map((exchange) => (
@@ -157,7 +157,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                 <select
                   value={selectedProduct}
                   onChange={(e) => setSelectedProduct(e.target.value)}
-                  className="calculator-select"
+                  className="calculator-select perkx-selector"
                 >
                   <option value="">{selectedExchange ? t('calculator.select_product') : t('calculator.select_product')}</option>
                   {availableProducts.map((product) => (
@@ -173,7 +173,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                 <select
                   value={selectedFeeType}
                   onChange={(e) => setSelectedFeeType(e.target.value)}
-                  className="calculator-select"
+                  className="calculator-select perkx-selector"
                 >
                   <option value="taker">{t('calculator.fee_taker')}</option>
                   <option value="maker">{t('calculator.fee_maker')}</option>
