@@ -38,7 +38,7 @@ export default async function CampaignDetailPage({ params }: CampaignDetailPageP
   const { locale, slug } = await params;
   const t = await getTranslations('campaign');
 
-  const campaign = await getCampaignData(slug);
+  const campaign: any = await getCampaignData(slug);
 
   if (!campaign) {
     notFound();
@@ -79,11 +79,18 @@ export default async function CampaignDetailPage({ params }: CampaignDetailPageP
               <div dangerouslySetInnerHTML={{ __html: campaign.description }} />
             </div>
 
-            <div className="campaign-detail-actions">
-              <Link href={campaign.redirect_url} target="_blank" rel="noopener noreferrer" className="btn btn-campaign-join">
-                {t('join_campaign')}
-              </Link>
-            </div>
+            {campaign.redirect_url.length && (
+              <div className="campaign-detail-actions">
+                <Link
+                  href={campaign.status === 'expired' ? undefined : campaign.redirect_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`btn btn-campaign-join ${campaign.status === 'expired' ? 'btn-disabled' : ''}`}
+                >
+                  {t('join_campaign')}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
     </>

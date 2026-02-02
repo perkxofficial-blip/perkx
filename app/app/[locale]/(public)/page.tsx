@@ -148,7 +148,27 @@ export default async function LandingPage() {
               />
             </div>
             <div className="col-md-6 timeline-wrapper">
-
+              <Image
+                className="w-coin w-coin1"
+                src="/images/w-coin1.png"
+                alt={`${t('home.coin')}`}
+                width={109}
+                height={98}
+              />
+              <Image
+                className="w-coin w-coin2"
+                src="/images/w-coin2.png"
+                alt={`${t('home.coin')}`}
+                width={69}
+                height={70}
+              />
+              <Image
+                className="w-coin w-coin3"
+                src="/images/w-coin3.png"
+                alt={`${t('home.coin')}`}
+                width={51}
+                height={51}
+              />
               <div className="timeline-block">
                 <div className="d-flex align-items-center timeline-item">
                   <div className="timeline-icon">
