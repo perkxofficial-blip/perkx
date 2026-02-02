@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
@@ -38,10 +39,13 @@ interface Campaign {
 type TimelineStatus = 'ACTIVE' | 'UPCOMING' | 'ENDED';
 
 export default function AdminCampaignsPage() {
+  const searchParams = useSearchParams();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const hasFetched = useRef(false);
+  const hasInitialized = useRef(false);
+  const isInitialMount = useRef(true);
 
   // Filter states
   const [searchQuery, setSearchQuery] = useState('');
@@ -50,6 +54,29 @@ export default function AdminCampaignsPage() {
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  // Initialize filters from URL params
+  useEffect(() => {
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+
+    const text = searchParams.get('text');
+    const status = searchParams.get('status');
+    const page = searchParams.get('page');
+    const perPage = searchParams.get('perPage');
+
+    if (text) setSearchQuery(text);
+    if (status) setStatusFilter(status);
+    if (page) {
+      setCurrentPage(parseInt(page) || 1);
+    }
+    if (perPage) setRowsPerPage(parseInt(perPage) || 10);
+
+    // Mark that initial mount is complete
+    setTimeout(() => {
+      isInitialMount.current = false;
+    }, 0);
+  }, [searchParams]);
 
   // Delete modal state
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -188,10 +215,29 @@ export default function AdminCampaignsPage() {
     return filteredCampaigns.slice(startIndex, endIndex);
   }, [filteredCampaigns, currentPage, rowsPerPage]);
 
-  // Reset to page 1 when filters change
+  // Reset to page 1 when search/status filters change (but not during initial load from URL)
   useEffect(() => {
+    if (isInitialMount.current) {
+      return; // Don't reset during initial mount
+    }
     setCurrentPage(1);
-  }, [searchQuery, statusFilter, rowsPerPage]);
+  }, [searchQuery, statusFilter]);
+
+  // Sync URL when any filter changes (but not during initial load)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      return; // Don't sync during initial load
+    }
+    
+    const params = new URLSearchParams();
+    if (searchQuery) params.set('text', searchQuery);
+    if (statusFilter !== 'ALL') params.set('status', statusFilter);
+    params.set('page', currentPage.toString());
+    params.set('perPage', rowsPerPage.toString());
+    
+    const newUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ''}`;
+    window.history.replaceState(null, '', newUrl);
+  }, [searchQuery, statusFilter, currentPage, rowsPerPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -285,6 +331,17 @@ export default function AdminCampaignsPage() {
     const month = months[date.getMonth()];
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
+  };
+
+  const getEditUrl = (campaignId: number) => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set('text', searchQuery);
+    if (statusFilter !== 'ALL') params.set('status', statusFilter);
+    params.set('page', currentPage.toString());
+    params.set('perPage', rowsPerPage.toString());
+    
+    const queryString = params.toString();
+    return `/admin/campaigns/${campaignId}${queryString ? `?${queryString}` : ''}`;
   };
 
   const getPageNumbers = () => {
@@ -484,7 +541,7 @@ export default function AdminCampaignsPage() {
                         <td className="px-6 py-4">
                           <div className="flex items-center justify-center gap-2">
                             <Link
-                              href={`/admin/campaigns/${campaign.id}`}
+                              href={getEditUrl(campaign.id)}
                               className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
                               title="Edit"
                             >
