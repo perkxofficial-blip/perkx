@@ -13,7 +13,6 @@ export async function resetAction(formData: FormData) {
   const res = await resetPassword(payload)
 
   const result: any = await res.json()
-  console.log(result)
   if (!res.ok) {
     if (result.statusCode === 400) {
       await cookieUtil.set('reset', {
