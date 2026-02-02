@@ -10,6 +10,16 @@ interface AboutUsPageProps {
   }>;
 }
 
+export async function generateMetadata({ params }: AboutUsPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations('terms-of-use');
+  
+  return {
+    title: t("meta.title") || 'Terms of Use | PerkX',
+    description: t("meta.description") || 'Read the terms of use for PerkX',
+  };
+}
+
 export default async function AboutUsPage({ params }: AboutUsPageProps) {
   const { locale } = await params;
   const t = await getTranslations('terms-of-use');

@@ -12,16 +12,17 @@ interface ExchangesPageProps {
 
 export async function generateMetadata({ params }: ExchangesPageProps): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations('calculator');
 
   return {
-    title: 'Calculator | PerkX',
-    description: 'View Calculator Page',
+    title: t("meta.title") || 'Calculator | PerkX',
+    description: t("meta.description") || 'View Calculator Page',
   };
 }
 
 export default async function CalculatorPage({ params }: ExchangesPageProps) {
   const { locale } = await params;
-  const t = await getTranslations();
+  const t = await getTranslations('calculator');
   
   let exchanges: Exchange[] = [];
   try {
@@ -39,10 +40,10 @@ export default async function CalculatorPage({ params }: ExchangesPageProps) {
             <div className="row position-relative justify-content-center">
               <div className="col-12 text-center calculator-hero-content">
                 <h1 className="calculator-hero-title">
-                  {t('calculator.hero_title_part1')}<span className="gradient-text">{t('calculator.hero_title_gradient')}</span>
+                  {t('hero_title_part1')}<span className="gradient-text">{t('hero_title_gradient')}</span>
                 </h1>
                 <p className="calculator-hero-subtitle">
-                  {t('calculator.hero_subtitle')}
+                  {t('hero_subtitle')}
                 </p>
               </div>
             </div>

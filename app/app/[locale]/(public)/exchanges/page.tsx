@@ -13,10 +13,11 @@ interface ExchangesPageProps {
 
 export async function generateMetadata({ params }: ExchangesPageProps): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations('exchanges');
 
   return {
-    title: 'Exchanges | PerkX',
-    description: 'View all available Exchanges and exchange offers',
+    title: t("meta.title") || 'Exchanges | PerkX',
+    description: t("meta.description") || 'View all available Exchanges and exchange offers',
   };
 }
 
@@ -27,7 +28,7 @@ interface ExchangeRowProps {
 
 export default async function ExchangesPage({ params }: ExchangesPageProps) {
   const { locale } = await params;
-  const t = await getTranslations();
+  const t = await getTranslations('exchanges');
   
   let exchanges: Exchange[] = [];
   try {
@@ -53,11 +54,11 @@ export default async function ExchangesPage({ params }: ExchangesPageProps) {
               <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
 
               <div className="get-started col-md-6 text-center">
-                <h2 className='exchange-hero_title'>{t('exchanges.hero_title_part1')}</h2>
-                <h1><span className="exchange-hero_title_gradient">{t('exchanges.hero_title_gradient')}</span></h1>
-                <p>{t('exchanges.hero_subtitle')}</p>
+                <h2 className='exchange-hero_title'>{t('hero_title_part1')}</h2>
+                <h1><span className="exchange-hero_title_gradient">{t('hero_title_gradient')}</span></h1>
+                <p>{t('hero_subtitle')}</p>
                 <a href="/register" className="get-started-now btn-get-started d-inline-flex align-items-center gap-2">
-                  {t('exchanges.get_started')}
+                  {t('get_started')}
                   <Image
                     src="/images/arrow-right-s-line.svg"
                     alt="arrow right"
