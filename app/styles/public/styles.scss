@@ -2125,6 +2125,7 @@ header {
   gap: 60px;
   position: relative;
   z-index: 2;
+  margin: 32px 0;
 }
 
 .calculator-left-section {
@@ -2214,6 +2215,47 @@ header {
   text-align: center;
 }
 
+.perkx-selector {
+  border: 0.5px solid #595959;
+  background: rgba(255, 255, 255, 0.12);
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px !important;
+  color: #868C98;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  box-shadow: 0px 1px 2px 0px rgba(228, 229, 231, 0.24);
+
+  /* regular-shadow/x-small */
+  box-shadow: 0 1px 2px 0 rgba(228, 229, 231, 0.24);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: rgba(239, 115, 209, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(226, 228, 233, 0.1);
+  }
+  option {
+    background-color: #1F1F49;
+    color: #FCFCFC;
+    padding: 12px 10px;
+    overflow: hidden;
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.096px;
+    border-radius: 10px;
+  }
+}
 .calculator-inputs {
   display: flex;
   gap: 16px;
@@ -2322,7 +2364,7 @@ header {
 .calculator-cta-btn {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 14px;
   background: linear-gradient(105.43deg, rgba(239, 115, 209, 0.8) 1.16%, rgba(179, 136, 244, 0.8) 102.96%);
   border: none;
   border-radius: 10px;
