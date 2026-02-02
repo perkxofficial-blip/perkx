@@ -141,8 +141,9 @@
     "forgot_email_success": "비밀번호 복구 이메일이 전송되었습니다. 스팸함을 포함하여 확인해주세요.",
     "forgot_email_failed": "비밀번호 복구 이메일 전송에 실패했습니다. 이메일을 확인하거나 다시 시도해주세요.",
     "reset_password_success": "비밀번호가 성공적으로 재설정되었습니다. 새 비밀번호로 로그인할 수 있습니다.",
-    "token_invalid": "유효하지 않은 재설정 토큰입니다. 새로 요청해주세요.",
-    "token_expire": "재설정 토큰이 만료되었습니다. 새로 요청해주세요."
+    "token_invalid": "이 재설정 토큰은 유효하지 않습니다.",
+    "token_expire": "이 재설정 토큰은 만료되었습니다.",
+    "email_already_verified": "이메일은 이미 인증되었습니다."
   },
   "campaign": {
     "title": "<perkx>PerkX</perkx> 독점 캠페인",

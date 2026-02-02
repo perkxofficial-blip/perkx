@@ -40,7 +40,6 @@ export class EmailVerificationService {
         verified_at: IsNull(),
       },
     });
-    console.log(verify);
     return {
       status: !!verify,
       expired_at: verify?.created_at,
@@ -79,11 +78,11 @@ export class EmailVerificationService {
         where: { token: token },
       });
 
-      if (!record) throw new NotFoundException('Invalid token');
+      if (!record) throw new BadRequestException('message.token_invalid');
       if (record.verified_at)
-        throw new BadRequestException('Email already verified');
+        throw new BadRequestException('message.email_already_verified');
       if (record.expires_at < new Date())
-        throw new BadRequestException('Token expired');
+        throw new BadRequestException('message.token_expire');
 
       const now = new Date();
       record.verified_at = now;
