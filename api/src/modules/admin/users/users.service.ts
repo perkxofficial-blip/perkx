@@ -153,6 +153,7 @@ export class UsersService {
       .select([
         'referred_user.id',
         'referred_user.email',
+        'referred_user.referral_code',
         'referred_user.status',
         'referred_user.created_at',
       ])
@@ -222,6 +223,7 @@ export class UsersService {
       referrals: referrals.map((ref) => ({
         id: ref.referred_user_id,
         email: ref.referred_user_email,
+        referral_code: ref.referred_user_referral_code,
         status: ref.referred_user_status,
         created_at: ref.referred_user_created_at,
       })),

@@ -33,6 +33,7 @@ interface UserDetail {
   referrals: Array<{
     id: number;
     email: string;
+    referral_code?: string;
     created_at: string;
     status?: string;
     country?: string;
@@ -571,7 +572,7 @@ export default function UserDetailPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{referral.id}</td>
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{referral.referral_code}</td>
                         <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(referral.created_at)}</td>
                         <td className="px-6 py-4">
                           <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${referral.status?.toUpperCase() === 'ACTIVE'
