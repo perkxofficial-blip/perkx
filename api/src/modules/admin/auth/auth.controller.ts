@@ -2,37 +2,8 @@ import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AdminLocalAuthGuard } from './guards';
 import { Public } from '../../../common/decorators';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, MinLength } from 'class-validator';
-
-class ForgotPasswordDto {
-  @ApiProperty({
-    description: 'Admin email address',
-    example: 'admin@example.com',
-    format: 'email'
-  })
-  @IsEmail()
-  email: string;
-}
-
-class ResetPasswordDto {
-  @ApiProperty({
-    description: 'Password reset token received via email',
-    example: 'abcd1234567890efgh',
-    minLength: 1
-  })
-  @IsString()
-  token: string;
-
-  @ApiProperty({
-    description: 'New password for admin account',
-    example: 'MyNewSecurePassword123',
-    minLength: 8
-  })
-  @IsString()
-  @MinLength(8)
-  newPassword: string;
-}
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { AdminResetPasswordDto, ForgotPasswordDto } from './dto';
 
 @ApiTags('Admin Auth')
 @Controller('admin/auth')
@@ -100,7 +71,7 @@ export class AuthController {
     description: 'Resets admin password using the token received via email. The token can only be used once and expires in 24 hours.'
   })
   @ApiBody({ 
-    type: ResetPasswordDto,
+    type: AdminResetPasswordDto,
     description: 'Reset token and new password'
   })
   @ApiResponse({ 
@@ -133,7 +104,7 @@ export class AuthController {
       }
     }
   })
-  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+  async resetPassword(@Body() resetPasswordDto: AdminResetPasswordDto) {
     return this.authService.resetPassword(
       resetPasswordDto.token,
       resetPasswordDto.newPassword,
