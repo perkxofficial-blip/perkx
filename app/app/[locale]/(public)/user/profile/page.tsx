@@ -6,6 +6,7 @@ import { apiClient } from '@/services/api/client';
 import { endpoints } from '@/services/endpoints';
 import { auth } from '@/services/auth';
 import { COUNTRIES } from '@/lib/countries';
+import Toast from '@/components/admin/Toast';
 
 interface UserProfile {
   id: number;
@@ -24,7 +25,17 @@ export default function UserProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Toast state
+  const [toast, setToast] = useState<{ show: boolean; message: string; type: 'success' | 'error' | 'warning' | 'info' } | null>(null);
+
+  const showToast = (message: string, type: 'success' | 'error' | 'warning' | 'info' = 'info') => {
+    setToast({ show: true, message, type });
+  };
+
+  const hideToast = () => {
+    setToast(null);
+  };
 
   // Field-level errors
   const [profileErrors, setProfileErrors] = useState<Record<string, string>>({});
@@ -68,6 +79,14 @@ export default function UserProfilePage() {
     }
 
     return fieldErrors;
+  };
+
+  // Helper function to validate password
+  const validatePassword = (password: string): string | null => {
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+      return 'Password needs to be a minimum of 8 characters, 1 number, and 1 uppercase letter.';
+    }
+    return null;
   };
 
   // Ref for date picker
@@ -136,7 +155,6 @@ export default function UserProfilePage() {
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    setMessage(null);
 
     try {
       const token = auth.getUserToken();
@@ -149,7 +167,7 @@ export default function UserProfilePage() {
 
       await apiClient.put(endpoints.user.updateProfile, profileForm, token);
 
-      setMessage({ type: 'success', text: 'Profile updated successfully!' });
+      showToast('Profile updated successfully!', 'success');
       setProfileErrors({}); // Clear all field errors on success
       await loadProfile();
     } catch (error: any) {
@@ -168,13 +186,10 @@ export default function UserProfilePage() {
       if (Object.keys(fieldErrors).length > 0) {
         // Has field-specific errors - display them below fields
         setProfileErrors(fieldErrors);
-        setMessage(null); // Clear general message
+        showToast('Please fix the errors in the form', 'error');
       } else {
-        // General error - display in banner
-        setMessage({
-          type: 'error',
-          text: error.message || 'Failed to update profile'
-        });
+        // General error - display as toast
+        showToast(error.message || 'Failed to update profile', 'error');
         setProfileErrors({}); // Clear field errors
       }
     } finally {
@@ -185,10 +200,17 @@ export default function UserProfilePage() {
   const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    setMessage(null);
+
+    // Validate new password
+    const passwordValidationError = validatePassword(passwordForm.new_password);
+    if (passwordValidationError) {
+      showToast(passwordValidationError, 'error');
+      setSaving(false);
+      return;
+    }
 
     if (passwordForm.new_password !== passwordForm.confirm_new_password) {
-      setMessage({ type: 'error', text: 'New passwords do not match' });
+      showToast('Confirm password does not match.', 'error');
       setSaving(false);
       return;
     }
@@ -204,7 +226,7 @@ export default function UserProfilePage() {
 
       await apiClient.patch(endpoints.user.updatePassword, passwordForm, token);
 
-      setMessage({ type: 'success', text: 'Password updated successfully!' });
+      showToast('Reset password successfully!', 'success');
       setPasswordErrors({}); // Clear all field errors on success
       setPasswordForm({
         current_password: '',
@@ -227,13 +249,10 @@ export default function UserProfilePage() {
       if (Object.keys(fieldErrors).length > 0) {
         // Has field-specific errors - display them below fields
         setPasswordErrors(fieldErrors);
-        setMessage(null); // Clear general message
+        showToast('Please fix the errors in the form', 'error');
       } else {
-        // General error - display in banner
-        setMessage({
-          type: 'error',
-          text: error.message || 'Failed to update password'
-        });
+        // General error - display as toast
+        showToast(error.message || 'Failed to update password', 'error');
         setPasswordErrors({}); // Clear field errors
       }
     } finally {
@@ -327,16 +346,6 @@ export default function UserProfilePage() {
               <h1 className="!text-[#FCFCFC] text-2xl font-bold">My Profile</h1>
               <p className="!text-[#FCFCFC] text-sm leading-7 m-0">Manage your official profile and secure your affiliate account</p>
             </div>
-
-            {/* Message Alert */}
-            {message && (
-              <div className={`p-4 rounded-lg ${message.type === 'success'
-                ? 'bg-green-500/20 text-green-300 border border-green-500/30'
-                : 'bg-red-500/20 text-red-300 border border-red-500/30'
-                }`}>
-                {message.text}
-              </div>
-            )}
 
             {/* Content Grid */}
             <div className="grid lg:grid-cols-2 gap-6 mx-[40px]">
@@ -449,7 +458,12 @@ export default function UserProfilePage() {
                           <input
                             type={showPassword.new ? 'text' : 'password'}
                             value={passwordForm.new_password}
-                            onChange={(e) => setPasswordForm({ ...passwordForm, new_password: e.target.value })}
+                            onChange={(e) => {
+                              setPasswordForm({ ...passwordForm, new_password: e.target.value });
+                              if (passwordErrors.new_password) {
+                                setPasswordErrors({ ...passwordErrors, new_password: '' });
+                              }
+                            }}
                             placeholder="Enter New Password"
                             className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                             required
@@ -472,6 +486,9 @@ export default function UserProfilePage() {
                             )}
                           </button>
                         </div>
+                        {passwordErrors.new_password && (
+                          <p className="text-red-400 text-sm mt-1">{passwordErrors.new_password}</p>
+                        )}
                       </div>
 
                       {/* Confirm New Password */}
@@ -511,7 +528,7 @@ export default function UserProfilePage() {
                       {/* Submit Button */}
                       <button
                         type="submit"
-                        disabled={saving}
+                        disabled={saving || !passwordForm.current_password || !passwordForm.new_password || !passwordForm.confirm_new_password}
                         className="inline-flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50 self-start"
                       >
                         <span className="text-white text-center text-lg font-medium leading-5 tracking-[-0.108px]">
@@ -743,7 +760,7 @@ export default function UserProfilePage() {
                     <div className="flex items-start gap-2 mt-auto">
                       <button
                         type="submit"
-                        disabled={saving}
+                        disabled={saving || !profileForm.first_name.trim() || !profileForm.last_name.trim()}
                         className="flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50"
                       >
                         <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px]">
@@ -767,6 +784,16 @@ export default function UserProfilePage() {
           </div>
         </main>
       </div>
+
+      {/* Toast Notification */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={hideToast}
+          duration={5000}
+        />
+      )}
     </div>
   );
 }
