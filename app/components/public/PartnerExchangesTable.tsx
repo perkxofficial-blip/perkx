@@ -32,13 +32,13 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
       <table className="table">
         <thead>
         <tr>
-          <th>{t('exchanges')}</th>
-          <th>{t('product')}</th>
-          <th>{t('discount_rate')}</th>
-          <th>{t('default_taker')}</th>
-          <th>{t('final_taker')}</th>
-          <th>{t('ave_rebate')}</th>
-          <th>{t('action')}</th>
+          <th style={{ width: '14%' }}>{t('exchanges')}</th>
+          <th style={{ width: '18%' }}>{t('product')}</th>
+          <th style={{ width: '10%' }}>{t('discount_rate')}</th>
+          <th style={{ width: '14%' }}>{t('default_taker')}</th>
+          <th style={{ width: '14%' }}>{t('final_taker')}</th>
+          <th style={{ width: '14%' }}>{t('ave_rebate')}</th>
+          <th style={{ width: '14%' }}>{t('action')}</th>
         </tr>
         </thead>
 

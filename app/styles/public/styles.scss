@@ -146,7 +146,7 @@ header {
 }
 .img-bg {
   height: 840px;
-  background-image: url("../../public/images/bg-source.jpg");
+  background-image: url("../../public/images/bg-source-grey.png");
   background-size: cover;
   background-position: 0 -350px;
   background-repeat: no-repeat;
@@ -978,7 +978,6 @@ header {
       color: #FCFCFC;
       font-size: 16px;
       font-style: normal;
-      font-weight: 700;
       line-height: 18px; /* 112.5% */
       border: none;
     }
