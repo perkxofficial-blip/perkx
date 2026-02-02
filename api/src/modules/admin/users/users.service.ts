@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserExchange, Exchange, UserStatus, AccessLog } from '../../../entities';
 import { ListUsersQueryDto, UpdateUserDto } from './dto';
-import { MailService } from '../../../mail/mail.service';
 import { StorageService } from '../../../common/storage/storage.service';
 
 @Injectable()
@@ -15,7 +14,6 @@ export class UsersService {
     private userExchangeRepository: Repository<UserExchange>,
     @InjectRepository(AccessLog)
     private accessLogRepository: Repository<AccessLog>,
-    private mailService: MailService,
     private storageService: StorageService,
   ) {}
 
@@ -291,9 +289,6 @@ export class UsersService {
 
     user.status = newStatus;
     await this.userRepository.save(user);
-
-    // Send email notification when status changes
-    await this.mailService.sendMailChangeStatusUser(user.email, newStatus);
 
     return {
       id: user.id,
