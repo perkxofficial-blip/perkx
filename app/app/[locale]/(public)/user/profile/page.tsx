@@ -292,11 +292,13 @@ export default function UserProfilePage() {
           <div className="w-full flex flex-col pb-3">
             {/* Logo */}
             <div className="h-[73px] flex items-center justify-center px-4 py-[13px]">
-              <img
-                src="/images/logo.png"
-                alt="PerkX Logo"
-                className="h-10 w-auto object-contain"
-              />
+              <a href="/" className="block">
+                <img
+                  src="/images/logo.png"
+                  alt="PerkX Logo"
+                  className="h-10 w-auto object-contain hover:opacity-90 transition-opacity cursor-pointer"
+                />
+              </a>
             </div>
 
             {/* Navigation */}
