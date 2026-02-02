@@ -32,7 +32,7 @@ const CampaignItem = ({campaign}: CampaignItemProps) => {
             {campaign.title}
           </p>
           <span className='campaign-desc'>{campaign.sub_title}</span>
-          <a href={`/campaigns/${campaign.slug}`}>{t('campaign.btn_name')}</a>
+          <a href={`/campaigns/${campaign.slug}`}>{t(campaign.status === 'expired' ? 'campaign.status_expired' : 'campaign.btn_name')}</a>
         </div>
       </div>
     </div>
