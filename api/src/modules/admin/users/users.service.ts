@@ -157,7 +157,16 @@ export class UsersService {
         'referred_user.created_at',
       ])
       .where('referred_user.referral_user_id = :id', { id })
-      .orderBy('referred_user.created_at', 'DESC');
+      .orderBy(
+        `CASE referred_user.status 
+          WHEN 'ACTIVE' THEN 1 
+          WHEN 'INACTIVE' THEN 2 
+          WHEN 'DEACTIVATE' THEN 3 
+          ELSE 4 
+        END`,
+        'ASC',
+      )
+      .addOrderBy('referred_user.created_at', 'DESC');
 
     const referrals = await referralsQuery.getRawMany();
 
