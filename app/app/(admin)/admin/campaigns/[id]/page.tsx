@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, use } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
@@ -37,6 +37,7 @@ interface Exchange {
 export default function EditCampaignPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
   const [fetching, setFetching] = useState(true);
@@ -45,6 +46,9 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const hasFetched = useRef(false);
+
+  // Store filter params for redirect back to list
+  const [filterParams, setFilterParams] = useState<string>('');
 
   const [formData, setFormData] = useState<FormData>({
     title: '',
@@ -78,6 +82,21 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
+
+    // Capture filter params from URL
+    const urlParams = new URLSearchParams();
+    const text = searchParams.get('text');
+    const status = searchParams.get('status');
+    const page = searchParams.get('page');
+    const perPage = searchParams.get('perPage');
+    
+    if (text) urlParams.set('text', text);
+    if (status) urlParams.set('status', status);
+    if (page) urlParams.set('page', page);
+    if (perPage) urlParams.set('perPage', perPage);
+    
+    const finalParams = urlParams.toString();
+    setFilterParams(finalParams);
 
     const fetchData = async () => {
       const token = auth.getAdminToken();
@@ -292,7 +311,8 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
       // Wait longer if uploading a new banner file to ensure backend completes processing
       const delayTime = formData.banner ? 5000 : 1500;
       setTimeout(() => {
-        router.push('/admin/campaigns');
+        const redirectUrl = filterParams ? `/admin/campaigns?${filterParams}` : '/admin/campaigns';
+        router.push(redirectUrl);
       }, delayTime);
     } catch (err: any) {
       console.error('Error updating campaign:', err);
@@ -353,7 +373,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
     <>
       <div className="mb-6">
         <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
-          <Link href="/admin/campaigns" className="hover:text-blue-600">Campaigns</Link>
+          <Link href={filterParams ? `/admin/campaigns?${filterParams}` : '/admin/campaigns'} className="hover:text-blue-600">Campaigns</Link>
           <span>/</span>
           <span>Campaign Editor</span>
         </div>
@@ -633,7 +653,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-end gap-3">
             <Link
-              href="/admin/campaigns"
+              href={filterParams ? `/admin/campaigns?${filterParams}` : '/admin/campaigns'}
               className="px-6 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
             >
               Cancel
