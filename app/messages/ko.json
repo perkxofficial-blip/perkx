@@ -32,6 +32,10 @@
     "ko": "한국어"
   },
   "home": {
+    "meta": {
+      "title": "홈 | PerkX",
+      "description": "PerkX와 함께 글로벌 거래소에서 트레이딩 리베이트를 극대화하세요. 고액 트레이더를 위한 전문 캐시백 플랫폼입니다."
+    },
     "intro_1": "혜택은 주어지는 것이 아닙니다.",
     "intro_2": "협상으로 얻는 것입니다.",
     "hero_section_description": "최고의 수수료 리베이트, 에어드롭, 할인 혜택을 하나의 포털에서 제공합니다 — 모든 거래는 최고의 조건을 누려야 하니까요.",
@@ -145,8 +149,10 @@
     "token_expire": "이 재설정 토큰은 만료되었습니다.",
     "email_already_verified": "이메일은 이미 인증되었습니다."
   },
-  "campaign": {
-    "title": "<perkx>PerkX</perkx> 독점 캠페인",
+  "campaign": {    "meta": {
+      "title": "캐페인 | PerkX",
+      "description": "진행 중인 트레이딩 이벤트와 보상을 한눈에 확인하세요"
+    },    "title": "<perkx>PerkX</perkx> 독점 캠페인",
     "desc": "진행 중인 트레이딩 이벤트와 보상을 한눈에 확인하세요.",
     "campaign_holder": "캠페인 주최자",
     "all_campaign_holder": "모든 주최자",
@@ -172,12 +178,20 @@
     "result_per_page": "페이지당 결과 수"
   },
   "exchanges": {
+    "meta": {
+      "title": "거래소 | PerkX",
+      "description": "PerkX와 함께 글로벌 최상위 거래소를 비교하고 참여하세요"
+    },
     "hero_title_part1": "암호화폐 트레이딩",
     "hero_title_gradient": "캐시백을 극대화하세요.",
     "hero_subtitle": "PerkX와 함께 글로벌 최상위 거래소를 비교하고 참여하세요.",
     "get_started": "시작하기"
   },
   "calculator": {
+    "meta": {
+      "title": "계산기 | PerkX",
+      "description": "거래량을 기준으로 예상 캐시백 수익을 계산해보세요"
+    },
     "hero_title_part1": "놓치고 있는 ",
     "hero_title_gradient": "수익을 확인하세요",
     "hero_subtitle": "거래량을 기준으로 예상 캐시백 수익을 계산해보세요",
@@ -437,6 +451,16 @@
         "paragraph2": "본 약관은 법률 충돌 원칙을 고려하지 않고 PerkX의 운영 법인이 설립된 관할권의 법률에 따라 규율되고 해석됩니다.",
         "paragraph3": "본 약관 또는 서비스와 관련하여 발생하는 모든 분쟁, 청구 또는 논쟁은 해당 관할권의 관할 법원의 전속 관할권에 속합니다."
       }
+    }
+  },
+  "help-center": {
+    "meta": {
+      "title": "고객 지원 | PerkX",
+      "description": "PerkX에 대한 자주 묻는 질문에 대한 답변을 찾으세요"
+    },
+    "hero": {
+      "title": "고객 지원",
+      "subtitle": "PerkX에 대한 자주 묻는 질문에 대한 답변을 찾으세요"
     }
   }
 }

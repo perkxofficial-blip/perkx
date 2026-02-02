@@ -6,6 +6,7 @@ import {Exchange, getAllExchanges} from "@/services/api/public/exchange";
 import CampaignItem from "@/components/public/CampaignItem";
 import SelectSearch from "@/components/public/SelectSearch";
 import Pagination from "@/components/public/Pagination";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
 async function campaigns(params: any) {
   const result: {
@@ -47,8 +48,20 @@ interface Props {
     status?: string
     page?: string
     per_page?: string
+    locale: string
   }
 }
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { locale } = await searchParams;
+  const t = await getTranslations('campaign');
+
+  return {
+    title: t("meta.title") || 'Campaigns | PerkX',
+    description: t("meta.description") || 'View all available campaigns and exchange offers',
+  };
+}
+
 export default async function CampaignPage({ searchParams }: Props) {
   const params = await searchParams
   const data = await campaigns(params);
