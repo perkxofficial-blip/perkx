@@ -75,7 +75,7 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
             <span className="text-xl font-bold text-gray-900 dark:text-white">PerkX Admin</span>
           </Link> */}
           {/* Logo */}
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/admin/">
             <Image
               src="/images/admin-logo.png"
               alt={"Admin Logo"}
