@@ -176,7 +176,8 @@ export class AuthService {
       }
       const user = await userRepo.findOneBy({ id: record.user_id });
 
-      await user.hashPassword(newPassword);
+      // Update password (will be hashed by BeforeUpdate hook)
+      user.password = newPassword;
       await userRepo.save(user);
       await passwordResetRepo.delete({ user_id: user.id });
 

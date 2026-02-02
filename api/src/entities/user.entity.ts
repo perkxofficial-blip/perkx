@@ -79,8 +79,21 @@ export class User {
   updated_at: Date;
 
   @BeforeInsert()
-  async hashPassword(newPassword: string) {
-    this.password = await bcrypt.hash(newPassword ?? this.password, 10);
+  async hashPasswordOnInsert() {
+    if (this.password && !this.password.startsWith('$2')) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
+  }
+
+  @BeforeUpdate()
+  async hashPasswordOnUpdate() {
+    if (this.password && !this.password.startsWith('$2')) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
+  }
+
+  async hashPassword(plainPassword: string): Promise<void> {
+    this.password = await bcrypt.hash(plainPassword, 10);
   }
 
   async validatePassword(password: string): Promise<boolean> {
