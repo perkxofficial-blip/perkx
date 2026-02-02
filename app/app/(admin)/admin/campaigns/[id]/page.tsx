@@ -94,12 +94,12 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
           category: campaign.category || 'all_user',
           redirect_url: campaign.redirect_url || '',
           description: campaign.description || '',
-          preview_start: formatDateTimeLocal(campaign.preview_start),
-          preview_end: formatDateTimeLocal(campaign.preview_end),
-          launch_start: formatDateTimeLocal(campaign.launch_start),
-          launch_end: formatDateTimeLocal(campaign.launch_end),
-          archive_start: formatDateTimeLocal(campaign.archive_start),
-          archive_end: formatDateTimeLocal(campaign.archive_end),
+          preview_start: formatDateTimeForInput(campaign.preview_start),
+          preview_end: formatDateTimeForInput(campaign.preview_end),
+          launch_start: formatDateTimeForInput(campaign.launch_start),
+          launch_end: formatDateTimeForInput(campaign.launch_end),
+          archive_start: formatDateTimeForInput(campaign.archive_start),
+          archive_end: formatDateTimeForInput(campaign.archive_end),
           banner: null,
           banner_url: campaign.banner_url || '',
         });
@@ -146,15 +146,20 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
     fetchData();
   }, [resolvedParams.id]);
 
-  const formatDateTimeLocal = (dateString?: string) => {
+  const formatDateTimeForInput = (dateString?: string) => {
     if (!dateString) return '';
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
+    try {
+      // Parse ISO string directly to avoid timezone conversion
+      // Expected format: "2024-01-15T10:30:00.000Z" or "2024-01-15T10:30:00"
+      const isoMatch = dateString.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+      if (isoMatch) {
+        const [, year, month, day, hour, minute] = isoMatch;
+        return `${year}-${month}-${day}T${hour}:${minute}`;
+      }
+      return '';
+    } catch {
+      return '';
+    }
   };
 
   const handleInputChange = (field: keyof FormData, value: any) => {
