@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
@@ -33,6 +33,7 @@ interface UserDetail {
   referrals: Array<{
     id: number;
     email: string;
+    referral_code?: string;
     created_at: string;
     status?: string;
     country?: string;
@@ -46,7 +47,19 @@ interface UserDetail {
 export default function UserDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const userId = params?.id as string;
+
+  // Preserve filter parameters for back navigation
+  const filterParams = new URLSearchParams();
+  if (searchParams.get('search')) filterParams.set('search', searchParams.get('search')!);
+  if (searchParams.get('status')) filterParams.set('status', searchParams.get('status')!);
+  if (searchParams.get('dateFrom')) filterParams.set('dateFrom', searchParams.get('dateFrom')!);
+  if (searchParams.get('dateTo')) filterParams.set('dateTo', searchParams.get('dateTo')!);
+  if (searchParams.get('page')) filterParams.set('page', searchParams.get('page')!);
+  if (searchParams.get('rowsPerPage')) filterParams.set('rowsPerPage', searchParams.get('rowsPerPage')!);
+  
+  const backToListUrl = `/admin/users${filterParams.toString() ? `?${filterParams.toString()}` : ''}`;
 
   const [user, setUser] = useState<UserDetail | null>(null);
   const [loading, setLoading] = useState(true);
@@ -170,7 +183,7 @@ export default function UserDetailPage() {
         </svg>
         <p className="mt-4 text-gray-500 dark:text-gray-400 font-medium">{error}</p>
         <Link
-          href="/admin/users"
+          href={backToListUrl}
           className="mt-4 inline-block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
         >
           Back to Users List
@@ -188,7 +201,7 @@ export default function UserDetailPage() {
             Dashboard
           </Link>
           <span className="mx-2">/</span>
-          <Link href="/admin/users" className="hover:text-gray-700 dark:hover:text-gray-200">
+          <Link href={backToListUrl} className="hover:text-gray-700 dark:hover:text-gray-200">
             User Management
           </Link>
           <span className="mx-2">/</span>
@@ -237,7 +250,7 @@ export default function UserDetailPage() {
           </div>
           <div className="flex gap-2 ml-6">
             <Link
-              href="/admin/users"
+              href={backToListUrl}
               className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
             >
               Back to List
@@ -318,7 +331,7 @@ export default function UserDetailPage() {
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Referrer:</span>
                 {user.referrer ? (
                   <Link
-                    href={`/admin/users/${user.referrer.id}`}
+                    href={`/admin/users/${user.referrer.id}${filterParams.toString() ? `?${filterParams.toString()}` : ''}`}
                     className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-right"
                   >
                     {user.referrer.email}
@@ -571,7 +584,7 @@ export default function UserDetailPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{referral.id}</td>
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{referral.referral_code}</td>
                         <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(referral.created_at)}</td>
                         <td className="px-6 py-4">
                           <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${referral.status?.toUpperCase() === 'ACTIVE'

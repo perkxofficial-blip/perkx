@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserExchange, Exchange, UserStatus, AccessLog } from '../../../entities';
 import { ListUsersQueryDto, UpdateUserDto } from './dto';
-import { MailService } from '../../../mail/mail.service';
 import { StorageService } from '../../../common/storage/storage.service';
 
 @Injectable()
@@ -15,7 +14,6 @@ export class UsersService {
     private userExchangeRepository: Repository<UserExchange>,
     @InjectRepository(AccessLog)
     private accessLogRepository: Repository<AccessLog>,
-    private mailService: MailService,
     private storageService: StorageService,
   ) {}
 
@@ -153,6 +151,7 @@ export class UsersService {
       .select([
         'referred_user.id',
         'referred_user.email',
+        'referred_user.referral_code',
         'referred_user.status',
         'referred_user.created_at',
       ])
@@ -222,6 +221,7 @@ export class UsersService {
       referrals: referrals.map((ref) => ({
         id: ref.referred_user_id,
         email: ref.referred_user_email,
+        referral_code: ref.referred_user_referral_code,
         status: ref.referred_user_status,
         created_at: ref.referred_user_created_at,
       })),
@@ -289,9 +289,6 @@ export class UsersService {
 
     user.status = newStatus;
     await this.userRepository.save(user);
-
-    // Send email notification when status changes
-    await this.mailService.sendMailChangeStatusUser(user.email, newStatus);
 
     return {
       id: user.id,

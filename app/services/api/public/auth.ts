@@ -34,5 +34,5 @@ export async function resetPassword(payload: any): Promise<Response> {
 }
 
 export async function verify(payload: any, headers: any): Promise<Response> {
-  return await apiClient.authPost(endpoints.user.verifyEmail, payload, headers);
+  return await apiClient.authPost(endpoints.user.verify, payload, headers);
 }

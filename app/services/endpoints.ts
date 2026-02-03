@@ -8,12 +8,13 @@ export const endpoints = {
     forgotPassword: '/auth/forgot-password',
     resetPassword: '/auth/reset-password',
     verifyEmail: '/auth/verify-email',
+    verify: '/auth/verify',
     resendEmail: '/auth/resend',
     verifyOtp: '/auth/verify-otp',
     resendOtp: '/auth/resend-otp',
     profile: '/profile',
     updateProfile: '/profile',
-    updatePassword: '/profile/change-password',
+    updatePassword: '/profile/password',
   },
 
   // Admin endpoints

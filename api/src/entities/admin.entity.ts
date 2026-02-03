@@ -39,12 +39,21 @@ export class Admin {
   updated_at: Date;
 
   @BeforeInsert()
-  @BeforeUpdate()
-  async hashPassword() {
-    if (this.password) {
-      const salt = await bcrypt.genSalt(10);
-      this.password = await bcrypt.hash(this.password, salt);
+  async hashPasswordOnInsert() {
+    if (this.password && !this.password.startsWith('$2')) {
+      this.password = await bcrypt.hash(this.password, 10);
     }
+  }
+
+  @BeforeUpdate()
+  async hashPasswordOnUpdate() {
+    if (this.password && !this.password.startsWith('$2')) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
+  }
+
+  async hashPassword(plainPassword: string): Promise<void> {
+    this.password = await bcrypt.hash(plainPassword, 10);
   }
 
   async validatePassword(password: string): Promise<boolean> {
