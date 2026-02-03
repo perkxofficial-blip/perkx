@@ -515,7 +515,8 @@
       "profile_update_failed": "Error al actualizar el perfil",
       "password_updated": "¡Contraseña actualizada exitosamente!",
       "password_update_failed": "Error al actualizar la contraseña",
-      "passwords_not_match": "Las nuevas contraseñas no coinciden"
+      "passwords_not_match": "Las nuevas contraseñas no coinciden",
+      "fix_form_errors": "Por favor corrija los errores en el formulario"
     }
   }
 }

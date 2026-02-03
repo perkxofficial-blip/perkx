@@ -515,7 +515,8 @@
       "profile_update_failed": "プロフィールの更新に失敗しました",
       "password_updated": "パスワードが正常に更新されました！",
       "password_update_failed": "パスワードの更新に失敗しました",
-      "passwords_not_match": "新しいパスワードが一致しません"
+      "passwords_not_match": "新しいパスワードが一致しません",
+      "fix_form_errors": "フォームのエラーを修正してください"
     }
   }
 }

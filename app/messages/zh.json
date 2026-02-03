@@ -515,7 +515,8 @@
       "profile_update_failed": "个人资料更新失败",
       "password_updated": "密码更新成功！",
       "password_update_failed": "密码更新失败",
-      "passwords_not_match": "新密码不匹配"
+      "passwords_not_match": "新密码不匹配",
+      "fix_form_errors": "请修复表单中的错误"
     }
   }
 }

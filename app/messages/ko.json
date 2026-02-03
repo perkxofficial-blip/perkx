@@ -513,6 +513,7 @@
       "profile_update_failed": "프로필 업데이트 실패",
       "password_updated": "비밀번호가 성공적으로 업데이트되었습니다!",
       "password_update_failed": "비밀번호 업데이트 실패",
-      "passwords_not_match": "새 비밀번호가 일치하지 않습니다"
+      "passwords_not_match": "새 비밀번호가 일치하지 않습니다",
+      "fix_form_errors": "양식의 오류를 수정하세요"
     }  }
 }

@@ -516,7 +516,8 @@
       "profile_update_failed": "Failed to update profile",
       "password_updated": "Password updated successfully!",
       "password_update_failed": "Failed to update password",
-      "passwords_not_match": "New passwords do not match"
+      "passwords_not_match": "New passwords do not match",
+      "fix_form_errors": "Please fix the errors in the form"
     }
   }
 }

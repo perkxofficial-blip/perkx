@@ -515,7 +515,8 @@
       "profile_update_failed": "Gagal memperbarui profil",
       "password_updated": "Password berhasil diperbarui!",
       "password_update_failed": "Gagal memperbarui password",
-      "passwords_not_match": "Password baru tidak cocok"
+      "passwords_not_match": "Password baru tidak cocok",
+      "fix_form_errors": "Harap perbaiki kesalahan dalam formulir"
     }
   }
 }
