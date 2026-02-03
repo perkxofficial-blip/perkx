@@ -1,0 +1,521 @@
+{
+  "meta": {
+    "home": {
+      "title": "PerkX | 最大化您的交易返佣",
+      "description": "通过PerkX在全球交易所最大化您的交易返佣。专为高频交易者打造的专业返现平台。",
+      "og_title": "PerkX – 最大化您的交易返佣",
+      "og_description": "每笔交易都能赚取返现。加入数千名使用PerkX提升交易奖励的专业交易者。"
+    }
+  },
+  "menu": {
+    "how_it_works": "如何运作",
+    "exchanges": "交易所",
+    "calculator": "计算器",
+    "campaigns": "活动",
+    "about_us": "关于我们",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出",
+    "dashboard": "仪表板",
+    "profile": "个人资料",
+    "settings": "设置",
+    "users": "用户",
+    "home": "首页",
+    "readMore": "阅读更多"
+  },
+  "page": {
+    "notFound": "页面未找到",
+    "register": "注册"
+  },
+  "language": {
+    "en": "英语",
+    "ko": "韩语",
+    "zh": "中文",
+    "ja": "日语",
+    "id": "印尼语",
+    "es": "西班牙语"
+  },
+  "home": {
+    "meta": {
+      "title": "首页 | PerkX",
+      "description": "通过PerkX在全球交易所最大化您的交易返佣。专为高频交易者打造的专业返现平台。"
+    },
+    "intro_1": "福利不是给予的。",
+    "intro_2": "而是谈判得来的。",
+    "hero_section_description": "我们将最佳手续费返佣、空投和折扣集中到一个平台 — 因为每笔交易都值得最好的待遇。",
+    "get_started_now": "立即开始",
+    "coin": "装饰币",
+    "how_perkx_works": "如何使用 <perkx>PerkX</perkx>",
+    "how_perkx_works_description": "通过三个简单步骤开始，在交易中赚取返现",
+    "timeline1": "1. 注册PerkX账户",
+    "timeline2": "2. 注册/关联您的交易所账户",
+    "timeline2_desc": "通过提供的链接创建交易所账户",
+    "timeline3": "3. 开始交易",
+    "calculator_title": "看看您<perkx>错过了什么</perkx>",
+    "calculator_desc": "根据您的交易量计算潜在的返现收益。",
+    "calculator_btn": "计算返现",
+    "exclusive_campaigns": "独家活动",
+    "view_all_campaigns": "查看所有活动",
+    "join_now": "立即加入",
+    "partner_exchanges": "合作交易所",
+    "partner_exchanges_desc": "直接合作，提供业内最高的验证返佣率。",
+    "table": {
+      "exchanges": "交易所",
+      "product": "产品",
+      "discount_rate": "折扣率",
+      "default_taker": "默认Taker/Maker费用",
+      "final_taker": "最终Taker/Maker费用",
+      "ave_rebate": "100万交易量平均返佣",
+      "action": "操作"
+    },
+    "view_all_partners": "查看所有合作伙伴"
+  },
+  "footer": {
+    "desc": "加密货币交易返现的全球标准。帮助机构和散户交易者最大化资金效率。",
+    "platform": "平台",
+    "exchange_rebates": "交易所返佣",
+    "profit_calculator": "利润计算器",
+    "resources": "资源",
+    "help_center": "帮助中心",
+    "terms_of_use": "使用条款",
+    "copyright": "© 2026 PerkX Global LTD.",
+    "follow_us": "关注我们"
+  },
+  "login": {
+    "desc": "输入您的电子邮件和密码以登录！",
+    "email": "电子邮件地址",
+    "email_placeholder": "name@email.com",
+    "password": "密码",
+    "password_placeholder": "输入您的密码",
+    "forgot_password": "忘记密码？",
+    "create_account": "还没有账户？",
+    "sign_up": "注册"
+  },
+  "register": {
+    "title": "创建您的账户",
+    "desc": "今天开始您的加密货币联盟之旅。",
+    "confirm_password": "确认密码",
+    "referral_uid": "推荐人UID（可选）",
+    "referral_uid_placeholder": "例如：PX-8829",
+    "submit_btn": "创建账户",
+    "already_account": "已有账户？",
+    "sign_in": "登录"
+  },
+  "verify_email": {
+    "title": "验证您的电子邮件",
+    "title_otp": "双因素验证",
+    "desc": "请检查您的收件箱以激活您的账户。",
+    "desc_otp": "一个6位数的验证码已发送到您的电子邮件。",
+    "resend": "重新发送",
+    "confirm": "确认",
+    "back_to_login": "返回登录"
+  },
+  "forgot_password": {
+    "title": "忘记密码",
+    "desc": "输入您的电子邮件地址，我们将向您发送重置密码的链接",
+    "btn": "发送"
+  },
+  "reset_password": {
+    "title": "重置密码",
+    "desc": "输入您的新密码以重置！",
+    "btn": "重置"
+  },
+  "validate": {
+    "email_required": "电子邮件为必填项。",
+    "email_invalid": "无效的电子邮件格式。",
+    "email_already_exists": "此电子邮件已被注册。",
+    "password_required": "密码为必填项。",
+    "password_string": "密码必须是字符串。",
+    "password_min_8": "密码至少需要8个字符。",
+    "password_max_16": "密码不得超过16个字符。",
+    "password_invalid_format": "密码至少需要8个字符、1个数字和1个大写字母。",
+    "confirm_password_required": "确认密码为必填项。",
+    "confirm_password_string": "确认密码必须是字符串。",
+    "password_not_match": "密码和确认密码不匹配。",
+    "referral_string": "推荐码必须是字符串。",
+    "invalid_referral_uid": "无效的推荐码。",
+    "unknown_error": "出了点问题。请稍后再试。"
+  },
+  "message": {
+    "email_not_verified": "电子邮件不存在或已验证",
+    "resend_email_success": "验证邮件已成功重新发送。请检查您的收件箱。",
+    "resend_email_failed": "重新发送验证邮件失败。请稍后再试。",
+    "invalid_credentials": "用户凭据不正确。",
+    "please_verify_your_email": "请验证您的电子邮件",
+    "account_banned": "您的账户已被禁用，请联系管理员获取支持",
+    "verify_otp_failed": "验证码无效。请重试。",
+    "resend_otp_success": "您的新验证码正在发送中。请检查您的收件箱。",
+    "resend_otp_failed": "重新发送验证码时出错。请重试。",
+    "forgot_email_success": "密码恢复邮件已成功发送。请检查您的收件箱（包括垃圾邮件）。",
+    "forgot_email_failed": "发送密码恢复邮件失败。请验证您的电子邮件地址或稍后再试。",
+    "reset_password_success": "您的密码已成功重置。您现在可以使用新密码登录。",
+    "token_invalid": "此重置令牌无效。请请求新的密码重置。",
+    "token_expire": "此重置令牌已过期。请请求新的密码重置。"
+  },
+  "campaign": {
+    "meta": {
+      "title": "活动 | PerkX",
+      "description": "活跃交易竞赛和奖励的高密度概览"
+    },
+    "title": "<perkx>PerkX</perkx> 独家活动",
+    "desc": "活跃交易竞赛和奖励的高密度概览。",
+    "campaign_holder": "活动持有者",
+    "all_campaign_holder": "所有活动持有者",
+    "category": "类别",
+    "all_category": "所有类别",
+    "campaign_status": "活动状态",
+    "all_campaign_status": "所有活动状态",
+    "category_all_user": "所有用户",
+    "category_new_user": "新用户",
+    "status_active": "进行中",
+    "status_upcoming": "即将开始",
+    "status_expired": "已结束",
+    "btn_name": "查看详情",
+    "breadcrumb_home": "首页",
+    "breadcrumb_campaigns": "活动",
+    "join_campaign": "加入活动",
+    "not_found_title": "活动未找到",
+    "not_found_description": "您要找的活动不存在",
+    "no_campaign_not_found": "未找到此选择的活动"
+  },
+  "paging": {
+    "showing_to_of": "显示 <bold>{from}</bold> 到 <bold>{to}</bold>，共 <bold>{total}</bold> 个活动",
+    "result_per_page": "每页结果数"
+  },
+  "exchanges": {
+    "meta": {
+      "title": "交易所 | PerkX",
+      "description": "通过PerkX比较和加入顶级全球交易所"
+    },
+    "hero_title_part1": "最大化您的加密货币",
+    "hero_title_gradient": "交易返现。",
+    "hero_subtitle": "通过PerkX比较和加入顶级全球交易所。",
+    "get_started": "立即开始"
+  },
+  "calculator": {
+    "meta": {
+      "title": "计算器 | PerkX",
+      "description": "根据您的交易量计算潜在的返现收益"
+    },
+    "hero_title_part1": "看看您",
+    "hero_title_gradient": "错过了什么",
+    "hero_subtitle": "根据您的交易量计算潜在的返现收益",
+    "volume_title": "每月交易量 USDT",
+    "select_exchange": "选择交易所",
+    "select_product": "选择产品",
+    "select_fee_type": "费用类型",
+    "product_spot": "现货",
+    "product_futures": "期货",
+    "product_margin": "保证金",
+    "fee_taker": "Taker",
+    "fee_maker": "Maker",
+    "monthly_cashback": "每月返现",
+    "annual_savings": "年度节省",
+    "claim_rebate_btn": "立即领取此返佣",
+    "choose_exchange": "选择交易所"
+  },
+  "about": {
+    "meta": {
+      "title": "关于我们 | PerkX",
+      "description": "了解更多关于PerkX和我们的使命"
+    },
+    "hero": {
+      "title": "关于我们",
+      "subtitle": "活跃交易竞赛和奖励的高密度概览。"
+    },
+    "intro": {
+      "title": "PerkX是加密货币与福利相遇的地方 - 减去复杂的东西。",
+      "description": "我们不是DEX，不是CEX，也不是你的前任。我们嗅出每一个诱人的Web3交易，从隐藏的注册奖励到质押甜头和惊喜空投，并将它们整齐地放在一个地方。就像一个加密货币优惠券阿姨，但更酷。"
+    },
+    "sections": {
+      "what_we_do": {
+        "title": "我们实际做什么：",
+        "items": [
+          "在一个地方收集所有CeFi + DeFi交易、促销、奖励和奖金",
+          "将所有细则翻译成您的非加密货币朋友可能真正理解的东西",
+          "帮助您感觉自己像个加密货币天才，而无需动一根手指（或签署5个MetaMask交易）"
+        ]
+      },
+      "what_we_dont_do": {
+        "title": "我们不做什么：",
+        "items": [
+          "处理您的资金（您保留您的币，我们保持手不沾）",
+          "要求您\"全仓进入\"或\"钻石手\"任何东西",
+          "强迫您加入奇怪的Discord邪教以解锁福利"
+        ]
+      }
+    },
+    "footer_note": {
+      "title": "我们相信Web3不应该感觉像解码黑客帝国。",
+      "description": "它应该感觉像走进一个自助餐，那里的一切都已经用您不知道自己拥有的免费返现和推荐奖金支付了。",
+      "tldr": "简而言之：我们找到福利。您领取它们。大家都高兴。",
+      "tldr_note": "（除了那个仍在支付全额费用的人。安息吧。）"
+    }
+  },
+  "how-it-works": {
+    "meta": {
+      "title": "如何运作 | PerkX",
+      "description": "了解PerkX返现奖励的运作方式"
+    },
+    "hero": {
+      "title_part1": "解锁更好的交易",
+      "title_gradient": "福利",
+      "subtitle": "按照三个简单步骤，在每笔交易中解锁更好的费用和奖励。"
+    },
+    "steps": {
+      "step1": {
+        "title": "1. 注册PerkX账户",
+        "description": "在1分钟内创建您的免费PerkX账户。只需输入您的电子邮件并设置密码即可开始。"
+      },
+      "step2": {
+        "title": "2. 通过提供的链接创建交易所账户",
+        "description": "通过提供的链接创建交易所账户"
+      },
+      "step3": {
+        "title": "3. 开始交易",
+        "description": "在1分钟内创建您的免费PerkX账户。只需输入您的电子邮件并设置密码即可开始。"
+      }
+    }
+  },
+  "terms-of-use": {
+    "meta": {
+      "title": "PerkX 使用条款",
+      "description": "阅读PerkX的使用条款"
+    },
+    "hero": {
+      "title": "PerkX 使用条款",
+      "subtitle": ""
+    },
+    "effective_date": "生效日期：",
+    "intro": {
+      "paragraph1": "这些使用条款（\"条款\"）阐述了PerkX与服务用户之间的权利、义务和责任。该服务由[公司法定名称]运营，该公司在[司法管辖区]注册成立（\"PerkX\"、\"我们\"或\"我们的\"）。",
+      "paragraph2": "通过访问或使用PerkX网站、应用程序或任何相关服务（统称为\"服务\"），您（\"用户\"、\"您\"或\"您的\"）确认您已阅读、理解并同意受这些条款和我们的隐私政策的法律约束。如果您不同意，则不得访问或使用服务。"
+    },
+    "sections": {
+      "definitions": {
+        "title": "1. 定义",
+        "intro": "就这些条款而言：",
+        "items": [
+          "<strong>账户</strong> 指已注册的PerkX用户账户。",
+          "<strong>会员</strong> 指已成功注册账户的用户。",
+          "<strong>非会员</strong> 指在未注册的情况下访问服务的用户。",
+          "<strong>合作交易所</strong> 指根据其自身条款提供基于推荐的福利、返佣、奖励或促销的第三方虚拟资产交易所、交易平台或服务提供商。",
+          "<strong>推荐码/推荐链接</strong> 指合作交易所用于将用户注册或活动归属于PerkX或另一会员的代码或链接。",
+          "<strong>福利</strong> 指<strong>仅由合作交易所</strong>提供的任何返佣、费用折扣、奖励、佣金、活动激励或类似优势。",
+          "<strong>UID</strong> 指由合作交易所发出的用户标识符。"
+        ]
+      },
+      "eligibility": {
+        "title": "2. 资格",
+        "items": [
+          "您必须至少<strong>十六（16）岁</strong>，或您所在司法管辖区要求的最低法定年龄（以较高者为准）。",
+          "您必须具有完全的法律行为能力以签订具有约束力的协议。",
+          "根据适用法律、法规、制裁或合作交易所规则，您不得被禁止使用服务。",
+          "该服务不适用于位于访问或使用将是非法或受限制的司法管辖区的用户。"
+        ]
+      },
+      "registration": {
+        "title": "3. 注册和账户管理",
+        "items": [
+          "要访问某些功能，您可能需要注册为会员并创建账户。",
+          "您同意提供准确、完整和最新的信息。",
+          "您全权负责维护账户凭据的机密性以及在您账户下进行的所有活动。",
+          "如果您怀疑未经授权的访问或安全漏洞，您必须立即通知PerkX。",
+          "PerkX对您未能保护账户凭据而导致的损失不承担责任。"
+        ]
+      },
+      "nature_of_service": {
+        "title": "4. 服务性质",
+        "items": [
+          "<strong>仅推荐和信息平台。</strong> PerkX提供推荐链接、信息列表和工具，允许用户发现和访问合作交易所优惠。",
+          "<strong>PerkX不提供返现或奖励。</strong> PerkX<strong>不</strong>接受、持有、分发或向用户支付任何返现、返佣、奖励或佣金。",
+          "<strong>对合作交易所没有控制权。</strong> 所有福利均<strong>仅由合作交易所</strong>根据其自身系统和规则提供、计算和管理。"
+        ]
+      },
+      "no_custody": {
+        "title": "4A. 无托管、无支付、无货币传输",
+        "items": [
+          "PerkX<strong>不</strong>代表用户持有、接收、存储、传输、管理、控制或托管任何法定货币、虚拟资产、数字资产、稳定币或其他价值。",
+          "PerkX<strong>不</strong>处理任何类型的支付、付款、结算或提款。",
+          "PerkX<strong>不是</strong>银行、支付机构、货币服务业务、汇款提供商、电子货币发行人、经纪人、交易商或投资顾问。",
+          "所有福利直接由合作交易所发放到用户的合作交易所账户中。",
+          "PerkX无权访问、冻结、撤销、延迟、追回或以其他方式影响任何用户资金或福利。"
+        ]
+      },
+      "partner_offers": {
+        "title": "4B. 合作伙伴优惠和准确性免责声明",
+        "items": [
+          "显示的有关合作交易所或福利的信息仅用于<strong>一般信息和营销目的</strong>。",
+          "合作交易所优惠可能随时更改、过期、暂停或受地区限制，恕不另行通知。",
+          "PerkX不保证：",
+          "如有任何差异，<strong>合作交易所条款应占优势</strong>。",
+          "列出合作交易所并不意味着背书、合作伙伴关系、代理或保证。"
+        ],
+        "sub_items": [
+          "优惠信息的准确性或完整性，",
+          "任何福利的资格，或",
+          "成功的推荐归属。"
+        ]
+      },
+      "partner_exchanges": {
+        "title": "5. 合作交易所和福利",
+        "items": [
+          "您对任何合作交易所的使用完全受该合作交易所的条款、政策和合规要求的约束。",
+          "合作交易所确定：",
+          "PerkX对合作交易所的决定或系统故障不承担责任。"
+        ],
+        "sub_items": [
+          "福利的资格，",
+          "归属规则，",
+          "计算方法，",
+          "支付时间表，以及",
+          "撤销或追回。"
+        ]
+      },
+      "uid_linking": {
+        "title": "6. UID关联和归属",
+        "items": [
+          "如果支持UID关联，用户只能关联属于他们的UID。",
+          "归属完全取决于合作交易所跟踪逻辑和技术系统。",
+          "如果怀疑滥用或滥用，PerkX可能会拒绝或删除UID链接。"
+        ]
+      },
+      "prohibited_conduct": {
+        "title": "7. 禁止行为",
+        "intro": "用户不得：",
+        "items": [
+          "通过洗盘交易、自我交易或操纵行为滥用推荐系统或福利。",
+          "未经授权使用机器人、爬虫或自动化工具。",
+          "尝试未经授权的访问、黑客攻击或安全测试。",
+          "提供虚假信息或冒充他人。",
+          "违反合作交易所条款或适用法律。",
+          "干扰服务运营或其他用户的访问。"
+        ],
+        "conclusion": "PerkX可能会调查违规行为并采取适当行动。"
+      },
+      "service_availability": {
+        "title": "8. 服务可用性和修改",
+        "items": [
+          "服务在尽力而为的基础上提供，不保证不间断的可用性。",
+          "PerkX可能因运营、法律或技术原因暂停、修改或中止服务的任何部分。",
+          "合作交易所可能随时添加或删除。"
+        ]
+      },
+      "no_investment_advice": {
+        "title": "9. 无投资建议；风险披露",
+        "items": [
+          "PerkX不提供财务、投资、税务或法律建议。",
+          "交易数字资产涉及重大风险，包括资金损失。",
+          "合作交易所独立运营，可能会出现中断、政策变更或破产。"
+        ]
+      },
+      "intellectual_property": {
+        "title": "10. 知识产权",
+        "items": [
+          "服务中的所有知识产权均属于PerkX或其许可方。",
+          "用户获得使用服务的有限、非独占、可撤销许可。",
+          "未经许可，用户不得复制、修改、分发或反向工程服务。"
+        ]
+      },
+      "suspension_termination": {
+        "title": "11. 暂停和终止",
+        "items": [
+          "用户可以随时停止使用服务。",
+          "如果用户违反这些条款、适用法律或合作交易所规则，PerkX可能会暂停或终止访问。",
+          "终止PerkX访问不会影响合作交易所已发放或拒绝的福利。"
+        ]
+      },
+      "disclaimers": {
+        "title": "12. 免责声明",
+        "items": [
+          "服务按\"原样\"和\"可用\"提供。",
+          "PerkX不承担所有保证，包括适销性和特定用途的适用性。",
+          "PerkX不保证合作交易所的性能、准确性或可用性。"
+        ]
+      },
+      "limitation_liability": {
+        "title": "13. 责任限制",
+        "items": [
+          "在法律允许的最大范围内，PerkX不对间接、附带、后果性或惩罚性损害承担责任。",
+          "PerkX对错过的福利、交易损失或合作交易所行为不承担责任。",
+          "在无法排除责任的情况下，PerkX的总责任应限制为<strong>[上限金额]</strong>。"
+        ]
+      },
+      "indemnification": {
+        "title": "14. 赔偿",
+        "content": "您同意赔偿并使PerkX免受因您滥用服务、违反这些条款或违反法律而引起的索赔。"
+      },
+      "privacy": {
+        "title": "15. 隐私",
+        "paragraph1": "与服务相关而收集或处理的个人数据应按照<strong>PerkX隐私政策</strong>处理，该政策构成这些条款的组成部分。",
+        "paragraph2": "如果这些条款与隐私政策在个人数据方面存在任何不一致，则以隐私政策为准。"
+      },
+      "amendments": {
+        "title": "16. 修订、适用法律和管辖权",
+        "paragraph1": "PerkX可能随时更新这些条款。更新后继续使用即表示接受。",
+        "paragraph2": "这些条款应受PerkX运营实体注册成立所在司法管辖区的法律管辖和解释，而不考虑法律冲突原则。",
+        "paragraph3": "因这些条款或服务引起的或与之相关的任何争议、索赔或争议应受该司法管辖区主管法院的专属管辖。"
+      }
+    }
+  },
+  "help-center": {
+    "meta": {
+      "title": "帮助中心 | PerkX",
+      "description": "查找有关PerkX的常见问题解答"
+    },
+    "hero": {
+      "title": "帮助中心",
+      "subtitle": "查找有关PerkX的常见问题解答"
+    }
+  },
+  "user": {
+    "dashboard": {
+      "title": "用户仪表板",
+      "welcome": "欢迎",
+      "email": "电子邮件",
+      "status": "状态",
+      "active": "活跃",
+      "inactive": "非活跃",
+      "loading": "加载中..."
+    },
+    "profile": {
+      "title": "我的个人资料",
+      "subtitle": "管理您的官方个人资料并保护您的联盟账户",
+      "loading": "加载中...",
+      "affiliate_connection": "联盟连接",
+      "affiliate_subtitle": "分享您的推荐链接以赚取奖励",
+      "my_referrer_id": "我的推荐人ID",
+      "copy_success": "已复制！",
+      "security_password": "安全和密码",
+      "security_subtitle": "确保您的账户使用安全可靠的密码",
+      "current_password": "当前密码",
+      "new_password": "新密码",
+      "confirm_new_password": "确认新密码",
+      "update_password": "更新密码",
+      "updating": "更新中...",
+      "profile_overview": "个人资料概览",
+      "profile_overview_subtitle": "更新您的账户信息并管理您的个人资料",
+      "first_name": "名字",
+      "last_name": "姓氏",
+      "email_address": "电子邮件地址",
+      "phone_number": "电话号码",
+      "gender": "性别",
+      "select_gender": "选择性别",
+      "male": "男",
+      "female": "女",
+      "birthday": "生日",
+      "country": "国家",
+      "select_country": "选择国家",
+      "save_changes": "保存个人资料更改",
+      "saving": "保存中...",
+      "cancel": "取消",
+      "linked_exchanges": "关联的交易所",
+      "logout": "退出",
+      "profile_updated": "个人资料更新成功！",
+      "profile_update_failed": "个人资料更新失败",
+      "password_updated": "密码更新成功！",
+      "password_update_failed": "密码更新失败",
+      "passwords_not_match": "新密码不匹配"
+    }
+  }
+}

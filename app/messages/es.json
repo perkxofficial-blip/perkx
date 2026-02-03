@@ -1,0 +1,521 @@
+{
+  "meta": {
+    "home": {
+      "title": "PerkX | Maximiza tus Reembolsos de Trading",
+      "description": "Maximiza tus reembolsos de trading en exchanges globales con PerkX. Una plataforma profesional de cashback diseñada para traders de alto volumen.",
+      "og_title": "PerkX – Maximiza tus Reembolsos de Trading",
+      "og_description": "Gana cashback en cada operación. Únete a miles de traders profesionales que usan PerkX para aumentar sus recompensas de trading."
+    }
+  },
+  "menu": {
+    "how_it_works": "Cómo Funciona",
+    "exchanges": "Exchanges",
+    "calculator": "Calculadora",
+    "campaigns": "Campañas",
+    "about_us": "Sobre Nosotros",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "dashboard": "Panel",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "users": "Usuarios",
+    "home": "Inicio",
+    "readMore": "Leer Más"
+  },
+  "page": {
+    "notFound": "Página no encontrada",
+    "register": "Registrarse"
+  },
+  "language": {
+    "en": "Inglés",
+    "ko": "Coreano",
+    "zh": "Chino",
+    "ja": "Japonés",
+    "id": "Indonesio",
+    "es": "Español"
+  },
+  "home": {
+    "meta": {
+      "title": "Inicio | PerkX",
+      "description": "Maximiza tus reembolsos de trading en exchanges globales con PerkX. Una plataforma profesional de cashback diseñada para traders de alto volumen."
+    },
+    "intro_1": "Los beneficios no se dan.",
+    "intro_2": "Se negocian.",
+    "hero_section_description": "Obtenemos los mejores reembolsos de comisiones, airdrops y descuentos en un solo portal — porque cada operación merece el mejor trato.",
+    "get_started_now": "Comenzar Ahora",
+    "coin": "Moneda decorativa",
+    "how_perkx_works": "Cómo Funciona <perkx>PerkX</perkx>",
+    "how_perkx_works_description": "Comienza en tres simples pasos y empieza a ganar cashback en tus operaciones",
+    "timeline1": "1. Registra una cuenta PerkX",
+    "timeline2": "2. Registra/Vincula tu cuenta de exchange",
+    "timeline2_desc": "Crea una cuenta de exchange a través del enlace proporcionado",
+    "timeline3": "3. Comienza a Operar",
+    "calculator_title": "Mira lo que <perkx>Te Estás Perdiendo</perkx>",
+    "calculator_desc": "Calcula tus ganancias potenciales de cashback según tu volumen de trading.",
+    "calculator_btn": "Calcular Cashback",
+    "exclusive_campaigns": "Campañas Exclusivas",
+    "view_all_campaigns": "Ver todas las campañas",
+    "join_now": "Únete Ahora",
+    "partner_exchanges": "Exchanges Asociados",
+    "partner_exchanges_desc": "Asociaciones directas que ofrecen las tasas de reembolso verificadas más altas de la industria.",
+    "table": {
+      "exchanges": "Exchanges",
+      "product": "Producto",
+      "discount_rate": "Tasa de Descuento",
+      "default_taker": "Comisión Taker/Maker Predeterminada",
+      "final_taker": "Comisión Taker/Maker Final",
+      "ave_rebate": "Reembolso Promedio por Vol. 1M",
+      "action": "acción"
+    },
+    "view_all_partners": "Ver Todos los Socios"
+  },
+  "footer": {
+    "desc": "El estándar global para cashback de trading de criptomonedas. Ayudando a traders institucionales y minoristas a maximizar la eficiencia del capital.",
+    "platform": "Plataforma",
+    "exchange_rebates": "Reembolsos de Exchange",
+    "profit_calculator": "Calculadora de Ganancias",
+    "resources": "recursos",
+    "help_center": "Centro de Ayuda",
+    "terms_of_use": "Términos de Uso",
+    "copyright": "© 2026 PerkX Global LTD.",
+    "follow_us": "Síguenos"
+  },
+  "login": {
+    "desc": "¡Ingresa tu correo electrónico y contraseña para iniciar sesión!",
+    "email": "Correo Electrónico",
+    "email_placeholder": "nombre@email.com",
+    "password": "Contraseña",
+    "password_placeholder": "Ingresa tu contraseña",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "create_account": "¿No tienes una cuenta?",
+    "sign_up": "Regístrate"
+  },
+  "register": {
+    "title": "Crea tu Cuenta",
+    "desc": "Comienza tu viaje de afiliado cripto hoy.",
+    "confirm_password": "Confirmar Contraseña",
+    "referral_uid": "UID del Referente (Opcional)",
+    "referral_uid_placeholder": "Ej: PX-8829",
+    "submit_btn": "Crear Cuenta",
+    "already_account": "¿Ya tienes una cuenta?",
+    "sign_in": "Iniciar sesión"
+  },
+  "verify_email": {
+    "title": "Verifica tu Correo Electrónico",
+    "title_otp": "Verificación de Dos Factores",
+    "desc": "Por favor, revisa tu bandeja de entrada para activar tu cuenta.",
+    "desc_otp": "Se ha enviado un código de verificación de 6 dígitos a tu correo electrónico.",
+    "resend": "Reenviar",
+    "confirm": "Confirmar",
+    "back_to_login": "Volver al Inicio de Sesión"
+  },
+  "forgot_password": {
+    "title": "Olvidé mi Contraseña",
+    "desc": "Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña",
+    "btn": "Enviar"
+  },
+  "reset_password": {
+    "title": "Restablecer Contraseña",
+    "desc": "¡Ingresa tu nueva contraseña para restablecerla!",
+    "btn": "Restablecer"
+  },
+  "validate": {
+    "email_required": "El correo electrónico es obligatorio.",
+    "email_invalid": "Formato de correo electrónico no válido.",
+    "email_already_exists": "Este correo electrónico ya está registrado.",
+    "password_required": "La contraseña es obligatoria.",
+    "password_string": "La contraseña debe ser una cadena de texto.",
+    "password_min_8": "La contraseña debe tener al menos 8 caracteres.",
+    "password_max_16": "La contraseña no debe exceder los 16 caracteres.",
+    "password_invalid_format": "La contraseña necesita tener un mínimo de 8 caracteres, 1 número y 1 letra mayúscula.",
+    "confirm_password_required": "La confirmación de contraseña es obligatoria.",
+    "confirm_password_string": "La confirmación de contraseña debe ser una cadena de texto.",
+    "password_not_match": "La contraseña y la confirmación de contraseña no coinciden.",
+    "referral_string": "El código de referido debe ser una cadena de texto.",
+    "invalid_referral_uid": "Código de referido no válido.",
+    "unknown_error": "Algo salió mal. Por favor, inténtalo de nuevo más tarde."
+  },
+  "message": {
+    "email_not_verified": "El correo electrónico no existe o ya está verificado",
+    "resend_email_success": "El correo de verificación se ha reenviado correctamente. Por favor, revisa tu bandeja de entrada.",
+    "resend_email_failed": "Error al reenviar el correo de verificación. Por favor, inténtalo de nuevo más tarde.",
+    "invalid_credentials": "Las credenciales del usuario son incorrectas.",
+    "please_verify_your_email": "Por favor, verifica tu correo electrónico",
+    "account_banned": "Tu cuenta ha sido bloqueada, por favor contacta al administrador para obtener soporte",
+    "verify_otp_failed": "El código de verificación no es válido. Por favor, inténtalo de nuevo.",
+    "resend_otp_success": "Tu nuevo código de verificación está en camino. Por favor, revisa tu bandeja de entrada.",
+    "resend_otp_failed": "Algo salió mal al reenviar tu código. Por favor, inténtalo de nuevo.",
+    "forgot_email_success": "El correo de recuperación de contraseña se ha enviado correctamente. Por favor, revisa tu bandeja de entrada (incluido Spam).",
+    "forgot_email_failed": "Error al enviar el correo de recuperación de contraseña. Por favor, verifica tu dirección de correo electrónico o inténtalo de nuevo más tarde.",
+    "reset_password_success": "Tu contraseña se ha restablecido correctamente. Ahora puedes iniciar sesión con tu nueva contraseña.",
+    "token_invalid": "Este token de restablecimiento no es válido. Por favor, solicita un nuevo restablecimiento de contraseña.",
+    "token_expire": "Este token de restablecimiento ha expirado. Por favor, solicita un nuevo restablecimiento de contraseña."
+  },
+  "campaign": {
+    "meta": {
+      "title": "Campañas | PerkX",
+      "description": "Vista general de alta densidad de competiciones de trading activas y recompensas"
+    },
+    "title": "Campañas Exclusivas de <perkx>PerkX</perkx>",
+    "desc": "Vista general de alta densidad de competiciones de trading activas y recompensas.",
+    "campaign_holder": "Organizador de Campaña",
+    "all_campaign_holder": "Todos los Organizadores de Campaña",
+    "category": "Categoría",
+    "all_category": "Todas las Categorías",
+    "campaign_status": "Estado de Campaña",
+    "all_campaign_status": "Todos los Estados de Campaña",
+    "category_all_user": "Todos los Usuarios",
+    "category_new_user": "Usuarios Nuevos",
+    "status_active": "Activa",
+    "status_upcoming": "Próximamente",
+    "status_expired": "Finalizada",
+    "btn_name": "Ver Detalles",
+    "breadcrumb_home": "Inicio",
+    "breadcrumb_campaigns": "Campañas",
+    "join_campaign": "Unirse a la Campaña",
+    "not_found_title": "Campaña No Encontrada",
+    "not_found_description": "La campaña que buscas no existe",
+    "no_campaign_not_found": "No se encontraron campañas para esta selección"
+  },
+  "paging": {
+    "showing_to_of": "Mostrando <bold>{from}</bold> a <bold>{to}</bold> de <bold>{total}</bold> campañas",
+    "result_per_page": "Resultados por página"
+  },
+  "exchanges": {
+    "meta": {
+      "title": "Exchanges | PerkX",
+      "description": "Compara y únete a los principales exchanges globales con PerkX"
+    },
+    "hero_title_part1": "Maximiza tu Cripto",
+    "hero_title_gradient": "Cashback de Trading.",
+    "hero_subtitle": "Compara y únete a los principales exchanges globales con PerkX.",
+    "get_started": "Comenzar"
+  },
+  "calculator": {
+    "meta": {
+      "title": "Calculadora | PerkX",
+      "description": "Calcula tus ganancias potenciales de cashback según tu volumen de trading"
+    },
+    "hero_title_part1": "Mira lo que ",
+    "hero_title_gradient": "Te Estás Perdiendo",
+    "hero_subtitle": "Calcula tus ganancias potenciales de cashback según tu volumen de trading",
+    "volume_title": "Volumen de Trading Mensual USDT",
+    "select_exchange": "Seleccionar Exchange",
+    "select_product": "Seleccionar producto",
+    "select_fee_type": "Tipo de Comisión",
+    "product_spot": "Spot",
+    "product_futures": "Futuros",
+    "product_margin": "Margen",
+    "fee_taker": "Taker",
+    "fee_maker": "Maker",
+    "monthly_cashback": "CASHBACK MENSUAL",
+    "annual_savings": "AHORRO ANUAL",
+    "claim_rebate_btn": "Reclama Este Reembolso Ahora",
+    "choose_exchange": "Seleccionar exchange"
+  },
+  "about": {
+    "meta": {
+      "title": "Sobre Nosotros | PerkX",
+      "description": "Aprende más sobre PerkX y nuestra misión"
+    },
+    "hero": {
+      "title": "Sobre Nosotros",
+      "subtitle": "Vista general de alta densidad de competiciones de trading activas y recompensas."
+    },
+    "intro": {
+      "title": "PerkX es donde las criptomonedas se encuentran con los beneficios - sin las cosas complicadas.",
+      "description": "No somos un DEX, no somos un CEX, no somos tu ex. Rastreamos cada oferta jugosa de Web3, desde recompensas de registro ocultas hasta endulzantes de staking y airdrops sorpresa y los colocamos ordenadamente en un solo lugar. Como una tía de cupones cripto, pero más cool."
+    },
+    "sections": {
+      "what_we_do": {
+        "title": "Lo Que Realmente Hacemos:",
+        "items": [
+          "Recopilamos todas las ofertas, promociones, recompensas y bonos de CeFi + DeFi en un solo lugar",
+          "Traducimos toda esa letra pequeña a algo que tu amigo no cripto podría entender",
+          "Te ayudamos a sentirte como un genio cripto sin mover un dedo (o firmar 5 transacciones de MetaMask)"
+        ]
+      },
+      "what_we_dont_do": {
+        "title": "Lo Que No Hacemos:",
+        "items": [
+          "Manejar tus fondos (tú guardas tus monedas, nosotros mantenemos nuestras manos fuera)",
+          "Pedirte que \"inviertas todo\" o \"diamond hand\" nada",
+          "Obligarte a unirte a cultos raros de Discord para desbloquear beneficios"
+        ]
+      }
+    },
+    "footer_note": {
+      "title": "Creemos que Web3 no debería sentirse como decodificar Matrix.",
+      "description": "Debería sentirse como entrar a un buffet donde todo ya está pagado con cashback gratis y bonos de referidos que no sabías que tenías.",
+      "tldr": "En resumen: Nosotros encontramos los beneficios. Tú los reclamas. Todos felices.",
+      "tldr_note": "(Excepto esa persona que todavía paga comisiones completas. DEP.)"
+    }
+  },
+  "how-it-works": {
+    "meta": {
+      "title": "Cómo Funciona | PerkX",
+      "description": "Aprende cómo funcionan las recompensas de cashback de PerkX"
+    },
+    "hero": {
+      "title_part1": "Desbloquea Mejores ",
+      "title_gradient": "Beneficios de Trading",
+      "subtitle": "Sigue tres simples pasos para desbloquear mejores comisiones y recompensas en cada operación."
+    },
+    "steps": {
+      "step1": {
+        "title": "1. Registra una cuenta PerkX",
+        "description": "Crea tu cuenta gratuita de PerkX en menos de 1 minuto. Solo ingresa tu correo electrónico y establece una contraseña para comenzar."
+      },
+      "step2": {
+        "title": "2. Crea una cuenta de exchange a través del enlace proporcionado",
+        "description": "Crea una cuenta de exchange a través del enlace proporcionado"
+      },
+      "step3": {
+        "title": "3. Comienza a Operar",
+        "description": "Crea tu cuenta gratuita de PerkX en menos de 1 minuto. Solo ingresa tu correo electrónico y establece una contraseña para comenzar."
+      }
+    }
+  },
+  "terms-of-use": {
+    "meta": {
+      "title": "Términos de Uso de PerkX",
+      "description": "Lee los términos de uso de PerkX"
+    },
+    "hero": {
+      "title": "Términos de Uso de PerkX",
+      "subtitle": ""
+    },
+    "effective_date": "Fecha de Vigencia:",
+    "intro": {
+      "paragraph1": "Estos Términos de Uso (\"Términos\") establecen los derechos, obligaciones y responsabilidades entre PerkX y los usuarios del Servicio. El Servicio es operado por [Nombre Legal de la Empresa], una empresa constituida en [Jurisdicción] (\"PerkX\", \"nosotros\" o \"nuestro\").",
+      "paragraph2": "Al acceder o usar el sitio web de PerkX, la aplicación o cualquier servicio relacionado (colectivamente, el \"Servicio\"), usted (\"Usuario\", \"usted\" o \"su\") confirma que ha leído, entendido y acepta estar legalmente vinculado por estos Términos y nuestra Política de Privacidad. Si no está de acuerdo, no debe acceder ni usar el Servicio."
+    },
+    "sections": {
+      "definitions": {
+        "title": "1. Definiciones",
+        "intro": "A los efectos de estos Términos:",
+        "items": [
+          "<strong>Cuenta</strong> significa una cuenta de usuario registrada de PerkX.",
+          "<strong>Miembro</strong> significa un Usuario que ha registrado exitosamente una Cuenta.",
+          "<strong>No Miembro</strong> significa un Usuario que accede al Servicio sin registro.",
+          "<strong>Exchange Asociado</strong> significa un exchange de activos virtuales de terceros, plataforma de trading o proveedor de servicios que ofrece beneficios basados en referencias, reembolsos, recompensas o promociones bajo sus propios términos.",
+          "<strong>Código de Referido / Enlace de Referido</strong> significa un código o enlace utilizado por un Exchange Asociado para atribuir el registro o actividad de un Usuario a PerkX o a otro Miembro.",
+          "<strong>Beneficio(s)</strong> significa cualquier reembolso, descuento de comisión, recompensa, comisión, incentivo de campaña o ventaja similar proporcionada <strong>únicamente por un Exchange Asociado</strong>.",
+          "<strong>UID</strong> significa el identificador de usuario emitido por un Exchange Asociado."
+        ]
+      },
+      "eligibility": {
+        "title": "2. Elegibilidad",
+        "items": [
+          "Debe tener al menos <strong>dieciséis (16) años</strong>, o la edad legal mínima requerida en su jurisdicción, lo que sea mayor.",
+          "Debe tener capacidad legal completa para celebrar un acuerdo vinculante.",
+          "No debe estar prohibido de usar el Servicio bajo leyes aplicables, regulaciones, sanciones o reglas de Exchange Asociado.",
+          "El Servicio no está destinado a Usuarios ubicados en jurisdicciones donde el acceso o uso sería ilegal o restringido."
+        ]
+      },
+      "registration": {
+        "title": "3. Registro y Gestión de Cuenta",
+        "items": [
+          "Para acceder a ciertas funciones, es posible que deba registrarse como Miembro y crear una Cuenta.",
+          "Usted acepta proporcionar información precisa, completa y actualizada.",
+          "Usted es el único responsable de mantener la confidencialidad de las credenciales de su Cuenta y de todas las actividades realizadas bajo su Cuenta.",
+          "Debe notificar a PerkX inmediatamente si sospecha de acceso no autorizado o violaciones de seguridad.",
+          "PerkX no será responsable de las pérdidas resultantes de su incapacidad para proteger las credenciales de su Cuenta."
+        ]
+      },
+      "nature_of_service": {
+        "title": "4. Naturaleza del Servicio",
+        "items": [
+          "<strong>Plataforma de referidos e información únicamente.</strong> PerkX proporciona enlaces de referidos, listados informativos y herramientas que permiten a los Usuarios descubrir y acceder a ofertas de Exchange Asociado.",
+          "<strong>No hay cashback o recompensas proporcionadas por PerkX.</strong> PerkX <strong>no</strong> acepta, retiene, distribuye ni paga ningún cashback, reembolso, recompensa o comisión a los Usuarios.",
+          "<strong>Sin control sobre Exchanges Asociados.</strong> Todos los Beneficios son proporcionados, calculados y administrados <strong>únicamente por Exchanges Asociados</strong>, bajo sus propios sistemas y reglas."
+        ]
+      },
+      "no_custody": {
+        "title": "4A. Sin Custodia, Sin Pagos, Sin Transmisión de Dinero",
+        "items": [
+          "PerkX <strong>no</strong> mantiene, recibe, almacena, transmite, gestiona, controla ni custodia ninguna moneda fiduciaria, activos virtuales, activos digitales, stablecoins u otro valor en nombre de los Usuarios.",
+          "PerkX <strong>no</strong> procesa pagos, desembolsos, liquidaciones o retiros de ningún tipo.",
+          "PerkX <strong>no es</strong> un banco, institución de pago, negocio de servicios monetarios, proveedor de remesas, emisor de dinero electrónico, corredor, distribuidor o asesor de inversiones.",
+          "Todos los Beneficios son emitidos directamente por Exchanges Asociados en la cuenta del Exchange Asociado del Usuario.",
+          "PerkX no tiene autoridad para acceder, congelar, revertir, retrasar, recuperar o afectar de otra manera los fondos o Beneficios del Usuario."
+        ]
+      },
+      "partner_offers": {
+        "title": "4B. Ofertas de Socios y Descargo de Responsabilidad de Precisión",
+        "items": [
+          "La información mostrada sobre Exchanges Asociados o Beneficios se proporciona <strong>solo con fines informativos generales y de marketing</strong>.",
+          "Las ofertas de Exchange Asociado pueden cambiar, expirar, suspenderse o estar restringidas por región en cualquier momento sin previo aviso.",
+          "PerkX no garantiza:",
+          "En caso de cualquier discrepancia, <strong>prevalecerán los términos del Exchange Asociado</strong>.",
+          "Listar un Exchange Asociado no implica respaldo, asociación, agencia o garantía."
+        ],
+        "sub_items": [
+          "la precisión o integridad de la información de la oferta,",
+          "la elegibilidad para cualquier Beneficio, o",
+          "la atribución de referido exitosa."
+        ]
+      },
+      "partner_exchanges": {
+        "title": "5. Exchanges Asociados y Beneficios",
+        "items": [
+          "Su uso de cualquier Exchange Asociado se rige únicamente por los términos, políticas y requisitos de cumplimiento de ese Exchange Asociado.",
+          "Los Exchanges Asociados determinan:",
+          "PerkX no tiene responsabilidad por las decisiones o fallas del sistema del Exchange Asociado."
+        ],
+        "sub_items": [
+          "elegibilidad para Beneficios,",
+          "reglas de atribución,",
+          "métodos de cálculo,",
+          "calendarios de pago, y",
+          "reversiones o recuperaciones."
+        ]
+      },
+      "uid_linking": {
+        "title": "6. Vinculación de UID y Atribución",
+        "items": [
+          "Si se admite la vinculación de UID, los Usuarios solo pueden vincular UID que les pertenezcan.",
+          "La atribución depende completamente de la lógica de seguimiento del Exchange Asociado y los sistemas técnicos.",
+          "PerkX puede rechazar o eliminar enlaces de UID si se sospecha uso indebido o abuso."
+        ]
+      },
+      "prohibited_conduct": {
+        "title": "7. Conducta Prohibida",
+        "intro": "Los Usuarios no deben:",
+        "items": [
+          "Abusar de los sistemas de referidos o Beneficios a través de wash trading, self-trading o comportamiento manipulador.",
+          "Usar bots, crawlers o herramientas automatizadas sin autorización.",
+          "Intentar acceso no autorizado, hacking o pruebas de seguridad.",
+          "Proporcionar información falsa o hacerse pasar por otros.",
+          "Violar los términos del Exchange Asociado o las leyes aplicables.",
+          "Interferir con las operaciones del Servicio o el acceso de otros Usuarios."
+        ],
+        "conclusion": "PerkX puede investigar violaciones y tomar las medidas apropiadas."
+      },
+      "service_availability": {
+        "title": "8. Disponibilidad y Modificación del Servicio",
+        "items": [
+          "El Servicio se proporciona en base al mejor esfuerzo sin garantía de disponibilidad ininterrumpida.",
+          "PerkX puede suspender, modificar o discontinuar cualquier parte del Servicio por razones operativas, legales o técnicas.",
+          "Los Exchanges Asociados pueden ser agregados o eliminados en cualquier momento."
+        ]
+      },
+      "no_investment_advice": {
+        "title": "9. Sin Asesoramiento de Inversión; Divulgación de Riesgos",
+        "items": [
+          "PerkX no proporciona asesoramiento financiero, de inversión, fiscal o legal.",
+          "El trading de activos digitales implica un riesgo significativo, incluida la pérdida de fondos.",
+          "Los Exchanges Asociados operan de forma independiente y pueden estar sujetos a interrupciones, cambios de políticas o insolvencia."
+        ]
+      },
+      "intellectual_property": {
+        "title": "10. Propiedad Intelectual",
+        "items": [
+          "Todos los derechos de propiedad intelectual en el Servicio pertenecen a PerkX o sus licenciantes.",
+          "Los Usuarios reciben una licencia limitada, no exclusiva y revocable para usar el Servicio.",
+          "Los Usuarios no pueden copiar, modificar, distribuir o realizar ingeniería inversa del Servicio sin permiso."
+        ]
+      },
+      "suspension_termination": {
+        "title": "11. Suspensión y Terminación",
+        "items": [
+          "Los Usuarios pueden dejar de usar el Servicio en cualquier momento.",
+          "PerkX puede suspender o terminar el acceso si los Usuarios violan estos Términos, las leyes aplicables o las reglas del Exchange Asociado.",
+          "La terminación del acceso a PerkX no afecta los Beneficios del Exchange Asociado ya emitidos o denegados."
+        ]
+      },
+      "disclaimers": {
+        "title": "12. Descargos de Responsabilidad",
+        "items": [
+          "El Servicio se proporciona \"tal cual\" y \"según disponibilidad\".",
+          "PerkX renuncia a todas las garantías, incluida la comerciabilidad y la idoneidad para un propósito particular.",
+          "PerkX no garantiza el rendimiento, la precisión o la disponibilidad del Exchange Asociado."
+        ]
+      },
+      "limitation_liability": {
+        "title": "13. Limitación de Responsabilidad",
+        "items": [
+          "En la medida máxima permitida por la ley, PerkX no será responsable de daños indirectos, incidentales, consecuentes o punitivos.",
+          "PerkX no es responsable de Beneficios perdidos, pérdidas comerciales o acciones del Exchange Asociado.",
+          "Cuando la responsabilidad no pueda ser excluida, la responsabilidad total de PerkX se limitará a <strong>[monto límite]</strong>."
+        ]
+      },
+      "indemnification": {
+        "title": "14. Indemnización",
+        "content": "Usted acepta indemnizar y eximir de responsabilidad a PerkX de reclamos que surjan de su uso indebido del Servicio, violación de estos Términos o violación de la ley."
+      },
+      "privacy": {
+        "title": "15. Privacidad",
+        "paragraph1": "Los datos personales recopilados o procesados en relación con el Servicio se manejarán de acuerdo con la <strong>Política de Privacidad de PerkX</strong>, que forma parte integral de estos Términos.",
+        "paragraph2": "En caso de cualquier inconsistencia entre estos Términos y la Política de Privacidad con respecto a los datos personales, prevalecerá la Política de Privacidad."
+      },
+      "amendments": {
+        "title": "16. Enmiendas, Ley Aplicable y Jurisdicción",
+        "paragraph1": "PerkX puede actualizar estos Términos en cualquier momento. El uso continuado después de las actualizaciones constituye aceptación.",
+        "paragraph2": "Estos Términos se regirán e interpretarán de acuerdo con las leyes de la jurisdicción en la que se constituye la entidad operativa de PerkX, sin tener en cuenta los principios de conflicto de leyes.",
+        "paragraph3": "Cualquier disputa, reclamo o controversia que surja de o en relación con estos Términos o el Servicio estará sujeta a la jurisdicción exclusiva de los tribunales competentes de dicha jurisdicción."
+      }
+    }
+  },
+  "help-center": {
+    "meta": {
+      "title": "Centro de Ayuda | PerkX",
+      "description": "Encuentra respuestas a preguntas comunes sobre PerkX"
+    },
+    "hero": {
+      "title": "Centro de Ayuda",
+      "subtitle": "Encuentra respuestas a preguntas comunes sobre PerkX"
+    }
+  },
+  "user": {
+    "dashboard": {
+      "title": "Panel de Usuario",
+      "welcome": "Bienvenido",
+      "email": "Correo Electrónico",
+      "status": "Estado",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "loading": "Cargando..."
+    },
+    "profile": {
+      "title": "Mi Perfil",
+      "subtitle": "Administra tu perfil oficial y asegura tu cuenta de afiliado",
+      "loading": "Cargando...",
+      "affiliate_connection": "Conexión de Afiliado",
+      "affiliate_subtitle": "Comparte tu enlace de referido para ganar recompensas",
+      "my_referrer_id": "MI ID DE REFERIDO",
+      "copy_success": "¡Copiado!",
+      "security_password": "Seguridad y Contraseña",
+      "security_subtitle": "Asegúrate de que tu cuenta use una contraseña segura",
+      "current_password": "Contraseña Actual",
+      "new_password": "Nueva Contraseña",
+      "confirm_new_password": "Confirmar Nueva Contraseña",
+      "update_password": "Actualizar Contraseña",
+      "updating": "Actualizando...",
+      "profile_overview": "Vista General del Perfil",
+      "profile_overview_subtitle": "Actualiza la información de tu cuenta y administra tu perfil",
+      "first_name": "Nombre",
+      "last_name": "Apellido",
+      "email_address": "Correo Electrónico",
+      "phone_number": "Número de Teléfono",
+      "gender": "Género",
+      "select_gender": "Seleccionar género",
+      "male": "Masculino",
+      "female": "Femenino",
+      "birthday": "Cumpleaños",
+      "country": "País",
+      "select_country": "Seleccionar país",
+      "save_changes": "Guardar Cambios del Perfil",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "linked_exchanges": "Exchanges Vinculados",
+      "logout": "Cerrar Sesión",
+      "profile_updated": "¡Perfil actualizado exitosamente!",
+      "profile_update_failed": "Error al actualizar el perfil",
+      "password_updated": "¡Contraseña actualizada exitosamente!",
+      "password_update_failed": "Error al actualizar la contraseña",
+      "passwords_not_match": "Las nuevas contraseñas no coinciden"
+    }
+  }
+}

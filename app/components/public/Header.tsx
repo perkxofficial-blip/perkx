@@ -3,6 +3,15 @@ import {getTranslations} from "next-intl/server";
 import AuthButtons from "./AuthButtons";
 import Navigation from "./Navigation";
 
+const LANGUAGES = [
+  { code: 'en', key: 'language.en' },
+  { code: 'ko', key: 'language.ko' },
+  { code: 'zh', key: 'language.zh' },
+  { code: 'ja', key: 'language.ja' },
+  { code: 'id', key: 'language.id' },
+  { code: 'es', key: 'language.es' },
+] as const;
+
 export default async function Header() {
   const t = await getTranslations();
   return (
@@ -64,16 +73,13 @@ export default async function Header() {
 
 
                 <ul className="dropdown-menu" aria-label="Language selection">
-                  <li>
-                    <a className="dropdown-item" href="/en">
-                      {t("language.en")}
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/ko">
-                      {t("language.ko")}
-                    </a>
-                  </li>
+                  {LANGUAGES.map((lang) => (
+                    <li key={lang.code}>
+                      <a className="dropdown-item" href={`/${lang.code}`}>
+                        {t(lang.key)}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
 

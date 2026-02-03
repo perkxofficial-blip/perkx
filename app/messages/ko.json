@@ -29,7 +29,11 @@
   },
   "language": {
     "en": "영어",
-    "ko": "한국어"
+    "ko": "한국어",
+    "zh": "중국어",
+    "ja": "일본어",
+    "id": "인도네시아어",
+    "es": "스페인어"
   },
   "home": {
     "meta": {
@@ -460,7 +464,54 @@
     "hero": {
       "title": "고객 지원",
       "subtitle": "PerkX에 대한 자주 묻는 질문에 대한 답변을 찾으세요"
-    }
-  }
+    }  },
+  "user": {
+    "dashboard": {
+      "title": "사용자 대시보드",
+      "welcome": "환영합니다",
+      "email": "이메일",
+      "status": "상태",
+      "active": "활성",
+      "inactive": "비활성",
+      "loading": "로딩 중..."
+    },
+    "profile": {
+      "title": "내 프로필",
+      "subtitle": "공식 프로필을 관리하고 제휴 계정을 보호하세요",
+      "loading": "로딩 중...",
+      "affiliate_connection": "제휴 연결",
+      "affiliate_subtitle": "추천 링크를 공유하여 보상을 받으세요",
+      "my_referrer_id": "내 추천인 ID",
+      "copy_success": "복사됨!",
+      "security_password": "보안 및 비밀번호",
+      "security_subtitle": "계정이 안전하고 보안된 비밀번호를 사용하고 있는지 확인하세요",
+      "current_password": "현재 비밀번호",
+      "new_password": "새 비밀번호",
+      "confirm_new_password": "새 비밀번호 확인",
+      "update_password": "비밀번호 업데이트",
+      "updating": "업데이트 중...",
+      "profile_overview": "프로필 개요",
+      "profile_overview_subtitle": "계정 정보를 업데이트하고 프로필을 관리하세요",
+      "first_name": "이름",
+      "last_name": "성",
+      "email_address": "이메일 주소",
+      "phone_number": "전화번호",
+      "gender": "성별",
+      "select_gender": "성별 선택",
+      "male": "남성",
+      "female": "여성",
+      "birthday": "생년월일",
+      "country": "국가",
+      "select_country": "국가 선택",
+      "save_changes": "프로필 변경사항 저장",
+      "saving": "저장 중...",
+      "cancel": "취소",
+      "linked_exchanges": "연결된 거래소",
+      "logout": "로그아웃",
+      "profile_updated": "프로필이 성공적으로 업데이트되었습니다!",
+      "profile_update_failed": "프로필 업데이트 실패",
+      "password_updated": "비밀번호가 성공적으로 업데이트되었습니다!",
+      "password_update_failed": "비밀번호 업데이트 실패",
+      "passwords_not_match": "새 비밀번호가 일치하지 않습니다"
+    }  }
 }
-```

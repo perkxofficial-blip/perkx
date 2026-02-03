@@ -29,7 +29,11 @@
   },
   "language": {
     "en": "English",
-    "ko": "Korean"
+    "ko": "Korean",
+    "zh": "Chinese",
+    "ja": "Japanese",
+    "id": "Indonesian",
+    "es": "Spanish"
   },
   "home": {
     "meta": {
@@ -462,6 +466,56 @@
     "hero": {
       "title": "Help Center",
       "subtitle": "Find answers to common questions about PerkX"
+    }
+  },
+  "user": {
+    "dashboard": {
+      "title": "User Dashboard",
+      "welcome": "Welcome",
+      "email": "Email",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "loading": "Loading..."
+    },
+    "profile": {
+      "title": "My Profile",
+      "subtitle": "Manage your official profile and secure your affiliate account",
+      "loading": "Loading...",
+      "affiliate_connection": "Affiliate Connection",
+      "affiliate_subtitle": "Share your referral link to earn rewards",
+      "my_referrer_id": "MY REFERRER ID",
+      "copy_success": "Copied!",
+      "security_password": "Security & Password",
+      "security_subtitle": "Ensure your account is using a safe and secure password",
+      "current_password": "Current Password",
+      "new_password": "New Password",
+      "confirm_new_password": "Confirm New Password",
+      "update_password": "Update Password",
+      "updating": "Updating...",
+      "profile_overview": "Profile Overview",
+      "profile_overview_subtitle": "Update your account info and manage your profile",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "gender": "Gender",
+      "select_gender": "Select gender",
+      "male": "Male",
+      "female": "Female",
+      "birthday": "Birthday",
+      "country": "Country",
+      "select_country": "Select country",
+      "save_changes": "Save Profile Changes",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "linked_exchanges": "Linked Exchanges",
+      "logout": "Logout",
+      "profile_updated": "Profile updated successfully!",
+      "profile_update_failed": "Failed to update profile",
+      "password_updated": "Password updated successfully!",
+      "password_update_failed": "Failed to update password",
+      "passwords_not_match": "New passwords do not match"
     }
   }
 }
