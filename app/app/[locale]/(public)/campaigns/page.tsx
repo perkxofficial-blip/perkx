@@ -55,8 +55,8 @@ export default async function CampaignPage({ searchParams }: Props) {
   const t = await getTranslations();
   const categories = [
     {value:'', label: t('campaign.all_category')},
+    {value:'all_user', label: t('campaign.category_all_user')},
     {value:'new_user', label: t('campaign.category_new_user')},
-    // {value:'trading_competition ', label: t('campaign.category_trading_competition')},
   ]
   const statuses = [
     {value:'', label: t('campaign.all_campaign_status')},
