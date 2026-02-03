@@ -19,7 +19,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     }
 
     if (user.status === UserStatus.DEACTIVATE) {
-      throw new UnauthorizedException('message.account_banned');
+      throw new UnauthorizedException('message.invalid_credentials');
     }
 
     return user;
