@@ -1,12 +1,22 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import { apiClient } from '@/services/api/client';
 import { endpoints } from '@/services/endpoints';
 import { auth } from '@/services/auth';
 import { COUNTRIES } from '@/lib/countries';
 import Toast from '@/components/admin/Toast';
+
+const LANGUAGES = [
+  { code: 'en', key: 'language.en' },
+  { code: 'ko', key: 'language.ko' },
+  { code: 'zh', key: 'language.zh' },
+  { code: 'ja', key: 'language.ja' },
+  { code: 'id', key: 'language.id' },
+  { code: 'es', key: 'language.es' },
+] as const;
 
 interface UserProfile {
   id: number;
@@ -22,9 +32,14 @@ interface UserProfile {
 
 export default function UserProfilePage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations('user.profile');
+  const tLang = useTranslations('language');
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
 
   // Toast state
   const [toast, setToast] = useState<{ show: boolean; message: string; type: 'success' | 'error' | 'warning' | 'info' } | null>(null);
@@ -167,7 +182,7 @@ export default function UserProfilePage() {
 
       await apiClient.put(endpoints.user.updateProfile, profileForm, token);
 
-      showToast('Profile updated successfully!', 'success');
+      showToast(t('profile_updated'), 'success');
       setProfileErrors({}); // Clear all field errors on success
       await loadProfile();
     } catch (error: any) {
@@ -186,10 +201,10 @@ export default function UserProfilePage() {
       if (Object.keys(fieldErrors).length > 0) {
         // Has field-specific errors - display them below fields
         setProfileErrors(fieldErrors);
-        showToast('Please fix the errors in the form', 'error');
+        showToast(t('fix_form_errors'), 'error');
       } else {
         // General error - display as toast
-        showToast(error.message || 'Failed to update profile', 'error');
+        showToast(error.message || t('profile_update_failed'), 'error');
         setProfileErrors({}); // Clear field errors
       }
     } finally {
@@ -210,7 +225,7 @@ export default function UserProfilePage() {
     }
 
     if (passwordForm.new_password !== passwordForm.confirm_new_password) {
-      showToast('Confirm password does not match.', 'error');
+      showToast(t('passwords_not_match'), 'error');
       setSaving(false);
       return;
     }
@@ -226,7 +241,7 @@ export default function UserProfilePage() {
 
       await apiClient.patch(endpoints.user.updatePassword, passwordForm, token);
 
-      showToast('Reset password successfully!', 'success');
+      showToast(t('password_updated'), 'success');
       setPasswordErrors({}); // Clear all field errors on success
       setPasswordForm({
         current_password: '',
@@ -249,10 +264,10 @@ export default function UserProfilePage() {
       if (Object.keys(fieldErrors).length > 0) {
         // Has field-specific errors - display them below fields
         setPasswordErrors(fieldErrors);
-        showToast('Please fix the errors in the form', 'error');
+        showToast(t('fix_form_errors'), 'error');
       } else {
         // General error - display as toast
-        showToast(error.message || 'Failed to update password', 'error');
+        showToast(error.message || t('password_update_failed'), 'error');
         setPasswordErrors({}); // Clear field errors
       }
     } finally {
@@ -268,7 +283,7 @@ export default function UserProfilePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#18163C] flex items-center justify-center">
-        <div className="text-white text-lg">Loading...</div>
+        <div className="text-white text-lg">{t('loading')}</div>
       </div>
     );
   }
@@ -301,6 +316,45 @@ export default function UserProfilePage() {
               </a>
             </div>
 
+            {/* Language Switcher */}
+            <div className="px-3 mb-3">
+              <div className="relative">
+                <button
+                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                  className="w-full flex items-center justify-between gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-[#C9C9C9]"
+                >
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                    <span className="text-sm font-medium">{tLang(locale)}</span>
+                  </div>
+                  <svg className={`w-4 h-4 transition-transform ${showLanguageDropdown ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+                
+                {showLanguageDropdown && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-[#2A2651] rounded-lg shadow-lg overflow-hidden z-50 border border-white/10">
+                    {LANGUAGES.map((lang) => (
+                      <a
+                        key={lang.code}
+                        href={`/${lang.code}/user/profile`}
+                        className={`block px-4 py-2 text-sm transition ${
+                          locale === lang.code
+                            ? 'bg-[#DAB2FF]/20 text-[#DAB2FF] font-medium'
+                            : 'text-[#C9C9C9] hover:bg-white/5'
+                        }`}
+                        onClick={() => setShowLanguageDropdown(false)}
+                      >
+                        {tLang(lang.code)}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
             {/* Navigation */}
             <nav className="flex-1 flex flex-col gap-3 px-3">
               <a
@@ -310,7 +364,7 @@ export default function UserProfilePage() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H6C4.93913 15 3.92172 15.4214 3.17157 16.1716C2.42143 16.9217 2 17.9391 2 19V21M22 20.9999V18.9999C21.9993 18.1136 21.7044 17.2527 21.1614 16.5522C20.6184 15.8517 19.8581 15.3515 19 15.1299M16 3.12988C16.8604 3.35018 17.623 3.85058 18.1676 4.55219C18.7122 5.2538 19.0078 6.11671 19.0078 7.00488C19.0078 7.89305 18.7122 8.75596 18.1676 9.45757C17.623 10.1592 16.8604 10.6596 16 10.8799M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" />
                 </svg>
-                <span className="text-sm font-bold leading-5 tracking-normal">My Profile</span>
+                <span className="text-sm font-bold leading-5 tracking-normal">{t('title')}</span>
               </a>
               <a
                 href="#"
@@ -319,7 +373,7 @@ export default function UserProfilePage() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9548 8.33394 21.9434 7.02296C21.932 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07799 16.987 2.0666C15.676 2.0552 14.413 2.55918 13.47 3.46997L11.75 5.17997M14.0002 11C13.5707 10.4259 13.0228 9.9508 12.3936 9.60704C11.7645 9.26328 11.0687 9.05886 10.3535 9.00765C9.63841 8.95643 8.92061 9.05961 8.24885 9.3102C7.5771 9.56079 6.96709 9.95291 6.4602 10.46L3.4602 13.46C2.54941 14.403 2.04544 15.666 2.05683 16.977C2.06822 18.288 2.59407 19.542 3.52111 20.4691C4.44815 21.3961 5.70221 21.922 7.01319 21.9334C8.32418 21.9447 9.58719 21.4408 10.5302 20.53L12.2402 18.82" />
                 </svg>
-                <span className="text-sm font-bold leading-5 tracking-normal">Linked Exchanges</span>
+                <span className="text-sm font-bold leading-5 tracking-normal">{t('linked_exchanges')}</span>
               </a>
             </nav>
 
@@ -334,7 +388,7 @@ export default function UserProfilePage() {
                   <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M15 12H3L6 9" />
                   <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 15L3 12" />
                 </svg>
-                <span className="text-sm font-medium">Logout</span>
+                <span className="text-sm font-medium">{t('logout')}</span>
               </button>
             </div>
           </div>
@@ -345,8 +399,8 @@ export default function UserProfilePage() {
           <div className="flex flex-col gap-6">
             {/* Page Header */}
             <div className="flex flex-col gap-1">
-              <h1 className="!text-[#FCFCFC] text-2xl font-bold">My Profile</h1>
-              <p className="!text-[#FCFCFC] text-sm leading-7 m-0">Manage your official profile and secure your affiliate account</p>
+              <h1 className="!text-[#FCFCFC] text-2xl font-bold">{t('title')}</h1>
+              <p className="!text-[#FCFCFC] text-sm leading-7 m-0">{t('subtitle')}</p>
             </div>
 
             {/* Content Grid */}
@@ -365,14 +419,14 @@ export default function UserProfilePage() {
                   {/* Content */}
                   <div className="relative z-10 flex flex-col gap-4">
                     <div className="flex flex-col gap-1">
-                      <h2 className="!text-[#FCFCFC] text-xl font-bold">Affiliate Connection</h2>
-                      <p className="!text-[#FCFCFC] text-sm leading-[21px]">Share your referral link to earn rewards</p>
+                      <h2 className="!text-[#FCFCFC] text-xl font-bold">{t('affiliate_connection')}</h2>
+                      <p className="!text-[#FCFCFC] text-sm leading-[21px]">{t('affiliate_subtitle')}</p>
                     </div>
 
                     <div className="flex items-center gap-3 rounded-[8px] border-[0.5px] border-[#9FABED] bg-white/10 p-3 self-start">
                       <div className="inline-flex flex-col gap-2 rounded-lg px-4 py-0">
                         <label className="text-[#C9C9C9] text-sm font-medium leading-5 tracking-normal uppercase">
-                          MY REFERRER ID
+                          {t('my_referrer_id')}
                         </label>
                         <div className="text-[#DAB2FF] text-2xl font-medium leading-5 tracking-normal">
                           {profile?.referral_code || 'PX-99284'}
@@ -386,7 +440,7 @@ export default function UserProfilePage() {
                             background: 'linear-gradient(95deg, #EF73D1 1.16%, #B388F4 102.96%)',
                             borderRadius: '10px'
                           }}
-                          title={isCopied ? 'Copied!' : 'Copy Referral Code'}
+                          title={isCopied ? t('copy_success') : 'Copy Referral Code'}
                         >
                           {isCopied ? (
                             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -400,7 +454,7 @@ export default function UserProfilePage() {
                         </button>
                         {isCopied && (
                           <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#18163C] text-white text-sm rounded-lg shadow-lg whitespace-nowrap">
-                            Copied!
+                            {t('copy_success')}
                           </div>
                         )}
                       </div>
@@ -412,15 +466,15 @@ export default function UserProfilePage() {
                 <div className="rounded-[10px] bg-white/[0.08] shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] backdrop-blur-[12px] p-6 flex flex-col flex-1">
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1">
-                      <h2 className="!text-[#FCFCFC] text-xl font-bold">Security & Password</h2>
-                      <p className="!text-[#FCFCFC] text-sm leading-[21px]">Ensure your account is using a safe and secure password</p>
+                      <h2 className="!text-[#FCFCFC] text-xl font-bold">{t('security_password')}</h2>
+                      <p className="!text-[#FCFCFC] text-sm leading-[21px]">{t('security_subtitle')}</p>
                     </div>
 
                     <form onSubmit={handleUpdatePassword} className="flex flex-col gap-4">
                       {/* Current Password */}
                       <div className="flex flex-col gap-1">
                         <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                          Current Password
+                          {t('current_password')}
                         </label>
                         <div className="relative">
                           <input
@@ -454,7 +508,7 @@ export default function UserProfilePage() {
                       {/* New Password */}
                       <div className="flex flex-col gap-1">
                         <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                          New Password
+                          {t('new_password')}
                         </label>
                         <div className="relative">
                           <input
@@ -496,7 +550,7 @@ export default function UserProfilePage() {
                       {/* Confirm New Password */}
                       <div className="flex flex-col gap-1">
                         <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                          Confirm New Password
+                          {t('confirm_new_password')}
                         </label>
                         <div className="relative">
                           <input
@@ -534,7 +588,7 @@ export default function UserProfilePage() {
                         className="inline-flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50 self-start"
                       >
                         <span className="text-white text-center text-lg font-medium leading-5 tracking-[-0.108px]">
-                          {saving ? 'Updating...' : 'Update Password'}
+                          {saving ? t('updating') : t('update_password')}
                         </span>
                       </button>
                     </form>
@@ -546,15 +600,15 @@ export default function UserProfilePage() {
               <div className="rounded-[10px] bg-white/[0.08] shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] backdrop-blur-[12px] p-6 flex flex-col">
                 <div className="flex flex-col gap-4 flex-1">
                   <div className="flex flex-col gap-1">
-                    <h2 className="!text-[#FCFCFC] text-xl font-bold">Profile Overview</h2>
-                    <p className="!text-[#FCFCFC] text-sm leading-[21px]">Update your account info and manage your profile</p>
+                    <h2 className="!text-[#FCFCFC] text-xl font-bold">{t('profile_overview')}</h2>
+                    <p className="!text-[#FCFCFC] text-sm leading-[21px]">{t('profile_overview_subtitle')}</p>
                   </div>
 
                   <form onSubmit={handleUpdateProfile} className="flex flex-col gap-4">
                     {/* First Name */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                        First Name
+                        {t('first_name')}
                       </label>
                       <input
                         type="text"
@@ -576,7 +630,7 @@ export default function UserProfilePage() {
                     {/* Last Name */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                        Last Name
+                        {t('last_name')}
                       </label>
                       <input
                         type="text"
@@ -598,7 +652,7 @@ export default function UserProfilePage() {
                     {/* Email Address */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                        Email Address
+                        {t('email_address')}
                       </label>
                       <input
                         type="email"
@@ -611,7 +665,7 @@ export default function UserProfilePage() {
                     {/* Phone Number */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                        Phone Number
+                        {t('phone_number')}
                       </label>
                       <input
                         type="tel"
@@ -633,7 +687,7 @@ export default function UserProfilePage() {
                     {/* Gender */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                        Gender
+                        {t('gender')}
                       </label>
                       <div className="relative">
                         <select
@@ -646,9 +700,9 @@ export default function UserProfilePage() {
                           }}
                           className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm appearance-none focus:outline-none focus:border-purple-500 [&>option]:bg-[#18163C] [&>option]:text-white"
                         >
-                          <option value="" className="bg-[#18163C] text-white">Select gender</option>
-                          <option value="Male" className="bg-[#18163C] text-white">Male</option>
-                          <option value="Female" className="bg-[#18163C] text-white">Female</option>
+                          <option value="" className="bg-[#18163C] text-white">{t('select_gender')}</option>
+                          <option value="Male" className="bg-[#18163C] text-white">{t('male')}</option>
+                          <option value="Female" className="bg-[#18163C] text-white">{t('female')}</option>
                         </select>
                         <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none" fill="#C9C9C9" viewBox="0 0 20 20">
                           <path d="M10.0001 10.8785L13.7126 7.16602L14.7731 8.22652L10.0001 12.9995L5.22705 8.22652L6.28755 7.16602L10.0001 10.8785Z" />
@@ -662,7 +716,7 @@ export default function UserProfilePage() {
                     {/* Birthday */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                        Birthday
+                        {t('birthday')}
                       </label>
                       <div className="relative">
                         {/* Hidden native date input */}
@@ -729,7 +783,7 @@ export default function UserProfilePage() {
                     {/* Country */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
-                        Country
+                        {t('country')}
                       </label>
                       <div className="relative">
                         <select
@@ -742,7 +796,7 @@ export default function UserProfilePage() {
                           }}
                           className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm appearance-none focus:outline-none focus:border-purple-500 [&>option]:bg-[#18163C] [&>option]:text-white"
                         >
-                          <option value="" className="bg-[#18163C] text-white">Select country</option>
+                          <option value="" className="bg-[#18163C] text-white">{t('select_country')}</option>
                           {COUNTRIES.map((country) => (
                             <option key={country.value} value={country.value} className="bg-[#18163C] text-white">
                               {country.label}
@@ -766,7 +820,7 @@ export default function UserProfilePage() {
                         className="flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50"
                       >
                         <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px]">
-                          {saving ? 'Saving...' : 'Save Profile Changes'}
+                          {saving ? t('saving') : t('save_changes')}
                         </span>
                       </button>
                       <button
@@ -775,7 +829,7 @@ export default function UserProfilePage() {
                         className="flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-white/10 hover:bg-white/20 shadow-[0_1px_2px_0_rgba(55,93,251,0.08)]"
                       >
                         <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px]">
-                          Cancel
+                          {t('cancel')}
                         </span>
                       </button>
                     </div>
