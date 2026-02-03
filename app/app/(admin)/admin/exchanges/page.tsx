@@ -48,6 +48,7 @@ export default function ExchangePartnerConfigPage() {
     // Validate file type
     const validTypes = [
       'text/csv',
+      'application/csv',
       'application/vnd.ms-excel',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ];
@@ -124,7 +125,7 @@ export default function ExchangePartnerConfigPage() {
       {/* Page Header */}
       <div className="mb-6">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          Exchange Partner Configuration
+          Import Exchange Information
         </h2>
       </div>
 
@@ -139,7 +140,7 @@ export default function ExchangePartnerConfigPage() {
             <div>
               <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-300 mb-1">Instructions</h3>
               <p className="text-sm text-blue-800 dark:text-blue-300">
-                Update your homepage exchange list by uploading an Excel file. Use the template provided below to ensure correct data formatting and avoid validation errors.
+                Update your homepage exchange list by uploading an CSV file. Use the template provided below to ensure correct data formatting and avoid validation errors.
               </p>
             </div>
           </div>
@@ -153,7 +154,7 @@ export default function ExchangePartnerConfigPage() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Download Excel Template
+              Download CSV Template
             </button>
 
             {/* Upload Errors Display */}
@@ -190,7 +191,7 @@ export default function ExchangePartnerConfigPage() {
               </div>
               
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Upload Excel File here
+                Upload CSV File here
               </h3>
               
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">

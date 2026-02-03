@@ -1,11 +1,27 @@
 import Header from "@/components/public/Header";
 import PartnerSection from "@/components/public/PartnerSection";
 import Image from "next/image";
+import type { Metadata } from 'next';
 import { getTranslations } from "next-intl/server";
 import CampaignSection from "@/components/public/CampaignSection";
 import PartnerExchangesTable from "@/components/public/PartnerExchangesTable";
 import {getAllExchanges, Exchange, ExchangeSlide} from "@/services/api/public/exchange";
 import { Campaign, getFeaturedCampaigns } from '@/services/api/public/campaign';
+
+interface HomePageProps {
+  params: Promise<{
+    locale: string;
+  }>;
+}
+export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations('home');
+  
+  return {
+    title: t("meta.title") || 'Home | PerkX',
+    description: t("meta.description") || 'Maximize your trading rebates on global exchanges with PerkX. A professional cashback platform built for high-volume traders.',
+  };
+}
 
 async function getLandingData() {
   const result: {
@@ -339,10 +355,10 @@ export default async function LandingPage() {
               <div className="pe-table">
                 <PartnerExchangesTable exchanges={data.exchanges || []} />
                 <div className=" d-flex justify-content-center mt-4">
-                  <div className="pe-btn">
+                  <div>
                     <a
                       href="/exchanges"
-                      className="d-inline-flex align-items-center gap-2 text-decoration-none"
+                      className="perk-primary-btn d-inline-flex align-items-center gap-2 text-decoration-none"
                     >
                       {t("home.view_all_partners")}
                       <Image

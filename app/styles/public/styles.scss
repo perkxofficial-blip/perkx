@@ -48,6 +48,9 @@ header {
           color: #89EFFF;
         }
       }
+      :hover {
+        color: #89EFFF;
+      }
     }
   }
   padding: 24px 0;
@@ -141,9 +144,40 @@ header {
   }
   padding: 24px 0;
 }
+
+.perk-primary-btn {
+  display: flex;
+  width: 314px;
+  padding: 19px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: linear-gradient(95deg, rgba(239, 115, 209, 0.20) 1.16%, rgba(179, 136, 244, 0.20) 102.96%);
+  box-shadow: 0 1px 2px 0 rgba(55, 93, 251, 0.08);
+  backdrop-filter: blur(6px);
+  color: var(--text-white-0, #FFF);
+  text-align: center;
+  font-feature-settings: 'liga' off, 'calt' off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.108px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, transform 0.25s ease;
+  
+}
+.perk-primary-btn:hover {
+  background: linear-gradient( 95deg, rgba(239, 115, 209, 0.35), rgba(179, 136, 244, 0.35) );
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
 .img-bg {
   height: 840px;
-  background-image: url("../../public/images/bg-source.jpg");
+  background-image: url("../../public/images/bg-source-grey.png");
   background-size: cover;
   background-position: 0 -135px;
   background-repeat: no-repeat;
@@ -975,7 +1009,6 @@ header {
       color: #FCFCFC;
       font-size: 16px;
       font-style: normal;
-      font-weight: 700;
       line-height: 18px; /* 112.5% */
       border: none;
     }
@@ -1013,6 +1046,7 @@ header {
     gap: 16px;
     align-self: stretch;
     border-radius: 12px;
+    font-weight: 700;
   }
   .pe-top td {
     border-top: 1px solid #FFE680;;
@@ -2091,6 +2125,7 @@ header {
   gap: 60px;
   position: relative;
   z-index: 2;
+  margin: 32px 0;
 }
 
 .calculator-left-section {
@@ -2180,6 +2215,47 @@ header {
   text-align: center;
 }
 
+.perkx-selector {
+  border: 0.5px solid #595959;
+  background: rgba(255, 255, 255, 0.12);
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px !important;
+  color: #868C98;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  box-shadow: 0px 1px 2px 0px rgba(228, 229, 231, 0.24);
+
+  /* regular-shadow/x-small */
+  box-shadow: 0 1px 2px 0 rgba(228, 229, 231, 0.24);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: rgba(239, 115, 209, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(226, 228, 233, 0.1);
+  }
+  option {
+    background-color: #1F1F49;
+    color: #FCFCFC;
+    padding: 12px 10px;
+    overflow: hidden;
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.096px;
+    border-radius: 10px;
+  }
+}
 .calculator-inputs {
   display: flex;
   gap: 16px;
@@ -2288,7 +2364,7 @@ header {
 .calculator-cta-btn {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 14px;
   background: linear-gradient(105.43deg, rgba(239, 115, 209, 0.8) 1.16%, rgba(179, 136, 244, 0.8) 102.96%);
   border: none;
   border-radius: 10px;

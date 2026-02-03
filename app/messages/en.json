@@ -32,6 +32,10 @@
     "ko": "Korean"
   },
   "home": {
+    "meta": {
+      "title": "Home | PerkX",
+      "description": "Maximize your trading rebates on global exchanges with PerkX. A professional cashback platform built for high-volume traders."
+    },
     "intro_1":"Perks aren’t given.",
     "intro_2": "They’re negotiated.",
     "hero_section_description": "We get the best fee rebates, airdrops, and discounts into one portal — because every trade deserves the best deal.",
@@ -146,6 +150,10 @@
     "email_already_verified": "Email already verified"
   },
   "campaign": {
+    "meta": {
+      "title": "Campaigns | PerkX",
+      "description": "High-density overview of active trading competitions and rewards"
+    },
     "title": "<perkx>PerkX</perkx> Exclusive Campaigns",
     "desc": "High-density overview of active trading competitions and rewards.",
     "campaign_holder": "Campaign Holder",
@@ -172,12 +180,20 @@
     "result_per_page": "Result per page"
   },
   "exchanges": {
+    "meta": {
+      "title": "Exchanges | PerkX",
+      "description": "Compare and join top-tier global exchanges with PerkX"
+    },
     "hero_title_part1": "Maximize Your Crypto",
     "hero_title_gradient": "Trading Cashback.",
     "hero_subtitle": "Compare and join top-tier global exchanges with PerkX.",
     "get_started": "Get Started"
   },
   "calculator": {
+    "meta": {
+      "title": "Calculator | PerkX",
+      "description": "Calculate your potential cashback earnings based on your trading volume"
+    },
     "hero_title_part1": "See What ",
     "hero_title_gradient": "You're Missing",
     "hero_subtitle": "Calculate your potential cashback earnings based on your trading volume",

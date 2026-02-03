@@ -8,11 +8,13 @@ import {
   IsInt,
   MaxLength,
   ValidateIf,
+  Validate,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { CampaignCategory } from '../../../../entities';
 import { TransformBoolean } from '../../../../common/decorators/transform-boolean.decorator';
+import { CampaignPeriodOrderConstraint } from '../../../../common/validators/campaign-period.validator';
 
 export class CreateCampaignDto {
   @ApiPropertyOptional({
@@ -126,6 +128,7 @@ export class CreateCampaignDto {
   @IsOptional()
   @Type(() => Date)
   @IsDate()
+  @Validate(CampaignPeriodOrderConstraint)
   archive_end?: Date;
 
   @ApiPropertyOptional({

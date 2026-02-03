@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
@@ -33,6 +33,7 @@ interface UserDetail {
   referrals: Array<{
     id: number;
     email: string;
+    referral_code?: string;
     created_at: string;
     status?: string;
     country?: string;
@@ -46,7 +47,19 @@ interface UserDetail {
 export default function UserDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const userId = params?.id as string;
+
+  // Preserve filter parameters for back navigation
+  const filterParams = new URLSearchParams();
+  if (searchParams.get('search')) filterParams.set('search', searchParams.get('search')!);
+  if (searchParams.get('status')) filterParams.set('status', searchParams.get('status')!);
+  if (searchParams.get('dateFrom')) filterParams.set('dateFrom', searchParams.get('dateFrom')!);
+  if (searchParams.get('dateTo')) filterParams.set('dateTo', searchParams.get('dateTo')!);
+  if (searchParams.get('page')) filterParams.set('page', searchParams.get('page')!);
+  if (searchParams.get('rowsPerPage')) filterParams.set('rowsPerPage', searchParams.get('rowsPerPage')!);
+  
+  const backToListUrl = `/admin/users${filterParams.toString() ? `?${filterParams.toString()}` : ''}`;
 
   const [user, setUser] = useState<UserDetail | null>(null);
   const [loading, setLoading] = useState(true);
@@ -170,7 +183,7 @@ export default function UserDetailPage() {
         </svg>
         <p className="mt-4 text-gray-500 dark:text-gray-400 font-medium">{error}</p>
         <Link
-          href="/admin/users"
+          href={backToListUrl}
           className="mt-4 inline-block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
         >
           Back to Users List
@@ -188,7 +201,7 @@ export default function UserDetailPage() {
             Dashboard
           </Link>
           <span className="mx-2">/</span>
-          <Link href="/admin/users" className="hover:text-gray-700 dark:hover:text-gray-200">
+          <Link href={backToListUrl} className="hover:text-gray-700 dark:hover:text-gray-200">
             User Management
           </Link>
           <span className="mx-2">/</span>
@@ -237,7 +250,7 @@ export default function UserDetailPage() {
           </div>
           <div className="flex gap-2 ml-6">
             <Link
-              href="/admin/users"
+              href={backToListUrl}
               className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
             >
               Back to List
@@ -318,7 +331,7 @@ export default function UserDetailPage() {
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Referrer:</span>
                 {user.referrer ? (
                   <Link
-                    href={`/admin/users/${user.referrer.id}`}
+                    href={`/admin/users/${user.referrer.id}${filterParams.toString() ? `?${filterParams.toString()}` : ''}`}
                     className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-right"
                   >
                     {user.referrer.email}
@@ -395,8 +408,8 @@ export default function UserDetailPage() {
                     key={referral.id}
                     className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className={`w-2 h-2 rounded-full ${referral.status?.toUpperCase() === 'ACTIVE'
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${referral.status?.toUpperCase() === 'ACTIVE'
                         ? 'bg-green-500'
                         : referral.status?.toUpperCase() === 'INACTIVE'
                           ? 'bg-yellow-500'
@@ -404,7 +417,16 @@ export default function UserDetailPage() {
                             ? 'bg-red-500'
                             : 'bg-gray-500'
                         }`}></div>
-                      <span className="text-sm text-gray-900 dark:text-white">{referral.email}</span>
+                      <div className="relative group flex-1 min-w-0">
+                        <span className={`text-sm truncate block ${referral.status?.toUpperCase() === 'DEACTIVATE' 
+                          ? 'text-gray-500 dark:text-gray-400' 
+                          : 'text-gray-900 dark:text-white'
+                        }`}>{referral.email}</span>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                          {referral.email}
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                        </div>
+                      </div>
                     </div>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {formatDate(referral.created_at)}
@@ -541,7 +563,7 @@ export default function UserDetailPage() {
                   <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                     <tr>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email Address</th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">UID</th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">PerkX UID</th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Joined Date</th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Country</th>
@@ -550,8 +572,19 @@ export default function UserDetailPage() {
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
                     {user.referrals.map((referral) => (
                       <tr key={referral.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">{referral.email}</td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{referral.id}</td>
+                        <td className="px-6 py-4">
+                          <div className="relative group max-w-xs">
+                            <span className={`text-sm truncate block ${referral.status?.toUpperCase() === 'DEACTIVATE' 
+                              ? 'text-gray-500 dark:text-gray-400' 
+                              : 'text-gray-900 dark:text-white'
+                            }`}>{referral.email}</span>
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 dark:bg-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                              {referral.email}
+                              <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{referral.referral_code}</td>
                         <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(referral.created_at)}</td>
                         <td className="px-6 py-4">
                           <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${referral.status?.toUpperCase() === 'ACTIVE'

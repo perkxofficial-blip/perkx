@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
@@ -17,23 +18,38 @@ interface User {
   referral_code?: string;
   referrer_email?: string;
   created_at?: string;
+  referral_by?: {
+    id: number;
+    email: string;
+    referral_code: string;
+  };
 }
 
 export default function AdminUsersPage() {
+  const searchParams = useSearchParams();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const hasFetched = useRef(false);
+  
+  // Store initial values to detect actual changes vs initialization
+  const initialValues = useRef({
+    search: searchParams.get('search') || '',
+    status: searchParams.get('status') || 'ALL',
+    dateFrom: searchParams.get('dateFrom') || '',
+    dateTo: searchParams.get('dateTo') || '',
+    rowsPerPage: parseInt(searchParams.get('rowsPerPage') || '10')
+  });
 
-  // Filter states
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('ALL');
-  const [dateFrom, setDateFrom] = useState('');
-  const [dateTo, setDateTo] = useState('');
+  // Filter states - initialize from URL params
+  const [searchQuery, setSearchQuery] = useState(initialValues.current.search);
+  const [statusFilter, setStatusFilter] = useState(initialValues.current.status);
+  const [dateFrom, setDateFrom] = useState(initialValues.current.dateFrom);
+  const [dateTo, setDateTo] = useState(initialValues.current.dateTo);
 
-  // Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // Pagination states - initialize from URL params
+  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page') || '1'));
+  const [rowsPerPage, setRowsPerPage] = useState(initialValues.current.rowsPerPage);
 
   useEffect(() => {
     // Prevent double fetch in React Strict Mode
@@ -120,9 +136,18 @@ export default function AdminUsersPage() {
     return filteredUsers.slice(startIndex, endIndex);
   }, [filteredUsers, currentPage, rowsPerPage]);
 
-  // Reset to page 1 when filters change
+  // Reset to page 1 only when filters actually change (not during initialization)
   useEffect(() => {
-    setCurrentPage(1);
+    const hasFiltersChanged = 
+      searchQuery !== initialValues.current.search ||
+      statusFilter !== initialValues.current.status ||
+      dateFrom !== initialValues.current.dateFrom ||
+      dateTo !== initialValues.current.dateTo ||
+      rowsPerPage !== initialValues.current.rowsPerPage;
+    
+    if (hasFiltersChanged) {
+      setCurrentPage(1);
+    }
   }, [searchQuery, statusFilter, dateFrom, dateTo, rowsPerPage]);
 
   const handlePageChange = (page: number) => {
@@ -132,6 +157,19 @@ export default function AdminUsersPage() {
   const handleRowsPerPageChange = (rows: number) => {
     setRowsPerPage(rows);
     setCurrentPage(1);
+  };
+
+  // Build query string for preserving filters when navigating to detail page
+  const getDetailUrl = (userId: number) => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set('search', searchQuery);
+    if (statusFilter !== 'ALL') params.set('status', statusFilter);
+    if (dateFrom) params.set('dateFrom', dateFrom);
+    if (dateTo) params.set('dateTo', dateTo);
+    params.set('page', currentPage.toString());
+    params.set('rowsPerPage', rowsPerPage.toString());
+    
+    return `/admin/users/${userId}${params.toString() ? `?${params.toString()}` : ''}`;
   };
 
   const clearFilters = () => {
@@ -316,7 +354,7 @@ export default function AdminUsersPage() {
                 <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                   <tr>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email Address</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">UID</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">PerkX UID</th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Joined Date</th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Referrer(email)</th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status Badge</th>
@@ -330,7 +368,7 @@ export default function AdminUsersPage() {
                       <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">{user.email}</td>
                       <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{user.referral_code}</td>
                       <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(user.created_at)}</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.referrer_email || '-'}</td>
+                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.referral_by?.email || '-'}</td>
                       <td className="px-6 py-4">
                         <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${user.status?.toUpperCase() === 'ACTIVE'
                           ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
@@ -346,7 +384,7 @@ export default function AdminUsersPage() {
                       <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.country || '-'}</td>
                       <td className="px-6 py-4">
                         <Link
-                          href={`/admin/users/${user.id}`}
+                          href={getDetailUrl(user.id)}
                           className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
                         >
                           View

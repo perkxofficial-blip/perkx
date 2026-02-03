@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { auth } from '@/services/auth';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface AdminLayoutWrapperProps {
   children: React.ReactNode;
@@ -66,17 +67,27 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
       {/* Sidebar */}
       <aside className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 duration-300 ease-linear lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-          <Link href="/admin" className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-2 px-6 py-5.5 lg:py-6.5">
+          {/* <Link href="/admin" className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">P</span>
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-white">PerkX Admin</span>
-          </Link>
+          </Link> */}
+          {/* Logo */}
+          <a className="navbar-brand" href="/admin/">
+            <Image
+              src="/images/admin-logo.png"
+              alt={"Admin Logo"}
+              width={123}
+              height={41}
+              priority
+            />
+          </a>
 
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="block lg:hidden text-gray-600 dark:text-gray-300"
+            className="block lg:hidden text-gray-600 dark:text-gray-300 absolute right-6"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -147,7 +158,7 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                     </svg>
-                    <span className="whitespace-nowrap">Exchange Config</span>
+                    <span className="whitespace-nowrap">Import Exchange</span>
                   </Link>
                 </li>
 
