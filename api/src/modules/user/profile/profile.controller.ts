@@ -112,32 +112,4 @@ export class ProfileController {
     return this.profileService.updatePassword(user.id, updatePasswordDto);
   }
 
-  @Get('linked-exchanges')
-  @ApiOperation({ summary: 'Get list of exchanges linked to user' })
-  @ApiResponse({
-    status: 200,
-    description: 'List of linked exchanges retrieved successfully',
-    schema: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          id: { type: 'number' },
-          name: { type: 'string' },
-          code: { type: 'string' },
-          logo_path: { type: 'string', nullable: true },
-          logo_url: { type: 'string', nullable: true },
-          exchange_uid: { type: 'string' },
-          linked_at: { type: 'string', format: 'date-time' },
-        },
-      },
-    },
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Unauthorized - invalid or missing token',
-  })
-  async getLinkedExchanges(@CurrentUser() user: User) {
-    return this.profileService.getLinkedExchanges(user.id);
-  }
 }

@@ -24,6 +24,13 @@ export class UserExchange {
   @Column({ length: 100 })
   exchange_uid: string;
 
+  @Column({
+    type: 'enum',
+    enum: ['ACTIVE', 'PENDING', 'REJECTED'],
+    default: 'PENDING',
+  })
+  status: 'ACTIVE' | 'PENDING' | 'REJECTED';
+
   @CreateDateColumn()
   created_at: Date;
 
