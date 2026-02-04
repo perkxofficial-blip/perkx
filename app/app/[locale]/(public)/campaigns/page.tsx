@@ -170,7 +170,7 @@ export default async function CampaignPage({ searchParams }: Props) {
           </div>
           <div className="row">
             {data?.campaigns?.data &&  data?.campaigns?.data.length > 0 ? data?.campaigns?.data.map((campaign: any) => (
-              <div className='col-md-6 col-lg-3 mb-4' key={campaign.id}>
+              <div className='col-6 col-lg-3 mb-4' key={campaign.id}>
                 <CampaignItem campaign={campaign}/>
               </div>
             )) : (
@@ -205,7 +205,7 @@ export default async function CampaignPage({ searchParams }: Props) {
               <div className="col-md-6 col-12 d-flex pagination-page hidden-xs">
                 <Pagination pagination={pagination} />
               </div>
-              <div className="col-12 show-sx">
+              <div className="col-12 show-xs">
                 <div className="gap-3">
                   <div className="row d-flex align-items-center ">
                     <div className="col-6">
