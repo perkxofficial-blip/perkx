@@ -180,6 +180,7 @@
   },
   "paging": {
     "showing_to_of": "<bold>{from}</bold>から<bold>{to}</bold>を表示中、全<bold>{total}</bold>キャンペーン",
+    "showing_to_of_mobile": "<bold>{from}</bold>から<bold>{to}</bold>を表示中、全<bold>{total}</bold>",
     "result_per_page": "ページあたりの結果数"
   },
   "exchanges": {

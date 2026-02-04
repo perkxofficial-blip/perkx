@@ -46,10 +46,14 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
       </div>
 
       {/* Main Content Section - Steps */}
-      <section className="steps-section position-relative">
+      <section className="steps-section position-relative mt--30px">
         <div className="container">
           {/* Step 1 */}
           <div className="step-item">
+            <div className="step-content show-mb">
+              <h3>{t('steps.step1.title')}</h3>
+              <p>{t('steps.step1.description')}</p>
+            </div>
             <div className="step-image">
               <Image
                 src="/images/step1-register.png"
@@ -60,7 +64,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
                 style={{ objectFit: 'cover' }}
               />
             </div>
-            <div className="step-content">
+            <div className="step-content hidden-mb">
               <h3>{t('steps.step1.title')}</h3>
               <p>{t('steps.step1.description')}</p>
             </div>
@@ -68,6 +72,10 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
 
           {/* Step 2 */}
           <div className="step-item reverse">
+            <div className="step-content show-mb">
+              <h3>{t('steps.step2.title')}</h3>
+              <p>{t('steps.step2.description')}</p>
+            </div>
             <div className="step-image">
               <Image
                 src="/images/step2-link-exchange.png"
@@ -78,7 +86,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
                 style={{ objectFit: 'cover' }}
               />
             </div>
-            <div className="step-content">
+            <div className="step-content hidden-mb">
               <h3>{t('steps.step2.title')}</h3>
               <p>{t('steps.step2.description')}</p>
             </div>
@@ -86,6 +94,10 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
 
           {/* Step 3 */}
           <div className="step-item">
+            <div className="step-content show-mb">
+              <h3>{t('steps.step3.title')}</h3>
+              <p>{t('steps.step3.description')}</p>
+            </div>
             <div className="step-image">
               <Image
                 src="/images/step3-start-trading.png"
@@ -96,7 +108,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
                 style={{ objectFit: 'cover' }}
               />
             </div>
-            <div className="step-content">
+            <div className="step-content hidden-mb">
               <h3>{t('steps.step3.title')}</h3>
               <p>{t('steps.step3.description')}</p>
             </div>

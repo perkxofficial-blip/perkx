@@ -181,6 +181,7 @@
   },
   "paging": {
     "showing_to_of": "Showing <bold>{from}</bold> to <bold>{to}</bold> of <bold>{total}</bold> campaigns",
+    "showing_to_of_mobile": "Showing <bold>{from}</bold> to <bold>{to}</bold> of <bold>{total}</bold>",
     "result_per_page": "Result per page"
   },
   "exchanges": {

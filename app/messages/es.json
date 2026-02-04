@@ -180,6 +180,7 @@
   },
   "paging": {
     "showing_to_of": "Mostrando <bold>{from}</bold> a <bold>{to}</bold> de <bold>{total}</bold> campañas",
+    "showing_to_of_mobile": "Mostrando <bold>{from}</bold> a <bold>{to}</bold> de <bold>{total}</bold>",
     "result_per_page": "Resultados por página"
   },
   "exchanges": {

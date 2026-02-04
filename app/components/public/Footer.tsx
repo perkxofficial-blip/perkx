@@ -16,16 +16,16 @@ export default async function Footer() {
              priority // load sớm cho SEO/LCP
            />
          </div>
-         <div className="col-md-4 hidden-footer">
+         <div className="col-md-4 hidden-mb">
            <h3 className="footer-title">{t('footer.platform')}</h3>
          </div>
-         <div className="col-md-4 hidden-footer">
+         <div className="col-md-4 hidden-mb">
            <h3 className="footer-title">{t('footer.resources')}</h3>
          </div>
        </div>
         <div className="row footer-info">
           <div className="col-md-4"><p>{t('footer.desc')}</p></div>
-          <div className="col-md-4 show-fotter">
+          <div className="col-md-4 show-mb">
             <h3 className="footer-title">{t('footer.platform')}</h3>
           </div>
           <div className="col-md-4">
@@ -34,7 +34,7 @@ export default async function Footer() {
               <li><a href="/calculator">{t('footer.profit_calculator')}</a></li>
             </ul>
           </div>
-          <div className="col-md-4 show-fotter">
+          <div className="col-md-4 show-mb">
             <h3 className="footer-title">{t('footer.resources')}</h3>
           </div>
           <div className="col-md-4">

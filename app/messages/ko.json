@@ -179,6 +179,7 @@
   },
   "paging": {
     "showing_to_of": "<bold>{from}</bold>부터 <bold>{to}</bold>까지 / 총 <bold>{total}</bold>개 캠페인",
+    "showing_to_of_mobile": "<bold>{from}</bold>부터 <bold>{to}</bold>까지 / 총 <bold>{total}</bold>",
     "result_per_page": "페이지당 결과 수"
   },
   "exchanges": {
