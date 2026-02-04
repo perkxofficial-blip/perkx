@@ -522,6 +522,29 @@
       "password_update_failed": "Gagal memperbarui password",
       "passwords_not_match": "Password baru tidak cocok",
       "fix_form_errors": "Harap perbaiki kesalahan dalam formulir"
+    },
+    "linked_exchanges": {
+      "title": "Exchange Tertaut",
+      "subtitle": "Kelola profil resmi Anda dan amankan akun afiliasi Anda",
+      "loading": "Memuat...",
+      "total_linked": "TOTAL TERTAUT",
+      "link_new_exchange": "Tautkan Exchange Baru",
+      "no_exchanges": "Belum ada exchange yang tertaut. Klik '+ Tautkan Exchange Baru' untuk mulai mendapatkan cashback",
+      "uid": "UID",
+      "link_again": "Tautkan Lagi",
+      "modal_link_title": "Tautkan Exchange Baru",
+      "modal_link_again_title": "Tautkan Exchange Lagi",
+      "exchange_label": "Exchange",
+      "select_exchange": "Pilih Exchange",
+      "uid_code_label": "Kode UID",
+      "uid_code_placeholder": "Masukkan UID exchange Anda",
+      "view_exchange_info": "Lihat informasi rebate exchange",
+      "submit": "Kirim",
+      "modal_delete_title": "Hapus Tautan",
+      "delete_confirm_message": "Apakah Anda yakin ingin menghapus tautan exchange ini?",
+      "delete_confirm_warning": "Tindakan ini tidak dapat dibatalkan",
+      "cancel": "Batal",
+      "delete": "Hapus"
     }
   }
 }

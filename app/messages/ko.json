@@ -520,5 +520,29 @@
       "password_update_failed": "비밀번호 업데이트 실패",
       "passwords_not_match": "새 비밀번호가 일치하지 않습니다",
       "fix_form_errors": "양식의 오류를 수정하세요"
-    }  }
+    },
+    "linked_exchanges": {
+      "title": "연결된 거래소",
+      "subtitle": "공식 프로필을 관리하고 제휴 계정을 보호하세요",
+      "loading": "로딩 중...",
+      "total_linked": "총 연결됨",
+      "link_new_exchange": "새 거래소 연결",
+      "no_exchanges": "아직 연결된 거래소가 없습니다. '+ 새 거래소 연결'을 클릭하여 캐시백을 시작하세요",
+      "uid": "UID",
+      "link_again": "다시 연결",
+      "modal_link_title": "새 거래소 연결",
+      "modal_link_again_title": "거래소 다시 연결",
+      "exchange_label": "거래소",
+      "select_exchange": "거래소 선택",
+      "uid_code_label": "UID 코드",
+      "uid_code_placeholder": "거래소 UID를 입력하세요",
+      "view_exchange_info": "거래소 리베이트 정보 보기",
+      "submit": "제출",
+      "modal_delete_title": "연결 제거",
+      "delete_confirm_message": "이 거래소 연결을 제거하시겠습니까?",
+      "delete_confirm_warning": "이 작업은 취소할 수 없습니다",
+      "cancel": "취소",
+      "delete": "삭제"
+    }
+  }
 }

@@ -522,6 +522,29 @@
       "password_update_failed": "Error al actualizar la contraseña",
       "passwords_not_match": "Las nuevas contraseñas no coinciden",
       "fix_form_errors": "Por favor corrija los errores en el formulario"
+    },
+    "linked_exchanges": {
+      "title": "Exchanges Vinculados",
+      "subtitle": "Administre su perfil oficial y asegure su cuenta de afiliado",
+      "loading": "Cargando...",
+      "total_linked": "TOTAL VINCULADOS",
+      "link_new_exchange": "Vincular Nuevo Exchange",
+      "no_exchanges": "Aún no hay exchanges vinculados. Haga clic en '+ Vincular Nuevo Exchange' para comenzar a ganar cashback",
+      "uid": "UID",
+      "link_again": "Vincular Nuevamente",
+      "modal_link_title": "Vincular Nuevo Exchange",
+      "modal_link_again_title": "Vincular Exchange Nuevamente",
+      "exchange_label": "Exchange",
+      "select_exchange": "Seleccionar Exchange",
+      "uid_code_label": "Código UID",
+      "uid_code_placeholder": "Ingrese su UID del exchange",
+      "view_exchange_info": "Ver información de reembolso del exchange",
+      "submit": "Enviar",
+      "modal_delete_title": "Eliminar Vínculo",
+      "delete_confirm_message": "¿Está seguro de que desea eliminar este vínculo de exchange?",
+      "delete_confirm_warning": "Esta acción no se puede deshacer",
+      "cancel": "Cancelar",
+      "delete": "Eliminar"
     }
   }
 }

@@ -15,6 +15,8 @@ export const endpoints = {
     profile: '/profile',
     updateProfile: '/profile',
     updatePassword: '/profile/password',
+    exchanges: '/user/exchanges',
+    linkExchange: '/user/exchanges/uid',
   },
 
   // Admin endpoints

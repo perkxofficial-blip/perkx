@@ -523,6 +523,29 @@
       "password_update_failed": "Failed to update password",
       "passwords_not_match": "New passwords do not match",
       "fix_form_errors": "Please fix the errors in the form"
+    },
+    "linked_exchanges": {
+      "title": "Linked Exchanges",
+      "subtitle": "Manage your official profile and secure your affiliate account",
+      "loading": "Loading...",
+      "total_linked": "TOTAL LINKED",
+      "link_new_exchange": "Link New Exchange",
+      "no_exchanges": "No exchanges linked yet. Click '+ Link New Exchange' to start earning cashback",
+      "uid": "UID",
+      "link_again": "Link Again",
+      "modal_link_title": "Link New Exchange",
+      "modal_link_again_title": "Link Exchange Again",
+      "exchange_label": "Exchange",
+      "select_exchange": "Select Exchange",
+      "uid_code_label": "UID Code",
+      "uid_code_placeholder": "Enter your exchange UID",
+      "view_exchange_info": "View exchange rebate information",
+      "submit": "Submit",
+      "modal_delete_title": "Remove Link",
+      "delete_confirm_message": "Are you sure you want to remove this exchange link?",
+      "delete_confirm_warning": "This action cannot be undone",
+      "cancel": "Cancel",
+      "delete": "Delete"
     }
   }
 }
