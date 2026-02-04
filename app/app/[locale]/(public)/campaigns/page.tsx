@@ -228,7 +228,7 @@ export default async function CampaignPage({ searchParams }: Props) {
                   </div>
                 </div>
               </div>
-              <div className="col-12 d-flex pagination-page show-sx">
+              <div className="col-12 d-flex pagination-page show-xs">
                 <Pagination pagination={pagination} />
               </div>
             </div>
