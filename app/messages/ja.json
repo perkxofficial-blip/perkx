@@ -518,6 +518,29 @@
       "password_update_failed": "パスワードの更新に失敗しました",
       "passwords_not_match": "新しいパスワードが一致しません",
       "fix_form_errors": "フォームのエラーを修正してください"
+    },
+    "linked_exchanges": {
+      "title": "リンクされた取引所",
+      "subtitle": "公式プロフィールを管理し、アフィリエイトアカウントを保護します",
+      "loading": "読み込み中...",
+      "total_linked": "合計リンク数",
+      "link_new_exchange": "新しい取引所をリンク",
+      "no_exchanges": "まだ取引所がリンクされていません。「+ 新しい取引所をリンク」をクリックしてキャッシュバックを開始してください",
+      "uid": "UID",
+      "link_again": "再リンク",
+      "modal_link_title": "新しい取引所をリンク",
+      "modal_link_again_title": "取引所を再リンク",
+      "exchange_label": "取引所",
+      "select_exchange": "取引所を選択",
+      "uid_code_label": "UIDコード",
+      "uid_code_placeholder": "取引所のUIDを入力してください",
+      "view_exchange_info": "取引所のリベート情報を表示",
+      "submit": "送信",
+      "modal_delete_title": "リンクを削除",
+      "delete_confirm_message": "この取引所リンクを削除してもよろしいですか？",
+      "delete_confirm_warning": "この操作は元に戻せません",
+      "cancel": "キャンセル",
+      "delete": "削除"
     }
   }
 }

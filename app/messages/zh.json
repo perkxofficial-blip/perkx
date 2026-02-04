@@ -518,6 +518,29 @@
       "password_update_failed": "密码更新失败",
       "passwords_not_match": "新密码不匹配",
       "fix_form_errors": "请修复表单中的错误"
+    },
+    "linked_exchanges": {
+      "title": "关联交易所",
+      "subtitle": "管理您的官方资料并保护您的联盟账户",
+      "loading": "加载中...",
+      "total_linked": "总关联数",
+      "link_new_exchange": "关联新交易所",
+      "no_exchanges": "尚未关联任何交易所。点击'+ 关联新交易所'开始赚取返现",
+      "uid": "UID",
+      "link_again": "重新关联",
+      "modal_link_title": "关联新交易所",
+      "modal_link_again_title": "重新关联交易所",
+      "exchange_label": "交易所",
+      "select_exchange": "选择交易所",
+      "uid_code_label": "UID代码",
+      "uid_code_placeholder": "输入您的交易所UID",
+      "view_exchange_info": "查看交易所返佣信息",
+      "submit": "提交",
+      "modal_delete_title": "移除关联",
+      "delete_confirm_message": "确定要移除此交易所关联吗？",
+      "delete_confirm_warning": "此操作无法撤销",
+      "cancel": "取消",
+      "delete": "删除"
     }
   }
 }
