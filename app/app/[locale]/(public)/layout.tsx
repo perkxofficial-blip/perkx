@@ -34,7 +34,7 @@ export default function PublicLayout({
       {/* Start of home-90795 Zendesk Widget script */}
       <Script
         id="ze-snippet"
-        src="https://static.zdassets.com/ekr/snippet.js?key=867454fa-55b5-4302-8707-bb2eb1a94690"
+        src={`https://static.zdassets.com/ekr/snippet.js?key=${process.env.NEXT_PUBLIC_ZENDESK_KEY}`}
         strategy="lazyOnload"
       />
       {/* End of home-90795 Zendesk Widget script */}

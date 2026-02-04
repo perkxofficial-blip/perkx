@@ -3,6 +3,15 @@ import {getTranslations} from "next-intl/server";
 import AuthButtons from "./AuthButtons";
 import Navigation from "./Navigation";
 
+const LANGUAGES = [
+  { code: 'en', key: 'language.en' },
+  { code: 'ko', key: 'language.ko' },
+  { code: 'zh', key: 'language.zh' },
+  { code: 'ja', key: 'language.ja' },
+  { code: 'id', key: 'language.id' },
+  { code: 'es', key: 'language.es' },
+] as const;
+
 export default async function Header() {
   const t = await getTranslations();
   return (
@@ -11,20 +20,9 @@ export default async function Header() {
       <header id="site-header" className="hero-banner site-header">
         <div className="container menu-section">
           <div className="row align-items-center">
-            <div className="menu-block col-md-8">
+            <div className="menu-block col-md-12 col-lg-8">
               <nav className="navbar navbar-expand-lg navbar-light" aria-label="Main navigation">
                 <div className="container-fluid">
-                  {/* Logo */}
-                  <a className="navbar-brand" href="/">
-                    <Image
-                      src="/images/logo.png"
-                      alt={t('meta.home.title')}
-                      width={123}
-                      height={41}
-                      priority
-                    />
-                  </a>
-
                   {/* Navbar toggler */}
                   <button
                     className="navbar-toggler"
@@ -37,7 +35,27 @@ export default async function Header() {
                   >
                     <span className="navbar-toggler-icon" />
                   </button>
+                  {/* Mobile logo */}
+                  <a className="navbar-brand mx-auto d-lg-none" href="/">
+                    <Image
+                      src="/images/logo.png"
+                      alt={t('meta.home.title')}
+                      width={97}
+                      height={32}
+                      priority
+                    />
+                  </a>
 
+                  {/* Desktop logo */}
+                  <a className="navbar-brand d-none d-lg-block" href="/">
+                    <Image
+                      src="/images/logo.png"
+                      alt={t('meta.home.title')}
+                      width={123}
+                      height={41}
+                      priority
+                    />
+                  </a>
                   <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <Navigation />
                   </div>
@@ -45,7 +63,7 @@ export default async function Header() {
               </nav>
             </div>
 
-            <div className="language-block col-md-4 d-flex justify-content-end">
+            <div className="language-block col-lg-4 d-flex justify-content-end">
               <div className="btn-group">
                 <button
                   type="button"
@@ -64,16 +82,13 @@ export default async function Header() {
 
 
                 <ul className="dropdown-menu" aria-label="Language selection">
-                  <li>
-                    <a className="dropdown-item" href="/en">
-                      {t("language.en")}
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/ko">
-                      {t("language.ko")}
-                    </a>
-                  </li>
+                  {LANGUAGES.map((lang) => (
+                    <li key={lang.code}>
+                      <a className="dropdown-item" href={`/${lang.code}`}>
+                        {t(lang.key)}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
 

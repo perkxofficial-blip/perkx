@@ -120,23 +120,272 @@
     }
   }
 }
-@media (max-width: 1024px) {
+
+.navbar-toggler-icon {
+  background-image: url("../../public/images/mobile/menu.svg");
+}
+.navbar-toggler{
+  border:none !important;
+  box-shadow: none;
+}
+.navbar-toggler:focus{
+  box-shadow: none !important;
+}
+.show-xs{
+  display: none;
+}
+@media (max-width: 992px) {
   .campaign-slide-item {
     width: 240px;
   }
-
+ .hidden-xs {
+   display: none !important;
+ }
+  .show-xs{
+    display: block;
+  }
   .campaign-card,.campaign-item {
     height: 320px;
   }
-}
+  .language-block {
+    display: none !important;
+  }
+  .navbar-collapse {
+    backdrop-filter: blur(15px);
+    background: #ffffff29;
+    margin: 0 -12px;
+    padding: 15px;
+    z-index: 9999;
+  }
+  .banner-section {
 
+    .get-started {
+      z-index: 2;
+      padding-top: 0 ;
+      h2 {
+        font-size: 36px;
+      }
+      h1 {
+        font-size: 36px;
+      }
+      p {
+        font-size: 16px;
+      }
+      .btn-get-started {
+        display: flex;
+        width: 314px;
+        padding: 12px 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+    .coin-1{
+      width: 50px;
+      left: 10%;
+      z-index: 1;
+      bottom: 35%;
+    }
+    .coin-2{
+      width: 100px;
+      left: 10%;
+      z-index: 1;
+      bottom: 50%;
+    }
+    .coin-3, .coin-4 {
+      display: none;
+    }
+  }
+  .img-bg {
+    height: auto !important;
+  }
+  .partner-section{
+    margin-top: 50px;
+  }
+  .how-perk-work{
+    background-position: right -150px bottom -40px;
+    padding-bottom: 30px;
+    .w-coin{
+      display: none;
+    }
+    .how-perk-work-title {
+      h2, span.perkx {
+        font-size: 32px;
+      }
+      p {
+        font-size: 16px;
+        margin-bottom: 0;
+      }
+    }
+    .timeline-wrapper{
+      padding: 30px 0;
+    }
+    .timeline-block {
+      width: 100%;
+      padding: 24px;
+      margin-left: 0;
+      .timeline-icon {
+        img {
+          width: 40px;
+          height: 40px;
+          max-width: none;
+        }
+        h5 {
+          font-size: 18px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+      height: 350px;
+    }
+    .timeline-item {
+      margin-bottom: 24px !important;
+      .timeline-bottom {
+        left: 17px;
+        height: 83px;
+      }
+      .tb-1 {
+        top: 37px;
+      }
+      .tb-2 {
+        top: 38px;
+        height: 75px;
+      }
+    }
+  }
+  .calculator{
+    padding: 30px 24px;
+    padding-bottom: 60px;
+  }
+  .calculator-block {
+    h2 {
+      font-size: 32px;
+      margin-top: 0;
+    }
+    span.perkx {
+      font-size: 32px;
+    }
+    p {
+      font-size: 20px;
+    }
+  }
+  .calc-img {
+    width: 126px !important;
+    height: 92px !important;
+    bottom: -25px !important;
+    left: -25px !important;
+  }
+  .calc-btn {
+    margin-bottom: 0 !important;
+    padding: 12px 20px !important;
+  }
+  .campaign-section{
+    padding: 60px 0;
+    h2 {
+      font-size: 28px;
+    }
+    .campaign-slider-wrapper{
+      padding: 32px 0;
+    }
+    .campaign-view{
+      justify-content: center;
+      font-size: 14px;
+    }
+  }
+  .footer{
+    padding: 24px 4px;
+    .footer-title, ul {
+      padding-left: 0;
+    }
+    .footer-info {
+      padding-bottom: 20px;
+    }
+    .copyright {
+      padding-top: 20px;
+    }
+    .text-md-end p{
+      text-align: left;
+      padding-top: 16px;
+    }
+  }
+  .login{
+    padding: 0 12px;
+    .login-form {
+      h1 {
+        margin-top: 24px;
+        font-size: 24PX;
+      }
+    }
+  }
+  .partner-exchanges{
+    padding: 30px 0;
+    overflow: hidden;
+    h2 {
+      font-size: 36px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .perk-primary-btn {
+      padding: 12px 20px;
+    }
+  }
+}
+@media (min-width: 993px) {
+
+}
+.show-fotter{
+  display: none;
+}
 @media (max-width: 768px) {
+
+  .hidden-footer{
+    display: none;
+  }
+  .show-fotter {
+    display: block;
+  }
   .campaign-slide-item {
     width: 200px;
   }
 
   .campaign-card,.campaign-item {
     height: 280px;
+  }
+  .banner-section .coin-2 {
+    width: 80px;
+  }
+  .coin-1, .coin-2{
+    left: 10px !important;
+  }
+  .bg-img{
+    background-position: -250px -50px !important;
+  }
+  .timeline-block {
+    margin-top: -80px !important;
+    height: 300px !important;
+  }
+  .how-perk-work-title {
+    p {
+      margin-bottom: 30px !important;
+    }
+  }
+  .timeline-item {
+    .timeline-bottom {
+      height: 70px;
+    }
+    .tb-1 {
+      top: 37px;
+    }
+    .tb-2 {
+      top: 38px;
+      height: 63px;
+    }
+  }
+  .timeline-wrapper{
+    padding: 30px!important;
   }
 }
 
