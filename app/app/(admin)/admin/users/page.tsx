@@ -100,9 +100,8 @@ export default function AdminUsersPage() {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(user =>
         user.email.toLowerCase().includes(query) ||
-        user.id.toString().includes(query) ||
-        user.country?.toLowerCase().includes(query) ||
-        user.referrer_email?.toLowerCase().includes(query)
+        user.referral_code?.toLowerCase().includes(query) ||
+        user.country?.toLowerCase().includes(query)
       );
     }
 
@@ -252,7 +251,7 @@ export default function AdminUsersPage() {
               <input
                 id="search"
                 type="text"
-                placeholder="Search by email, UID, or referrer, country..."
+                placeholder="Search by email, UID or country"
                 className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 transition-colors"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -353,23 +352,23 @@ export default function AdminUsersPage() {
               <table className="w-full">
                 <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email Address</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">PerkX UID</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Joined Date</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Referrer(email)</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status Badge</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Country</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+                    <th className="w-64 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email Address</th>
+                    <th className="w-32 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">PerkX UID</th>
+                    <th className="w-32 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Joined Date</th>
+                    <th className="w-48 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Referrer(email)</th>
+                    <th className="w-28 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status Badge</th>
+                    <th className="w-24 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Country</th>
+                    <th className="w-20 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   {paginatedUsers.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">{user.email}</td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{user.referral_code}</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(user.created_at)}</td>
-                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.referral_by?.email || '-'}</td>
-                      <td className="px-6 py-4">
+                      <td className="w-64 px-6 py-4 text-sm text-gray-900 dark:text-white">{user.email}</td>
+                      <td className="w-32 px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{user.referral_code}</td>
+                      <td className="w-32 px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(user.created_at)}</td>
+                        <td className="w-48 px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.referral_by?.email || '-'}</td>
+                      <td className="w-28 px-6 py-4">
                         <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${user.status?.toUpperCase() === 'ACTIVE'
                           ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
                           : user.status?.toUpperCase() === 'INACTIVE'
@@ -381,8 +380,8 @@ export default function AdminUsersPage() {
                           {user.status?.toUpperCase() === 'ACTIVE' ? 'Active' : user.status?.toUpperCase() === 'INACTIVE' ? 'Inactive' : user.status?.toUpperCase() === 'DEACTIVATE' ? 'Deactivated' : 'Unknown'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.country || '-'}</td>
-                      <td className="px-6 py-4">
+                      <td className="w-24 px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.country || '-'}</td>
+                      <td className="w-20 px-6 py-4">
                         <Link
                           href={getDetailUrl(user.id)}
                           className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"

@@ -96,7 +96,7 @@
     "desc": "今天开始您的加密货币联盟之旅。",
     "confirm_password": "确认密码",
     "referral_uid": "推荐人UID（可选）",
-    "referral_uid_placeholder": "例如：PX-8829",
+    "referral_uid_placeholder": "例如：26xx8829",
     "submit_btn": "创建账户",
     "already_account": "已有账户？",
     "sign_in": "登录"
@@ -225,8 +225,12 @@
       "subtitle": "活跃交易竞赛和奖励的高密度概览。"
     },
     "intro": {
-      "title": "PerkX是加密货币与福利相遇的地方 - 减去复杂的东西。",
-      "description": "我们不是DEX，不是CEX，也不是你的前任。我们嗅出每一个诱人的Web3交易，从隐藏的注册奖励到质押甜头和惊喜空投，并将它们整齐地放在一个地方。就像一个加密货币优惠券阿姨，但更酷。"
+      "titles": ["PerkX是加密货币与福利相遇的地方。", "减去复杂的东西。"],
+      "descriptions": [
+        "我们不是DEX，不是CEX，也不是你的前任。 ",
+        "我们嗅出每一个诱人的Web3交易，从隐藏的注册奖励到质押甜头和惊喜空投，并将它们整齐地放在一个地方。",
+        "就像一个加密货币优惠券阿姨，但更酷。"
+      ]
     },
     "sections": {
       "what_we_do": {

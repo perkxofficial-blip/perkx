@@ -477,13 +477,13 @@ export default function AdminCampaignsPage() {
               <table className="w-full">
                 <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Campaign Name</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Campaign Holder</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Period</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Timeline Status</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Publish</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Featured</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+                    <th className="w-64 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Campaign Name</th>
+                    <th className="w-40 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Campaign Holder</th>
+                    <th className="w-52 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Period</th>
+                    <th className="w-32 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Timeline Status</th>
+                    <th className="w-24 px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Publish</th>
+                    <th className="w-24 px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Featured</th>
+                    <th className="w-28 px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -491,12 +491,12 @@ export default function AdminCampaignsPage() {
                     const timelineStatus = getTimelineStatus(campaign);
                     return (
                       <tr key={campaign.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-medium">{campaign.title}</td>
-                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{campaign.exchange?.name || '-'}</td>
-                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                        <td className="w-64 px-6 py-4 text-sm text-gray-900 dark:text-white font-medium">{campaign.title}</td>
+                        <td className="w-40 px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{campaign.exchange?.name || '-'}</td>
+                        <td className="w-52 px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
                           {formatDate(campaign.launch_start)} - {formatDate(campaign.launch_end)}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="w-32 px-6 py-4">
                           <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${timelineStatus === 'ACTIVE'
                               ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                               : timelineStatus === 'UPCOMING'
@@ -506,7 +506,7 @@ export default function AdminCampaignsPage() {
                             {timelineStatus === 'ACTIVE' ? 'Active' : timelineStatus === 'UPCOMING' ? 'Upcoming' : 'Ended'}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-center">
+                        <td className="w-24 px-6 py-4 text-center">
                           <button
                             onClick={() => handleToggleStatus(campaign.id, 'is_active', campaign.is_active)}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
@@ -522,7 +522,7 @@ export default function AdminCampaignsPage() {
                             />
                           </button>
                         </td>
-                        <td className="px-6 py-4 text-center">
+                        <td className="w-24 px-6 py-4 text-center">
                           <button
                             onClick={() => handleToggleStatus(campaign.id, 'featured', campaign.featured)}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${campaign.featured ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
@@ -534,7 +534,7 @@ export default function AdminCampaignsPage() {
                             />
                           </button>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="w-28 px-6 py-4">
                           <div className="flex items-center justify-center gap-2">
                             <Link
                               href={getEditUrl(campaign.id)}

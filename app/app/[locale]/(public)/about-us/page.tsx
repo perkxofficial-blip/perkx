@@ -48,9 +48,14 @@ export default async function AboutUsPage({ params }: AboutUsPageProps) {
           {/* Intro Section with Image */}
           <div className="intro-wrapper">
             <div className="intro-text">
-              <h2>{t('intro.title')}</h2>
+              {t.raw('intro.titles').map((title: string, index: number) => (
+                <h2 key={index}>{title}</h2>
+              ))}
+              <br/>
               <div className="intro-description">
-                <p>{t('intro.description')}</p>
+                {t.raw('intro.descriptions').map((desc: string, index: number) => (
+                  <p key={index}>{desc}</p>
+                ))}
               </div>
             </div>
             <div className="intro-image">

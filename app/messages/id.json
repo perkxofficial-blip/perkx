@@ -96,7 +96,7 @@
     "desc": "Mulai perjalanan afiliasi kripto Anda hari ini.",
     "confirm_password": "Konfirmasi Password",
     "referral_uid": "UID Referral (Opsional)",
-    "referral_uid_placeholder": "Contoh: PX-8829",
+    "referral_uid_placeholder": "Contoh: 26xx8829",
     "submit_btn": "Buat Akun",
     "already_account": "Sudah punya akun?",
     "sign_in": "Masuk"
@@ -225,8 +225,12 @@
       "subtitle": "Gambaran padat kompetisi trading aktif dan hadiah."
     },
     "intro": {
-      "title": "PerkX adalah tempat kripto bertemu keuntungan - tanpa hal yang rumit.",
-      "description": "Kami bukan DEX, bukan CEX, bukan mantan Anda. Kami mencari setiap penawaran Web3 yang menarik, dari hadiah pendaftaran tersembunyi hingga pemanis staking dan airdrop kejutan dan menempatkannya dengan rapi di satu tempat. Seperti bibi kupon kripto, tapi lebih keren."
+      "titles": ["PerkX adalah tempat kripto bertemu keuntungan.", "Tanpa hal yang rumit."],
+      "descriptions": [
+        "Kami bukan DEX, bukan CEX, bukan mantan Anda. ",
+        "Kami mencari setiap penawaran Web3 yang menarik, dari hadiah pendaftaran tersembunyi hingga pemanis staking dan airdrop kejutan dan menempatkannya dengan rapi di satu tempat.",
+        "Seperti bibi kupon kripto, tapi lebih keren."
+      ]
     },
     "sections": {
       "what_we_do": {

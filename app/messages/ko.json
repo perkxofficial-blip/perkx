@@ -96,7 +96,7 @@
     "desc": "오늘 바로 암호화폐 제휴 여정을 시작하세요.",
     "confirm_password": "비밀번호 확인",
     "referral_uid": "추천인 UID (선택)",
-    "referral_uid_placeholder": "예: PX-8829",
+    "referral_uid_placeholder": "예: 26xx8829",
     "submit_btn": "계정 생성",
     "already_account": "이미 계정이 있으신가요?",
     "sign_in": "로그인"
@@ -224,8 +224,12 @@
       "subtitle": "활성 트레이딩 경쟁과 보상에 대한 고밀도 개요."
     },
     "intro": {
-      "title": "PerkX는 암호화폐와 혜택이 만나는 곳입니다 - 복잡한 것들은 빼고요.",
-      "description": "우리는 DEX도, CEX도, 당신의 전 애인도 아닙니다. 숨겨진 가입 보상부터 스테이킹 혜택, 깜짝 에어드롭까지 모든 Web3 거래를 찾아서 한 곳에 깔끔하게 정리합니다. 암호화폐 쿠폰 이모 같지만, 더 멋집니다."
+      "titles": ["PerkX는 암호화폐와 혜택이 만나는 곳입니다.", "복잡한 것들은 빼고요."],
+      "descriptions": [
+        "우리는 DEX도, CEX도, 당신의 전 애인도 아닙니다. ",
+        "숨겨진 가입 보상부터 스테이킹 혜택, 깜짝 에어드롭까지 모든 Web3 거래를 찾아서 한 곳에 깔끔하게 정리합니다.",
+        "암호화폐 쿠폰 이모 같지만, 더 멋집니다."
+      ]
     },
     "sections": {
       "what_we_do": {
