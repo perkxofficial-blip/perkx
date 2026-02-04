@@ -96,9 +96,9 @@ export class AuthService {
   }
 
   private generateReferralCode(): string {
-    const year = new Date().getFullYear();
+    const year = new Date().getFullYear().toString().slice(-2);
     const random = randomBytes(4).toString('hex').slice(0, 6);
-    return `${year}-${random}`;
+    return `${year}${random}`;
   }
 
   async validateUser(email: string, password: string): Promise<any> {

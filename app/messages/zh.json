@@ -96,7 +96,7 @@
     "desc": "今天开始您的加密货币联盟之旅。",
     "confirm_password": "确认密码",
     "referral_uid": "推荐人UID（可选）",
-    "referral_uid_placeholder": "例如：PX-8829",
+    "referral_uid_placeholder": "例如：26xx8829",
     "submit_btn": "创建账户",
     "already_account": "已有账户？",
     "sign_in": "登录"
