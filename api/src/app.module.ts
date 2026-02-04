@@ -3,9 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
+import exchangeConfiguration from './config/exchange-configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule as UserAuthModule } from './modules/user/auth/auth.module';
 import { ProfileModule } from './modules/user/profile/profile.module';
+import { ExchangesModule } from './modules/user/exchanges/exchanges.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { PublicModule } from './modules/public/public.module';
 import { MailModule } from './mail/mail.module';
@@ -15,7 +17,7 @@ import { MailModule } from './mail/mail.module';
     ConfigModule.forRoot({
       envFilePath: ['.env'],
       isGlobal: true,
-      load: [configuration],
+      load: [configuration, exchangeConfiguration],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -33,6 +35,7 @@ import { MailModule } from './mail/mail.module';
     }),
     UserAuthModule,
     ProfileModule,
+    ExchangesModule,
     AdminModule,
     PublicModule,
     MailModule
