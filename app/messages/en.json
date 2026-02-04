@@ -226,8 +226,12 @@
       "subtitle": "High-density overview of active trading competitions and rewards."
     },
     "intro": {
-      "title": "PerkX is where crypto meets perks - minus the complicated stuff.",
-      "description": "We’re not a DEX, not a CEX, not your ex. We sniff out every juicy Web3 deal, from hidden signup rewards to staking sweeteners and surprise airdrops and slap them neatly in one spot. Like a crypto coupon aunt, but cooler."
+      "titles": ["PerkX is where crypto meets perks.", "Minus the complicated stuff."],
+      "descriptions": [
+        "We’re not a DEX, not a CEX, not your ex. ",
+        "We sniff out every juicy Web3 deal, from hidden signup rewards to staking sweeteners and surprise airdrops and slap them neatly in one spot.",
+        "Like a crypto coupon aunt, but cooler."
+      ]
     },
     "sections": {
       "what_we_do": {
