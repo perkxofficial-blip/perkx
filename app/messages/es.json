@@ -225,8 +225,12 @@
       "subtitle": "Vista general de alta densidad de competiciones de trading activas y recompensas."
     },
     "intro": {
-      "title": "PerkX es donde las criptomonedas se encuentran con los beneficios - sin las cosas complicadas.",
-      "description": "No somos un DEX, no somos un CEX, no somos tu ex. Rastreamos cada oferta jugosa de Web3, desde recompensas de registro ocultas hasta endulzantes de staking y airdrops sorpresa y los colocamos ordenadamente en un solo lugar. Como una tía de cupones cripto, pero más cool."
+      "titles": ["PerkX es donde las criptomonedas se encuentran con los beneficios.", "Sin las cosas complicadas."],
+      "descriptions": [
+        "No somos un DEX, no somos un CEX, no somos tu ex. ",
+        "Rastreamos cada oferta jugosa de Web3, desde recompensas de registro ocultas hasta endulzantes de staking y airdrops sorpresa y los colocamos ordenadamente en un solo lugar.",
+        "Como una tía de cupones cripto, pero más cool."
+      ]
     },
     "sections": {
       "what_we_do": {

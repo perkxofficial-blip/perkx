@@ -225,8 +225,12 @@
       "subtitle": "Gambaran padat kompetisi trading aktif dan hadiah."
     },
     "intro": {
-      "title": "PerkX adalah tempat kripto bertemu keuntungan - tanpa hal yang rumit.",
-      "description": "Kami bukan DEX, bukan CEX, bukan mantan Anda. Kami mencari setiap penawaran Web3 yang menarik, dari hadiah pendaftaran tersembunyi hingga pemanis staking dan airdrop kejutan dan menempatkannya dengan rapi di satu tempat. Seperti bibi kupon kripto, tapi lebih keren."
+      "titles": ["PerkX adalah tempat kripto bertemu keuntungan.", "Tanpa hal yang rumit."],
+      "descriptions": [
+        "Kami bukan DEX, bukan CEX, bukan mantan Anda. ",
+        "Kami mencari setiap penawaran Web3 yang menarik, dari hadiah pendaftaran tersembunyi hingga pemanis staking dan airdrop kejutan dan menempatkannya dengan rapi di satu tempat.",
+        "Seperti bibi kupon kripto, tapi lebih keren."
+      ]
     },
     "sections": {
       "what_we_do": {
