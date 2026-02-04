@@ -332,20 +332,71 @@
       padding: 12px 20px;
     }
   }
+  .how-it-works-page {
+    h2 {
+      font-size: 44px;
+    }
+    p {
+      font-size: 20px;
+    }
+
+  }
+  .how-it-works-page .banner-section {
+    padding-bottom: 40px;
+  }
+  .mb--30px {
+    margin-top: -30px !important;
+  }
+  .about-us-page .banner-section{
+    padding-bottom: 0;
+  }
+  .exchange-avatar{
+    display: none;
+  }
+  .exchange-hero_title, .exchange-hero_title_gradient{
+    font-size: 44px !important;
+  }
+  .img-bg-exchanges {
+    height: 525px;
+    p {
+      font-size: 20px !important;
+    }
+  }
+  .calculator-hero-title{
+    font-size: 44px !important;
+  }
+  .calculator-hero-content {
+    padding: 40px 0 !important;
+  }
+  .calculator-hero-subtitle {
+    font-size: 20px;
+  }
+  .calculator-section {
+    padding: 0;
+  }
+  .calculator-card-body {
+    padding: 16px;
+  }
+  .calculator-inputs .input-group .input-label {
+    font-size: 12px;
+  }
+  .calculator-main-content {
+    gap: 30;
+  }
 }
 @media (min-width: 993px) {
 
 }
-.show-fotter{
-  display: none;
+.show-mb{
+  display: none !important;
 }
 @media (max-width: 768px) {
 
-  .hidden-footer{
-    display: none;
+  .hidden-mb{
+    display: none !important;
   }
-  .show-fotter {
-    display: block;
+  .show-mb {
+    display: block !important;
   }
   .campaign-slide-item {
     width: 200px;
@@ -386,6 +437,15 @@
   }
   .timeline-wrapper{
     padding: 30px!important;
+  }
+  .calculator-container{
+    margin-top: 0 !important;
+  }
+  .calculator-main-content {
+    display: inline-block;
+  }
+  .calculator-left-section{
+    margin-bottom: 30px;
   }
 }
 

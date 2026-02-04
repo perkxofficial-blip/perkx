@@ -129,6 +129,7 @@
 // Responsive Design
 @media (max-width: 1200px) {
   .how-it-works-page {
+    padding-bottom: 0;
     .get-started {
       h1 {
         font-size: 56px;
@@ -173,11 +174,11 @@
   .how-it-works-page {
     .get-started {
       h1 {
-        font-size: 36px;
+        font-size: 44px;
       }
 
       p {
-        font-size: 18px;
+        font-size: 20px;
         margin-top: 16px;
       }
     }
@@ -185,7 +186,7 @@
 
   .steps-section {
     padding: 40px 0;
-
+    padding-top: 0;
     .step-item {
       flex-direction: column !important;
       gap: 24px !important;
@@ -214,11 +215,11 @@
   .how-it-works-page {
     .get-started {
       h1 {
-        font-size: 28px;
+        font-size: 44px;
       }
 
       p {
-        font-size: 16px;
+        font-size: 20px;
       }
     }
   }
