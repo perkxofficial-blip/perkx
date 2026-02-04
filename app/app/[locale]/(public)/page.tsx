@@ -55,7 +55,6 @@ async function getLandingData() {
   } catch {
     // Handle errors silently
   }
-  console.log("Landing Data:", result);
   return result;
 }
 
@@ -264,7 +263,7 @@ export default async function LandingPage() {
               <div className="col-md-8">
                 <h2>{t('home.exclusive_campaigns')}</h2>
               </div>
-              <div className="col-md-4 campaign-view">
+              <div className="col-md-4 campaign-view hidden-xs">
                 <a href="/campaigns">{t('home.view_all_campaigns')}</a>
                 <Image
                   src="/images/arrow-right-s-line.svg"
@@ -276,6 +275,18 @@ export default async function LandingPage() {
               </div>
             </div>
             <CampaignSection campaigns={data.campaigns || []}/>
+            <div className="row">
+              <div className="col-md-12 campaign-view show-xs">
+                <a href="/campaigns">{t('home.view_all_campaigns')}</a>
+                <Image
+                  src="/images/arrow-right-s-line.svg"
+                  alt="arrow right line"
+                  width={20}
+                  height={20}
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
           </div>
         </section>
       )}

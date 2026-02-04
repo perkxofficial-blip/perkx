@@ -16,22 +16,26 @@ export default async function Footer() {
              priority // load sớm cho SEO/LCP
            />
          </div>
-         <div className="col-md-4">
+         <div className="col-md-4 hidden-xs">
            <h3 className="footer-title">{t('footer.platform')}</h3>
-
          </div>
-         <div className="col-md-4">
+         <div className="col-md-4 hidden-xs">
            <h3 className="footer-title">{t('footer.resources')}</h3>
-
          </div>
        </div>
         <div className="row footer-info">
           <div className="col-md-4"><p>{t('footer.desc')}</p></div>
+          <div className="col-md-4 show-xs">
+            <h3 className="footer-title">{t('footer.platform')}</h3>
+          </div>
           <div className="col-md-4">
             <ul>
               <li><a href="/exchanges">{t('footer.exchange_rebates')}</a></li>
               <li><a href="/calculator">{t('footer.profit_calculator')}</a></li>
             </ul>
+          </div>
+          <div className="col-md-4 show-xs">
+            <h3 className="footer-title">{t('footer.resources')}</h3>
           </div>
           <div className="col-md-4">
             <ul>
