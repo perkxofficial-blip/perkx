@@ -1,0 +1,522 @@
+{
+  "meta": {
+    "home": {
+      "title": "PerkX | Maksimalkan Rebate Trading Anda",
+      "description": "Maksimalkan rebate trading Anda di bursa global dengan PerkX. Platform cashback profesional yang dibangun untuk trader volume tinggi.",
+      "og_title": "PerkX – Maksimalkan Rebate Trading Anda",
+      "og_description": "Dapatkan cashback di setiap perdagangan. Bergabunglah dengan ribuan trader profesional yang menggunakan PerkX untuk meningkatkan reward trading mereka."
+    }
+  },
+  "menu": {
+    "how_it_works": "Cara Kerja",
+    "exchanges": "Bursa",
+    "calculator": "Kalkulator",
+    "campaigns": "Kampanye",
+    "about_us": "Tentang Kami",
+    "login": "Masuk",
+    "register": "Daftar",
+    "logout": "Keluar",
+    "dashboard": "Dashboard",
+    "profile": "Profil",
+    "settings": "Pengaturan",
+    "users": "Pengguna",
+    "home": "Beranda",
+    "readMore": "Baca Selengkapnya"
+  },
+  "page": {
+    "notFound": "Halaman tidak ditemukan",
+    "register": "Daftar"
+  },
+  "language": {
+    "en": "Inggris",
+    "ko": "Korea",
+    "zh": "Mandarin",
+    "ja": "Jepang",
+    "id": "Indonesia",
+    "es": "Spanyol"
+  },
+  "home": {
+    "meta": {
+      "title": "Beranda | PerkX",
+      "description": "Maksimalkan rebate trading Anda di bursa global dengan PerkX. Platform cashback profesional yang dibangun untuk trader volume tinggi."
+    },
+    "intro_1": "Keuntungan tidak diberikan.",
+    "intro_2": "Tetapi dinegosiasikan.",
+    "hero_section_description": "Kami mendapatkan rebate biaya terbaik, airdrop, dan diskon dalam satu portal — karena setiap perdagangan layak mendapat kesepakatan terbaik.",
+    "get_started_now": "Mulai Sekarang",
+    "coin": "Koin dekoratif",
+    "how_perkx_works": "Cara Kerja <perkx>PerkX</perkx>",
+    "how_perkx_works_description": "Mulai dalam tiga langkah sederhana dan mulai dapatkan cashback dari trading Anda",
+    "timeline1": "1. Daftar akun PerkX",
+    "timeline2": "2. Daftar/Hubungkan akun bursa Anda",
+    "timeline2_desc": "Buat akun bursa melalui tautan yang disediakan",
+    "timeline3": "3. Mulai Trading",
+    "calculator_title": "Lihat Apa yang <perkx>Anda Lewatkan</perkx>",
+    "calculator_desc": "Hitung potensi pendapatan cashback Anda berdasarkan volume trading Anda.",
+    "calculator_btn": "Hitung Cashback",
+    "exclusive_campaigns": "Kampanye Eksklusif",
+    "view_all_campaigns": "Lihat semua kampanye",
+    "join_now": "Gabung Sekarang",
+    "partner_exchanges": "Bursa Mitra",
+    "partner_exchanges_desc": "Kemitraan langsung yang menawarkan tingkat rebate terverifikasi tertinggi di industri.",
+    "table": {
+      "exchanges": "Bursa",
+      "product": "Produk",
+      "discount_rate": "Tingkat Diskon",
+      "default_taker": "Biaya Taker/Maker Default",
+      "final_taker": "Biaya Taker/Maker Akhir",
+      "ave_rebate": "Rata-rata Rebate untuk Vol 1M",
+      "action": "aksi"
+    },
+    "view_all_partners": "Lihat Semua Mitra"
+  },
+  "footer": {
+    "desc": "Standar global untuk cashback trading kripto. Membantu trader institusional dan ritel memaksimalkan efisiensi modal.",
+    "platform": "Platform",
+    "exchange_rebates": "Rebate Bursa",
+    "profit_calculator": "Kalkulator Profit",
+    "resources": "sumber daya",
+    "help_center": "Pusat Bantuan",
+    "terms_of_use": "Syarat Penggunaan",
+    "copyright": "© 2026 PerkX Global LTD.",
+    "follow_us": "Ikuti Kami"
+  },
+  "login": {
+    "desc": "Masukkan email dan password Anda untuk masuk!",
+    "email": "Alamat Email",
+    "email_placeholder": "nama@email.com",
+    "password": "Password",
+    "password_placeholder": "Masukkan password Anda",
+    "forgot_password": "Lupa password?",
+    "create_account": "Belum punya akun?",
+    "sign_up": "Daftar"
+  },
+  "register": {
+    "title": "Buat Akun Anda",
+    "desc": "Mulai perjalanan afiliasi kripto Anda hari ini.",
+    "confirm_password": "Konfirmasi Password",
+    "referral_uid": "UID Referral (Opsional)",
+    "referral_uid_placeholder": "Contoh: PX-8829",
+    "submit_btn": "Buat Akun",
+    "already_account": "Sudah punya akun?",
+    "sign_in": "Masuk"
+  },
+  "verify_email": {
+    "title": "Verifikasi Email Anda",
+    "title_otp": "Verifikasi Dua Faktor",
+    "desc": "Silakan periksa inbox Anda untuk mengaktifkan akun Anda.",
+    "desc_otp": "Kode verifikasi 6 digit telah dikirim ke email Anda.",
+    "resend": "Kirim Ulang",
+    "confirm": "Konfirmasi",
+    "back_to_login": "Kembali ke Login"
+  },
+  "forgot_password": {
+    "title": "Lupa Password",
+    "desc": "Masukkan alamat email Anda dan kami akan mengirimkan tautan untuk mereset password Anda",
+    "btn": "Kirim"
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "desc": "Masukkan password baru Anda untuk mereset!",
+    "btn": "Reset"
+  },
+  "validate": {
+    "email_required": "Email wajib diisi.",
+    "email_invalid": "Format email tidak valid.",
+    "email_already_exists": "Email ini sudah terdaftar.",
+    "password_required": "Password wajib diisi.",
+    "password_string": "Password harus berupa string.",
+    "password_min_8": "Password harus minimal 8 karakter.",
+    "password_max_16": "Password tidak boleh melebihi 16 karakter.",
+    "password_invalid_format": "Password harus minimal 8 karakter, 1 angka, dan 1 huruf kapital.",
+    "confirm_password_required": "Konfirmasi password wajib diisi.",
+    "confirm_password_string": "Konfirmasi password harus berupa string.",
+    "password_not_match": "Password dan konfirmasi password tidak cocok.",
+    "referral_string": "Kode referral harus berupa string.",
+    "invalid_referral_uid": "Kode referral tidak valid.",
+    "unknown_error": "Terjadi kesalahan. Silakan coba lagi nanti."
+  },
+  "message": {
+    "email_not_verified": "Email tidak ada atau sudah terverifikasi",
+    "resend_email_success": "Email verifikasi telah berhasil dikirim ulang. Silakan periksa inbox Anda.",
+    "resend_email_failed": "Gagal mengirim ulang email verifikasi. Silakan coba lagi nanti.",
+    "invalid_credentials": "Kredensial pengguna salah.",
+    "please_verify_your_email": "Silakan verifikasi email Anda",
+    "account_banned": "Akun Anda diblokir, silakan hubungi admin untuk bantuan",
+    "verify_otp_failed": "Kode verifikasi tidak valid. Silakan coba lagi.",
+    "resend_otp_success": "Kode verifikasi baru Anda sedang dikirim. Silakan periksa inbox Anda.",
+    "resend_otp_failed": "Terjadi kesalahan saat mengirim ulang kode Anda. Silakan coba lagi.",
+    "forgot_email_success": "Email pemulihan password telah berhasil dikirim. Silakan periksa inbox Anda (termasuk Spam).",
+    "forgot_email_failed": "Gagal mengirim email pemulihan password. Silakan verifikasi alamat email Anda atau coba lagi nanti.",
+    "reset_password_success": "Password Anda telah berhasil direset. Anda sekarang dapat masuk dengan password baru Anda.",
+    "token_invalid": "Token reset ini tidak valid. Silakan minta reset password baru.",
+    "token_expire": "Token reset ini telah kedaluwarsa. Silakan minta reset password baru."
+  },
+  "campaign": {
+    "meta": {
+      "title": "Kampanye | PerkX",
+      "description": "Gambaran padat kompetisi trading aktif dan hadiah"
+    },
+    "title": "Kampanye Eksklusif <perkx>PerkX</perkx>",
+    "desc": "Gambaran padat kompetisi trading aktif dan hadiah.",
+    "campaign_holder": "Penyelenggara Kampanye",
+    "all_campaign_holder": "Semua Penyelenggara Kampanye",
+    "category": "Kategori",
+    "all_category": "Semua Kategori",
+    "campaign_status": "Status Kampanye",
+    "all_campaign_status": "Semua Status Kampanye",
+    "category_all_user": "Semua Pengguna",
+    "category_new_user": "Pengguna Baru",
+    "status_active": "Aktif",
+    "status_upcoming": "Akan Datang",
+    "status_expired": "Berakhir",
+    "btn_name": "Lihat Detail",
+    "breadcrumb_home": "Beranda",
+    "breadcrumb_campaigns": "Kampanye",
+    "join_campaign": "Gabung Kampanye",
+    "not_found_title": "Kampanye Tidak Ditemukan",
+    "not_found_description": "Kampanye yang Anda cari tidak ada",
+    "no_campaign_not_found": "Tidak ada kampanye yang ditemukan untuk pilihan ini"
+  },
+  "paging": {
+    "showing_to_of": "Menampilkan <bold>{from}</bold> hingga <bold>{to}</bold> dari <bold>{total}</bold> kampanye",
+    "result_per_page": "Hasil per halaman"
+  },
+  "exchanges": {
+    "meta": {
+      "title": "Bursa | PerkX",
+      "description": "Bandingkan dan bergabung dengan bursa global terbaik dengan PerkX"
+    },
+    "hero_title_part1": "Maksimalkan Kripto Anda",
+    "hero_title_gradient": "Cashback Trading.",
+    "hero_subtitle": "Bandingkan dan bergabung dengan bursa global terbaik dengan PerkX.",
+    "get_started": "Mulai Sekarang"
+  },
+  "calculator": {
+    "meta": {
+      "title": "Kalkulator | PerkX",
+      "description": "Hitung potensi pendapatan cashback Anda berdasarkan volume trading Anda"
+    },
+    "hero_title_part1": "Lihat Apa yang ",
+    "hero_title_gradient": "Anda Lewatkan",
+    "hero_subtitle": "Hitung potensi pendapatan cashback Anda berdasarkan volume trading Anda",
+    "volume_title": "Volume Trading Bulanan USDT",
+    "select_exchange": "Pilih Bursa",
+    "select_product": "Pilih produk",
+    "select_fee_type": "Jenis Biaya",
+    "product_spot": "Spot",
+    "product_futures": "Futures",
+    "product_margin": "Margin",
+    "fee_taker": "Taker",
+    "fee_maker": "Maker",
+    "monthly_cashback": "CASHBACK BULANAN",
+    "annual_savings": "PENGHEMATAN TAHUNAN",
+    "claim_rebate_btn": "Klaim Rebate Ini Sekarang",
+    "choose_exchange": "Pilih bursa"
+  },
+  "about": {
+    "meta": {
+      "title": "Tentang Kami | PerkX",
+      "description": "Pelajari lebih lanjut tentang PerkX dan misi kami"
+    },
+    "hero": {
+      "title": "Tentang Kami",
+      "subtitle": "Gambaran padat kompetisi trading aktif dan hadiah."
+    },
+    "intro": {
+      "title": "PerkX adalah tempat kripto bertemu keuntungan - tanpa hal yang rumit.",
+      "description": "Kami bukan DEX, bukan CEX, bukan mantan Anda. Kami mencari setiap penawaran Web3 yang menarik, dari hadiah pendaftaran tersembunyi hingga pemanis staking dan airdrop kejutan dan menempatkannya dengan rapi di satu tempat. Seperti bibi kupon kripto, tapi lebih keren."
+    },
+    "sections": {
+      "what_we_do": {
+        "title": "Apa yang Sebenarnya Kami Lakukan:",
+        "items": [
+          "Mengumpulkan semua penawaran CeFi + DeFi, promo, hadiah, dan bonus di satu tempat",
+          "Menerjemahkan semua tulisan kecil itu menjadi sesuatu yang mungkin benar-benar dipahami teman non-kripto Anda",
+          "Membantu Anda merasa seperti jenius kripto tanpa mengangkat jari (atau menandatangani 5 transaksi MetaMask)"
+        ]
+      },
+      "what_we_dont_do": {
+        "title": "Apa yang Tidak Kami Lakukan:",
+        "items": [
+          "Menangani dana Anda (Anda menyimpan koin Anda, kami tidak ikut campur)",
+          "Meminta Anda untuk \"all in\" atau \"diamond hand\" apa pun",
+          "Memaksa Anda bergabung dengan kultus Discord aneh untuk membuka manfaat"
+        ]
+      }
+    },
+    "footer_note": {
+      "title": "Kami percaya Web3 seharusnya tidak terasa seperti memecahkan kode Matrix.",
+      "description": "Seharusnya terasa seperti berjalan ke buffet di mana semuanya sudah dibayar dengan cashback gratis dan bonus referral yang tidak Anda tahu Anda miliki.",
+      "tldr": "Singkatnya: Kami menemukan keuntungan. Anda mengklaimnya. Semua orang senang.",
+      "tldr_note": "(Kecuali orang yang masih membayar biaya penuh. RIP.)"
+    }
+  },
+  "how-it-works": {
+    "meta": {
+      "title": "Cara Kerja | PerkX",
+      "description": "Pelajari cara kerja cashback reward PerkX"
+    },
+    "hero": {
+      "title_part1": "Buka Kunci Trading yang Lebih Baik ",
+      "title_gradient": "Perkx",
+      "subtitle": "Ikuti tiga langkah sederhana untuk membuka biaya dan hadiah yang lebih baik di setiap perdagangan."
+    },
+    "steps": {
+      "step1": {
+        "title": "1. Daftar akun PerkX",
+        "description": "Buat akun PerkX gratis Anda dalam waktu kurang dari 1 menit. Cukup masukkan email Anda dan atur password untuk memulai."
+      },
+      "step2": {
+        "title": "2. Buat akun bursa melalui tautan yang disediakan",
+        "description": "Buat akun bursa melalui tautan yang disediakan"
+      },
+      "step3": {
+        "title": "3. Mulai Trading",
+        "description": "Buat akun PerkX gratis Anda dalam waktu kurang dari 1 menit. Cukup masukkan email Anda dan atur password untuk memulai."
+      }
+    }
+  },
+  "terms-of-use": {
+    "meta": {
+      "title": "Syarat Penggunaan PerkX",
+      "description": "Baca syarat penggunaan untuk PerkX"
+    },
+    "hero": {
+      "title": "Syarat Penggunaan PerkX",
+      "subtitle": ""
+    },
+    "effective_date": "Tanggal Berlaku:",
+    "intro": {
+      "paragraph1": "Syarat Penggunaan ini (\"Syarat\") menetapkan hak, kewajiban, dan tanggung jawab antara PerkX dan pengguna Layanan. Layanan ini dioperasikan oleh [Nama Legal Perusahaan], sebuah perusahaan yang didirikan di [Yurisdiksi] (\"PerkX,\" \"kami,\" atau \"milik kami\").",
+      "paragraph2": "Dengan mengakses atau menggunakan situs web PerkX, aplikasi, atau layanan terkait (secara kolektif, \"Layanan\"), Anda (\"Pengguna,\" \"Anda,\" atau \"milik Anda\") mengkonfirmasi bahwa Anda telah membaca, memahami, dan setuju untuk terikat secara hukum oleh Syarat ini dan Kebijakan Privasi kami. Jika Anda tidak setuju, Anda tidak boleh mengakses atau menggunakan Layanan."
+    },
+    "sections": {
+      "definitions": {
+        "title": "1. Definisi",
+        "intro": "Untuk tujuan Syarat ini:",
+        "items": [
+          "<strong>Akun</strong> berarti akun pengguna PerkX yang terdaftar.",
+          "<strong>Anggota</strong> berarti Pengguna yang telah berhasil mendaftar Akun.",
+          "<strong>Non-Anggota</strong> berarti Pengguna yang mengakses Layanan tanpa pendaftaran.",
+          "<strong>Bursa Mitra</strong> berarti bursa aset virtual pihak ketiga, platform trading, atau penyedia layanan yang menawarkan manfaat berbasis referral, rebate, hadiah, atau promosi berdasarkan syarat mereka sendiri.",
+          "<strong>Kode Referral / Tautan Referral</strong> berarti kode atau tautan yang digunakan oleh Bursa Mitra untuk menghubungkan pendaftaran atau aktivitas Pengguna ke PerkX atau ke Anggota lain.",
+          "<strong>Manfaat</strong> berarti rebate, diskon biaya, hadiah, komisi, insentif kampanye, atau keuntungan serupa yang disediakan <strong>hanya oleh Bursa Mitra</strong>.",
+          "<strong>UID</strong> berarti identifikasi pengguna yang dikeluarkan oleh Bursa Mitra."
+        ]
+      },
+      "eligibility": {
+        "title": "2. Kelayakan",
+        "items": [
+          "Anda harus berusia minimal <strong>enam belas (16) tahun</strong>, atau usia legal minimum yang diperlukan di yurisdiksi Anda, mana yang lebih tinggi.",
+          "Anda harus memiliki kapasitas hukum penuh untuk membuat perjanjian yang mengikat.",
+          "Anda tidak boleh dilarang menggunakan Layanan berdasarkan hukum, peraturan, sanksi, atau aturan Bursa Mitra yang berlaku.",
+          "Layanan ini tidak ditujukan untuk Pengguna yang berada di yurisdiksi di mana akses atau penggunaan akan ilegal atau dibatasi."
+        ]
+      },
+      "registration": {
+        "title": "3. Pendaftaran dan Manajemen Akun",
+        "items": [
+          "Untuk mengakses fitur tertentu, Anda mungkin diminta untuk mendaftar sebagai Anggota dan membuat Akun.",
+          "Anda setuju untuk memberikan informasi yang akurat, lengkap, dan terkini.",
+          "Anda bertanggung jawab penuh untuk menjaga kerahasiaan kredensial Akun Anda dan untuk semua aktivitas yang dilakukan di bawah Akun Anda.",
+          "Anda harus segera memberi tahu PerkX jika Anda mencurigai akses tidak sah atau pelanggaran keamanan.",
+          "PerkX tidak bertanggung jawab atas kerugian yang diakibatkan oleh kegagalan Anda untuk menjaga kredensial Akun Anda."
+        ]
+      },
+      "nature_of_service": {
+        "title": "4. Sifat Layanan",
+        "items": [
+          "<strong>Platform referral dan informasi saja.</strong> PerkX menyediakan tautan referral, daftar informasi, dan alat yang memungkinkan Pengguna menemukan dan mengakses penawaran Bursa Mitra.",
+          "<strong>Tidak ada cashback atau hadiah yang disediakan oleh PerkX.</strong> PerkX <strong>tidak</strong> menerima, menyimpan, mendistribusikan, atau membayar cashback, rebate, hadiah, atau komisi kepada Pengguna.",
+          "<strong>Tidak ada kontrol atas Bursa Mitra.</strong> Semua Manfaat disediakan, dihitung, dan dikelola <strong>hanya oleh Bursa Mitra</strong>, di bawah sistem dan aturan mereka sendiri."
+        ]
+      },
+      "no_custody": {
+        "title": "4A. Tidak Ada Kustodian, Tidak Ada Pembayaran, Tidak Ada Transfer Uang",
+        "items": [
+          "PerkX <strong>tidak</strong> menyimpan, menerima, menyimpan, mentransmisikan, mengelola, mengontrol, atau mengkustodikan mata uang fiat, aset virtual, aset digital, stablecoin, atau nilai lainnya atas nama Pengguna.",
+          "PerkX <strong>tidak</strong> memproses pembayaran, pembayaran, penyelesaian, atau penarikan dalam bentuk apa pun.",
+          "PerkX <strong>bukan</strong> bank, lembaga pembayaran, bisnis layanan uang, penyedia pengiriman uang, penerbit e-money, broker, dealer, atau penasihat investasi.",
+          "Semua Manfaat diterbitkan langsung oleh Bursa Mitra ke akun Bursa Mitra Pengguna.",
+          "PerkX tidak memiliki wewenang untuk mengakses, membekukan, membalikkan, menunda, clawback, atau mempengaruhi dana atau Manfaat Pengguna dengan cara apa pun."
+        ]
+      },
+      "partner_offers": {
+        "title": "4B. Penawaran Mitra dan Penafian Akurasi",
+        "items": [
+          "Informasi yang ditampilkan mengenai Bursa Mitra atau Manfaat disediakan untuk <strong>tujuan informasi umum dan pemasaran saja</strong>.",
+          "Penawaran Bursa Mitra dapat berubah, kedaluwarsa, ditangguhkan, atau dibatasi wilayah kapan saja tanpa pemberitahuan.",
+          "PerkX tidak menjamin:",
+          "Dalam hal ada ketidaksesuaian, <strong>syarat Bursa Mitra akan berlaku</strong>.",
+          "Daftar Bursa Mitra tidak menyiratkan dukungan, kemitraan, agensi, atau jaminan."
+        ],
+        "sub_items": [
+          "akurasi atau kelengkapan informasi penawaran,",
+          "kelayakan untuk Manfaat apa pun, atau",
+          "atribusi referral yang berhasil."
+        ]
+      },
+      "partner_exchanges": {
+        "title": "5. Bursa Mitra dan Manfaat",
+        "items": [
+          "Penggunaan Anda terhadap Bursa Mitra apa pun diatur hanya oleh syarat, kebijakan, dan persyaratan kepatuhan Bursa Mitra tersebut.",
+          "Bursa Mitra menentukan:",
+          "PerkX tidak bertanggung jawab atas keputusan Bursa Mitra atau kegagalan sistem."
+        ],
+        "sub_items": [
+          "kelayakan untuk Manfaat,",
+          "aturan atribusi,",
+          "metode perhitungan,",
+          "jadwal pembayaran, dan",
+          "pembalikan atau clawback."
+        ]
+      },
+      "uid_linking": {
+        "title": "6. Tautan UID dan Atribusi",
+        "items": [
+          "Jika tautan UID didukung, Pengguna hanya dapat menautkan UID yang menjadi milik mereka.",
+          "Atribusi tergantung sepenuhnya pada logika pelacakan Bursa Mitra dan sistem teknis.",
+          "PerkX dapat menolak atau menghapus tautan UID jika dicurigai ada penyalahgunaan atau penyalahgunaan."
+        ]
+      },
+      "prohibited_conduct": {
+        "title": "7. Perilaku Terlarang",
+        "intro": "Pengguna tidak boleh:",
+        "items": [
+          "Menyalahgunakan sistem referral atau Manfaat melalui wash trading, self-trading, atau perilaku manipulatif.",
+          "Menggunakan bot, crawler, atau alat otomatis tanpa otorisasi.",
+          "Mencoba akses tidak sah, peretasan, atau pengujian keamanan.",
+          "Memberikan informasi palsu atau menyamar sebagai orang lain.",
+          "Melanggar syarat Bursa Mitra atau hukum yang berlaku.",
+          "Mengganggu operasi Layanan atau akses Pengguna lain."
+        ],
+        "conclusion": "PerkX dapat menyelidiki pelanggaran dan mengambil tindakan yang sesuai."
+      },
+      "service_availability": {
+        "title": "8. Ketersediaan dan Modifikasi Layanan",
+        "items": [
+          "Layanan disediakan berdasarkan upaya terbaik tanpa jaminan ketersediaan tanpa gangguan.",
+          "PerkX dapat menangguhkan, memodifikasi, atau menghentikan bagian mana pun dari Layanan karena alasan operasional, hukum, atau teknis.",
+          "Bursa Mitra dapat ditambahkan atau dihapus kapan saja."
+        ]
+      },
+      "no_investment_advice": {
+        "title": "9. Tidak Ada Nasihat Investasi; Pengungkapan Risiko",
+        "items": [
+          "PerkX tidak memberikan nasihat keuangan, investasi, pajak, atau hukum.",
+          "Trading aset digital melibatkan risiko yang signifikan, termasuk kehilangan dana.",
+          "Bursa Mitra beroperasi secara independen dan dapat mengalami pemadaman, perubahan kebijakan, atau kebangkrutan."
+        ]
+      },
+      "intellectual_property": {
+        "title": "10. Kekayaan Intelektual",
+        "items": [
+          "Semua hak kekayaan intelektual dalam Layanan adalah milik PerkX atau pemberi lisensinya.",
+          "Pengguna menerima lisensi terbatas, non-eksklusif, dan dapat dibatalkan untuk menggunakan Layanan.",
+          "Pengguna tidak boleh menyalin, memodifikasi, mendistribusikan, atau merekayasa balik Layanan tanpa izin."
+        ]
+      },
+      "suspension_termination": {
+        "title": "11. Penangguhan dan Penghentian",
+        "items": [
+          "Pengguna dapat berhenti menggunakan Layanan kapan saja.",
+          "PerkX dapat menangguhkan atau menghentikan akses jika Pengguna melanggar Syarat ini, hukum yang berlaku, atau aturan Bursa Mitra.",
+          "Penghentian akses PerkX tidak mempengaruhi Manfaat Bursa Mitra yang sudah diterbitkan atau ditolak."
+        ]
+      },
+      "disclaimers": {
+        "title": "12. Penafian",
+        "items": [
+          "Layanan disediakan \"sebagaimana adanya\" dan \"sebagaimana tersedia.\"",
+          "PerkX menafikan semua jaminan, termasuk kelayakan untuk diperdagangkan dan kesesuaian untuk tujuan tertentu.",
+          "PerkX tidak menjamin kinerja, akurasi, atau ketersediaan Bursa Mitra."
+        ]
+      },
+      "limitation_liability": {
+        "title": "13. Batasan Tanggung Jawab",
+        "items": [
+          "Sejauh diizinkan oleh hukum, PerkX tidak bertanggung jawab atas kerusakan tidak langsung, insidental, konsekuensial, atau hukuman.",
+          "PerkX tidak bertanggung jawab atas Manfaat yang terlewat, kerugian trading, atau tindakan Bursa Mitra.",
+          "Jika tanggung jawab tidak dapat dikecualikan, total tanggung jawab PerkX akan dibatasi hingga <strong>[jumlah batas]</strong>."
+        ]
+      },
+      "indemnification": {
+        "title": "14. Ganti Rugi",
+        "content": "Anda setuju untuk mengganti rugi dan membebaskan PerkX dari klaim yang timbul dari penyalahgunaan Layanan, pelanggaran Syarat ini, atau pelanggaran hukum."
+      },
+      "privacy": {
+        "title": "15. Privasi",
+        "paragraph1": "Data pribadi yang dikumpulkan atau diproses sehubungan dengan Layanan akan ditangani sesuai dengan <strong>Kebijakan Privasi PerkX</strong>, yang merupakan bagian integral dari Syarat ini.",
+        "paragraph2": "Jika ada ketidaksesuaian antara Syarat ini dan Kebijakan Privasi sehubungan dengan data pribadi, Kebijakan Privasi akan berlaku."
+      },
+      "amendments": {
+        "title": "16. Amandemen, Hukum yang Mengatur dan Yurisdiksi",
+        "paragraph1": "PerkX dapat memperbarui Syarat ini kapan saja. Penggunaan berkelanjutan setelah pembaruan merupakan penerimaan.",
+        "paragraph2": "Syarat ini akan diatur oleh dan ditafsirkan sesuai dengan hukum yurisdiksi di mana entitas operasi PerkX didirikan, tanpa memperhatikan prinsip konflik hukum.",
+        "paragraph3": "Setiap perselisihan, klaim, atau kontroversi yang timbul dari atau sehubungan dengan Syarat ini atau Layanan akan tunduk pada yurisdiksi eksklusif pengadilan yang kompeten di yurisdiksi tersebut."
+      }
+    }
+  },
+  "help-center": {
+    "meta": {
+      "title": "Pusat Bantuan | PerkX",
+      "description": "Temukan jawaban untuk pertanyaan umum tentang PerkX"
+    },
+    "hero": {
+      "title": "Pusat Bantuan",
+      "subtitle": "Temukan jawaban untuk pertanyaan umum tentang PerkX"
+    }
+  },
+  "user": {
+    "dashboard": {
+      "title": "Dashboard Pengguna",
+      "welcome": "Selamat Datang",
+      "email": "Email",
+      "status": "Status",
+      "active": "Aktif",
+      "inactive": "Tidak Aktif",
+      "loading": "Memuat..."
+    },
+    "profile": {
+      "title": "Profil Saya",
+      "subtitle": "Kelola profil resmi Anda dan amankan akun afiliasi Anda",
+      "loading": "Memuat...",
+      "affiliate_connection": "Koneksi Afiliasi",
+      "affiliate_subtitle": "Bagikan tautan referral Anda untuk mendapatkan hadiah",
+      "my_referrer_id": "ID REFERRAL SAYA",
+      "copy_success": "Disalin!",
+      "security_password": "Keamanan & Password",
+      "security_subtitle": "Pastikan akun Anda menggunakan password yang aman",
+      "current_password": "Password Saat Ini",
+      "new_password": "Password Baru",
+      "confirm_new_password": "Konfirmasi Password Baru",
+      "update_password": "Perbarui Password",
+      "updating": "Memperbarui...",
+      "profile_overview": "Ringkasan Profil",
+      "profile_overview_subtitle": "Perbarui info akun Anda dan kelola profil Anda",
+      "first_name": "Nama Depan",
+      "last_name": "Nama Belakang",
+      "email_address": "Alamat Email",
+      "phone_number": "Nomor Telepon",
+      "gender": "Jenis Kelamin",
+      "select_gender": "Pilih jenis kelamin",
+      "male": "Pria",
+      "female": "Wanita",
+      "birthday": "Tanggal Lahir",
+      "country": "Negara",
+      "select_country": "Pilih negara",
+      "save_changes": "Simpan Perubahan Profil",
+      "saving": "Menyimpan...",
+      "cancel": "Batal",
+      "linked_exchanges": "Bursa Terhubung",
+      "logout": "Keluar",
+      "profile_updated": "Profil berhasil diperbarui!",
+      "profile_update_failed": "Gagal memperbarui profil",
+      "password_updated": "Password berhasil diperbarui!",
+      "password_update_failed": "Gagal memperbarui password",
+      "passwords_not_match": "Password baru tidak cocok",
+      "fix_form_errors": "Harap perbaiki kesalahan dalam formulir"
+    }
+  }
+}

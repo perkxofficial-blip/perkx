@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { apiClient } from '@/services/api/client';
 import { endpoints } from '@/services/endpoints';
 import { auth } from '@/services/auth';
@@ -12,6 +13,7 @@ export default function UserLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const t = useTranslations('user.profile');
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
 
@@ -50,7 +52,7 @@ export default function UserLayout({
     return (
       <div className="min-h-screen relative bg-cover bg-center bg-no-repeat flex items-center justify-center" style={{ backgroundImage: 'url(/images/bg-source.jpg)' }}>
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-        <div className="text-white text-lg relative z-10">Loading...</div>
+        <div className="text-white text-lg relative z-10">{t('loading')}</div>
       </div>
     );
   }
