@@ -90,6 +90,7 @@ export class ExchangesService {
         // Update existing REJECTED record
         existingUserExchange.exchange_uid = addExchangeUidDto.exchange_uid;
         existingUserExchange.status = status;
+        existingUserExchange.reason = status === 'REJECTED' ? message : null;
         savedUserExchange = await this.userExchangeRepository.save(
           existingUserExchange,
         );
@@ -100,6 +101,8 @@ export class ExchangesService {
           exchange_id: addExchangeUidDto.exchange_id,
           exchange_uid: addExchangeUidDto.exchange_uid,
           status,
+          updated_by: 'System',
+          reason: status === 'REJECTED' ? message : null,
         });
         savedUserExchange = await this.userExchangeRepository.save(
           userExchange,

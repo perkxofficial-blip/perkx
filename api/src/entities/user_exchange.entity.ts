@@ -31,6 +31,12 @@ export class UserExchange {
   })
   status: 'ACTIVE' | 'PENDING' | 'REJECTED';
 
+  @Column({ nullable: true })
+  updated_by: string;
+
+  @Column({ nullable: true })
+  reason: string;
+
   @CreateDateColumn()
   created_at: Date;
 
