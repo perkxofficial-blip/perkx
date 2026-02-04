@@ -2278,7 +2278,7 @@ header {
       width: 100%;
       padding: 10px 12px;
       border-radius: 10px !important;
-      color: #868C98;
+      color: #fff;
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
@@ -2297,6 +2297,9 @@ header {
         opacity: 0.5;
         cursor: not-allowed;
         background: rgba(226, 228, 233, 0.1);
+      }
+      &::placeholder {
+        color: #fff;
       }
     }
   }

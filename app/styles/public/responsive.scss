@@ -1,3 +1,6 @@
+.pagination-page{
+  justify-content: end;
+}
 @media (max-width: 768px) {
   .campaign-slide {
     padding: 0 40px;
@@ -381,7 +384,33 @@
     font-size: 12px;
   }
   .calculator-main-content {
-    gap: 30;
+    gap: 30px;
+  }
+  .campaign-page{
+    h1, span.perkx {
+      font-size: 44px !important;
+    }
+    p {
+      font-size:20px !important;
+    }
+    .campaign-section {
+      padding-top: 0 !important;
+      .form-label {
+        font-size: 13px !important;
+      }
+    }
+  }
+  .campaign-page .banner-section .get-started{
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  .pagination{
+    select {
+      width: 100px !important;
+    }
+  }
+  .pagination-page{
+    justify-content: center;
   }
 }
 @media (min-width: 993px) {

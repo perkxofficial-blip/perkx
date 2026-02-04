@@ -180,6 +180,7 @@
   },
   "paging": {
     "showing_to_of": "Menampilkan <bold>{from}</bold> hingga <bold>{to}</bold> dari <bold>{total}</bold> kampanye",
+    "showing_to_of_mobile": "Menampilkan <bold>{from}</bold> hingga <bold>{to}</bold> dari <bold>{total}</bold>",
     "result_per_page": "Hasil per halaman"
   },
   "exchanges": {

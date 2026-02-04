@@ -120,7 +120,7 @@ export default async function CampaignPage({ searchParams }: Props) {
       <section className="campaign-section position-relative">
         <div className="container">
           <div className="row justify-content-center mb-5">
-            <div className="col-md-3">
+            <div className="col-md-3 col-4">
               <div className="mb-3 position-relative">
                 <label htmlFor="holderInput" className="form-label">
                   {t('campaign.campaign_holder')}
@@ -136,7 +136,7 @@ export default async function CampaignPage({ searchParams }: Props) {
                 />
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 col-4">
               <div className="mb-3 position-relative">
                 <label htmlFor="categoryInput" className="form-label">
                   {t('campaign.category')}
@@ -152,7 +152,7 @@ export default async function CampaignPage({ searchParams }: Props) {
                 />
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 col-4">
               <div className="mb-3 position-relative">
                 <label htmlFor="statusInput" className="form-label">
                   {t('campaign.campaign_holder')}
@@ -170,7 +170,7 @@ export default async function CampaignPage({ searchParams }: Props) {
           </div>
           <div className="row">
             {data?.campaigns?.data &&  data?.campaigns?.data.length > 0 ? data?.campaigns?.data.map((campaign: any) => (
-              <div className='col-md-3 mb-4' key={campaign.id}>
+              <div className='col-md-6 col-lg-3 mb-4' key={campaign.id}>
                 <CampaignItem campaign={campaign}/>
               </div>
             )) : (
@@ -181,8 +181,8 @@ export default async function CampaignPage({ searchParams }: Props) {
           </div>
           {pagination && pagination?.total > 0 && (
             <div className="row align-items-center pagination">
-              <div className="col-md-6 d-flex">
-                <div className="d-flex align-items-center gap-3">
+              <div className="col-md-6 col-sm-12">
+                <div className="d-flex align-items-center gap-3 hidden-xs">
                   <p className="mb-0">
                     {t.rich('paging.showing_to_of', {
                       from:
@@ -202,8 +202,33 @@ export default async function CampaignPage({ searchParams }: Props) {
                   <SelectSearch name="limit" options={perPages} />
                 </div>
               </div>
-
-              <div className="col-md-6 d-flex justify-content-end">
+              <div className="col-md-6 col-12 d-flex pagination-page hidden-xs">
+                <Pagination pagination={pagination} />
+              </div>
+              <div className="col-12 show-sx">
+                <div className="gap-3">
+                  <div className="row d-flex align-items-center ">
+                    <div className="col-6">
+                      <p className="mb-0">
+                        {t.rich('paging.showing_to_of_mobile', {
+                          from:
+                            pagination.total === 0
+                              ? 0
+                              : (pagination.page - 1) * pagination.limit + 1,
+                          to: Math.min(
+                            pagination.page * pagination.limit,
+                            pagination.total
+                          ),
+                          total: pagination.total,
+                          bold: (chunks) => <strong>{chunks}</strong>,
+                        })}
+                      </p>
+                    </div>
+                    <div className="col-6 d-flex  justify-content-end"><SelectSearch name="limit" options={perPages} /></div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 d-flex pagination-page show-sx">
                 <Pagination pagination={pagination} />
               </div>
             </div>

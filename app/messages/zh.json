@@ -180,6 +180,7 @@
   },
   "paging": {
     "showing_to_of": "显示 <bold>{from}</bold> 到 <bold>{to}</bold>，共 <bold>{total}</bold> 个活动",
+    "showing_to_of_mobile": "显示 <bold>{from}</bold> 到 <bold>{to}</bold>，共 <bold>{total}</bold>",
     "result_per_page": "每页结果数"
   },
   "exchanges": {
