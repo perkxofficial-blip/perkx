@@ -23,7 +23,7 @@ import { User } from '../../../entities';
 
 @ApiTags('User Exchanges')
 @ApiBearerAuth('user-jwt')
-@Controller('exchanges')
+@Controller('user/exchanges')
 @UseGuards(JwtAuthGuard)
 export class ExchangesController {
   constructor(private exchangesService: ExchangesService) {}
