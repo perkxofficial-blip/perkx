@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { BaseExchangeAdapter } from '../base-exchange.adapter';
 import { VerificationResult } from '../types/exchange-api-response.types';
-import axios from 'axios';
 const JSONBig = require('json-bigint');
 
 interface BingxConfig {
@@ -68,48 +67,59 @@ export class BingxAdapter extends BaseExchangeAdapter {
 
       const url = `${this.config.url}${uri}?${this.getParameters(payload, true)}&signature=${signature}`;
 
-      const response = await axios({
+      const fetchResponse = await fetch(url, {
         method: method,
-        url: url,
         headers: {
           'X-BX-APIKEY': this.config.apiKey,
         },
-        timeout: 10000,
-        transformResponse: [(data) => {
-          const jsonBig = JSONBig({ storeAsString: true });
-          return jsonBig.parse(data);
-        }],
       });
 
-      if (response.data && response.data.data) {
-        const inviteResult = response.data.data.inviteResult;
+      if (!fetchResponse.ok) {
+        const errorText = await fetchResponse.text();
+        let errorData;
+        try {
+          errorData = this.parseJsonResponse(errorText);
+        } catch {
+          errorData = { msg: `HTTP ${fetchResponse.status}: ${fetchResponse.statusText}` };
+        }
+        this.logger.error(`BingX API error response: ${JSON.stringify(errorData)}`);
+        return {
+          status: 'REJECTED',
+          message: 'Verification failed',
+        };
+      }
+
+      const responseText = await fetchResponse.text();
+      const response = this.parseJsonResponse(responseText);
+
+      if (response && response.data) {
+        const inviteResult = response.data.inviteResult;
+        this.logger.debug(`BingX API response data: ${JSON.stringify(response.data)}`);
 
         if (inviteResult === true || inviteResult === 1) {
           return {
             status: 'ACTIVE',
             message: 'UID verified successfully',
-            data: response.data.data,
           };
         }
 
         return {
           status: 'REJECTED',
           message: 'UID is not registered from affiliate link',
-          data: response.data.data,
         };
       }
 
+      this.logger.warn(`BingX API invalid response: ${JSON.stringify(response)}`);
       return {
         status: 'REJECTED',
-        message: response.data?.msg || 'Invalid response from BingX API',
-        data: response.data,
+        message: 'Verification failed',
       };
     } catch (error: any) {
       this.logger.error(`BingX verification failed: ${error.message}`, error.stack);
 
       return {
         status: 'REJECTED',
-        message: `Verification failed: ${error.message}`,
+        message: 'Verification failed',
       };
     }
   }

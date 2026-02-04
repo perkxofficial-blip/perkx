@@ -5,7 +5,7 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { UserExchange, Exchange } from '../../../entities';
 import { ExchangeAdapterFactory } from '../../../common/exchanges';
 import { StorageService } from '../../../common/storage/storage.service';
@@ -47,7 +47,7 @@ export class ExchangesService {
       },
     });
 
-    if (existingUserExchange) {
+    if (existingUserExchange && existingUserExchange.status !== 'REJECTED') {
       throw new ConflictException(
         `Exchange '${exchange.name}' is already linked to your account`,
       );
@@ -57,6 +57,7 @@ export class ExchangesService {
       where: {
         exchange_id: addExchangeUidDto.exchange_id,
         exchange_uid: addExchangeUidDto.exchange_uid,
+        user_id: Not(userId),
       },
     });
 
@@ -83,17 +84,27 @@ export class ExchangesService {
         message = verificationResult.message;
       }
 
-      // Create user exchange record with status from verification result
-      const userExchange = this.userExchangeRepository.create({
-        user_id: userId,
-        exchange_id: addExchangeUidDto.exchange_id,
-        exchange_uid: addExchangeUidDto.exchange_uid,
-        status,
-      });
+      let savedUserExchange: UserExchange;
 
-      const savedUserExchange = await this.userExchangeRepository.save(
-        userExchange,
-      );
+      if (existingUserExchange && existingUserExchange.status === 'REJECTED') {
+        // Update existing REJECTED record
+        existingUserExchange.exchange_uid = addExchangeUidDto.exchange_uid;
+        existingUserExchange.status = status;
+        savedUserExchange = await this.userExchangeRepository.save(
+          existingUserExchange,
+        );
+      } else {
+        // Create new record
+        const userExchange = this.userExchangeRepository.create({
+          user_id: userId,
+          exchange_id: addExchangeUidDto.exchange_id,
+          exchange_uid: addExchangeUidDto.exchange_uid,
+          status,
+        });
+        savedUserExchange = await this.userExchangeRepository.save(
+          userExchange,
+        );
+      }
 
       return {
         id: savedUserExchange.id,
