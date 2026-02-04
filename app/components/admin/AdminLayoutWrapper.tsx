@@ -16,6 +16,20 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Detect color scheme preference
+  useEffect(() => {
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(darkModeQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches);
+    };
+
+    darkModeQuery.addEventListener('change', handleChange);
+    return () => darkModeQuery.removeEventListener('change', handleChange);
+  }, []);
 
   useEffect(() => {
     const token = auth.getAdminToken();
@@ -77,7 +91,7 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
           {/* Logo */}
           <a className="navbar-brand" href="/admin/">
             <Image
-              src="/images/admin-logo.png"
+              src={isDarkMode ? "/images/logo.png" : "/images/dark-logo.png"}
               alt={"Admin Logo"}
               width={123}
               height={41}
