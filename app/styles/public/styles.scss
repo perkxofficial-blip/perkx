@@ -19,17 +19,24 @@ header {
   height: 89px;
 }
 .site-header {
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-
+  height: 86px;
   background: transparent;
   transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 .site-header.scrolled {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 48, 0.5);
+    backdrop-filter: blur(28px);
+    z-index: -1;
+  }
 }
 
 .menu-block {
