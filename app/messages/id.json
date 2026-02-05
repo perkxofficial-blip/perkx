@@ -544,7 +544,11 @@
       "delete_confirm_message": "Apakah Anda yakin ingin menghapus tautan exchange ini?",
       "delete_confirm_warning": "Tindakan ini tidak dapat dibatalkan",
       "cancel": "Batal",
-      "delete": "Hapus"
+      "delete": "Hapus",
+      "link_success": "Exchange berhasil ditautkan!",
+      "link_error": "Gagal menautkan exchange. Silakan coba lagi.",
+      "delete_success": "Exchange berhasil dihapus!",
+      "delete_error": "Gagal menghapus exchange. Silakan coba lagi."
     }
   }
 }

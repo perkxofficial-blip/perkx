@@ -6,6 +6,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api/client';
 import { endpoints } from '@/services/endpoints';
+import Toast from '@/components/admin/Toast';
 
 const LANGUAGES = [
   { code: 'en', key: 'language.en' },
@@ -47,6 +48,7 @@ export default function LinkedExchangesPage() {
   const [exchangeToDelete, setExchangeToDelete] = useState<Exchange | null>(null);
   const [modalMounted, setModalMounted] = useState(false);
   const [deleteModalMounted, setDeleteModalMounted] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
     loadExchanges();
@@ -144,6 +146,9 @@ export default function LinkedExchangesPage() {
       // Close modal and reset state
       setShowDeleteModal(false);
       setExchangeToDelete(null);
+      
+      // Show success toast
+      setToast({ message: t('delete_success'), type: 'success' });
     } catch (error: any) {
       console.error('Error deleting exchange:', error);
       
@@ -153,7 +158,10 @@ export default function LinkedExchangesPage() {
         return;
       }
       
-      // Still close modal on error, but you might want to show an error message
+      // Show error toast
+      setToast({ message: t('delete_error'), type: 'error' });
+      
+      // Close modal
       setShowDeleteModal(false);
       setExchangeToDelete(null);
     }
@@ -187,6 +195,7 @@ export default function LinkedExchangesPage() {
       
       if (isNaN(exchangeId)) {
         console.error('Invalid exchange ID');
+        setToast({ message: t('link_error'), type: 'error' });
         return;
       }
 
@@ -201,6 +210,9 @@ export default function LinkedExchangesPage() {
       setShowLinkModal(false);
       setIsRelinking(false);
       
+      // Show success toast
+      setToast({ message: t('link_success'), type: 'success' });
+      
       // Reload exchanges
       await loadExchanges();
     } catch (error: any) {
@@ -211,6 +223,9 @@ export default function LinkedExchangesPage() {
         router.push('/login');
         return;
       }
+      
+      // Show error toast
+      setToast({ message: t('link_error'), type: 'error' });
     }
   };
 
@@ -633,6 +648,15 @@ export default function LinkedExchangesPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Toast Notification */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
       )}
     </div>
   );

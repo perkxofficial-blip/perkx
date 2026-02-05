@@ -544,7 +544,11 @@
       "delete_confirm_message": "この取引所リンクを削除してもよろしいですか？",
       "delete_confirm_warning": "この操作は元に戻せません",
       "cancel": "キャンセル",
-      "delete": "削除"
+      "delete": "削除",
+      "link_success": "取引所のリンクに成功しました！",
+      "link_error": "取引所のリンクに失敗しました。もう一度お試しください。",
+      "delete_success": "取引所が正常に削除されました！",
+      "delete_error": "取引所の削除に失敗しました。もう一度お試しください。"
     }
   }
 }

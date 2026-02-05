@@ -542,7 +542,11 @@
       "delete_confirm_message": "이 거래소 연결을 제거하시겠습니까?",
       "delete_confirm_warning": "이 작업은 취소할 수 없습니다",
       "cancel": "취소",
-      "delete": "삭제"
+      "delete": "삭제",
+      "link_success": "거래소가 성공적으로 연결되었습니다!",
+      "link_error": "거래소 연결에 실패했습니다. 다시 시도해주세요.",
+      "delete_success": "거래소가 성공적으로 제거되었습니다!",
+      "delete_error": "거래소 제거에 실패했습니다. 다시 시도해주세요."
     }
   }
 }
