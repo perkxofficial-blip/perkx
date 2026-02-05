@@ -29,7 +29,9 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      {children}
+      <main>
+        {children}
+      </main>
       <Footer/>
       {/* Start of home-90795 Zendesk Widget script */}
       <Script

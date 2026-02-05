@@ -121,7 +121,7 @@ export default async function LandingPage() {
                     <span>{t("home.get_started_now")}</span>
                     <Image
                       src="/images/icon/arrow-right-s-line.svg"
-                      alt={t("home.get_started_now")}
+                      alt={`${t("home.get_started_now")} icon`}
                       width={16}
                       height={16}
                       className="ms-2"
@@ -197,7 +197,7 @@ export default async function LandingPage() {
                     <div className="timeline-bottom tb-1"></div>
                   </div>
                   <div className="ms-4 ">
-                    <h5 className="mb-0">{t('home.timeline1')}</h5>
+                    <p className="heading-like mb-0">{t('home.timeline1')}</p>
                   </div>
                 </div>
                 <div className="d-flex align-items-center timeline-item">
@@ -211,7 +211,7 @@ export default async function LandingPage() {
                     <div className="timeline-bottom tb-2"></div>
                   </div>
                   <div className="ms-4 ">
-                    <h5 className="mb-1">{t('home.timeline2')}</h5>
+                    <p className="heading-like mb-1">{t('home.timeline2')}</p>
                     <p>{t('home.timeline2_desc')}</p>
                   </div>
 
@@ -226,7 +226,7 @@ export default async function LandingPage() {
                     />
                   </div>
                   <div className="ms-4 ">
-                    <h5 className="mb-0">{t('home.timeline3')}</h5>
+                    <p className="heading-like mb-0">{t('home.timeline3')}</p>
                   </div>
                 </div>
               </div>
