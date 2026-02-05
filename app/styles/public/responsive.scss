@@ -442,6 +442,42 @@
     line-height: 18px; /* 112.5% */
     padding-top: 12px;
   }
+  .profile-body {
+    margin-inline: unset;
+  }
+  .profile-aside {
+    position: fixed;
+    backdrop-filter: blur(15px);
+    display: block;
+    z-index: 999;
+  }
+  .profile-menu {
+    h1 {
+      text-align: end;
+    }
+  }
+  .profile-aside-top{
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    justify-content: space-between !important;
+  }
+  .text-referral {
+    font-size: 20px;
+  }
+  .btn-w-100{
+    width: 100%;
+    padding: 10px 5px !important;
+    span{
+      font-size: 14px !important;
+    }
+  }
+  .btn-w-50{
+    width: 50%;
+    padding: 10px 5px !important;
+    span{
+      font-size: 14px !important;
+    }
+  }
 }
 @media (min-width: 993px) {
 
