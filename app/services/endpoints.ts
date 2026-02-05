@@ -32,6 +32,8 @@ export const endpoints = {
     exchanges: '/admin/exchanges',
     exchangesList: '/admin/exchanges/list',
     exchangesImport: '/admin/exchanges/import-products',
+    userExchanges: '/admin/exchanges/user_exchanges',
+    updateUserExchange: (id: string | number) => `/admin/exchanges/user_exchanges/uid/${id}/update`,
     pages: '/admin/pages',
   },
 

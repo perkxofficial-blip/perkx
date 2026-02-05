@@ -382,6 +382,16 @@ export default function UserDetailPage() {
                 ))}
               </div>
             )}
+            {user.exchanges.length > 0 && (
+              <div className="text-center mt-4">
+                <Link
+                  href={`/admin/users/${user.id}/exchanges${filterParams.toString() ? `?${filterParams.toString()}` : ''}`}
+                  className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                >
+                  View All Exchanges
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 
