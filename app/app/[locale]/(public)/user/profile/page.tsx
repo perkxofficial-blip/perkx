@@ -40,8 +40,31 @@ export default function UserProfilePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const [open, setOpen] = useState(false);
+  const asideRef = useRef<HTMLDivElement | null>(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
 
-  // Toast state
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (
+        asideRef.current &&
+        !asideRef.current.contains(target) &&
+        btnRef.current &&
+        !btnRef.current.contains(target)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
+
+    // Toast state
   const [toast, setToast] = useState<{ show: boolean; message: string; type: 'success' | 'error' | 'warning' | 'info' } | null>(null);
 
   const showToast = (message: string, type: 'success' | 'error' | 'warning' | 'info' = 'info') => {
@@ -303,10 +326,26 @@ export default function UserProfilePage() {
 
       <div className="flex relative z-10">
         {/* Sidebar */}
-        <aside className="hidden lg:flex lg:w-[260px] flex-shrink-0 bg-white/[0.02] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] min-h-screen">
+        <aside
+          ref={asideRef}
+          className={`hidden lg:flex lg:w-[260px] flex-shrink-0 bg-white/[0.02] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] min-h-screen ${open ? 'profile-aside' : ''}`}
+        >
           <div className="w-full flex flex-col pb-3">
             {/* Logo */}
-            <div className="h-[73px] flex items-center justify-center px-4 py-[13px]">
+
+            <div className="h-[73px] flex items-center justify-center px-4 py-[13px] profile-aside-top">
+              <button
+                className="navbar-toggler show-xs"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                onClick={() => setOpen(!open)}
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
               <a href="/" className="block">
                 <img
                   src="/images/logo.png"
@@ -333,7 +372,7 @@ export default function UserProfilePage() {
                     <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
-                
+
                 {showLanguageDropdown && (
                   <div className="absolute top-full left-0 right-0 mt-1 bg-[#2A2651] rounded-lg shadow-lg overflow-hidden z-50 border border-white/10">
                     {LANGUAGES.map((lang) => (
@@ -395,16 +434,36 @@ export default function UserProfilePage() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-[20px]">
+        <main className="flex-1 p-[20px] profile-main">
           <div className="flex flex-col gap-6">
             {/* Page Header */}
-            <div className="flex flex-col gap-1">
-              <h1 className="!text-[#FCFCFC] text-2xl font-bold">{t('title')}</h1>
-              <p className="!text-[#FCFCFC] text-sm leading-7 m-0">{t('subtitle')}</p>
+            <div className="d-flex align-items-center justify-content-between profile-menu">
+              <button
+                ref={btnRef}
+                className="navbar-toggler show-xs"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                onClick={() => setOpen(!open)}
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+
+              <h1 className="text-white text-2xl font-bold m-0">
+                {t('title')}
+              </h1>
             </div>
 
+            <p className="text-white text-sm leading-7 m-0 hidden-xs">
+              {t('subtitle')}
+            </p>
+
+
             {/* Content Grid */}
-            <div className="grid lg:grid-cols-2 gap-6 mx-[40px]">
+            <div className="grid lg:grid-cols-2 gap-6 mx-[40px] profile-body">
               {/* Left Column */}
               <div className="flex flex-col gap-6">
                 {/* Affiliate Connection Card */}
@@ -428,7 +487,7 @@ export default function UserProfilePage() {
                         <label className="text-[#C9C9C9] text-sm font-medium leading-5 tracking-normal uppercase">
                           {t('my_referrer_id')}
                         </label>
-                        <div className="text-[#DAB2FF] text-2xl font-medium leading-5 tracking-normal">
+                        <div className="text-[#DAB2FF] text-2xl font-medium leading-5 tracking-normal text-referral">
                           {profile?.referral_code || 'PX-99284'}
                         </div>
                       </div>
@@ -585,7 +644,7 @@ export default function UserProfilePage() {
                       <button
                         type="submit"
                         disabled={saving || !passwordForm.current_password || !passwordForm.new_password || !passwordForm.confirm_new_password}
-                        className="inline-flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50 self-start"
+                        className="btn-w-100 inline-flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50 self-start"
                       >
                         <span className="text-white text-center text-lg font-medium leading-5 tracking-[-0.108px]">
                           {saving ? t('updating') : t('update_password')}
@@ -817,7 +876,7 @@ export default function UserProfilePage() {
                       <button
                         type="submit"
                         disabled={saving || !profileForm.first_name.trim() || !profileForm.last_name.trim()}
-                        className="flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50"
+                        className="btn-w-50 flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50"
                       >
                         <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px]">
                           {saving ? t('saving') : t('save_changes')}
@@ -826,7 +885,7 @@ export default function UserProfilePage() {
                       <button
                         type="button"
                         onClick={loadProfile}
-                        className="flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-white/10 hover:bg-white/20 shadow-[0_1px_2px_0_rgba(55,93,251,0.08)]"
+                        className="btn-w-50 flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-white/10 hover:bg-white/20 shadow-[0_1px_2px_0_rgba(55,93,251,0.08)]"
                       >
                         <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px]">
                           {t('cancel')}

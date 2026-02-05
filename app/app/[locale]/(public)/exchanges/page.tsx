@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { getAllExchanges, Exchange, ExchangeProduct } from '@/services/api/public/exchange';
 import Image from 'next/image';
 import PartnerExchangesTable from '@/components/public/PartnerExchangesTable';
+import PartnerExchangesMobileTable from "@/components/public/PartnerExchangesMobileTable";
 
 interface ExchangesPageProps {
   params: Promise<{
@@ -127,8 +128,11 @@ export default async function ExchangesPage({ params }: ExchangesPageProps) {
 
         <div className="container">
           <div className="position-relative">
-            <div className="pe-table">
+            <div className="pe-table hidden-xs">
               <PartnerExchangesTable exchanges={exchanges} />
+            </div>
+            <div className="pe-table show-xs">
+              <PartnerExchangesMobileTable exchanges={exchanges} />
             </div>
           </div>
         </div>

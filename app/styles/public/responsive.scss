@@ -1,6 +1,9 @@
 .pagination-page{
   justify-content: end;
 }
+.le-header{
+  display: flex;
+}
 @media (max-width: 768px) {
   .campaign-slide {
     padding: 0 40px;
@@ -333,6 +336,7 @@
     }
     .perk-primary-btn {
       padding: 12px 20px;
+      width: 100%;
     }
   }
   .how-it-works-page {
@@ -415,6 +419,81 @@
   .pagination-page{
     justify-content: center;
   }
+  .pe-table {
+    padding: 16px !important;
+  }
+  .exchange-card {
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    p {
+      margin-bottom: 5px;
+    }
+    .pe-link {
+      width: 100%;
+      margin-top: 12px;
+    }
+  }
+  .pe-top {
+    border: 1px solid #FFE680;
+    padding: 0px;
+  }
+  .exchange-title {
+    color: #FCFCFC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px; /* 112.5% */
+    padding-top: 12px;
+  }
+  .profile-body {
+    margin-inline: unset;
+  }
+  .profile-aside {
+    position: fixed;
+    backdrop-filter: blur(15px);
+    z-index: 9999;
+    display: flex;
+    height: 100vh;
+  }
+  .profile-menu {
+    h1 {
+      text-align: end;
+    }
+  }
+  .profile-aside-top{
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    justify-content: space-between !important;
+  }
+  .text-referral {
+    font-size: 20px;
+  }
+  .btn-w-100{
+    width: 100%;
+    padding: 10px 5px !important;
+    span{
+      font-size: 14px !important;
+    }
+  }
+  .btn-w-50{
+    width: 50%;
+    padding: 10px 5px !important;
+    span{
+      font-size: 14px !important;
+    }
+  }
+  .profile-main {
+    padding: 16px !important;
+  }
+  .le-header{
+    display: contents;
+  }
+  .le-box{
+    justify-content: space-between !important;
+  }
+  .btn-user-bottom {
+    margin-top: auto;
+  }
 }
 @media (min-width: 993px) {
 
@@ -478,6 +557,15 @@
   }
   .calculator-left-section{
     margin-bottom: 30px;
+  }
+  .le-box{
+    display: contents !important;
+  }
+  .le-box-link{
+    justify-content: space-between !important;
+  }
+  .le-box-link .flex:first-child{
+    width: 70% !important;
   }
 }
 

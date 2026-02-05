@@ -7,6 +7,7 @@ import CampaignSection from "@/components/public/CampaignSection";
 import PartnerExchangesTable from "@/components/public/PartnerExchangesTable";
 import {getAllExchanges, Exchange, ExchangeSlide} from "@/services/api/public/exchange";
 import { Campaign, getFeaturedCampaigns } from '@/services/api/public/campaign';
+import PartnerExchangesMobileTable from "@/components/public/PartnerExchangesMobileTable";
 
 interface HomePageProps {
   params: Promise<{
@@ -363,24 +364,28 @@ export default async function LandingPage() {
                 height={125}
                 aria-hidden="true"
               />
+
               <div className="pe-table">
-                <PartnerExchangesTable exchanges={data.exchanges || []} />
+                <div className="hidden-xs">
+                  <PartnerExchangesTable exchanges={data?.exchanges} />
+                </div>
+                <div className="show-xs">
+                  <PartnerExchangesMobileTable exchanges={data?.exchanges} />
+                </div>
                 <div className=" d-flex justify-content-center mt-4">
-                  <div>
-                    <a
-                      href="/exchanges"
-                      className="perk-primary-btn d-inline-flex align-items-center gap-2 text-decoration-none"
-                    >
-                      {t("home.view_all_partners")}
-                      <Image
-                        src="/images/arrow-right-s-line.svg"
-                        alt="arrow right line"
-                        width={20}
-                        height={20}
-                        aria-hidden="true"
-                      />
-                    </a>
-                  </div>
+                  <a
+                    href="/exchanges"
+                    className="perk-primary-btn d-inline-flex align-items-center gap-2 text-decoration-none"
+                  >
+                    {t("home.view_all_partners")}
+                    <Image
+                      src="/images/arrow-right-s-line.svg"
+                      alt="arrow right line"
+                      width={20}
+                      height={20}
+                      aria-hidden="true"
+                    />
+                  </a>
                 </div>
               </div>
             </div>
