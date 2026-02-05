@@ -541,7 +541,11 @@
       "delete_confirm_message": "Are you sure you want to remove this exchange link?",
       "delete_confirm_warning": "This action cannot be undone",
       "cancel": "Cancel",
-      "delete": "Delete"
+      "delete": "Delete",
+      "link_success": "Exchange linked successfully!",
+      "link_error": "Failed to link exchange. Please try again.",
+      "delete_success": "Exchange removed successfully!",
+      "delete_error": "Failed to remove exchange. Please try again."
     }
   }
 }

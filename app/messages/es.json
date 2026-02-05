@@ -540,7 +540,11 @@
       "delete_confirm_message": "¿Está seguro de que desea eliminar este vínculo de exchange?",
       "delete_confirm_warning": "Esta acción no se puede deshacer",
       "cancel": "Cancelar",
-      "delete": "Eliminar"
+      "delete": "Eliminar",
+      "link_success": "¡Exchange vinculado exitosamente!",
+      "link_error": "Error al vincular el exchange. Por favor, inténtelo de nuevo.",
+      "delete_success": "¡Exchange eliminado exitosamente!",
+      "delete_error": "Error al eliminar el exchange. Por favor, inténtelo de nuevo."
     }
   }
 }
