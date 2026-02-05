@@ -170,7 +170,7 @@ export default async function CampaignPage({ searchParams }: Props) {
           </div>
           <div className="row">
             {data?.campaigns?.data &&  data?.campaigns?.data.length > 0 ? data?.campaigns?.data.map((campaign: any) => (
-              <div className='col-6 col-lg-3 mb-4' key={campaign.id}>
+              <div className='col-12 col-lg-3 mb-4' key={campaign.id}>
                 <CampaignItem campaign={campaign}/>
               </div>
             )) : (
@@ -202,8 +202,10 @@ export default async function CampaignPage({ searchParams }: Props) {
                   <SelectSearch name="limit" options={perPages} />
                 </div>
               </div>
-              <div className="col-md-6 col-12 d-flex pagination-page hidden-xs">
-                <Pagination pagination={pagination} />
+                <div className="col-md-6 col-12 d-flex pagination-page">
+                  <div className="hidden-xs">
+                    <Pagination pagination={pagination} />
+                  </div>
               </div>
               <div className="col-12 show-xs">
                 <div className="gap-3">
@@ -228,8 +230,10 @@ export default async function CampaignPage({ searchParams }: Props) {
                   </div>
                 </div>
               </div>
-              <div className="col-12 d-flex pagination-page show-xs">
-                <Pagination pagination={pagination} />
+              <div className="show-xs">
+                <div className="col-12 d-flex pagination-page ">
+                  <Pagination pagination={pagination} />
+                </div>
               </div>
             </div>
 
