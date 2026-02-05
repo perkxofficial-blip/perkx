@@ -36,7 +36,7 @@ export default async function Header() {
                     <span className="navbar-toggler-icon" />
                   </button>
                   {/* Mobile logo */}
-                  <a className="navbar-brand mx-auto d-lg-none" href="/">
+                  <a className="navbar-brand mx-auto show-xs" href="/">
                     <Image
                       src="/images/logo.png"
                       alt={t('meta.home.title')}
@@ -47,7 +47,7 @@ export default async function Header() {
                   </a>
 
                   {/* Desktop logo */}
-                  <a className="navbar-brand d-none d-lg-block" href="/">
+                  <a className="navbar-brand hidden-xs" href="/">
                     <Image
                       src="/images/logo.png"
                       alt={t('meta.home.title')}
@@ -57,13 +57,73 @@ export default async function Header() {
                     />
                   </a>
                   <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div className="show-xs menu-header">
+                      <div className="d-flex justify-content-between">
+                        <button
+                          className="navbar-toggler btn-menu-header"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#navbarSupportedContent"
+                          aria-controls="navbarSupportedContent"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation"
+                        >
+                          <span className="navbar-toggler-icon" ></span>
+                        </button>
+                        <a className="navbar-brand" href="/">
+                          <Image
+                            src="/images/logo.png"
+                            alt={t('meta.home.title')}
+                            width={97}
+                            height={32}
+                            priority
+                          />
+                        </a>
+                      </div>
+                    </div>
                     <Navigation />
+                    <div className="show-xs text-center">
+                      <div className="language-block">
+                       <div className="col-12">
+                         <div className="btn-group">
+                           <button
+                             type="button"
+                             className="btn btn-language dropdown-toggle d-inline-flex align-items-center"
+                             data-bs-toggle="dropdown"
+                             aria-expanded="false"
+                           >
+                             <Image
+                               src="/images/global-line.png"
+                               alt="Language: English"
+                               width={20}
+                               height={20}
+                             />
+                             <span className="ms-1">{t("language.en")}</span>
+                           </button>
+
+
+                           <ul className="dropdown-menu" aria-label="Language selection">
+                             {LANGUAGES.map((lang) => (
+                               <li key={lang.code}>
+                                 <a className="dropdown-item" href={`/${lang.code}`}>
+                                   {t(lang.key)}
+                                 </a>
+                               </li>
+                             ))}
+                           </ul>
+                         </div>
+                       </div>
+                        <div className="col-12 auth-block-mb">
+                          <AuthButtons />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </nav>
             </div>
 
-            <div className="language-block col-lg-4 d-flex justify-content-end">
+            <div className="hidden-xs language-block col-lg-4 d-flex justify-content-end">
               <div className="btn-group">
                 <button
                   type="button"
