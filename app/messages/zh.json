@@ -66,7 +66,8 @@
       "default_taker": "默认Taker/Maker费用",
       "final_taker": "最终Taker/Maker费用",
       "ave_rebate": "100万交易量平均返佣",
-      "action": "操作"
+      "action": "操作",
+      "register": "注册"
     },
     "view_all_partners": "查看所有合作伙伴"
   },

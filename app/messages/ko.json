@@ -66,7 +66,8 @@
       "default_taker": "기본 테이커/메이커 수수료",
       "final_taker": "최종 테이커/메이커 수수료",
       "ave_rebate": "월 거래량 100만 기준 평균 리베이트",
-      "action": "액션"
+      "action": "액션",
+      "register": "회원가입"
     },
     "view_all_partners": "모든 파트너 보기"
   },

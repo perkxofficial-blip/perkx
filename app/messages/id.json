@@ -66,7 +66,8 @@
       "default_taker": "Biaya Taker/Maker Default",
       "final_taker": "Biaya Taker/Maker Akhir",
       "ave_rebate": "Rata-rata Rebate untuk Vol 1M",
-      "action": "aksi"
+      "action": "aksi",
+      "register": "Daftar"
     },
     "view_all_partners": "Lihat Semua Mitra"
   },

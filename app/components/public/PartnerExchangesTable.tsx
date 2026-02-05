@@ -108,7 +108,7 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Register
+                  {t('register')}
                 </a>
               </td>
             </tr>

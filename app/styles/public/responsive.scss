@@ -333,6 +333,7 @@
     }
     .perk-primary-btn {
       padding: 12px 20px;
+      width: 100%;
     }
   }
   .how-it-works-page {
@@ -414,6 +415,32 @@
   }
   .pagination-page{
     justify-content: center;
+  }
+  .pe-table {
+    padding: 16px !important;
+  }
+  .exchange-card {
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    p {
+      margin-bottom: 5px;
+    }
+    .pe-link {
+      width: 100%;
+      margin-top: 12px;
+    }
+  }
+  .pe-top {
+    border: 1px solid #FFE680;
+    padding: 0px;
+  }
+  .exchange-title {
+    color: #FCFCFC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px; /* 112.5% */
+    padding-top: 12px;
   }
 }
 @media (min-width: 993px) {
