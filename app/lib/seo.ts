@@ -9,7 +9,7 @@ interface GenerateMetadataProps {
 export function generatePageMetadata({ page, locale }: GenerateMetadataProps): Metadata {
   const title = page.metaTitle || page.title;
   const description = page.metaDescription || page.description || '';
-  const canonicalUrl = page.canonicalUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/pages/${page.slug}`;
+  const canonicalUrl = page.canonicalUrl || `${process.env.FRONTEND_URL}/${locale}/${page.slug}`;
 
   const openGraph = {
     title: page.ogTitle || title,
