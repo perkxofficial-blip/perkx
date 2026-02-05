@@ -434,7 +434,7 @@ export default function UserProfilePage() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-[20px]">
+        <main className="flex-1 p-[20px] profile-main">
           <div className="flex flex-col gap-6">
             {/* Page Header */}
             <div className="d-flex align-items-center justify-content-between profile-menu">

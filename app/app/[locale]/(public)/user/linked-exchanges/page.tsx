@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { auth } from '@/services/auth';
@@ -49,6 +49,29 @@ export default function LinkedExchangesPage() {
   const [modalMounted, setModalMounted] = useState(false);
   const [deleteModalMounted, setDeleteModalMounted] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [open, setOpen] = useState(false);
+  const asideRef = useRef<HTMLDivElement | null>(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (
+        asideRef.current &&
+        !asideRef.current.contains(target) &&
+        btnRef.current &&
+        !btnRef.current.contains(target)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
 
   useEffect(() => {
     loadExchanges();
@@ -277,10 +300,25 @@ export default function LinkedExchangesPage() {
 
       <div className="flex relative z-10">
         {/* Sidebar */}
-        <aside className="hidden lg:flex lg:w-[260px] flex-shrink-0 bg-white/[0.02] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] min-h-screen">
+        <aside
+          ref={asideRef}
+          className={`hidden lg:flex lg:w-[260px] flex-shrink-0 bg-white/[0.02] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] min-h-screen ${open ? 'profile-aside' : ''}`}
+        >
           <div className="w-full flex flex-col pb-3">
             {/* Logo */}
-            <div className="h-[73px] flex items-center justify-center px-4 py-[13px]">
+            <div className="h-[73px] flex items-center justify-center px-4 py-[13px] profile-aside-top">
+              <button
+                className="navbar-toggler show-xs"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                onClick={() => setOpen(!open)}
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
               <a href="/" className="block">
                 <img
                   src="/images/logo.png"
@@ -312,75 +350,95 @@ export default function LinkedExchangesPage() {
               </a>
             </nav>
 
-            {/* Language Switcher */}
-            <div className="px-3 mb-3">
-              <div className="relative">
-                <button
-                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                  className="w-full flex items-center justify-between gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-[#C9C9C9]"
-                >
-                  <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
-                      <path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H2M12 22C6.47715 22 2 17.5228 2 12M12 22C9.43223 19.3038 8 15.7233 8 12C8 8.27674 9.43223 4.69615 12 2M12 22C14.5678 19.3038 16 15.7233 16 12C16 8.27674 14.5678 4.69615 12 2M2 12C2 6.47715 6.47715 2 12 2" stroke="#C9C9C9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <span className="text-sm font-medium">{tLang(locale)}</span>
-                  </div>
-                  <svg className={`w-4 h-4 transition-transform ${showLanguageDropdown ? '-rotate-90' : ''}`} fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                </button>
-                
-                {showLanguageDropdown && (
-                  <div className="absolute left-full bottom-0 ml-1 bg-[#2A2651] rounded-lg shadow-lg overflow-hidden z-[100] border border-white/10 min-w-[200px]">
-                    {LANGUAGES.map((lang) => (
-                      <a
-                        key={lang.code}
-                        href={`/${lang.code}/user/linked-exchanges`}
-                        className={`block px-4 py-2 text-sm transition no-underline ${
-                          locale === lang.code
-                            ? 'bg-[#DAB2FF]/20 !text-[#DAB2FF] font-medium'
-                            : '!text-[#C9C9C9] hover:bg-white/5 hover:!text-white'
-                        }`}
-                        onClick={() => setShowLanguageDropdown(false)}
-                      >
-                        {tLang(lang.code)}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+           <div className="btn-user-bottom">
+             {/* Language Switcher */}
+             <div className="px-3 mb-3">
+               <div className="relative">
+                 <button
+                   onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                   className="w-full flex items-center justify-between gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-[#C9C9C9]"
+                 >
+                   <div className="flex items-center gap-2">
+                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                       <path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H2M12 22C6.47715 22 2 17.5228 2 12M12 22C9.43223 19.3038 8 15.7233 8 12C8 8.27674 9.43223 4.69615 12 2M12 22C14.5678 19.3038 16 15.7233 16 12C16 8.27674 14.5678 4.69615 12 2M2 12C2 6.47715 6.47715 2 12 2" stroke="#C9C9C9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                     </svg>
+                     <span className="text-sm font-medium">{tLang(locale)}</span>
+                   </div>
+                   <svg className={`w-4 h-4 transition-transform ${showLanguageDropdown ? '-rotate-90' : ''}`} fill="currentColor" viewBox="0 0 20 20">
+                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                   </svg>
+                 </button>
 
-            {/* Logout Button */}
-            <div className="px-3">
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg text-[#C9C9C9] hover:bg-white/5 transition w-full"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M10 8V6C10 5.46957 10.2107 4.96086 10.5858 4.58579C10.9609 4.21071 11.4696 4 12 4H19C19.5304 4 20.0391 4.21071 20.4142 4.58579C20.7893 4.96086 21 5.46957 21 6V18C21 18.5304 20.7893 19.0391 20.4142 19.4142C20.0391 19.7893 19.5304 20 19 20H12C11.4696 20 10.9609 19.7893 10.5858 19.4142C10.2107 19.0391 10 18.5304 10 18V16" />
-                <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M15 12H3L6 9" />
-                <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 15L3 12" />
-              </svg>
-              <span className="text-sm font-medium">{tProfile('logout')}</span>
-            </button>
-            </div>
+                 {showLanguageDropdown && (
+                   <div className="absolute left-full bottom-0 ml-1 bg-[#2A2651] rounded-lg shadow-lg overflow-hidden z-[100] border border-white/10 min-w-[200px]">
+                     {LANGUAGES.map((lang) => (
+                       <a
+                         key={lang.code}
+                         href={`/${lang.code}/user/linked-exchanges`}
+                         className={`block px-4 py-2 text-sm transition no-underline ${
+                           locale === lang.code
+                             ? 'bg-[#DAB2FF]/20 !text-[#DAB2FF] font-medium'
+                             : '!text-[#C9C9C9] hover:bg-white/5 hover:!text-white'
+                         }`}
+                         onClick={() => setShowLanguageDropdown(false)}
+                       >
+                         {tLang(lang.code)}
+                       </a>
+                     ))}
+                   </div>
+                 )}
+               </div>
+             </div>
+
+             {/* Logout Button */}
+             <div className="px-3">
+               <button
+                 onClick={handleLogout}
+                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-[#C9C9C9] hover:bg-white/5 transition w-full"
+               >
+                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M10 8V6C10 5.46957 10.2107 4.96086 10.5858 4.58579C10.9609 4.21071 11.4696 4 12 4H19C19.5304 4 20.0391 4.21071 20.4142 4.58579C20.7893 4.96086 21 5.46957 21 6V18C21 18.5304 20.7893 19.0391 20.4142 19.4142C20.0391 19.7893 19.5304 20 19 20H12C11.4696 20 10.9609 19.7893 10.5858 19.4142C10.2107 19.0391 10 18.5304 10 18V16" />
+                   <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M15 12H3L6 9" />
+                   <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 15L3 12" />
+                 </svg>
+                 <span className="text-sm font-medium">{tProfile('logout')}</span>
+               </button>
+             </div>
+           </div>
           </div>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-[20px]">
+        <main className="flex-1 p-[20px] profile-main">
           <div className="flex flex-col gap-6">
             {/* Page Header */}
-            <div className="flex items-end gap-6">
+            <div className="items-end gap-6 le-header">
               <div className="flex flex-col gap-1 flex-1">
-                <h1 className="!text-[#FCFCFC] text-2xl font-bold">{t('title')}</h1>
-                <p className="!text-[#FCFCFC] text-sm leading-7 m-0">{t('subtitle')}</p>
+                <div className="d-flex align-items-center justify-content-between profile-menu">
+                  <button
+                    ref={btnRef}
+                    className="navbar-toggler show-xs"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    onClick={() => setOpen(!open)}
+                  >
+                    <span className="navbar-toggler-icon" />
+                  </button>
+
+                  <h1 className="text-white text-2xl font-bold m-0">
+                    {t('title')}
+                  </h1>
+                </div>
+                <p className="!text-[#FCFCFC] text-sm leading-7 m-0 hidden-xs">{t('subtitle')}</p>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 le-box">
                 {/* Total Linked Badge */}
-                <div className="flex items-center gap-3 px-3 py-2 border border-white/10" style={{ borderRadius: '12px', background: 'rgba(248, 249, 250, 0.20)' }}>
+                <div className="le-box-link flex items-center gap-3 px-3 py-2 border border-white/10" style={{ borderRadius: '12px', background: 'rgba(248, 249, 250, 0.20)' }}>
                   <div className="flex flex-col gap-1 pr-3 border-r" style={{ borderRightColor: 'rgba(252, 252, 252, 0.20)', borderRightWidth: '1px' }}>
                     <span className="text-[#FCFCFC] text-sm font-normal uppercase leading-5 tracking-normal">{t('total_linked')}</span>
                     <span className="text-[#6EDAFF] text-2xl font-bold leading-tight">{exchanges.length}</span>
@@ -401,7 +459,7 @@ export default function LinkedExchangesPage() {
                     setUidCode('');
                     setShowLinkModal(true);
                   }}
-                  className="flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] transition"
+                  className="le-btn flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] transition"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 20 20">
                     <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M4.16675 10.0003H15.8334M10.0001 4.16699V15.8337" />
@@ -470,7 +528,7 @@ export default function LinkedExchangesPage() {
                             }}
                           >
                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M17.5 10C17.5 8.01088 16.7098 6.10322 15.3033 4.6967C13.8968 3.29018 11.9891 2.5 10 2.5C7.90329 2.50789 5.89081 3.32602 4.38333 4.78333L2.5 6.66667M2.5 6.66667V2.5M2.5 6.66667H6.66667M2.5 10C2.5 11.9891 3.29018 13.8968 4.6967 15.3033C6.10322 16.7098 8.01088 17.5 10 17.5C12.0967 17.4921 14.1092 16.674 15.6167 15.2167L17.5 13.3333M17.5 13.3333H13.3333M17.5 13.3333V17.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.5 10C17.5 8.01088 16.7098 6.10322 15.3033 4.6967C13.8968 3.29018 11.9891 2.5 10 2.5C7.90329 2.50789 5.89081 3.32602 4.38333 4.78333L2.5 6.66667M2.5 6.66667V2.5M2.5 6.66667H6.66667M2.5 10C2.5 11.9891 3.29018 13.8968 4.6967 15.3033C6.10322 16.7098 8.01088 17.5 10 17.5C12.0967 17.4921 14.1092 16.674 15.6167 15.2167L17.5 13.3333M17.5 13.3333H13.3333M17.5 13.3333V17.5" stroke="white"/>
                           </svg>
                             <span className="text-white text-xs font-medium whitespace-nowrap">{t('link_again')}</span>
                           </button>

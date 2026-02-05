@@ -1,6 +1,9 @@
 .pagination-page{
   justify-content: end;
 }
+.le-header{
+  display: flex;
+}
 @media (max-width: 768px) {
   .campaign-slide {
     padding: 0 40px;
@@ -448,8 +451,9 @@
   .profile-aside {
     position: fixed;
     backdrop-filter: blur(15px);
-    display: block;
-    z-index: 999;
+    z-index: 9999;
+    display: flex;
+    height: 100vh;
   }
   .profile-menu {
     h1 {
@@ -477,6 +481,18 @@
     span{
       font-size: 14px !important;
     }
+  }
+  .profile-main {
+    padding: 16px !important;
+  }
+  .le-header{
+    display: contents;
+  }
+  .le-box{
+    justify-content: space-between !important;
+  }
+  .btn-user-bottom {
+    margin-top: auto;
   }
 }
 @media (min-width: 993px) {
@@ -541,6 +557,15 @@
   }
   .calculator-left-section{
     margin-bottom: 30px;
+  }
+  .le-box{
+    display: contents !important;
+  }
+  .le-box-link{
+    justify-content: space-between !important;
+  }
+  .le-box-link .flex:first-child{
+    width: 70% !important;
   }
 }
 
