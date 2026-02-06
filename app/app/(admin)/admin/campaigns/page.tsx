@@ -7,7 +7,7 @@ import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 import Toast from '@/components/admin/Toast';
-
+import { formatDate } from '@/app/utils/dateUtils';
 interface Exchange {
   id: number;
   name: string;
@@ -321,16 +321,6 @@ export default function AdminCampaignsPage() {
     } finally {
       setDeleting(false);
     }
-  };
-
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
   };
 
   const getEditUrl = (campaignId: number) => {
