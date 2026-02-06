@@ -11,8 +11,8 @@ export class ZoomexAdapter extends BaseExchangeAdapter {
 
   async verifyAffiliateUid(uid: string): Promise<VerificationResult> {
     return {
-      status: 'REJECTED',
-      message: '',
+      status: 'PENDING',
+      message: 'Pending verification',
     };
   }
 }
