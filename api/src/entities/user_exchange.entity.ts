@@ -5,7 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Index,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { User } from './user.entity';
+import { Exchange } from './exchange.entity';
 
 @Entity('user_exchanges')
 @Index(['user_id', 'exchange_id'], { unique: true })
@@ -20,6 +24,14 @@ export class UserExchange {
 
   @Column()
   exchange_id: number;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
+  @ManyToOne(() => Exchange)
+  @JoinColumn({ name: 'exchange_id' })
+  exchange: Exchange;
 
   @Column({ length: 100 })
   exchange_uid: string;
