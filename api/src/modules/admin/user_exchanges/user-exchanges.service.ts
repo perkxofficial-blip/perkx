@@ -21,19 +21,8 @@ export class UserExchangesService {
 
     const queryBuilder = this.userExchangeRepository
       .createQueryBuilder('user_exchange')
-      .innerJoin('users', 'user', 'user_exchange.user_id = user.id')
-      .innerJoin('exchanges', 'exchange', 'user_exchange.exchange_id = exchange.id')
-      .select([
-        'user_exchange.id AS id',
-        'user.email AS user_email',
-        'exchange.name AS exchange_name',
-        'user_exchange.exchange_uid AS exchange_uid',
-        'user_exchange.created_at AS created_at',
-        'user_exchange.status AS status',
-        'user_exchange.updated_at AS updated_at',
-        'user_exchange.reason AS reason',
-        'user_exchange.updated_by AS updated_by',
-      ]);
+      .leftJoinAndSelect('user_exchange.user', 'user')
+      .leftJoinAndSelect('user_exchange.exchange', 'exchange');
 
     // Apply filters
     if (query.exchange_id) {
@@ -51,17 +40,18 @@ export class UserExchangesService {
     queryBuilder.orderBy('user_exchange.created_at', 'DESC');
 
     // Get total count for pagination
+    // Note: With ManyToOne (1-1) relations, count remains accurate even with joins
     const total = await queryBuilder.getCount();
 
     // Apply pagination
     queryBuilder.skip(skip).take(limit);
 
-    const results = await queryBuilder.getRawMany();
+    const results = await queryBuilder.getMany();
 
     const data = results.map((row) => ({
       id: row.id,
-      user_email: row.user_email,
-      exchange_name: row.exchange_name,
+      user_email: row.user.email,
+      exchange_name: row.exchange.name,
       exchange_uid: row.exchange_uid,
       created_at: row.created_at,
       status: row.status,
