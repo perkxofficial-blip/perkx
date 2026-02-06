@@ -160,11 +160,27 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
                   </Link>
                 </li>
 
+                {/* Exchanges Manager */}
+                <li>
+                  <Link
+                    href="/admin/exchanges-manager"
+                    className={`group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out ${pathname?.startsWith('/admin/exchanges-manager')
+                      ? 'bg-blue-50 text-blue-600 dark:bg-gray-700 dark:text-blue-400'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Exchanges Management
+                  </Link>
+                </li>
+
                 {/* Exchange Partner Config */}
                 <li>
                   <Link
                     href="/admin/exchanges"
-                    className={`group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out ${pathname?.startsWith('/admin/exchanges')
+                    className={`group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out ${pathname?.startsWith('/admin/exchanges') && pathname !== '/admin/exchanges-manager'
                       ? 'bg-blue-50 text-blue-600 dark:bg-gray-700 dark:text-blue-400'
                       : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                       }`}

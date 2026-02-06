@@ -355,45 +355,6 @@ export default function UserProfilePage() {
               </a>
             </div>
 
-            {/* Language Switcher */}
-            <div className="px-3 mb-3">
-              <div className="relative">
-                <button
-                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                  className="w-full flex items-center justify-between gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-[#C9C9C9]"
-                >
-                  <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                    </svg>
-                    <span className="text-sm font-medium">{tLang(locale)}</span>
-                  </div>
-                  <svg className={`w-4 h-4 transition-transform ${showLanguageDropdown ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-
-                {showLanguageDropdown && (
-                  <div className="absolute top-full left-0 right-0 mt-1 bg-[#2A2651] rounded-lg shadow-lg overflow-hidden z-50 border border-white/10">
-                    {LANGUAGES.map((lang) => (
-                      <a
-                        key={lang.code}
-                        href={`/${lang.code}/user/profile`}
-                        className={`block px-4 py-2 text-sm transition ${
-                          locale === lang.code
-                            ? 'bg-[#DAB2FF]/20 text-[#DAB2FF] font-medium'
-                            : 'text-[#C9C9C9] hover:bg-white/5'
-                        }`}
-                        onClick={() => setShowLanguageDropdown(false)}
-                      >
-                        {tLang(lang.code)}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
             {/* Navigation */}
             <nav className="flex-1 flex flex-col gap-3 px-3">
               <a
@@ -416,8 +377,48 @@ export default function UserProfilePage() {
               </a>
             </nav>
 
-            {/* Logout Button */}
-            <div className="px-3 mt-auto">
+           <div className="btn-user-bottom">
+             {/* Language Switcher */}
+             <div className="px-3 mb-3">
+               <div className="relative">
+                 <button
+                   onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                   className="w-full flex items-center justify-between gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-[#C9C9C9]"
+                 >
+                   <div className="flex items-center gap-2">
+                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                       <path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H2M12 22C6.47715 22 2 17.5228 2 12M12 22C9.43223 19.3038 8 15.7233 8 12C8 8.27674 9.43223 4.69615 12 2M12 22C14.5678 19.3038 16 15.7233 16 12C16 8.27674 14.5678 4.69615 12 2M2 12C2 6.47715 6.47715 2 12 2" stroke="#C9C9C9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                     </svg>
+                     <span className="text-sm font-medium">{tLang(locale)}</span>
+                   </div>
+                   <svg className={`w-4 h-4 transition-transform ${showLanguageDropdown ? '-rotate-90' : ''}`} fill="currentColor" viewBox="0 0 20 20">
+                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                   </svg>
+                 </button>
+
+                 {showLanguageDropdown && (
+                   <div className="absolute left-full bottom-0 ml-1 bg-[#2A2651] rounded-lg shadow-lg overflow-hidden z-[100] border border-white/10 min-w-[200px]">
+                     {LANGUAGES.map((lang) => (
+                       <a
+                         key={lang.code}
+                         href={`/${lang.code}/user/profile`}
+                         className={`block px-4 py-2 text-sm transition no-underline ${
+                           locale === lang.code
+                             ? 'bg-[#DAB2FF]/20 !text-[#DAB2FF] font-medium'
+                             : '!text-[#C9C9C9] hover:bg-white/5 hover:!text-white'
+                         }`}
+                         onClick={() => setShowLanguageDropdown(false)}
+                       >
+                         {tLang(lang.code)}
+                       </a>
+                     ))}
+                   </div>
+                 )}
+               </div>
+             </div>
+
+             {/* Logout Button */}
+             <div className="px-3">
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-[#C9C9C9] hover:bg-white/5 transition w-full"
@@ -430,6 +431,7 @@ export default function UserProfilePage() {
                 <span className="text-sm font-medium">{t('logout')}</span>
               </button>
             </div>
+           </div>
           </div>
         </aside>
 
