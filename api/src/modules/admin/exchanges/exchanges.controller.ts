@@ -2,10 +2,6 @@ import {
   Controller,
   Get,
   Post,
-  Patch,
-  Param,
-  Query,
-  Body,
   UseGuards,
   UseInterceptors,
   UploadedFile,
@@ -14,7 +10,6 @@ import {
   FileValidator,
   HttpCode,
   HttpStatus,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
@@ -24,14 +19,9 @@ import {
   ApiBearerAuth,
   ApiConsumes,
   ApiBody,
-  ApiQuery,
-  ApiParam,
 } from '@nestjs/swagger';
 import { AdminExchangesService } from './exchanges.service';
 import { AdminJwtAuthGuard } from '../auth/guards';
-import { CurrentAdmin } from '../../../common/decorators';
-import { Admin } from '../../../entities';
-import { ListUserExchangesQueryDto, UpdateUserExchangeDto } from './dto';
 
 /**
  * Custom validator for CSV files
@@ -149,116 +139,4 @@ export class AdminExchangesController {
     return await this.exchangesService.importExchangeProducts(file);
   }
 
-  @Get('user_exchanges')
-  @ApiOperation({
-    summary: 'Get list of user exchanges',
-    description: 'Returns paginated list of user exchanges with filters by exchange_id and status',
-  })
-  @ApiQuery({
-    name: 'exchange_id',
-    required: false,
-    type: Number,
-    description: 'Filter by exchange ID',
-  })
-  @ApiQuery({
-    name: 'status',
-    required: false,
-    enum: ['ACTIVE', 'PENDING', 'REJECTED'],
-    description: 'Filter by status',
-  })
-  @ApiQuery({
-    name: 'page',
-    required: false,
-    type: Number,
-    description: 'Page number (default: 1)',
-    example: 1,
-  })
-  @ApiQuery({
-    name: 'limit',
-    required: false,
-    type: Number,
-    description: 'Number of items per page (default: 50)',
-    example: 50,
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'List of user exchanges retrieved successfully',
-    schema: {
-      type: 'object',
-      properties: {
-        data: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              id: { type: 'number' },
-              user_email: { type: 'string' },
-              exchange_name: { type: 'string' },
-              exchange_uid: { type: 'string' },
-              created_at: { type: 'string', format: 'date-time' },
-              status: { type: 'string', enum: ['ACTIVE', 'PENDING', 'REJECTED'] },
-              updated_at: { type: 'string', format: 'date-time' },
-              reason: { type: 'string', nullable: true },
-              updated_by: { type: 'string', nullable: true },
-            },
-          },
-        },
-        pagination: {
-          type: 'object',
-          properties: {
-            total: { type: 'number', description: 'Total number of items' },
-            page: { type: 'number', description: 'Current page number' },
-            limit: { type: 'number', description: 'Number of items per page' },
-            totalPages: { type: 'number', description: 'Total number of pages' },
-          },
-        },
-      },
-    },
-  })
-  async getUserExchanges(@Query() query: ListUserExchangesQueryDto) {
-    return await this.exchangesService.getUserExchanges(query);
-  }
-
-  @Patch('user_exchanges/uid/:id/update')
-  @ApiOperation({
-    summary: 'Update user exchange status and reason',
-    description: 'Update status (required) and reason (optional) for a user exchange',
-  })
-  @ApiParam({
-    name: 'id',
-    type: Number,
-    description: 'User exchange ID',
-  })
-  @ApiBody({
-    type: UpdateUserExchangeDto,
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'User exchange updated successfully',
-    schema: {
-      type: 'object',
-      properties: {
-        id: { type: 'number' },
-        status: { type: 'string', enum: ['ACTIVE', 'PENDING', 'REJECTED'] },
-        reason: { type: 'string', nullable: true },
-        updated_by: { type: 'string' },
-        updated_at: { type: 'string', format: 'date-time' },
-      },
-    },
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'User exchange not found',
-  })
-  async updateUserExchange(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateDto: UpdateUserExchangeDto,
-    @CurrentAdmin() admin: Admin,
-  ) {
-    return await this.exchangesService.updateUserExchange(
-      id,
-      updateDto,
-      admin.username,
-    );
-  }
 }
