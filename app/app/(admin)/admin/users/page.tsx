@@ -6,6 +6,7 @@ import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
+import { formatDate } from '@/app/utils/dateUtils';
 
 interface User {
   id: number;
@@ -176,16 +177,6 @@ export default function AdminUsersPage() {
     setStatusFilter('ALL');
     setDateFrom('');
     setDateTo('');
-  };
-
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
   };
 
   // Pagination numbers to display

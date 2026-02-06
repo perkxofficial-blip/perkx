@@ -7,6 +7,7 @@ import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 import Toast from '@/components/admin/Toast';
+import { formatDate, formatDateTime } from '@/app/utils/dateUtils';
 
 interface UserDetail {
   id: number;
@@ -139,29 +140,6 @@ export default function UserDetailPage() {
     } finally {
       setActionLoading(false);
     }
-  };
-
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
-
-  const formatDateTime = (dateString?: string) => {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds}`;
   };
 
   if (loading) {

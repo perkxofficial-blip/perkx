@@ -7,6 +7,7 @@ import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
 import Toast from '@/components/admin/Toast';
 import Link from 'next/link';
+import { formatDateTimeForInput } from '@/app/utils/dateUtils';
 
 interface FormData {
   title: string;
@@ -164,22 +165,6 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
 
     fetchData();
   }, [resolvedParams.id]);
-
-  const formatDateTimeForInput = (dateString?: string) => {
-    if (!dateString) return '';
-    try {
-      // Parse ISO string directly to avoid timezone conversion
-      // Expected format: "2024-01-15T10:30:00.000Z" or "2024-01-15T10:30:00"
-      const isoMatch = dateString.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
-      if (isoMatch) {
-        const [, year, month, day, hour, minute] = isoMatch;
-        return `${year}-${month}-${day}T${hour}:${minute}`;
-      }
-      return '';
-    } catch {
-      return '';
-    }
-  };
 
   const handleInputChange = (field: keyof FormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));

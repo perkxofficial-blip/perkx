@@ -8,6 +8,7 @@ import { endpoints } from '@/services/endpoints';
 import Link from 'next/link';
 import Toast from '@/components/admin/Toast';
 import { getExchangeStatusBadge } from '@/app/utils/statusBadge';
+import { formatDate, formatDateTime } from '@/app/utils/dateUtils';
 
 interface Exchange {
   id: number;
@@ -168,16 +169,6 @@ export default function ExchangesManagerPage() {
     }, 200);
   };
 
-  const formatDateTime = (dateString?: string) => {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
-
   useEffect(() => {
     loadExchangeOptions();
   }, []);
@@ -248,14 +239,8 @@ export default function ExchangesManagerPage() {
     }
   };
 
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
+  const formatStatus = (status: string) => {
+    return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
   };
 
   const getExchangeLogo = (exchangeName: string) => {
@@ -478,7 +463,7 @@ export default function ExchangesManagerPage() {
                       </td>
                       <td className="px-6 py-4">
                         <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${statusBadge.bg} ${statusBadge.text}`}>
-                          {exchange.status}
+                          {formatStatus(exchange.status)}
                         </span>
                       </td>
                       <td className="px-6 py-4">
@@ -655,7 +640,7 @@ export default function ExchangesManagerPage() {
             {/* Modal Header */}
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Verification Details - {selectedExchange.status === 'ACTIVE' ? 'Active' : 'Rejected'}
+                Verification Details - {formatStatus(selectedExchange.status)}
               </h3>
             </div>
 
