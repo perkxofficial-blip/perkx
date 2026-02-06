@@ -11,8 +11,8 @@ export class KucoinAdapter extends BaseExchangeAdapter {
 
   async verifyAffiliateUid(uid: string): Promise<VerificationResult> {
     return {
-      status: 'REJECTED',
-      message: '',
+      status: 'PENDING',
+      message: 'Pending verification',
     };
   }
 }

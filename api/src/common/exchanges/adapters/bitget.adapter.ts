@@ -110,7 +110,7 @@ export class BitgetAdapter extends BaseExchangeAdapter {
       // Get timestamp from Bitget server, fallback to local time if failed
       let timestamp = await this.getServerTime();
       if (!timestamp) {
-        timestamp = (Date.now() - 105000).toString();
+        timestamp = Date.now().toString();
       }
 
       // For POST request, body should be JSON string
