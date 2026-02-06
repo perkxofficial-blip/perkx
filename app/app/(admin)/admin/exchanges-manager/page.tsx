@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { auth } from '@/services/auth';
 import { apiClient } from '@/services/api';
 import { endpoints } from '@/services/endpoints';
@@ -11,6 +11,8 @@ import { getExchangeStatusBadge } from '@/app/utils/statusBadge';
 
 interface Exchange {
   id: number;
+  user_id: number;
+  user_email?: string;
   exchange_id: number;
   exchange_uid: string;
   exchange_name: string;
@@ -25,17 +27,7 @@ interface Exchange {
   updated_by?: string;
   rejected_on?: string;
   reason?: string;
-}
-
-interface UserDetail {
-  id: number;
-  email: string;
-  first_name?: string;
-  last_name?: string;
-  exchanges: Array<{
-    name: string;
-    uid: string;
-  }>;
+  imageError?: boolean;
 }
 
 interface ExchangeOption {
@@ -45,24 +37,9 @@ interface ExchangeOption {
   logo_url?: string;
 }
 
-export default function UserExchangesPage() {
-  const params = useParams();
+export default function ExchangesManagerPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const userId = params?.id as string;
 
-  // Preserve filter parameters for back navigation
-  const filterParams = new URLSearchParams();
-  if (searchParams.get('search')) filterParams.set('search', searchParams.get('search')!);
-  if (searchParams.get('status')) filterParams.set('status', searchParams.get('status')!);
-  if (searchParams.get('dateFrom')) filterParams.set('dateFrom', searchParams.get('dateFrom')!);
-  if (searchParams.get('dateTo')) filterParams.set('dateTo', searchParams.get('dateTo')!);
-  if (searchParams.get('page')) filterParams.set('page', searchParams.get('page')!);
-  if (searchParams.get('rowsPerPage')) filterParams.set('rowsPerPage', searchParams.get('rowsPerPage')!);
-  
-  const backToDetailUrl = `/admin/users/${userId}${filterParams.toString() ? `?${filterParams.toString()}` : ''}`;
-
-  const [user, setUser] = useState<UserDetail | null>(null);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
   const [exchangeOptions, setExchangeOptions] = useState<ExchangeOption[]>([]);
   const [loading, setLoading] = useState(true);
@@ -74,9 +51,13 @@ export default function UserExchangesPage() {
   });
 
   const [filters, setFilters] = useState({
-    exchangeName: '',
+    exchangeId: '',
     status: '',
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalCount, setTotalCount] = useState(0);
 
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedExchange, setSelectedExchange] = useState<Exchange | null>(null);
@@ -105,12 +86,10 @@ export default function UserExchangesPage() {
 
     setIsSubmitting(true);
     try {
-      // Call API to approve exchange
       await apiClient.patch(endpoints.admin.updateUserExchange(exchangeId), {
         status: 'ACTIVE'
       }, token);
       showToast('Exchange approved successfully', 'success');
-      // Reload exchanges
       await loadExchanges();
     } catch (error: any) {
       console.error('Error approving exchange:', error);
@@ -155,14 +134,12 @@ export default function UserExchangesPage() {
 
     setIsSubmitting(true);
     try {
-      // Call API to reject exchange
       await apiClient.patch(endpoints.admin.updateUserExchange(exchangeToReject.id), {
         status: 'REJECTED',
         reason: rejectReason.trim()
       }, token);
       showToast('Exchange rejected successfully', 'success');
       handleCloseRejectModal();
-      // Reload exchanges
       await loadExchanges();
     } catch (error: any) {
       console.error('Error rejecting exchange:', error);
@@ -202,40 +179,12 @@ export default function UserExchangesPage() {
   };
 
   useEffect(() => {
-    if (!userId) return;
-
-    const token = auth.getAdminToken();
-    if (!token) {
-      setError('No authentication token found');
-      setLoading(false);
-      return;
-    }
-
-    // Load user basic info
-    apiClient.get(endpoints.admin.userDetail(userId), token || undefined)
-      .then(data => {
-        if (data.statusCode === 200 && data.data) {
-          setUser(data.data);
-        } else if (data.id) {
-          setUser(data);
-        } else {
-          setError('User not found');
-        }
-      })
-      .catch(err => {
-        console.error('Error fetching user:', err);
-        if (err.status === 500 || err.status === 401 || err.status === 403) {
-          auth.clearAdminToken();
-          window.location.href = '/admin/login';
-        } else {
-          setError('Failed to load user details');
-        }
-      });
-
-    // Load user exchanges and exchange options
-    loadExchanges();
     loadExchangeOptions();
-  }, [userId]);
+  }, []);
+
+  useEffect(() => {
+    loadExchanges();
+  }, [currentPage, rowsPerPage, filters.exchangeId, filters.status]);
 
   const loadExchangeOptions = async () => {
     const token = auth.getAdminToken();
@@ -259,17 +208,32 @@ export default function UserExchangesPage() {
       return;
     }
 
+    setLoading(true);
     try {
-      // Get user exchanges from admin exchanges endpoint
-      const response = await apiClient.get(endpoints.admin.userExchanges, token);
-      const exchangesData = Array.isArray(response.data) 
-        ? response.data 
-        : (response.data?.exchanges || response.data?.data || []);
-      console.log('Exchanges data:', exchangesData);
-      if (exchangesData.length > 0) {
-        console.log('First exchange structure:', exchangesData[0]);
+      // Build query parameters for API
+      const params = new URLSearchParams();
+      params.append('page', currentPage.toString());
+      params.append('limit', rowsPerPage.toString());
+      
+      // Add filters if present
+      if (filters.exchangeId) {
+        params.append('exchange_id', filters.exchangeId);
       }
+      if (filters.status) {
+        params.append('status', filters.status);
+      }
+
+      const url = `${endpoints.admin.userExchanges}?${params.toString()}`;
+      const response = await apiClient.get(url, token);
+      
+      // Parse response structure
+      // Response format: { statusCode, message, data: { data: [...], pagination: {...} } }
+      const exchangesData = response.data?.data || [];
+      const pagination = response.data?.pagination || {};
+      const total = pagination.total || 0;
+      
       setExchanges(exchangesData);
+      setTotalCount(total);
       setLoading(false);
     } catch (error: any) {
       console.error('Error loading exchanges:', error);
@@ -294,20 +258,28 @@ export default function UserExchangesPage() {
     return `${day} ${month} ${year}`;
   };
 
-  const filteredExchanges = exchanges.filter(exchange => {
-    // Compare exchange name from selectbox with exchange_name in list
-    const matchesExchange = !filters.exchangeName || 
-      filters.exchangeName === exchange.exchange_name;
-    const matchesStatus = !filters.status || exchange.status === filters.status;
-    return matchesExchange && matchesStatus;
-  });
+  const getExchangeLogo = (exchangeName: string) => {
+    return `/images/exchanges/${exchangeName.toLowerCase()}.png`;
+  };
+
+  // Server-side pagination - API handles filtering and pagination
+  const totalPages = Math.ceil(totalCount / rowsPerPage);
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const endIndex = Math.min(startIndex + exchanges.length, totalCount);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters.exchangeId, filters.status]);
 
   const clearFilters = () => {
     setFilters({
-      exchangeName: '',
+      exchangeId: '',
       status: '',
     });
   };
+
+  // No need for statistics object anymore
 
   if (loading) {
     return (
@@ -320,19 +292,13 @@ export default function UserExchangesPage() {
     );
   }
 
-  if (error || !user) {
+  if (error) {
     return (
       <div className="p-12 text-center">
         <svg className="mx-auto h-12 w-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
         <p className="mt-4 text-gray-500 dark:text-gray-400 font-medium">{error}</p>
-        <Link
-          href={backToDetailUrl}
-          className="mt-4 inline-block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
-        >
-          Back to User Detail
-        </Link>
       </div>
     );
   }
@@ -346,15 +312,7 @@ export default function UserExchangesPage() {
             Dashboard
           </Link>
           <span className="mx-2">/</span>
-          <Link href="/admin/users" className="hover:text-gray-700 dark:hover:text-gray-200">
-            User Management
-          </Link>
-          <span className="mx-2">/</span>
-          <Link href={backToDetailUrl} className="hover:text-gray-700 dark:hover:text-gray-200">
-            {user.email}
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-900 dark:text-white">Linked Exchanges</span>
+          <span className="text-gray-900 dark:text-white">Exchange Management</span>
         </nav>
       </div>
 
@@ -363,10 +321,10 @@ export default function UserExchangesPage() {
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Linked Exchanges</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Exchange Management</h1>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Review and validate user-submitted UID links across exchanges for {user.email}
+              Manage and validate all user exchange connections across the platform
             </p>
           </div>
           <div className="ml-6">
@@ -376,7 +334,7 @@ export default function UserExchangesPage() {
               </div>
               <div className="flex items-center gap-2">
                 <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                  {exchanges.length}
+                  {totalCount}
                 </div>
                 <div className="w-10 h-10 rounded-lg bg-blue-600 dark:bg-blue-500 flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,13 +355,13 @@ export default function UserExchangesPage() {
               Exchange
             </label>
             <select
-              value={filters.exchangeName}
-              onChange={(e) => setFilters({ ...filters, exchangeName: e.target.value })}
+              value={filters.exchangeId}
+              onChange={(e) => setFilters({ ...filters, exchangeId: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white text-sm"
             >
               <option value="">All Exchanges</option>
               {exchangeOptions.map((exchange) => (
-                <option key={exchange.id} value={exchange.name}>
+                <option key={exchange.id} value={exchange.id}>
                   {exchange.name}
                 </option>
               ))}
@@ -426,8 +384,8 @@ export default function UserExchangesPage() {
           </div>
           <button
             onClick={clearFilters}
-            disabled={!filters.exchangeName && !filters.status}
-            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer pb-2"
+            disabled={!filters.exchangeId && !filters.status}
+            className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Clear Filters
           </button>
@@ -461,33 +419,43 @@ export default function UserExchangesPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
-              {filteredExchanges.length === 0 ? (
+              {exchanges.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
-                    {exchanges.length === 0 ? 'No exchanges connected' : 'No exchanges match the current filters'}
+                    {totalCount === 0 ? 'No exchanges found' : 'No exchanges match the current filters'}
                   </td>
                 </tr>
               ) : (
-                filteredExchanges.map((exchange) => {
+                exchanges.map((exchange) => {
                   const statusBadge = getExchangeStatusBadge(exchange.status);
                   return (
                     <tr key={exchange.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                       <td className="px-6 py-4">
-                        <span className="text-sm text-gray-900 dark:text-white">{user?.email}</span>
+                        <Link
+                          href={`/admin/users/${exchange.user_id}`}
+                          className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                        >
+                          {exchange.user_email || '-'}
+                        </Link>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-2">
-                            {exchange.logo_url ? (
-                              <img 
-                                src={exchange.logo_url} 
-                                alt={exchange.exchange_name}
-                                className="w-full h-full object-contain"
-                              />
-                            ) : (
+                          <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                            {exchange.imageError ? (
                               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                               </svg>
+                            ) : (
+                              <img 
+                                src={getExchangeLogo(exchange.exchange_name)}
+                                alt={exchange.exchange_name}
+                                className="w-full h-full object-contain p-1"
+                                onError={() => {
+                                  setExchanges(prev => prev.map(ex => 
+                                    ex.id === exchange.id ? { ...ex, imageError: true } : ex
+                                  ));
+                                }}
+                              />
                             )}
                           </div>
                           <span className="font-medium text-gray-900 dark:text-white">{exchange.exchange_name}</span>
@@ -550,11 +518,54 @@ export default function UserExchangesPage() {
           </table>
         </div>
         
-        {/* Footer Summary */}
+        {/* Footer with Pagination */}
         <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Showing {filteredExchanges.length} of {exchanges.length} exchanges
-          </p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Showing {totalCount > 0 ? startIndex + 1 : 0} to {endIndex} of {totalCount} exchanges
+              </p>
+              <div className="flex items-center gap-2">
+                <label className="text-sm text-gray-600 dark:text-gray-400">Rows per page:</label>
+                <select
+                  value={rowsPerPage}
+                  onChange={(e) => {
+                    setRowsPerPage(Number(e.target.value));
+                    setCurrentPage(1);
+                  }}
+                  className="px-2 py-1 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white text-sm"
+                >
+                  <option value={10}>10</option>
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+              </div>
+            </div>
+            
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Previous
+                </button>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
