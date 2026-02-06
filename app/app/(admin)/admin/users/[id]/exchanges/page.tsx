@@ -364,9 +364,6 @@ export default function UserExchangesPage() {
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Linked Exchanges</h1>
-              <span className="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
-                {exchanges.length} CONNECTED
-              </span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Review and validate user-submitted UID links across exchanges for {user.email}
