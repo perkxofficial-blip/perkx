@@ -43,6 +43,19 @@ export class UserExchangesService {
     // Note: With ManyToOne (1-1) relations, count remains accurate even with joins
     const total = await queryBuilder.getCount();
 
+    // Get total pending count (with same filters except status)
+    const pendingCountQueryBuilder = this.userExchangeRepository
+      .createQueryBuilder('user_exchange')
+      .where('user_exchange.status = :pendingStatus', { pendingStatus: 'PENDING' });
+
+    if (query.exchange_id) {
+      pendingCountQueryBuilder.andWhere('user_exchange.exchange_id = :exchangeId', {
+        exchangeId: query.exchange_id,
+      });
+    }
+
+    const totalPending = await pendingCountQueryBuilder.getCount();
+
     // Apply pagination
     queryBuilder.skip(skip).take(limit);
 
@@ -50,8 +63,8 @@ export class UserExchangesService {
 
     const data = results.map((row) => ({
       id: row.id,
-      user_email: row.user.email,
-      exchange_name: row.exchange.name,
+      user_email: row.user?.email,
+      exchange_name: row.exchange?.name,
       exchange_uid: row.exchange_uid,
       created_at: row.created_at,
       status: row.status,
@@ -67,6 +80,7 @@ export class UserExchangesService {
         page,
         limit,
         totalPages: Math.ceil(total / limit),
+        totalPending,
       },
     };
   }
