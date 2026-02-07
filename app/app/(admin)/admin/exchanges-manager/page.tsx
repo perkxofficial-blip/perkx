@@ -67,6 +67,9 @@ export default function ExchangesManagerPage() {
   const [rejectModalMounted, setRejectModalMounted] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
   const [exchangeToReject, setExchangeToReject] = useState<Exchange | null>(null);
+  const [showApproveModal, setShowApproveModal] = useState(false);
+  const [approveModalMounted, setApproveModalMounted] = useState(false);
+  const [exchangeToApprove, setExchangeToApprove] = useState<Exchange | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const showToast = (message: string, type: 'success' | 'error' | 'warning' | 'info' = 'info') => {
@@ -78,7 +81,23 @@ export default function ExchangesManagerPage() {
     showToast('UID copied to clipboard', 'success');
   };
 
-  const handleApprove = async (exchangeId: number) => {
+  const handleApproveClick = (exchange: Exchange) => {
+    setExchangeToApprove(exchange);
+    setShowApproveModal(true);
+    setTimeout(() => setApproveModalMounted(true), 10);
+  };
+
+  const handleCloseApproveModal = () => {
+    setApproveModalMounted(false);
+    setTimeout(() => {
+      setShowApproveModal(false);
+      setExchangeToApprove(null);
+    }, 200);
+  };
+
+  const handleSubmitApprove = async () => {
+    if (!exchangeToApprove) return;
+
     const token = auth.getAdminToken();
     if (!token) {
       router.push('/admin/login');
@@ -87,10 +106,11 @@ export default function ExchangesManagerPage() {
 
     setIsSubmitting(true);
     try {
-      await apiClient.patch(endpoints.admin.updateUserExchange(exchangeId), {
+      await apiClient.patch(endpoints.admin.updateUserExchange(exchangeToApprove.id), {
         status: 'ACTIVE'
       }, token);
-      showToast('Exchange approved successfully', 'success');
+      showToast('UID approved successfully.', 'success');
+      handleCloseApproveModal();
       await loadExchanges();
     } catch (error: any) {
       console.error('Error approving exchange:', error);
@@ -139,7 +159,7 @@ export default function ExchangesManagerPage() {
         status: 'REJECTED',
         reason: rejectReason.trim()
       }, token);
-      showToast('Exchange rejected successfully', 'success');
+      showToast('UID rejected successfully.', 'success');
       handleCloseRejectModal();
       await loadExchanges();
     } catch (error: any) {
@@ -472,7 +492,7 @@ export default function ExchangesManagerPage() {
                           {exchange.status === 'PENDING' ? (
                             <>
                               <button
-                                onClick={() => handleApprove(exchange.id)}
+                                onClick={() => handleApproveClick(exchange)}
                                 disabled={isSubmitting}
                                 className="px-6 py-2 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                               >
@@ -554,6 +574,77 @@ export default function ExchangesManagerPage() {
           </div>
         </div>
       </div>
+
+      {/* Approve Modal */}
+      {showApproveModal && exchangeToApprove && (
+        <div 
+          className={`fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 transition-opacity duration-200 ${
+            approveModalMounted ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={handleCloseApproveModal}
+        >
+          <div 
+            className={`bg-white dark:bg-gray-800 rounded-lg max-w-md w-full shadow-xl transition-all duration-200 ${
+              approveModalMounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Approve UID Verification
+              </h3>
+              <button
+                onClick={handleCloseApproveModal}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Are you sure you want to approve this UID verification?
+              </p>
+              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">User:</span>
+                  <span className="text-sm text-gray-900 dark:text-white">{exchangeToApprove.user_email}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Exchange:</span>
+                  <span className="text-sm text-gray-900 dark:text-white">{exchangeToApprove.exchange_name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">UID:</span>
+                  <span className="text-sm font-mono text-gray-900 dark:text-white">{exchangeToApprove.exchange_uid}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-3">
+              <button
+                onClick={handleCloseApproveModal}
+                disabled={isSubmitting}
+                className="px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSubmitApprove}
+                disabled={isSubmitting}
+                className="px-6 py-2 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Approving...' : 'Confirm Approval'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Reject Modal */}
       {showRejectModal && exchangeToReject && (
