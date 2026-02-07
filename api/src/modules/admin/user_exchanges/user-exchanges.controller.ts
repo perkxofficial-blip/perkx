@@ -33,7 +33,7 @@ export class UserExchangesController {
   @Get()
   @ApiOperation({
     summary: 'Get list of user exchanges',
-    description: 'Returns paginated list of user exchanges with filters by exchange_id and status',
+    description: 'Returns paginated list of user exchanges with filters by exchange_id and status. Includes totalPending count in pagination.',
   })
   @ApiQuery({
     name: 'exchange_id',
@@ -91,6 +91,7 @@ export class UserExchangesController {
             page: { type: 'number', description: 'Current page number' },
             limit: { type: 'number', description: 'Number of items per page' },
             totalPages: { type: 'number', description: 'Total number of pages' },
+            totalPending: { type: 'number', description: 'Total number of pending verifications (applies same filters as query)' },
           },
         },
       },
