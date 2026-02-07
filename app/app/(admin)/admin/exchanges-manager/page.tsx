@@ -240,6 +240,7 @@ export default function ExchangesManagerPage() {
   };
 
   const formatStatus = (status: string) => {
+    if (status === 'ACTIVE') return 'Approved';
     return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
   };
 
@@ -297,7 +298,7 @@ export default function ExchangesManagerPage() {
             Dashboard
           </Link>
           <span className="mx-2">/</span>
-          <span className="text-gray-900 dark:text-white">Exchange Management</span>
+          <span className="text-gray-900 dark:text-white">UID Verification</span>
         </nav>
       </div>
 
@@ -306,7 +307,7 @@ export default function ExchangesManagerPage() {
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Exchange Management</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">UID Verification</h1>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Manage and validate all user exchange connections across the platform
@@ -362,7 +363,7 @@ export default function ExchangesManagerPage() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white text-sm"
             >
               <option value="">All Statuses</option>
-              <option value="ACTIVE">Active</option>
+              <option value="ACTIVE">Approved</option>
               <option value="PENDING">Pending</option>
               <option value="REJECTED">Rejected</option>
             </select>
