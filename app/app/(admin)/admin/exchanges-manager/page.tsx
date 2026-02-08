@@ -59,6 +59,7 @@ export default function ExchangesManagerPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
+  const [totalPending, setTotalPending] = useState(0);
 
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedExchange, setSelectedExchange] = useState<Exchange | null>(null);
@@ -242,9 +243,11 @@ export default function ExchangesManagerPage() {
       const exchangesData = response.data?.data || [];
       const pagination = response.data?.pagination || {};
       const total = pagination.total || 0;
+      const pending = pagination.totalPending || 0;
       
       setExchanges(exchangesData);
       setTotalCount(total);
+      setTotalPending(pending);
       setLoading(false);
     } catch (error: any) {
       console.error('Error loading exchanges:', error);
@@ -336,11 +339,11 @@ export default function ExchangesManagerPage() {
           <div className="ml-6">
             <div className="flex flex-col items-center justify-center px-6 py-4 rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 min-w-[180px]">
               <div className="text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-1">
-                TOTAL REQUESTS
+                TOTAL PENDING REQUESTS
               </div>
               <div className="flex items-center gap-2">
                 <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                  {totalCount}
+                  {totalPending}
                 </div>
                 <div className="w-10 h-10 rounded-lg bg-blue-600 dark:bg-blue-500 flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
