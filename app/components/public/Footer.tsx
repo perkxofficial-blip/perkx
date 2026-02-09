@@ -17,16 +17,16 @@ export default async function Footer() {
            />
          </div>
          <div className="col-md-4 hidden-mb">
-           <h3 className="footer-title">{t('footer.platform')}</h3>
+           <p className="footer-title">{t('footer.platform')}</p>
          </div>
          <div className="col-md-4 hidden-mb">
-           <h3 className="footer-title">{t('footer.resources')}</h3>
+           <p className="footer-title">{t('footer.resources')}</p>
          </div>
        </div>
         <div className="row footer-info">
           <div className="col-md-4"><p>{t('footer.desc')}</p></div>
           <div className="col-md-4 show-mb">
-            <h3 className="footer-title">{t('footer.platform')}</h3>
+            <p className="footer-title">{t('footer.platform')}</p>
           </div>
           <div className="col-md-4">
             <ul>
@@ -35,7 +35,7 @@ export default async function Footer() {
             </ul>
           </div>
           <div className="col-md-4 show-mb">
-            <h3 className="footer-title">{t('footer.resources')}</h3>
+            <p className="footer-title">{t('footer.resources')}</p>
           </div>
           <div className="col-md-4">
             <ul>
