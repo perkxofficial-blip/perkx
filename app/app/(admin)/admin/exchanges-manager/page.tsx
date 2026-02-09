@@ -270,21 +270,16 @@ export default function ExchangesManagerPage() {
   // Format date time to UTC+8 timezone
   const formatDateTimeUTC8 = (dateString?: string) => {
     if (!dateString) return '-';
-    
     // Parse the UTC date
     const date = new Date(dateString);
-    
-    // Convert to UTC+8 by adding 8 hours to UTC time
-    const utc8Date = new Date(date.getTime() + (8 * 60 * 60 * 1000));
-    
     // Extract date components in UTC
-    const day = String(utc8Date.getUTCDate()).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[utc8Date.getUTCMonth()];
-    const year = utc8Date.getUTCFullYear();
-    const hours = String(utc8Date.getUTCHours()).padStart(2, '0');
-    const minutes = String(utc8Date.getUTCMinutes()).padStart(2, '0');
-    const seconds = String(utc8Date.getUTCSeconds()).padStart(2, '0');
+    const month = months[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
+    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
     
     return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds} (UTC+8)`;
   };
