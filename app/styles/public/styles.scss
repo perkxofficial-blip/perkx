@@ -294,7 +294,6 @@ header {
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-family: "DM Sans";
       font-size: 68px;
       font-style: normal;
       font-weight: 700;
@@ -307,7 +306,6 @@ header {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
-      font-family: "DM Sans";
       font-size: 68px;
       font-style: normal;
       font-weight: 700;
@@ -966,7 +964,7 @@ header {
   }
 }
 .partner-exchanges, .calculator-section {
-  padding: 60px;
+  padding: 80px;
 
   h2 {
     align-self: stretch;
@@ -2275,7 +2273,6 @@ header {
     .input-label {
       color: #C9C9C9;
       font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
-      font-family: "DM Sans";
       font-size: 14px;
       font-style: normal;
       font-weight: 400;
@@ -2284,19 +2281,17 @@ header {
       margin-bottom: initial;
     }
     .calculator-select {
-      border: 0.5px solid #595959;
+      border: 1px solid var(--border-color);
       background: rgba(255, 255, 255, 0.12);
       width: 100%;
       padding: 10px 12px;
       border-radius: 10px !important;
-      color: #fff;
+      color: var(--muted-text);
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
-      box-shadow: 0px 1px 2px 0px rgba(228, 229, 231, 0.24);
 
       /* regular-shadow/x-small */
-      box-shadow: 0 1px 2px 0 rgba(228, 229, 231, 0.24);
       cursor: pointer;
 
       &:focus {
@@ -2339,7 +2334,6 @@ header {
   display: flex;
   gap: 24px;
   align-items: center;
-  box-shadow: 0px 1px 2px 0px rgba(228, 229, 231, 0.24);
 }
 
 .result-item {

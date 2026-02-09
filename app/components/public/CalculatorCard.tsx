@@ -14,7 +14,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
   const [tradingVolume, setTradingVolume] = useState(10000000); // Default $10M
   const [selectedExchange, setSelectedExchange] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('');
-  const [selectedFeeType, setSelectedFeeType] = useState('taker');
+  const [selectedFeeType, setSelectedFeeType] = useState('');
 
   // Get selected exchange object
   const currentExchange = useMemo(() => {
@@ -37,6 +37,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
   const handleExchangeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedExchange(e.target.value);
     setSelectedProduct(''); // Reset product selection
+    setSelectedFeeType('');
   };
 
   // Calculate percentage based on slider position
@@ -156,7 +157,10 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                 <p className="input-label">{t('calculator.select_product')}</p>
                 <select
                   value={selectedProduct}
-                  onChange={(e) => setSelectedProduct(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedProduct(e.target.value)
+                    setSelectedFeeType('taker')
+                  }}
                   className="calculator-select perkx-selector"
                 >
                   <option value="">{selectedExchange ? t('calculator.select_product') : t('calculator.select_product')}</option>
@@ -175,6 +179,8 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                   onChange={(e) => setSelectedFeeType(e.target.value)}
                   className="calculator-select perkx-selector"
                 >
+
+                  <option value="">{t('calculator.fee_placeholder')}</option>
                   <option value="taker">{t('calculator.fee_taker')}</option>
                   <option value="maker">{t('calculator.fee_maker')}</option>
                 </select>

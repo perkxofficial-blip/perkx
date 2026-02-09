@@ -58,16 +58,6 @@ export default async function ExchangesPage({ params }: ExchangesPageProps) {
                 <h2 className='exchange-hero_title'>{t('hero_title_part1')}</h2>
                 <h1><span className="exchange-hero_title_gradient">{t('hero_title_gradient')}</span></h1>
                 <p>{t('hero_subtitle')}</p>
-                <a href="/register" className="get-started-now btn-get-started d-inline-flex align-items-center gap-2">
-                  {t('get_started')}
-                  <Image
-                    src="/images/arrow-right-s-line.svg"
-                    alt="arrow right"
-                    width={20}
-                    height={20}
-                    aria-hidden="true"
-                  />
-                </a>
               </div>
 
               <div className="bitcoin-right col-md-3" aria-hidden="true"></div>

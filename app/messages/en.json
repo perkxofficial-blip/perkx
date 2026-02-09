@@ -217,7 +217,8 @@
     "monthly_cashback": "MONTHLY CASHBACK",
     "annual_savings": "ANNUAL SAVINGS",
     "claim_rebate_btn": "Claim This Rebate Now",
-    "choose_exchange": "Select exchange"
+    "choose_exchange": "Select exchange",
+    "fee_placeholder": "Select fee"
   },
   "about": {
     "meta": {
