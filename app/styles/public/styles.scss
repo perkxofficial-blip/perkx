@@ -6,6 +6,7 @@
   --white: #fff;
   --sky: #88EEFE;
   --gray: #fcfcfc;
+  --secondary: #6c757d;
 }
 body {
   background: #000030;
@@ -698,7 +699,7 @@ header {
       align-self: stretch;
       border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.14);
-      background: linear-gradient(180deg, rgba(24, 10, 85, 0.00) 0%, rgba(0, 0, 0, 0.70) 100%);
+      background: linear-gradient(#180a55b5 0%, #000000db 30%);
       backdrop-filter: blur(12px);
       width: 100%;
       .tag{
@@ -706,12 +707,13 @@ header {
         padding: 2px 10px;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        font-size: 10px;
+        gap: 8px;
         border-radius: 60px;
       }
       .all-user {
         color: #A152CB;
-        font-size: 12px;
+        font-size: 10px;
         font-style: normal;
         font-weight: 500;
         line-height: 120%; /* 14.4px */
@@ -725,10 +727,12 @@ header {
         font-weight: 600;
         line-height: 150%; /* 24px */
         margin-bottom: 5px;
+        display: flex;
+        align-items: flex-end;
       }
       span {
-        color: #FFF;
-        font-size: 14px;
+        color: var(--secondary);
+        font-size: 12px;
         font-style: normal;
         font-weight: 400;
         line-height: 20px; /* 128.571% */
@@ -748,7 +752,7 @@ header {
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
 
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.086);
 
         color: #fcfcfc;
         text-align: center;
