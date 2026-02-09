@@ -48,12 +48,6 @@ export class UserExchangesService {
       .createQueryBuilder('user_exchange')
       .where('user_exchange.status = :pendingStatus', { pendingStatus: 'PENDING' });
 
-    if (query.exchange_id) {
-      pendingCountQueryBuilder.andWhere('user_exchange.exchange_id = :exchangeId', {
-        exchangeId: query.exchange_id,
-      });
-    }
-
     const totalPending = await pendingCountQueryBuilder.getCount();
 
     // Apply pagination
