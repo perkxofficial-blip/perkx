@@ -75,7 +75,6 @@ async function bootstrap() {
 
   // Apply global interceptors
   app.useGlobalInterceptors(
-    new TransformInterceptor(),
     new LoggingInterceptor(),
   );
 

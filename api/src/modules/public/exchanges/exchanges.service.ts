@@ -74,6 +74,17 @@ export class PublicExchangesService {
       productsByExchangeName.get(key)!.push(product);
     }
 
+    // Sort products within each exchange: "Futures Trading" first
+    for (const [exchangeKey, products] of productsByExchangeName.entries()) {
+      products.sort((a, b) => {
+        const aIsFutures = a.product_name === 'Futures Trading';
+        const bIsFutures = b.product_name === 'Futures Trading';
+        if (aIsFutures && !bIsFutures) return -1;
+        if (!aIsFutures && bIsFutures) return 1;
+        return 0;
+      });
+    }
+
     // Sort exchanges according to the order they appear in exchange_product
     const sortedExchanges = exchanges.sort((a, b) => {
       const indexA = exchangeOrder.indexOf(a.code.toLowerCase());
