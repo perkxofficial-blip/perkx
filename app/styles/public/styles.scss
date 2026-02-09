@@ -1,7 +1,8 @@
 :root {
   --font-base: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
   --primary-text: #E6E8EB;
-  --secondary-text: #8B90A0;
+  --secondary-text: #B8BCC6;
+  --muted-text: #8B90A0;
   --border-color: #ffffff60;
   --white: #fff;
   --sky: #88EEFE;
@@ -18,8 +19,8 @@ a {
 header {
   height: 89px;
 }
-.hero-sentinel{
-  height: 86px;
+#hero-sentinel{
+  height: 86px !important;
 }
 .btn-common{
   transition:
@@ -586,7 +587,7 @@ header {
   p {
     color: #FFF;
     text-align: center;
-    font-size: 32px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
@@ -638,8 +639,8 @@ header {
 }
 .campaign-section {
   h2 {
-    color: #FFF;
-    font-size: 40px;
+    color: var(--primary-text);
+    font-size: 48px;
     font-style: normal;
     font-weight: 700;
     line-height: 42px; /* 105% */
@@ -650,7 +651,7 @@ header {
     justify-content: end;
     align-items: center;
     a {
-      color: #FCFCFC;
+      color: var(--secondary-text);
       text-align: center;
       font-feature-settings: 'liga' off, 'calt' off;
       font-size: 14px;
@@ -974,13 +975,13 @@ header {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    background: var(--gr4, linear-gradient(270deg, #89EFFF 24.88%, #ED73D2 50.62%, #8AAFFF 74.91%));
+    background: var(--primary-text);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   p {
-    color: #FCFCFC;
+    color: var(--secondary-text);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -1017,9 +1018,10 @@ header {
       vertical-align: middle;
       background: none;
       color: #FCFCFC;
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
       line-height: 18px; /* 112.5% */
+      font-weight: 200 !important;
       border: none;
     }
   }
@@ -1041,7 +1043,7 @@ header {
     font-feature-settings: 'liga' off, 'calt' off;
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 200;
     line-height: 20px; /* 142.857% */
     letter-spacing: -0.084px;
   }
@@ -1254,6 +1256,7 @@ header {
     .text-copyright {
       p {
         text-align: left;
+        color: var(--secondary-text);
       }
     }
     .media {
@@ -2449,4 +2452,8 @@ header {
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+}
+.pe-footnote {
+  margin-top: 10px;
+  color: var(--muted-text);
 }

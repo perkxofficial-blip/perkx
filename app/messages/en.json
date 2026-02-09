@@ -70,7 +70,8 @@
       "action": "action",
       "register": "Register"
     },
-    "view_all_partners" : "View All Partners"
+    "view_all_partners" : "View All Partners",
+    "exchange_footnote": "Fees shown are based on non-VIP fee. For VIP traders, discount rates will apply based on your respective VIP profiles for 1M volume."
   },
   "footer": {
     "desc": "The global standard for crypto trading cashback. Helping institutional and retail traders maximize capital efficiency.",
@@ -80,7 +81,7 @@
     "resources": "resources",
     "help_center": "Help Center",
     "terms_of_use": "Terms of Use",
-    "copyright": "© 2026 PerkX Global LTD.",
+    "copyright": "© 2026 | PerkX | All Right Reserved.",
     "follow_us": "Follow Us"
   },
   "login": {

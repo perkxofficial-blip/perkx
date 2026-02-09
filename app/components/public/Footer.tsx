@@ -44,14 +44,12 @@ export default async function Footer() {
             </ul>
           </div>
         </div>
-        <div className="row  copyright">
+        <div className="row d-flex align-items-center copyright">
           <div className="col-md-8 text-copyright">
             <p className="mb-0">{t('footer.copyright')}</p>
           </div>
 
           <div className="col-md-4 text-md-end text-start">
-            <p className="mb-2">{t('footer.follow_us')}</p>
-
             <div className="d-flex justify-content-md-end justify-content-start gap-3">
               <a href="#" aria-label="Facebook">
                 <Image src="/images/fb.svg" alt="Facebook" width={48} height={48} />

@@ -140,6 +140,9 @@
 .show-xs{
   display: none !important;
 }
+#hero-sentinel{
+  height: 86px !important;
+}
 @media (max-width: 992px) {
   .campaign-slide-item {
     width: 240px;
@@ -277,14 +280,14 @@
       margin-bottom: 24px !important;
       .timeline-bottom {
         left: 17px;
-        height: 83px;
       }
       .tb-1 {
         top: 37px;
+        height: 35px;
       }
       .tb-2 {
         top: 38px;
-        height: 75px;
+        height: 98px;
       }
     }
   }
