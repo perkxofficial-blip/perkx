@@ -211,11 +211,14 @@ header {
   background-size: cover;
   background-repeat: no-repeat;
 }
-
+.homepage {
+  .banner-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
 .banner-section {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
   .get-started {
     padding: 150px 0 24px 0;
     text-align: center;
