@@ -142,6 +142,10 @@ export default function UserDetailPage() {
     }
   };
 
+  const getExchangeLogo = (exchangeName: string) => {
+    return `/images/exchanges/${exchangeName.toLowerCase()}.png`;
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -346,10 +350,31 @@ export default function UserDetailPage() {
                     className="flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
-                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                      <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src={getExchangeLogo(exchange.name)}
+                          alt={exchange.name}
+                          className="w-full h-full object-contain p-1"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent && !parent.querySelector('svg')) {
+                              const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                              svg.setAttribute('class', 'w-5 h-5 text-gray-400');
+                              svg.setAttribute('fill', 'none');
+                              svg.setAttribute('stroke', 'currentColor');
+                              svg.setAttribute('viewBox', '0 0 24 24');
+                              const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                              path.setAttribute('stroke-linecap', 'round');
+                              path.setAttribute('stroke-linejoin', 'round');
+                              path.setAttribute('stroke-width', '2');
+                              path.setAttribute('d', 'M13 10V3L4 14h7v7l9-11h-7z');
+                              svg.appendChild(path);
+                              parent.appendChild(svg);
+                            }
+                          }}
+                        />
                       </div>
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white">{exchange.name}</p>
