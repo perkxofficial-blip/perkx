@@ -12,3 +12,4 @@ export * from './adapters/gateio.adapter';
 export * from './adapters/weex.adapter';
 export * from './adapters/kucoin.adapter';
 export * from './adapters/zoomex.adapter';
+export * from './adapters/hyperliquid.adapter';

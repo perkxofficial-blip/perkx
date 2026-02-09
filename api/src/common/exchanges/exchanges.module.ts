@@ -9,6 +9,7 @@ import { WeexAdapter } from './adapters/weex.adapter';
 import { KucoinAdapter } from './adapters/kucoin.adapter';
 import { ZoomexAdapter } from './adapters/zoomex.adapter';
 import { ExchangeAdapterFactory } from './exchange-adapter.factory';
+import { HyperliquidAdapter } from './adapters/hyperliquid.adapter';
 
 @Module({
   providers: [
@@ -21,6 +22,7 @@ import { ExchangeAdapterFactory } from './exchange-adapter.factory';
     WeexAdapter,
     KucoinAdapter,
     ZoomexAdapter,
+    HyperliquidAdapter,
     ExchangeAdapterFactory,
   ],
   exports: [ExchangeAdapterFactory],
