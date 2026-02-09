@@ -9,6 +9,7 @@ import { GateioAdapter } from './adapters/gateio.adapter';
 import { WeexAdapter } from './adapters/weex.adapter';
 import { KucoinAdapter } from './adapters/kucoin.adapter';
 import { ZoomexAdapter } from './adapters/zoomex.adapter';
+import { HyperliquidAdapter } from './adapters/hyperliquid.adapter';
 
 @Injectable()
 export class ExchangeAdapterFactory {
@@ -24,6 +25,7 @@ export class ExchangeAdapterFactory {
     private readonly weexAdapter: WeexAdapter,
     private readonly kucoinAdapter: KucoinAdapter,
     private readonly zoomexAdapter: ZoomexAdapter,
+    private readonly hyperliquidAdapter: HyperliquidAdapter,
   ) {
     this.adapters.set('bingx', this.bingxAdapter);
     this.adapters.set('binance', this.binanceAdapter);
@@ -34,6 +36,7 @@ export class ExchangeAdapterFactory {
     this.adapters.set('weex', this.weexAdapter);
     this.adapters.set('kucoin', this.kucoinAdapter);
     this.adapters.set('zoomex', this.zoomexAdapter);
+    this.adapters.set('hyperliquid', this.hyperliquidAdapter);
   }
 
   /**
