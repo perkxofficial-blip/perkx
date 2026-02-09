@@ -22,10 +22,10 @@ export default async function AuthButtons() {
 
   return (
     <>
-      <Link href="/login" className="btn btn-login">
+      <Link href="/login" className="btn btn-login btn-common">
         {t("menu.login")}
       </Link>
-      <Link href="/register" className="btn btn-register">
+      <Link href="/register" className="btn btn-register btn-common">
         {t("page.register")}
       </Link>
     </>

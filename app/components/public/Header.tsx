@@ -18,7 +18,7 @@ export default async function Header() {
     <>
       <div id="hero-sentinel"></div>
       <header id="site-header" className="hero-banner site-header">
-        <div className="container menu-section">
+        <div className="menu-section">
           <div className="row align-items-center">
             <div className="menu-block col-md-12 col-lg-8">
               <nav className="navbar navbar-expand-lg navbar-light" aria-label="Main navigation">

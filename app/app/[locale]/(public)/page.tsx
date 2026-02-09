@@ -200,7 +200,7 @@ export default async function LandingPage() {
                     <p className="heading-like mb-0">{t('home.timeline1')}</p>
                   </div>
                 </div>
-                <div className="d-flex align-items-center timeline-item">
+                <div className="d-flex timeline-item">
                   <div className="timeline-icon">
                     <Image
                       src="/images/linked.png"
