@@ -522,7 +522,14 @@
       "password_updated": "密码更新成功！",
       "password_update_failed": "密码更新失败",
       "passwords_not_match": "新密码不匹配",
-      "fix_form_errors": "请修复表单中的错误"
+      "fix_form_errors": "请修复表单中的错误",
+      "placeholder_current_password": "输入您的密码",
+      "placeholder_new_password": "输入新密码",
+      "placeholder_confirm_password": "确认新密码",
+      "placeholder_first_name": "张伟",
+      "placeholder_last_name": "张",
+      "placeholder_phone": "+86-138-0013-8000",
+      "placeholder_birthday": "2000年1月1日"
     },
     "linked_exchanges": {
       "title": "关联交易所",
@@ -549,7 +556,10 @@
       "link_success": "交易所关联成功！",
       "link_error": "关联交易所失败，请重试。",
       "delete_success": "交易所移除成功！",
-      "delete_error": "移除交易所失败，请重试。"
+      "delete_error": "移除交易所失败，请重试。",
+      "status_active": "活跃",
+      "status_pending": "待审核",
+      "status_rejected": "已拒绝"
     }
   }
 }

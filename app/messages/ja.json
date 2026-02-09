@@ -522,7 +522,14 @@
       "password_updated": "パスワードが正常に更新されました！",
       "password_update_failed": "パスワードの更新に失敗しました",
       "passwords_not_match": "新しいパスワードが一致しません",
-      "fix_form_errors": "フォームのエラーを修正してください"
+      "fix_form_errors": "フォームのエラーを修正してください",
+      "placeholder_current_password": "パスワードを入力してください",
+      "placeholder_new_password": "新しいパスワードを入力",
+      "placeholder_confirm_password": "新しいパスワードを確認",
+      "placeholder_first_name": "太郎",
+      "placeholder_last_name": "山田",
+      "placeholder_phone": "+81-90-1234-5678",
+      "placeholder_birthday": "2000年1月1日"
     },
     "linked_exchanges": {
       "title": "リンクされた取引所",
@@ -549,7 +556,10 @@
       "link_success": "取引所のリンクに成功しました！",
       "link_error": "取引所のリンクに失敗しました。もう一度お試しください。",
       "delete_success": "取引所が正常に削除されました！",
-      "delete_error": "取引所の削除に失敗しました。もう一度お試しください。"
+      "delete_error": "取引所の削除に失敗しました。もう一度お試しください。",
+      "status_active": "アクティブ",
+      "status_pending": "保留中",
+      "status_rejected": "拒否"
     }
   }
 }

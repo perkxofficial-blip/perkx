@@ -278,6 +278,19 @@ export default function LinkedExchangesPage() {
     }
   };
 
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case 'ACTIVE':
+        return t('status_active');
+      case 'PENDING':
+        return t('status_pending');
+      case 'REJECTED':
+        return t('status_rejected');
+      default:
+        return status;
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#18163C] flex items-center justify-center">
@@ -501,7 +514,7 @@ export default function LinkedExchangesPage() {
                             className="text-xs font-medium uppercase"
                             style={{ color: statusBadge.text, lineHeight: '120%', letterSpacing: '0.36px' }}
                           >
-                            {exchange.status}
+                            {getStatusLabel(exchange.status)}
                           </span>
                         </div>
                       </div>

@@ -542,7 +542,7 @@ export default function UserProfilePage() {
                             type={showPassword.current ? 'text' : 'password'}
                             value={passwordForm.current_password}
                             onChange={(e) => setPasswordForm({ ...passwordForm, current_password: e.target.value })}
-                            placeholder="Enter your password"
+                            placeholder={t('placeholder_current_password')}
                             className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                             required
                           />
@@ -581,7 +581,7 @@ export default function UserProfilePage() {
                                 setPasswordErrors({ ...passwordErrors, new_password: '' });
                               }
                             }}
-                            placeholder="Enter New Password"
+                            placeholder={t('placeholder_new_password')}
                             className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                             required
                           />
@@ -618,7 +618,7 @@ export default function UserProfilePage() {
                             type={showPassword.confirm ? 'text' : 'password'}
                             value={passwordForm.confirm_new_password}
                             onChange={(e) => setPasswordForm({ ...passwordForm, confirm_new_password: e.target.value })}
-                            placeholder="Confirm New Password"
+                            placeholder={t('placeholder_confirm_password')}
                             className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                             required
                           />
@@ -680,7 +680,7 @@ export default function UserProfilePage() {
                             setProfileErrors({ ...profileErrors, first_name: '' });
                           }
                         }}
-                        placeholder="Jane Thompson"
+                        placeholder={t('placeholder_first_name')}
                         className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                       />
                       {profileErrors.first_name && (
@@ -702,7 +702,7 @@ export default function UserProfilePage() {
                             setProfileErrors({ ...profileErrors, last_name: '' });
                           }
                         }}
-                        placeholder="Jane Thompson"
+                        placeholder={t('placeholder_last_name')}
                         className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                       />
                       {profileErrors.last_name && (
@@ -737,7 +737,7 @@ export default function UserProfilePage() {
                             setProfileErrors({ ...profileErrors, phone: '' });
                           }
                         }}
-                        placeholder="+1-9293-764-8903"
+                        placeholder={t('placeholder_phone')}
                         className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                       />
                       {profileErrors.phone && (
@@ -820,7 +820,7 @@ export default function UserProfilePage() {
                           className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-purple-500 cursor-pointer flex items-center justify-between"
                         >
                           <span className={profileForm.birthday ? 'text-white' : 'text-white/50'}>
-                            {profileForm.birthday ? formatDateToDisplay(profileForm.birthday) : '01 Jan 2000'}
+                            {profileForm.birthday ? formatDateToDisplay(profileForm.birthday) : t('placeholder_birthday')}
                           </span>
                           {/* Calendar icon */}
                           <svg

@@ -523,7 +523,14 @@
       "password_updated": "Password updated successfully!",
       "password_update_failed": "Failed to update password",
       "passwords_not_match": "New passwords do not match",
-      "fix_form_errors": "Please fix the errors in the form"
+      "fix_form_errors": "Please fix the errors in the form",
+      "placeholder_current_password": "Enter your password",
+      "placeholder_new_password": "Enter new password",
+      "placeholder_confirm_password": "Confirm new password",
+      "placeholder_first_name": "Jane Thompson",
+      "placeholder_last_name": "Thompson",
+      "placeholder_phone": "+1-929-376-4893",
+      "placeholder_birthday": "01 Jan 2000"
     },
     "linked_exchanges": {
       "title": "Linked Exchanges",
@@ -550,7 +557,10 @@
       "link_success": "Exchange linked successfully!",
       "link_error": "Failed to link exchange. Please try again.",
       "delete_success": "Exchange removed successfully!",
-      "delete_error": "Failed to remove exchange. Please try again."
+      "delete_error": "Failed to remove exchange. Please try again.",
+      "status_active": "Active",
+      "status_pending": "Pending",
+      "status_rejected": "Rejected"
     }
   }
 }

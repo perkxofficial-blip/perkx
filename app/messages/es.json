@@ -522,7 +522,14 @@
       "password_updated": "¡Contraseña actualizada exitosamente!",
       "password_update_failed": "Error al actualizar la contraseña",
       "passwords_not_match": "Las nuevas contraseñas no coinciden",
-      "fix_form_errors": "Por favor corrija los errores en el formulario"
+      "fix_form_errors": "Por favor corrija los errores en el formulario",
+      "placeholder_current_password": "Ingrese su contraseña",
+      "placeholder_new_password": "Ingrese nueva contraseña",
+      "placeholder_confirm_password": "Confirme nueva contraseña",
+      "placeholder_first_name": "María",
+      "placeholder_last_name": "García",
+      "placeholder_phone": "+34-612-345-678",
+      "placeholder_birthday": "01 Ene 2000"
     },
     "linked_exchanges": {
       "title": "Exchanges Vinculados",
@@ -549,7 +556,10 @@
       "link_success": "¡Exchange vinculado exitosamente!",
       "link_error": "Error al vincular el exchange. Por favor, inténtelo de nuevo.",
       "delete_success": "¡Exchange eliminado exitosamente!",
-      "delete_error": "Error al eliminar el exchange. Por favor, inténtelo de nuevo."
+      "delete_error": "Error al eliminar el exchange. Por favor, inténtelo de nuevo.",
+      "status_active": "Activo",
+      "status_pending": "Pendiente",
+      "status_rejected": "Rechazado"
     }
   }
 }
