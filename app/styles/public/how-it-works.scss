@@ -85,22 +85,20 @@
       flex-direction: column;
       gap: 8px;
       color: #FCFCFC;
-
-      h3 {
-        font-family: 'DM Sans', sans-serif;
-        font-size: 32px;
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: 0.32px;
-        margin: 0;
-      }
-
       p {
         font-family: 'DM Sans', sans-serif;
         font-size: 20px;
         font-weight: 400;
         line-height: 1.5;
         letter-spacing: -0.12px;
+        margin: 0;
+      }
+      p.step-title {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.32px;
         margin: 0;
       }
     }
@@ -158,12 +156,11 @@
       }
 
       .step-content {
-        h3 {
-          font-size: 28px;
-        }
-
         p {
           font-size: 18px;
+        }
+        p.step-title {
+          font-size: 28px;
         }
       }
     }
@@ -199,12 +196,11 @@
       }
 
       .step-content {
-        h3 {
-          font-size: 24px;
-        }
-
         p {
           font-size: 16px;
+        }
+        p.step-title {
+          font-size: 24px;
         }
       }
     }
@@ -227,12 +223,11 @@
   .steps-section {
     .step-item {
       .step-content {
-        h3 {
-          font-size: 20px;
-        }
-
         p {
           font-size: 14px;
+        }
+        p.step-title {
+          font-size: 20px;
         }
       }
     }
