@@ -75,7 +75,7 @@ export default function CreateCampaignPage() {
       if (!token) return;
 
       try {
-        const data = await apiClient.get(endpoints.admin.exchangesList, token);
+        const data = await apiClient.get(`${endpoints.admin.exchangesList}?is_extension=true`, token);
 
         if (data.statusCode === 200 && Array.isArray(data.data)) {
           setExchanges(data.data);

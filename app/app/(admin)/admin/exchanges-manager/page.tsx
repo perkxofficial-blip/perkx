@@ -267,6 +267,28 @@ export default function ExchangesManagerPage() {
     return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
   };
 
+  // Format date time to UTC+8 timezone
+  const formatDateTimeUTC8 = (dateString?: string) => {
+    if (!dateString) return '-';
+    
+    // Parse the UTC date
+    const date = new Date(dateString);
+    
+    // Convert to UTC+8 by adding 8 hours to UTC time
+    const utc8Date = new Date(date.getTime() + (8 * 60 * 60 * 1000));
+    
+    // Extract date components in UTC
+    const day = String(utc8Date.getUTCDate()).padStart(2, '0');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[utc8Date.getUTCMonth()];
+    const year = utc8Date.getUTCFullYear();
+    const hours = String(utc8Date.getUTCHours()).padStart(2, '0');
+    const minutes = String(utc8Date.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(utc8Date.getUTCSeconds()).padStart(2, '0');
+    
+    return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds} (UTC+8)`;
+  };
+
   const getExchangeLogo = (exchangeName: string) => {
     return `/images/exchanges/${exchangeName.toLowerCase()}.png`;
   };
@@ -748,7 +770,7 @@ export default function ExchangesManagerPage() {
                       Approved On
                     </label>
                     <p className="text-sm text-gray-900 dark:text-white">
-                      {formatDateTime(selectedExchange.approved_on || selectedExchange.updated_at)}
+                      {formatDateTimeUTC8(selectedExchange.approved_on || selectedExchange.updated_at)}
                     </p>
                   </div>
                   <div>
@@ -767,7 +789,7 @@ export default function ExchangesManagerPage() {
                       Rejected On
                     </label>
                     <p className="text-sm text-gray-900 dark:text-white">
-                      {formatDateTime(selectedExchange.rejected_on || selectedExchange.updated_at)}
+                      {formatDateTimeUTC8(selectedExchange.rejected_on || selectedExchange.updated_at)}
                     </p>
                   </div>
                   <div>

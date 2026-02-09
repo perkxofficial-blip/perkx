@@ -143,7 +143,7 @@ export default function EditCampaignPage({ params }: { params: Promise<{ id: str
 
       // Fetch exchanges list
       try {
-        const exchangesData = await apiClient.get(endpoints.admin.exchangesList, token || undefined);
+        const exchangesData = await apiClient.get(`${endpoints.admin.exchangesList}?is_extension=true`, token || undefined);
 
         if (exchangesData.statusCode === 200 && Array.isArray(exchangesData.data)) {
           setExchanges(exchangesData.data);
