@@ -27,4 +27,7 @@ export default () => ({
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
   },
+  timezone: {
+    default: process.env.TZ || process.env.TIMEZONE || 'Asia/Singapore',
+  },
 });

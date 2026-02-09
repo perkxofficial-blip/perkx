@@ -91,6 +91,7 @@ export class ExchangesService {
         existingUserExchange.exchange_uid = addExchangeUidDto.exchange_uid;
         existingUserExchange.status = status;
         existingUserExchange.reason = status === 'REJECTED' ? message : null;
+        existingUserExchange.created_at = new Date();;
         savedUserExchange = await this.userExchangeRepository.save(
           existingUserExchange,
         );

@@ -11,6 +11,8 @@ import { ExchangesModule } from './modules/user/exchanges/exchanges.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { PublicModule } from './modules/public/public.module';
 import { MailModule } from './mail/mail.module';
+import { TransformInterceptor } from './common/interceptors';
+import { APP_INTERCEPTOR } from '@nestjs/core/constants';
 
 @Module({
   imports: [
@@ -41,6 +43,12 @@ import { MailModule } from './mail/mail.module';
     MailModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
+    },
+  ],
 })
 export class AppModule {}
