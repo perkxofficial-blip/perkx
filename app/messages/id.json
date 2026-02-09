@@ -522,7 +522,14 @@
       "password_updated": "Password berhasil diperbarui!",
       "password_update_failed": "Gagal memperbarui password",
       "passwords_not_match": "Password baru tidak cocok",
-      "fix_form_errors": "Harap perbaiki kesalahan dalam formulir"
+      "fix_form_errors": "Harap perbaiki kesalahan dalam formulir",
+      "placeholder_current_password": "Masukkan password Anda",
+      "placeholder_new_password": "Masukkan password baru",
+      "placeholder_confirm_password": "Konfirmasi password baru",
+      "placeholder_first_name": "Budi",
+      "placeholder_last_name": "Santoso",
+      "placeholder_phone": "+62-812-3456-7890",
+      "placeholder_birthday": "01 Jan 2000"
     },
     "linked_exchanges": {
       "title": "Exchange Tertaut",
@@ -549,7 +556,10 @@
       "link_success": "Exchange berhasil ditautkan!",
       "link_error": "Gagal menautkan exchange. Silakan coba lagi.",
       "delete_success": "Exchange berhasil dihapus!",
-      "delete_error": "Gagal menghapus exchange. Silakan coba lagi."
+      "delete_error": "Gagal menghapus exchange. Silakan coba lagi.",
+      "status_active": "Aktif",
+      "status_pending": "Menunggu",
+      "status_rejected": "Ditolak"
     }
   }
 }
