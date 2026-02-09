@@ -1214,16 +1214,7 @@ header {
   padding: 80px 0;
   border-top: 1px solid #585858;
   background: #000030;
-  .footer-title {
-    color: #FCFCFC;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 36px; /* 225% */
-    letter-spacing: 0.16px;
-    text-transform: uppercase;
-    padding-left: 2rem;
-  }
+
   .footer-info {
     p {
       color: #FCFCFC;
@@ -1273,6 +1264,16 @@ header {
         padding-right: 0;
       }
     }
+  }
+  p.footer-title {
+    color: #FCFCFC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 36px; /* 225% */
+    letter-spacing: 0.16px;
+    text-transform: uppercase;
+    padding-left: 2rem;
   }
 }
 .login {

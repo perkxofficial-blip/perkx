@@ -29,6 +29,7 @@ export default function SelectSearch({name, options}: SelectSearchProps) {
 
   return (
     <select
+      id={`${name}Input`}
       name={name}
       defaultValue={searchParams.get(name) ?? ''}
       onChange={handleChange}
