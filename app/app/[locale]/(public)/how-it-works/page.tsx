@@ -1,5 +1,4 @@
 import Header from "@/components/public/Header";
-import Footer from "@/components/public/Footer";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from 'next';
 import Image from "next/image";
@@ -51,7 +50,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
           {/* Step 1 */}
           <div className="step-item">
             <div className="step-content show-mb">
-              <h3>{t('steps.step1.title')}</h3>
+              <p className="step-title">{t('steps.step1.title')}</p>
               <p>{t('steps.step1.description')}</p>
             </div>
             <div className="step-image">
@@ -65,7 +64,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
               />
             </div>
             <div className="step-content hidden-mb">
-              <h3>{t('steps.step1.title')}</h3>
+              <p className="step-title">{t('steps.step1.title')}</p>
               <p>{t('steps.step1.description')}</p>
             </div>
           </div>
@@ -73,7 +72,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
           {/* Step 2 */}
           <div className="step-item reverse">
             <div className="step-content show-mb">
-              <h3>{t('steps.step2.title')}</h3>
+              <p className="step-title">{t('steps.step2.title')}</p>
               <p>{t('steps.step2.description')}</p>
             </div>
             <div className="step-image">
@@ -87,7 +86,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
               />
             </div>
             <div className="step-content hidden-mb">
-              <h3>{t('steps.step2.title')}</h3>
+              <p className="step-title">{t('steps.step2.title')}</p>
               <p>{t('steps.step2.description')}</p>
             </div>
           </div>
@@ -95,7 +94,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
           {/* Step 3 */}
           <div className="step-item">
             <div className="step-content show-mb">
-              <h3>{t('steps.step3.title')}</h3>
+              <p className="step-title">{t('steps.step3.title')}</p>
               <p>{t('steps.step3.description')}</p>
             </div>
             <div className="step-image">
@@ -109,7 +108,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
               />
             </div>
             <div className="step-content hidden-mb">
-              <h3>{t('steps.step3.title')}</h3>
+              <p className="step-title">{t('steps.step3.title')}</p>
               <p>{t('steps.step3.description')}</p>
             </div>
           </div>
