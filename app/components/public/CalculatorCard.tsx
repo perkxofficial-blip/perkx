@@ -144,7 +144,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                   onChange={handleExchangeChange}
                   className="calculator-select perkx-selector"
                 >
-                  <option value="">{t('calculator.select_exchange')}</option>
+                  <option value="" disabled selected>-</option>
                   {exchanges.map((exchange) => (
                     <option key={exchange.id} value={exchange.id}>
                       {exchange.name}
@@ -163,7 +163,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                   }}
                   className="calculator-select perkx-selector"
                 >
-                  <option value="">{selectedExchange ? t('calculator.select_product') : t('calculator.select_product')}</option>
+                  <option value="" disabled selected>{selectedExchange ? '-' : '-'}</option>
                   {availableProducts.map((product) => (
                     <option key={product.id} value={product.id}>
                       {product.product_name}
@@ -180,7 +180,7 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
                   className="calculator-select perkx-selector"
                 >
 
-                  <option value="">{t('calculator.fee_placeholder')}</option>
+                  <option value="" disabled>-</option>
                   <option value="taker">{t('calculator.fee_taker')}</option>
                   <option value="maker">{t('calculator.fee_maker')}</option>
                 </select>
