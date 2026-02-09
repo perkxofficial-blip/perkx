@@ -64,7 +64,7 @@ export default async function LandingPage() {
   const t = await getTranslations();
   return (
     <>
-      <div className="img-bg">
+      <div className="img-bg homepage">
         <Header/>
         <section className="banner-section" aria-label="Hero Section - Trade Global Market">
           <div className="container-fluid">
