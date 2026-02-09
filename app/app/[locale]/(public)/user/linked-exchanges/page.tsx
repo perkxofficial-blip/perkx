@@ -222,7 +222,7 @@ export default function LinkedExchangesPage() {
         return;
       }
 
-      await apiClient.post(endpoints.user.linkExchange, {
+      const response = await apiClient.post(endpoints.user.linkExchange, {
         exchange_id: exchangeId,
         exchange_uid: uidCode
       }, token);
@@ -247,8 +247,9 @@ export default function LinkedExchangesPage() {
         return;
       }
       
-      // Show error toast
-      setToast({ message: t('link_error'), type: 'error' });
+      // Show error toast with message from server if available
+      const errorMessage = error.response?.message || error.message || t('link_error');
+      setToast({ message: errorMessage, type: 'error' });
     }
   };
 
