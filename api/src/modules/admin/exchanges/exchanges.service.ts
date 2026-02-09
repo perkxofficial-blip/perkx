@@ -22,7 +22,7 @@ export class AdminExchangesService {
     private exchangeProductRepository: Repository<ExchangeProduct>,
   ) {}
 
-  async getExchangeList(): Promise<ExchangeListItem[]> {
+  async getExchangeList(isExtention?: boolean): Promise<ExchangeListItem[]> {
     // Get all active exchanges
     const activeExchanges = await this.exchangeRepository.find({
       where: { is_active: true },
@@ -30,13 +30,16 @@ export class AdminExchangesService {
       order: { name: 'ASC' },
     });
 
-    // Add PerkX as first item with id: 0
-    const perkXItem: ExchangeListItem = {
-      id: 0,
-      name: 'PerkX',
-    };
+    // Add PerkX as first item with id: 0 if is_extention is true
+    if (isExtention === true) {
+      const perkXItem: ExchangeListItem = {
+        id: 0,
+        name: 'PerkX',
+      };
+      return [perkXItem, ...activeExchanges];
+    }
 
-    return [perkXItem, ...activeExchanges];
+    return activeExchanges;
   }
 
   /**

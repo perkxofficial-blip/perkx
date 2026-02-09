@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
   UseGuards,
   UseInterceptors,
   UploadedFile,
@@ -10,6 +11,8 @@ import {
   FileValidator,
   HttpCode,
   HttpStatus,
+  ParseBoolPipe,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
@@ -19,6 +22,7 @@ import {
   ApiBearerAuth,
   ApiConsumes,
   ApiBody,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { AdminExchangesService } from './exchanges.service';
 import { AdminJwtAuthGuard } from '../auth/guards';
@@ -71,7 +75,14 @@ export class AdminExchangesController {
   @Get('list')
   @ApiOperation({
     summary: 'Get list of active exchanges',
-    description: 'Returns list of active exchanges with id and name. Includes a special PerkX item with id: 0.',
+    description: 'Returns list of active exchanges with id and name. Optionally includes a special PerkX item with id: 0 based on is_extention query parameter.',
+  })
+  @ApiQuery({
+    name: 'is_extention',
+    required: false,
+    description: 'If true, includes PerkX item (id: 0) as the first item. If false or not provided, excludes PerkX item.',
+    type: Boolean,
+    example: true,
   })
   @ApiResponse({
     status: 200,
@@ -91,8 +102,11 @@ export class AdminExchangesController {
     status: 401,
     description: 'Unauthorized - invalid or missing admin token',
   })
-  async getExchangeList() {
-    return await this.exchangesService.getExchangeList();
+  async getExchangeList(
+    @Query('is_extention', new DefaultValuePipe(false), ParseBoolPipe)
+    isExtention: boolean,
+  ) {
+    return await this.exchangesService.getExchangeList(isExtention);
   }
 
   @Post('import-products')
