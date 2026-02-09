@@ -44,6 +44,7 @@
     "intro_2": "而是谈判得来的。",
     "hero_section_description": "我们将最佳手续费返佣、空投和折扣集中到一个平台 — 因为每笔交易都值得最好的待遇。",
     "get_started_now": "立即开始",
+    "our_exclusive_partners": "我们的独家合作伙伴",
     "coin": "装饰币",
     "how_perkx_works": "如何使用 <perkx>PerkX</perkx>",
     "how_perkx_works_description": "通过三个简单步骤开始，在交易中赚取返现",
@@ -69,7 +70,8 @@
       "action": "操作",
       "register": "注册"
     },
-    "view_all_partners": "查看所有合作伙伴"
+    "view_all_partners": "查看所有合作伙伴",
+    "exchange_footnote": "所显示的费用基于非 VIP 费率。对于 VIP 交易者，将根据各自的 VIP 等级适用相应的折扣。计算基于 1M 的交易量。"
   },
   "footer": {
     "desc": "加密货币交易返现的全球标准。帮助机构和散户交易者最大化资金效率。",
@@ -79,7 +81,7 @@
     "resources": "资源",
     "help_center": "帮助中心",
     "terms_of_use": "使用条款",
-    "copyright": "© 2026 PerkX Global LTD.",
+    "copyright": "© 2026 | PerkX | All Right Reserved.",
     "follow_us": "关注我们"
   },
   "login": {

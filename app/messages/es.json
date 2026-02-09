@@ -44,6 +44,7 @@
     "intro_2": "Se negocian.",
     "hero_section_description": "Obtenemos los mejores reembolsos de comisiones, airdrops y descuentos en un solo portal — porque cada operación merece el mejor trato.",
     "get_started_now": "Comenzar Ahora",
+    "our_exclusive_partners": "Nuestros socios exclusivos",
     "coin": "Moneda decorativa",
     "how_perkx_works": "Cómo Funciona <perkx>PerkX</perkx>",
     "how_perkx_works_description": "Comienza en tres simples pasos y empieza a ganar cashback en tus operaciones",
@@ -69,7 +70,8 @@
       "action": "acción",
       "register": "Registrarse"
     },
-    "view_all_partners": "Ver Todos los Socios"
+    "view_all_partners": "Ver Todos los Socios",
+    "exchange_footnote": "Las comisiones mostradas se basan en tarifas no VIP. Para los traders VIP, se aplicarán descuentos según su nivel VIP correspondiente. Los cálculos se basan en un volumen de negociación de 1M."
   },
   "footer": {
     "desc": "El estándar global para cashback de trading de criptomonedas. Ayudando a traders institucionales y minoristas a maximizar la eficiencia del capital.",
@@ -79,7 +81,7 @@
     "resources": "recursos",
     "help_center": "Centro de Ayuda",
     "terms_of_use": "Términos de Uso",
-    "copyright": "© 2026 PerkX Global LTD.",
+    "copyright": "© 2026 | PerkX | All Right Reserved.",
     "follow_us": "Síguenos"
   },
   "login": {

@@ -44,6 +44,7 @@
     "intro_2": "交渉して得るものだ。",
     "hero_section_description": "最高の手数料リベート、エアドロップ、割引を1つのポータルに — すべての取引は最高の条件に値するから。",
     "get_started_now": "今すぐ始める",
+    "our_exclusive_partners": "当社の独占パートナー",
     "coin": "装飾用コイン",
     "how_perkx_works": "<perkx>PerkX</perkx>の仕組み",
     "how_perkx_works_description": "3つの簡単なステップで始めて、取引でキャッシュバックを獲得しましょう",
@@ -69,7 +70,8 @@
       "action": "アクション",
       "register": "登録"
     },
-    "view_all_partners": "すべてのパートナーを見る"
+    "view_all_partners": "すべてのパートナーを見る",
+    "exchange_footnote": "表示されている手数料は非VIP料金に基づいています。VIPトレーダーの場合、各VIPランクに応じた割引が適用されます。取引量1Mを基準に計算されています。"
   },
   "footer": {
     "desc": "暗号通貨取引キャッシュバックのグローバルスタンダード。機関投資家および個人投資家の資金効率を最大化します。",
@@ -79,7 +81,7 @@
     "resources": "リソース",
     "help_center": "ヘルプセンター",
     "terms_of_use": "利用規約",
-    "copyright": "© 2026 PerkX Global LTD.",
+    "copyright": "© 2026 | PerkX | All Right Reserved.",
     "follow_us": "フォローする"
   },
   "login": {

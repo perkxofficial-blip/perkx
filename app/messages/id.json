@@ -44,6 +44,7 @@
     "intro_2": "Tetapi dinegosiasikan.",
     "hero_section_description": "Kami mendapatkan rebate biaya terbaik, airdrop, dan diskon dalam satu portal — karena setiap perdagangan layak mendapat kesepakatan terbaik.",
     "get_started_now": "Mulai Sekarang",
+    "our_exclusive_partners": "Mitra Eksklusif Kami",
     "coin": "Koin dekoratif",
     "how_perkx_works": "Cara Kerja <perkx>PerkX</perkx>",
     "how_perkx_works_description": "Mulai dalam tiga langkah sederhana dan mulai dapatkan cashback dari trading Anda",
@@ -69,7 +70,8 @@
       "action": "aksi",
       "register": "Daftar"
     },
-    "view_all_partners": "Lihat Semua Mitra"
+    "view_all_partners": "Lihat Semua Mitra",
+    "exchange_footnote": "Biaya yang ditampilkan didasarkan pada tarif non-VIP. Untuk trader VIP, diskon akan berlaku sesuai dengan tingkat VIP masing-masing. Perhitungan didasarkan pada volume perdagangan 1M."
   },
   "footer": {
     "desc": "Standar global untuk cashback trading kripto. Membantu trader institusional dan ritel memaksimalkan efisiensi modal.",
@@ -79,7 +81,7 @@
     "resources": "sumber daya",
     "help_center": "Pusat Bantuan",
     "terms_of_use": "Syarat Penggunaan",
-    "copyright": "© 2026 PerkX Global LTD.",
+    "copyright": "© 2026 | PerkX | All Right Reserved.",
     "follow_us": "Ikuti Kami"
   },
   "login": {

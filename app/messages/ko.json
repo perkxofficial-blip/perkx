@@ -44,6 +44,7 @@
     "intro_2": "협상으로 얻는 것입니다.",
     "hero_section_description": "최고의 수수료 리베이트, 에어드롭, 할인 혜택을 하나의 포털에서 제공합니다 — 모든 거래는 최고의 조건을 누려야 하니까요.",
     "get_started_now": "지금 시작하기",
+    "our_exclusive_partners": "독점 파트너사",
     "coin": "장식용 코인",
     "how_perkx_works": "<perkx>PerkX</perkx> 이용 방법",
     "how_perkx_works_description": "간단한 3단계로 시작하고 거래 캐시백을 적립하세요",
@@ -69,7 +70,8 @@
       "action": "액션",
       "register": "회원가입"
     },
-    "view_all_partners": "모든 파트너 보기"
+    "view_all_partners": "모든 파트너 보기",
+    "exchange_footnote": "표시된 수수료는 비VIP 기준입니다. VIP 트레이더의 경우, 각 VIP 등급에 따라 할인율이 적용됩니다. 계산은 거래량 1M 기준입니다."
   },
   "footer": {
     "desc": "암호화폐 트레이딩 캐시백의 글로벌 기준. 기관 및 개인 트레이더의 자본 효율을 극대화합니다.",
@@ -79,7 +81,7 @@
     "resources": "리소스",
     "help_center": "고객 지원",
     "terms_of_use": "이용 약관",
-    "copyright": "© 2026 PerkX Global LTD.",
+    "copyright": "© 2026 | PerkX | All Right Reserved.",
     "follow_us": "팔로우하기"
   },
   "login": {

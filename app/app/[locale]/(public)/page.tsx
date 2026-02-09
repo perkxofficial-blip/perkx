@@ -200,7 +200,7 @@ export default async function LandingPage() {
                     <p className="heading-like mb-0">{t('home.timeline1')}</p>
                   </div>
                 </div>
-                <div className="d-flex align-items-center timeline-item">
+                <div className="d-flex timeline-item">
                   <div className="timeline-icon">
                     <Image
                       src="/images/linked.png"
@@ -387,6 +387,9 @@ export default async function LandingPage() {
                     />
                   </a>
                 </div>
+              </div>
+              <div className="pe-footnote offset-6 col-6">
+                {t('home.exchange_footnote')}
               </div>
             </div>
           </div>
