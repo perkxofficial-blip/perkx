@@ -4,7 +4,6 @@ import {
   ExecutionContext,
   CallHandler,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { transformDatesToTimezone, convertToTimezone } from '../utils/date.util';
@@ -21,24 +20,21 @@ export class TransformInterceptor<T> implements NestInterceptor<
   T,
   Response<T>
 > {
-  constructor(private configService: ConfigService) {}
-
   intercept(
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response<T>> {
-    const timezone = this.configService.get<string>('timezone.default') || 'Asia/Singapore';
-
     return next.handle().pipe(
       map((data) => {
         // Transform all created_at and updated_at fields in the data to configured timezone
-        const transformedData = transformDatesToTimezone(data, timezone);
+        // convertToTimezone will automatically get timezone from env (TZ or TIMEZONE) or use default
+        const transformedData = transformDatesToTimezone(data);
         
         return {
           statusCode: context.switchToHttp().getResponse().statusCode,
           message: 'Success',
           data: transformedData,
-          timestamp: convertToTimezone(new Date(), timezone) || new Date().toISOString(),
+          timestamp: convertToTimezone(new Date()) || new Date().toISOString(),
         };
       }),
     );

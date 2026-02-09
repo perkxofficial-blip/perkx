@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User, UserExchange, Exchange, UserStatus, AccessLog } from '../../../entities';
 import { ListUsersQueryDto, UpdateUserDto } from './dto';
 import { StorageService } from '../../../common/storage';
+import { convertToTimezone } from '../../../common/utils/date.util';
 
 @Injectable()
 export class UsersService {
@@ -208,7 +209,7 @@ export class UsersService {
       email_verified_at: userResult.user_email_verified_at,
       created_at: userResult.user_created_at,
       updated_at: userResult.user_updated_at,
-      last_login: lastLogin?.created_at || null,
+      last_login: convertToTimezone(lastLogin?.created_at) || null,
       ip_address: lastLogin?.ip_address || null,
       referrer: userResult.referrer_id
         ? {
