@@ -388,7 +388,7 @@ export default async function LandingPage() {
                   </a>
                 </div>
               </div>
-              <div className="pe-footnote offset-6 col-6">
+              <div className="pe-footnote offset-md-6 col-md-6 col-12">
                 {t('home.exchange_footnote')}
               </div>
             </div>
