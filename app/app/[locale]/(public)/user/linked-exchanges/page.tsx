@@ -493,7 +493,7 @@ export default function LinkedExchangesPage() {
                     className="flex items-center gap-4 p-4 rounded-[10px] bg-white/[0.08] shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] backdrop-blur-[12px]"
                   >
                     {/* Exchange Logo */}
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black p-2 flex-shrink-0">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black p-0 flex-shrink-0">
                       <img 
                         src={exchange.logo_url} 
                         alt={exchange.exchange_name}
