@@ -51,13 +51,13 @@ export default async function Footer() {
 
           <div className="col-md-4 text-md-end text-start">
             <div className="d-flex justify-content-md-end justify-content-start gap-3">
-              <a href="instagram.com/pepperx_official/" target="_blank" aria-label="Instagram">
+              <a href="https://www.instagram.com/pepperx_official/" target="_blank" aria-label="Instagram">
                 <Image src="/images/insta.svg" alt="Instagram" width={48} height={48} />
               </a>
               <a href="https://www.reddit.com/u/PerkX_Official/s/WsGGTcfejo" target="_blank" aria-label="Reddit">
                 <Image src="/images/reddit.svg" alt="Reddit" width={48} height={48} />
               </a>
-              <a href="t.me/perkx_official" target="_blank" aria-label="Telegram">
+              <a href="https://t.me/perkx_official" target="_blank" aria-label="Telegram">
                 <Image src="/images/tele.svg" alt="Telegram" width={48} height={48} />
               </a>
             </div>
