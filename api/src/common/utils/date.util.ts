@@ -27,9 +27,34 @@ export function convertToTimezone(date: Date | string | null | undefined, tz?: s
   const timezone = tz || getTimezone();
 
   try {
-    return dayjs(date).tz(timezone).format();
+    // Parse as UTC (from database), then convert to target timezone
+    return dayjs.utc(date).tz(timezone).format();
   } catch (error) {
     return dayjs(date).toISOString();
+  }
+}
+
+/**
+ * Convert a date from UTC+8 (Asia/Singapore) to UTC
+ * Used when saving dates from admin input (UTC+8) to database (UTC)
+ * @param date - Date object, string, or null/undefined in UTC+8
+ * @param tz - Optional timezone override, defaults to env TZ/TIMEZONE or 'Asia/Singapore'
+ * @returns Date object in UTC or null if input is null/undefined
+ */
+export function convertToUTC(date: Date | string | null | undefined, tz?: string): Date | null {
+  if (!date) {
+    return null;
+  }
+
+  const timezone = tz || getTimezone();
+
+  try {
+    // Parse the date as if it's in UTC+8, then convert to UTC
+    const utc8Date = dayjs.tz(date, timezone);
+    return utc8Date.utc().toDate();
+  } catch (error) {
+    // Fallback: treat as UTC if parsing fails
+    return dayjs(date).utc().toDate();
   }
 }
 

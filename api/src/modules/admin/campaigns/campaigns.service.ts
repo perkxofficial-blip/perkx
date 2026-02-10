@@ -10,6 +10,7 @@ import {
 } from './dto';
 import { StorageService } from '../../../common/storage/storage.service';
 import { generateSlug, generateUniqueSlug } from '../../../common/utils/slug.util';
+import { convertToTimezone, convertToUTC } from '../../../common/utils/date.util';
 
 type CampaignResponse = Campaign & {
   banner_url: string | null;
@@ -63,12 +64,35 @@ export class CampaignsService {
       },
     );
 
-    // Create campaign with banner_path and slug
-    const campaign = this.campaignRepository.create({
+    // Convert UTC+8 dates to UTC before saving to database
+    const campaignData = {
       ...createCampaignDto,
       banner_path: bannerPath,
       slug,
-    });
+    };
+
+    // Convert time period dates from UTC+8 to UTC
+    if (campaignData.preview_start) {
+      campaignData.preview_start = convertToUTC(campaignData.preview_start);
+    }
+    if (campaignData.preview_end) {
+      campaignData.preview_end = convertToUTC(campaignData.preview_end);
+    }
+    if (campaignData.launch_start) {
+      campaignData.launch_start = convertToUTC(campaignData.launch_start);
+    }
+    if (campaignData.launch_end) {
+      campaignData.launch_end = convertToUTC(campaignData.launch_end);
+    }
+    if (campaignData.archive_start) {
+      campaignData.archive_start = convertToUTC(campaignData.archive_start);
+    }
+    if (campaignData.archive_end) {
+      campaignData.archive_end = convertToUTC(campaignData.archive_end);
+    }
+
+    // Create campaign with banner_path and slug
+    const campaign = this.campaignRepository.create(campaignData);
 
     const savedCampaign = await this.campaignRepository.save(campaign);
 
@@ -244,7 +268,42 @@ export class CampaignsService {
       } as any;
     }
 
-    Object.assign(campaign, updateCampaignDto);
+    // Convert UTC+8 dates to UTC before saving to database
+    const updateData: any = { ...updateCampaignDto };
+
+    // Convert time period dates from UTC+8 to UTC
+    if (updateData.preview_start !== undefined) {
+      updateData.preview_start = updateData.preview_start 
+        ? convertToUTC(updateData.preview_start)
+        : null;
+    }
+    if (updateData.preview_end !== undefined) {
+      updateData.preview_end = updateData.preview_end 
+        ? convertToUTC(updateData.preview_end)
+        : null;
+    }
+    if (updateData.launch_start !== undefined) {
+      updateData.launch_start = updateData.launch_start 
+        ? convertToUTC(updateData.launch_start)
+        : null;
+    }
+    if (updateData.launch_end !== undefined) {
+      updateData.launch_end = updateData.launch_end 
+        ? convertToUTC(updateData.launch_end)
+        : null;
+    }
+    if (updateData.archive_start !== undefined) {
+      updateData.archive_start = updateData.archive_start 
+        ? convertToUTC(updateData.archive_start)
+        : null;
+    }
+    if (updateData.archive_end !== undefined) {
+      updateData.archive_end = updateData.archive_end 
+        ? convertToUTC(updateData.archive_end)
+        : null;
+    }
+
+    Object.assign(campaign, updateData);
     const savedCampaign = await this.campaignRepository.save(campaign);
 
     // Reload with exchange relation to ensure consistency
@@ -263,10 +322,19 @@ export class CampaignsService {
 
   /**
    * Transform campaign entity to response format with banner_url and exchange
+   * Converts UTC dates from database to UTC+8 for API response
+   * Note: created_at/updated_at are automatically converted by TransformInterceptor
    */
   private transformCampaignResponse(campaign: Campaign): CampaignResponse {
     return {
       ...campaign,
+      // Convert UTC dates to UTC+8 for response
+      preview_start: convertToTimezone(campaign.preview_start) as any,
+      preview_end: convertToTimezone(campaign.preview_end) as any,
+      launch_start: convertToTimezone(campaign.launch_start) as any,
+      launch_end: convertToTimezone(campaign.launch_end) as any,
+      archive_start: convertToTimezone(campaign.archive_start) as any,
+      archive_end: convertToTimezone(campaign.archive_end) as any,
       banner_url: this.getBannerUrl(campaign.banner_path),
       exchange: campaign.exchange
         ? {

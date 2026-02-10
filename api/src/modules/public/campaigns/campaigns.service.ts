@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Campaign } from '../../../entities';
 import { PublicListCampaignsQueryDto, CampaignStatus } from './dto';
 import { StorageService } from '../../../common/storage/storage.service';
+import { convertToTimezone } from '../../../common/utils/date.util';
 
 type CampaignResponse = Campaign & {
   banner_url: string | null;
@@ -174,10 +175,19 @@ export class PublicCampaignsService {
 
   /**
    * Transform campaign entity to response format with banner_url, status, and exchange
+   * Converts UTC dates from database to UTC+8 for API response
+   * Note: created_at/updated_at are automatically converted by TransformInterceptor
    */
   private transformCampaignResponse(campaign: Campaign): CampaignResponse {
     return {
       ...campaign,
+      // Convert UTC dates to UTC+8 for response
+      preview_start: convertToTimezone(campaign.preview_start) as any,
+      preview_end: convertToTimezone(campaign.preview_end) as any,
+      launch_start: convertToTimezone(campaign.launch_start) as any,
+      launch_end: convertToTimezone(campaign.launch_end) as any,
+      archive_start: convertToTimezone(campaign.archive_start) as any,
+      archive_end: convertToTimezone(campaign.archive_end) as any,
       banner_url: this.getBannerUrl(campaign.banner_path),
       status: this.calculateStatus(campaign),
       exchange: campaign.exchange
