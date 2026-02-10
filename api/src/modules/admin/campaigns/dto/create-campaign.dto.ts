@@ -14,6 +14,7 @@ import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { CampaignCategory } from '../../../../entities';
 import { TransformBoolean } from '../../../../common/decorators/transform-boolean.decorator';
+import { TransformDateUTC8 } from '../../../../common/decorators/transform-date-utc8.decorator';
 import { CampaignPeriodOrderConstraint } from '../../../../common/validators/campaign-period.validator';
 
 export class CreateCampaignDto {
@@ -76,7 +77,7 @@ export class CreateCampaignDto {
     type: Date,
   })
   @IsOptional()
-  @Type(() => Date)
+  @TransformDateUTC8()
   @IsDate()
   preview_start?: Date;
 
@@ -86,7 +87,7 @@ export class CreateCampaignDto {
     type: Date,
   })
   @IsOptional()
-  @Type(() => Date)
+  @TransformDateUTC8()
   @IsDate()
   preview_end?: Date;
 
@@ -96,7 +97,7 @@ export class CreateCampaignDto {
     type: Date,
   })
   @IsOptional()
-  @Type(() => Date)
+  @TransformDateUTC8()
   @IsDate()
   launch_start?: Date;
 
@@ -106,7 +107,7 @@ export class CreateCampaignDto {
     type: Date,
   })
   @IsOptional()
-  @Type(() => Date)
+  @TransformDateUTC8()
   @IsDate()
   launch_end?: Date;
 
@@ -116,7 +117,7 @@ export class CreateCampaignDto {
     type: Date,
   })
   @IsOptional()
-  @Type(() => Date)
+  @TransformDateUTC8()
   @IsDate()
   archive_start?: Date;
 
@@ -126,7 +127,7 @@ export class CreateCampaignDto {
     type: Date,
   })
   @IsOptional()
-  @Type(() => Date)
+  @TransformDateUTC8()
   @IsDate()
   @Validate(CampaignPeriodOrderConstraint)
   archive_end?: Date;
