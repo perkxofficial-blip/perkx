@@ -1989,19 +1989,17 @@ header {
   position: absolute;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(2px);
   overflow: hidden;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: none !important;
+  border-color: unset !important;
 
   &.exchange-avatar-bitget {
     right: 277px;
     top: 135px;
-    background: url('../../public/images/exchanges/bitget.png') lightgray 9.807px 5.754px / 308.391% 95.502% no-repeat, rgba(255, 255, 255, 0.20);
-    backdrop-filter: blur(2px)
+    background: url('../../public/images/exchanges/bitget.png') no-repeat;
   }
 
   &.exchange-avatar-okx {
@@ -2009,7 +2007,7 @@ header {
     top: 265px;
     width: 54px;
     height: 54px;
-    background-image: url('../../public/images/exchanges/okx.svg');
+    background-image: url('../../public/images/exchanges/okx.png');
   }
 
   &.exchange-avatar-weex {
@@ -2017,13 +2015,13 @@ header {
     top: 373px;
     width: 44px;
     height: 44px;
-    background-image: url('../../public/images/exchanges/weex.svg');
+    background-image: url('../../public/images/exchanges/weex.png');
   }
 
   &.exchange-avatar-binance {
     left: 255px;
     top: 114px;
-    background: url('../../public/images/exchanges/binance.png') lightgray 8.47px 8.47px / 71.768% 71.768% no-repeat, rgba(255, 255, 255, 0.20);
+    background: url('../../public/images/exchanges/binance.png') no-repeat;
   }
 
   &.exchange-avatar-bingx {
@@ -2039,7 +2037,7 @@ header {
     top: 388px;
     width: 44px;
     height: 44px;
-    background-image: url('../../public/images/exchanges/bybit.svg');
+    background-image: url('../../public/images/exchanges/bybit.png');
   }
 }
 .bg-bottom-left {

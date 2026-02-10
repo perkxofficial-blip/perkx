@@ -51,17 +51,14 @@ export default async function Footer() {
 
           <div className="col-md-4 text-md-end text-start">
             <div className="d-flex justify-content-md-end justify-content-start gap-3">
-              <a href="#" aria-label="Facebook">
-                <Image src="/images/fb.svg" alt="Facebook" width={48} height={48} />
-              </a>
-              <a href="#" aria-label="X">
-                <Image src="/images/x.svg" alt="X" width={48} height={48} />
-              </a>
-              <a href="#" aria-label="Instagram">
+              <a href="instagram.com/pepperx_official/" target="_blank" aria-label="Instagram">
                 <Image src="/images/insta.svg" alt="Instagram" width={48} height={48} />
               </a>
-              <a href="#" aria-label="TikTok">
-                <Image src="/images/tiktok.svg" alt="TikTok" width={48} height={48} />
+              <a href="https://www.reddit.com/u/PerkX_Official/s/WsGGTcfejo" target="_blank" aria-label="Reddit">
+                <Image src="/images/reddit.svg" alt="Reddit" width={48} height={48} />
+              </a>
+              <a href="t.me/perkx_official" target="_blank" aria-label="Telegram">
+                <Image src="/images/tele.svg" alt="Telegram" width={48} height={48} />
               </a>
             </div>
           </div>
