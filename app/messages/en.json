@@ -64,9 +64,9 @@
       "exchanges": "Exchanges",
       "product": "Product",
       "discount_rate": "Discount Rate",
-      "default_taker": "Default Taker/Maker Fee",
-      "final_taker": "Final Taker/Maker Fee",
-      "ave_rebate": "Ave Rebate For 1M Vol",
+      "default_taker": "Default*",
+      "final_taker": "Final*",
+      "ave_rebate": "Ave Rebate**",
       "action": "action",
       "register": "Register"
     },

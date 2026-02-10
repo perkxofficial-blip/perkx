@@ -64,9 +64,9 @@
       "exchanges": "Exchanges",
       "product": "Producto",
       "discount_rate": "Tasa de Descuento",
-      "default_taker": "Comisión Taker/Maker Predeterminada",
-      "final_taker": "Comisión Taker/Maker Final",
-      "ave_rebate": "Reembolso Promedio por Vol. 1M",
+      "default_taker": "Predeterminado*",
+      "final_taker": "Final*",
+      "ave_rebate": "Reembolso Promedio**",
       "action": "acción",
       "register": "Registrarse"
     },

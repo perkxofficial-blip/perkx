@@ -64,9 +64,9 @@
       "exchanges": "交易所",
       "product": "产品",
       "discount_rate": "折扣率",
-      "default_taker": "默认Taker/Maker费用",
-      "final_taker": "最终Taker/Maker费用",
-      "ave_rebate": "100万交易量平均返佣",
+      "default_taker": "默认*",
+      "final_taker": "最终*",
+      "ave_rebate": "平均返佣**",
       "action": "操作",
       "register": "注册"
     },
