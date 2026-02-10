@@ -64,9 +64,9 @@
       "exchanges": "Bursa",
       "product": "Produk",
       "discount_rate": "Tingkat Diskon",
-      "default_taker": "Biaya Taker/Maker Default",
-      "final_taker": "Biaya Taker/Maker Akhir",
-      "ave_rebate": "Rata-rata Rebate untuk Vol 1M",
+      "default_taker": "Default*",
+      "final_taker": "Final*",
+      "ave_rebate": "Rabat Rata-rata*",
       "action": "aksi",
       "register": "Daftar"
     },

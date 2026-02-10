@@ -64,9 +64,9 @@
       "exchanges": "取引所",
       "product": "商品",
       "discount_rate": "割引率",
-      "default_taker": "デフォルトTaker/Maker手数料",
-      "final_taker": "最終Taker/Maker手数料",
-      "ave_rebate": "100万取引量の平均リベート",
+      "default_taker": "デフォルト*",
+      "final_taker": "最終*",
+      "ave_rebate": "平均リベート**",
       "action": "アクション",
       "register": "登録"
     },
