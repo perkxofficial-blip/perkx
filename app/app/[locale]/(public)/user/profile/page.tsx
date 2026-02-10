@@ -150,6 +150,19 @@ export default function UserProfilePage() {
     return `${year}-${month}-${day}`;
   };
 
+  // Helper function to convert any date string to YYYY-MM-DD format for input
+  const convertToInputDateFormat = (dateString: string): string => {
+    if (!dateString) return '';
+    try {
+      // Try parsing the date string
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return '';
+      return formatDateToISO(date);
+    } catch {
+      return '';
+    }
+  };
+
   useEffect(() => {
     loadProfile();
   }, []);
@@ -172,7 +185,7 @@ export default function UserProfilePage() {
         last_name: userData.last_name || '',
         phone: userData.phone || '',
         gender: userData.gender || '',
-        birthday: userData.birthday || '',
+        birthday: convertToInputDateFormat(userData.birthday || ''),
         country: userData.country || '',
       });
       setLoading(false);
@@ -779,63 +792,18 @@ export default function UserProfilePage() {
                       <label className="text-[#C9C9C9] text-sm leading-5 tracking-[-0.084px]">
                         {t('birthday')}
                       </label>
-                      <div className="relative">
-                        {/* Hidden native date input */}
-                        <input
-                          ref={datePickerRef}
-                          type="date"
-                          value={profileForm.birthday}
-                          onChange={(e) => {
-                            setProfileForm({ ...profileForm, birthday: e.target.value });
-                            if (profileErrors.birthday) {
-                              setProfileErrors({ ...profileErrors, birthday: '' });
-                            }
-                          }}
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '1px',
-                            height: '1px',
-                            opacity: 0
-                          }}
-                        />
-                        {/* Visible custom input */}
-                        <div
-                          onClick={() => {
-                            const input = datePickerRef.current;
-                            if (input) {
-                              if (typeof input.showPicker === 'function') {
-                                try {
-                                  input.showPicker();
-                                } catch (e) {
-                                  // Fallback for browsers that don't support showPicker
-                                  input.focus();
-                                }
-                              } else {
-                                input.focus();
-                              }
-                            }
-                          }}
-                          className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-purple-500 cursor-pointer flex items-center justify-between"
-                        >
-                          <span className={profileForm.birthday ? 'text-white' : 'text-white/50'}>
-                            {profileForm.birthday ? formatDateToDisplay(profileForm.birthday) : t('placeholder_birthday')}
-                          </span>
-                          {/* Calendar icon */}
-                          <svg
-                            className="w-5 h-5 opacity-70"
-                            fill="none"
-                            stroke="#C9C9C9"
-                            viewBox="0 0 24 24"
-                          >
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></line>
-                            <line x1="8" y1="2" x2="8" y2="6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></line>
-                            <line x1="3" y1="10" x2="21" y2="10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></line>
-                          </svg>
-                        </div>
-                      </div>
+                      <input
+                        type="date"
+                        value={profileForm.birthday}
+                        onChange={(e) => {
+                          setProfileForm({ ...profileForm, birthday: e.target.value });
+                          if (profileErrors.birthday) {
+                            setProfileErrors({ ...profileErrors, birthday: '' });
+                          }
+                        }}
+                        className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
+                        style={{ colorScheme: 'dark' }}
+                      />
                       {profileErrors.birthday && (
                         <p className="text-red-400 text-sm mt-1">{profileErrors.birthday}</p>
                       )}
