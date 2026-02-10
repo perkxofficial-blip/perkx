@@ -1493,7 +1493,14 @@ header {
   margin-bottom: 5px !important;
 }
 .otp-input input {
- color: #fff;
+  color: #fff;
+  width: 44px;
+  height: 50px;
+  text-align: center !important;
+  font-size: 20px !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  outline: none !important;
 }
 .campaign-page {
   .banner-section {

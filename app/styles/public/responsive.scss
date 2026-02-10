@@ -144,6 +144,9 @@
   height: 86px !important;
 }
 @media (max-width: 992px) {
+  .homepage .banner-section {
+    height: calc(100vh - 86px);
+  }
   .campaign-slide-item {
     width: 240px;
   }
@@ -282,11 +285,11 @@
         left: 17px;
       }
       .tb-1 {
-        top: 37px;
+        top: 36px;
         height: 35px;
       }
       .tb-2 {
-        top: 38px;
+        top: 39px;
         height: 98px;
       }
     }
@@ -543,7 +546,18 @@
   display: none !important;
 }
 @media (max-width: 768px) {
-
+  .campaign-view {
+    display: flex !important;
+    align-items: center !important;
+    text-align: center;
+    .campaign-link {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+  .campaign-section {
+    padding-bottom: 30px;
+  }
   .hidden-mb{
     display: none !important;
   }
@@ -607,6 +621,25 @@
   }
   .le-box-link .flex:first-child{
     width: 70% !important;
+  }
+  .pe-box2 {
+    bottom: 65px !important;
+  }
+  .footer-title {
+    padding-left: 0 !important;
+  }
+  .img-bg-exchanges {
+    height: 435px;
+  }
+  .img-bg-calculator {
+    height: 390px;
+  }
+  .calculator-card {
+    margin-bottom: 30px !important;
+  }
+  .otp-input input {
+    width: 39px !important;
+    height: 45px !important;
   }
 }
 

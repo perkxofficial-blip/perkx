@@ -116,15 +116,6 @@ export default function OtpInputWithSubmit({
               onKeyDown={(e) => handleKeyDown(e, i)}
               onChange={(e) => handleChange(e, i)}
               onPaste={handlePaste}
-              style={{
-                width: 44.5,
-                height: 50,
-                textAlign: 'center',
-                fontSize: 20,
-                border: 'none',
-                borderBottom: '1px solid #c7d2fe',
-                outline: 'none',
-              }}
             />
           ))}
         </div>
