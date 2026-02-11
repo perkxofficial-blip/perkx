@@ -648,6 +648,9 @@
   .result-divider {
     display: none;
   }
+  .object-cover{
+    height: auto !important;
+  }
 }
 
 @media (max-width: 480px) {
