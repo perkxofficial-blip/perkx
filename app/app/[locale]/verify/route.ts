@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
       ttl: 7 * 24 * 60 * 60,
     });
 
-    return NextResponse.redirect(new URL(`${FRONTEND_URL}/user/profile`));
+    return NextResponse.redirect(new URL(`${FRONTEND_URL}/user/linked-exchanges`));
   } catch (err) {
     console.error('Verify error:', err);
     return NextResponse.redirect(new URL(`${FRONTEND_URL}/login`));

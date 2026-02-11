@@ -993,7 +993,7 @@ header {
   }
   .pe-table {
     border-radius: 16px;
-    border: 0.5px solid rgba(255, 255, 255, 0.50);
+
     background: rgba(219, 159, 207, 0.16);
     backdrop-filter: blur(6px);
     padding: 32px 40px;
@@ -1105,7 +1105,7 @@ header {
     flex-direction: column;
     align-items: flex-start;
     border-radius: 8px;
-    border: 0.5px solid rgba(255, 255, 255, 0.50);
+    border: 0.5px solid var(--border-color);
     background: #6D6380;
     box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.16);
     backdrop-filter: blur(12px);
@@ -1562,7 +1562,7 @@ header {
     gap: 8px;
     align-self: stretch;
     border-radius: 10px;
-    border: 0.5px solid #595959;
+    border: 0.5px var(--border-color);
     background: rgba(255, 255, 255, 0.12);
     box-shadow: 0 1px 2px 0 rgba(228, 229, 231, 0.24);
     backdrop-filter: blur(6px);
@@ -1830,7 +1830,7 @@ header {
   .exchanges-table-container {
     background: rgba(219, 159, 207, 0.16);
     backdrop-filter: blur(6px);
-    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    border: 0.5px solid var(--border-color);
     border-radius: 16px;
     padding: 32px 40px;
   }
@@ -1905,7 +1905,7 @@ header {
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        border: 2px solid #ffd868;
+        border: 2px solid var(--border-color);
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -2028,7 +2028,7 @@ header {
   &.exchange-avatar-binance {
     left: 255px;
     top: 114px;
-    background: url('../../public/images/exchanges/binance.png') no-repeat;
+    background: url('../../public/images/exchanges/binance.svg');
   }
 
   &.exchange-avatar-bingx {
@@ -2193,7 +2193,7 @@ header {
     width: 24px;
     height: 24px;
     background: radial-gradient(circle, rgba(239, 115, 209, 1) 0%, rgba(179, 136, 244, 1) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid var(--border-color);
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(239, 115, 209, 0.5);
@@ -2203,7 +2203,7 @@ header {
     width: 24px;
     height: 24px;
     background: radial-gradient(circle, rgba(239, 115, 209, 1) 0%, rgba(179, 136, 244, 1) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid var(--border-color);
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(239, 115, 209, 0.5);
@@ -2235,7 +2235,7 @@ header {
 }
 
 .perkx-selector {
-  border: 0.5px solid #595959;
+  border: 0.5px var(--border-color);
   background: rgba(255, 255, 255, 0.12);
   width: 100%;
   padding: 10px 12px;
@@ -2338,7 +2338,7 @@ header {
 .calculator-results {
   backdrop-filter: blur(45px);
   background: rgba(255, 255, 255, 0.12);
-  border: 0.5px solid #595959;
+  border: 0.5px solid var(--border-color);
   border-radius: 10px;
   padding: 24px;
   display: flex;
