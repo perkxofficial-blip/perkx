@@ -71,7 +71,8 @@
       "register": "회원가입"
     },
     "view_all_partners": "모든 파트너 보기",
-    "exchange_footnote": "표시된 수수료는 비VIP 기준입니다. VIP 트레이더의 경우, 각 VIP 등급에 따라 할인율이 적용됩니다. 계산은 거래량 1M 기준입니다."
+    "exchange_footnote_1": "*표시된 수수료는 비VIP 수수료 기준입니다. VIP 트레이더의 경우 각자의 VIP 등급에 따라 할인율이 적용됩니다.",
+    "exchange_footnote_2": "**거래량 1M 기준."
   },
   "footer": {
     "desc": "암호화폐 트레이딩 캐시백의 글로벌 기준. 기관 및 개인 트레이더의 자본 효율을 극대화합니다.",

@@ -2101,7 +2101,7 @@ header {
 }
 
 .calculator-hero-subtitle {
-  color: #fff;
+  color: var(--secondary-text);
   font-size: 24px;
   font-weight: 400;
   line-height: normal;
@@ -2167,7 +2167,7 @@ header {
 }
 
 .volume-title {
-  color: #fff;
+  color: var(--secondary-text);
   font-size: 24px;
   font-weight: 500;
   line-height: 1;
@@ -2365,7 +2365,7 @@ header {
 }
 
 .result-label {
-  color: #C9C9C9 !important;
+  color: var(--secondary-text) !important;
   font-size: 14px !important;
   font-weight: 400 !important;
   line-height: 20px !important;
@@ -2468,9 +2468,11 @@ header {
   font-weight: 400;
   line-height: 20px;
 }
-.pe-footnote {
+.pe-footnote p {
   margin-top: 10px;
+  margin-bottom: 0;
   color: var(--muted-text);
+  font-size: 14px;
 }
 iframe#launcher {
   border-radius: 50% !important;

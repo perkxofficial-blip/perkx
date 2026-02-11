@@ -71,7 +71,8 @@
       "register": "Register"
     },
     "view_all_partners" : "View All Partners",
-    "exchange_footnote": "Fees shown are based on non-VIP fee. For VIP traders, discount rates will apply based on your respective VIP profiles for 1M volume."
+    "exchange_footnote_1": "*Fees shown are based on non-VIP fee. For VIP traders, discount rates will apply based on your respective VIP profiles.",
+    "exchange_footnote_2": "**for 1M volume."
   },
   "footer": {
     "desc": "The global standard for crypto trading cashback. Helping institutional and retail traders maximize capital efficiency.",

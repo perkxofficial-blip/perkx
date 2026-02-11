@@ -71,7 +71,8 @@
       "register": "Daftar"
     },
     "view_all_partners": "Lihat Semua Mitra",
-    "exchange_footnote": "Biaya yang ditampilkan didasarkan pada tarif non-VIP. Untuk trader VIP, diskon akan berlaku sesuai dengan tingkat VIP masing-masing. Perhitungan didasarkan pada volume perdagangan 1M."
+    "exchange_footnote_1": "*Biaya yang ditampilkan berdasarkan biaya non-VIP. Untuk trader VIP, tarif diskon akan berlaku sesuai dengan profil VIP masing-masing.",
+    "exchange_footnote_2": "**Untuk volume 1M."
   },
   "footer": {
     "desc": "Standar global untuk cashback trading kripto. Membantu trader institusional dan ritel memaksimalkan efisiensi modal.",

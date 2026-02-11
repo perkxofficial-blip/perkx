@@ -71,7 +71,8 @@
       "register": "注册"
     },
     "view_all_partners": "查看所有合作伙伴",
-    "exchange_footnote": "所显示的费用基于非 VIP 费率。对于 VIP 交易者，将根据各自的 VIP 等级适用相应的折扣。计算基于 1M 的交易量。"
+    "exchange_footnote_1": "*所显示的费用基于非VIP费率。对于VIP交易者，将根据各自的VIP等级适用相应的折扣率。",
+    "exchange_footnote_2": "**基于1M交易量。"
   },
   "footer": {
     "desc": "加密货币交易返现的全球标准。帮助机构和散户交易者最大化资金效率。",
