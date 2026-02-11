@@ -641,6 +641,13 @@
     width: 39px !important;
     height: 45px !important;
   }
+  .calculator-results {
+    display: block;
+    text-align: center;
+  }
+  .result-divider {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
