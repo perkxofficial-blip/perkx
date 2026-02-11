@@ -340,7 +340,7 @@ export default function AdminUsersPage() {
         ) : (
           <>
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full table-fixed">
                 <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                   <tr>
                     <th className="w-64 px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email Address</th>
@@ -355,7 +355,7 @@ export default function AdminUsersPage() {
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   {paginatedUsers.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                      <td className="w-64 px-6 py-4 text-sm text-gray-900 dark:text-white">{user.email}</td>
+                      <td className="w-64 px-6 py-4 text-sm text-gray-900 dark:text-white truncate" title={user.email}>{user.email}</td>
                       <td className="w-32 px-6 py-4 text-sm text-gray-900 dark:text-white font-mono">{user.referral_code}</td>
                       <td className="w-32 px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDate(user.created_at)}</td>
                         <td className="w-48 px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{user.referral_by?.email || '-'}</td>
