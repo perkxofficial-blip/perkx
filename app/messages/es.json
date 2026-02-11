@@ -40,18 +40,20 @@
       "title": "Inicio | PerkX",
       "description": "Maximiza tus reembolsos de trading en exchanges globales con PerkX. Una plataforma profesional de cashback diseñada para traders de alto volumen."
     },
-    "intro_1": "Los beneficios no se dan.",
-    "intro_2": "Se negocian.",
+    "intro_1": "Las comisiones de trading existen.",
+    "intro_2": "El cashback también debería existir.",
     "hero_section_description": "Obtenemos los mejores reembolsos de comisiones, airdrops y descuentos en un solo portal — porque cada operación merece el mejor trato.",
     "get_started_now": "Comenzar Ahora",
     "our_exclusive_partners": "Nuestros socios exclusivos",
     "coin": "Moneda decorativa",
-    "how_perkx_works": "Cómo Funciona <perkx>PerkX</perkx>",
-    "how_perkx_works_description": "Comienza en tres simples pasos y empieza a ganar cashback en tus operaciones",
-    "timeline1": "1. Registra una cuenta PerkX",
-    "timeline2": "2. Registra/Vincula tu cuenta de exchange",
-    "timeline2_desc": "Crea una cuenta de exchange a través del enlace proporcionado",
-    "timeline3": "3. Comienza a Operar",
+    "how_perkx_works": "Comenzando con <perkx>PerkX</perkx>",
+    "how_perkx_works_description": "Tres pasos. Sin cambiar tu forma de operar.",
+    "timeline1": "1. Crea tu cuenta de PerkX",
+    "timeline1_desc": "Regístrate una vez para desbloquear cashback en nuestros exchanges asociados.",
+    "timeline2": "2. Conecta tu exchange",
+    "timeline2_desc": "Crea una cuenta en un exchange asociado usando nuestro enlace y luego vincúlala a PerkX.",
+    "timeline3": "3. Opera como siempre. Gana cashback.",
+    "timeline3_desc": "Cada operación elegible te otorga automáticamente una parte de las comisiones.",
     "calculator_title": "Mira lo que <perkx>Te Estás Perdiendo</perkx>",
     "calculator_desc": "Calcula tus ganancias potenciales de cashback según tu volumen de trading.",
     "calculator_btn": "Calcular Cashback",
@@ -71,7 +73,8 @@
       "register": "Registrarse"
     },
     "view_all_partners": "Ver Todos los Socios",
-    "exchange_footnote": "Las comisiones mostradas se basan en tarifas no VIP. Para los traders VIP, se aplicarán descuentos según su nivel VIP correspondiente. Los cálculos se basan en un volumen de negociación de 1M."
+    "exchange_footnote_1": "*Las tarifas mostradas se basan en la tarifa para no VIP. Para los traders VIP, se aplicarán tasas de descuento según su respectivo perfil VIP.",
+    "exchange_footnote_2": "**Para un volumen de 1M."
   },
   "footer": {
     "desc": "El estándar global para cashback de trading de criptomonedas. Ayudando a traders institucionales y minoristas a maximizar la eficiencia del capital.",

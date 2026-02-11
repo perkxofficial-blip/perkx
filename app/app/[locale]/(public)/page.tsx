@@ -186,7 +186,7 @@ export default async function LandingPage() {
                 height={51}
               />
               <div className="timeline-block">
-                <div className="d-flex align-items-center timeline-item">
+                <div className="d-flex timeline-item">
                   <div className="timeline-icon">
                     <Image
                       src="/images/people.svg"
@@ -197,7 +197,8 @@ export default async function LandingPage() {
                     <div className="timeline-bottom tb-1"></div>
                   </div>
                   <div className="ms-4 ">
-                    <p className="heading-like mb-0">{t('home.timeline1')}</p>
+                    <p className="heading-like mb-1">{t('home.timeline1')}</p>
+                    <p>{t('home.timeline1_desc')}</p>
                   </div>
                 </div>
                 <div className="d-flex timeline-item">
@@ -208,15 +209,14 @@ export default async function LandingPage() {
                       width={72}
                       height={72}
                     />
-                    <div className="timeline-bottom tb-2"></div>
+                    <div className="timeline-bottom tb-1"></div>
                   </div>
                   <div className="ms-4 ">
                     <p className="heading-like mb-1">{t('home.timeline2')}</p>
                     <p>{t('home.timeline2_desc')}</p>
                   </div>
-
                 </div>
-                <div className="d-flex align-items-center timeline-item">
+                <div className="d-flex timeline-item">
                   <div className="timeline-icon">
                     <Image
                       src="/images/chart.png"
@@ -227,6 +227,7 @@ export default async function LandingPage() {
                   </div>
                   <div className="ms-4 ">
                     <p className="heading-like mb-0">{t('home.timeline3')}</p>
+                    <p>{t('home.timeline3_desc')}</p>
                   </div>
                 </div>
               </div>
@@ -389,7 +390,8 @@ export default async function LandingPage() {
                 </div>
               </div>
               <div className="pe-footnote offset-md-6 col-md-6 col-12">
-                {t('home.exchange_footnote')}
+                <p>{t('home.exchange_footnote_1')}</p>
+                <p>{t('home.exchange_footnote_2')}</p>
               </div>
             </div>
           </div>
