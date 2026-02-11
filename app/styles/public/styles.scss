@@ -7,6 +7,7 @@
   --white: #fff;
   --sky: #88EEFE;
   --gray: #fcfcfc;
+  --hero-title-weight: 700;
 }
 body {
   background: #000030;
@@ -1077,19 +1078,15 @@ header {
     font-weight: 700;
   }
   .pe-top td {
-    border-top: 1px solid #FFE680;;
-    border-bottom: 1px solid #FFE680;
     background: rgba(255, 255, 255, 0.12);
     overflow: visible !important;
   }
   .pe-top td:first-child {
-    border-left: 1px solid #FFE680;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
   }
 
   .pe-top td:last-child {
-    border-right: 1px solid #FFE680;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
   }
@@ -1522,7 +1519,7 @@ header {
         text-align: center;
         font-size: 68px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: var(--hero-title-weight);
         line-height: normal;
         background: linear-gradient(270deg, #C2C1C8 6.15%, #FCFBFC 98.98%);
         background-clip: text;
@@ -2083,7 +2080,7 @@ header {
 .calculator-hero-title {
   color: #C2C1C8;
   font-size: 68px;
-  font-weight: 500;
+  font-weight: var(--hero-title-weight);
   line-height: 1.2;
   margin-bottom: 26px;
   font-family: var(--font-inter), sans-serif;

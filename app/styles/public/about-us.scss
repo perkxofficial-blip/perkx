@@ -19,7 +19,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-size: 68px;
-      font-weight: 500;
+      font-weight: var(--hero-title-weight);
       line-height: normal;
       margin: 0;
     }
