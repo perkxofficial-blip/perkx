@@ -29,7 +29,7 @@ interface ExchangeRowProps {
 
 export default async function ExchangesPage({ params }: ExchangesPageProps) {
   const { locale } = await params;
-  const t = await getTranslations('exchanges');
+  const t = await getTranslations();
   
   let exchanges: Exchange[] = [];
   try {
@@ -55,9 +55,9 @@ export default async function ExchangesPage({ params }: ExchangesPageProps) {
               <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
 
               <div className="get-started col-md-6 text-center">
-                <h2 className='exchange-hero_title'>{t('hero_title_part1')}</h2>
-                <h1><span className="exchange-hero_title_gradient">{t('hero_title_gradient')}</span></h1>
-                <p>{t('hero_subtitle')}</p>
+                <h2 className='exchange-hero_title'>{t('exchanges.hero_title_part1')}</h2>
+                <h1><span className="exchange-hero_title_gradient">{t('exchanges.hero_title_gradient')}</span></h1>
+                <p>{t('exchanges.hero_subtitle')}</p>
               </div>
 
               <div className="bitcoin-right col-md-3" aria-hidden="true"></div>
@@ -99,6 +99,10 @@ export default async function ExchangesPage({ params }: ExchangesPageProps) {
             </div>
             <div className="pe-table show-xs">
               <PartnerExchangesMobileTable exchanges={exchanges} />
+            </div>
+            <div className="pe-footnote offset-md-6 col-md-6 col-12">
+              <p>{t('home.exchange_footnote_1')}</p>
+              <p>{t('home.exchange_footnote_2')}</p>
             </div>
           </div>
         </div>
