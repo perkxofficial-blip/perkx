@@ -486,6 +486,9 @@ header {
 
     .timeline-icon {
       position: relative;
+      img {
+        max-width: unset !important;
+      }
     }
     .timeline-bottom {
       width: 3px;        /* đáy rộng 2px */
@@ -503,11 +506,11 @@ header {
       );
       position: absolute;
       top: 67px;
-      left: 31px;
+      left: 33px;
     }
     .tb-1 {
         top: 70px;
-        height: 42px;
+        height: 56px;
       }
     .tb-2 {
       top: 67px;
