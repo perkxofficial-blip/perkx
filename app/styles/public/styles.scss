@@ -71,7 +71,7 @@ header {
       padding: 0 8px;
       a {
         color: var(--white);
-        
+        font-family: var(--font-inter), sans-serif;
         &.active {
           color: #89EFFF;
         }
@@ -88,9 +88,11 @@ header {
     font-size: 14px;
     color: var(--white);
     border: none;
+    font-family: var(--font-inter), sans-serif;
   }
   .dropdown-item {
     font-size: 14px;
+    font-family: var(--font-inter), sans-serif;
   }
   .btn-group {
     padding-right: 24px;
@@ -101,6 +103,7 @@ header {
     width: 100px;
     height: 40px;
     color: var(--white);
+    font-family: var(--font-inter), sans-serif;
     border-radius: 10px;
     font-size: 14px;
     display: flex;
@@ -230,6 +233,7 @@ header {
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-family: var(--font-inter), sans-serif;
       text-align: center;
       font-size: 68px;
       font-style: normal;
@@ -238,6 +242,7 @@ header {
     }
     h1 {
       color: #89EFFF;
+      font-family: var(--font-inter), sans-serif;
       text-align: center;
       font-size: 68px;
       font-style: normal;
@@ -645,6 +650,7 @@ header {
   h2 {
     color: var(--primary-text);
     font-size: 48px;
+    font-family: var(--font-inter), sans-serif;
     font-style: normal;
     font-weight: 700;
     line-height: 42px; /* 105% */
@@ -978,6 +984,7 @@ header {
     align-self: stretch;
     text-align: center;
     font-size: 48px;
+    font-family: var(--font-inter), sans-serif;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -2077,6 +2084,7 @@ header {
   font-weight: 500;
   line-height: 1.2;
   margin-bottom: 26px;
+  font-family: var(--font-inter), sans-serif;
 
   background: linear-gradient(90deg, #FCFBFC 6.15%, #C2C1C8 98.982%);
   background-clip: text;

@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"], // tuỳ bạn dùng
   variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -21,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={dmSans.className} suppressHydrationWarning>
+      <body className={`${dmSans.className} ${inter.variable}`} suppressHydrationWarning>
         {children}
       </body>
     </html>
