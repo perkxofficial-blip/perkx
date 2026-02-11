@@ -37,7 +37,7 @@ export async function verifyOtpAction(formData: FormData) {
     httpOnly: false,
     ttl: 7 * 24 * 60 * 60 // 7 days
   })
-  redirect(`/user/profile`);
+  redirect(`/user/linked-exchanges`);
 }
 
 export async function resendOtpAction(formData: FormData) {
