@@ -434,7 +434,7 @@ export default function ExchangesManagerPage() {
       {/* Exchanges Table */}
       <div className="rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full table-fixed">
             <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -472,7 +472,8 @@ export default function ExchangesManagerPage() {
                       <td className="px-6 py-4">
                         <Link
                           href={`/admin/users/${exchange.user_id}`}
-                          className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                          className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 truncate block"
+                          title={exchange.user_email || '-'}
                         >
                           {exchange.user_email || '-'}
                         </Link>
