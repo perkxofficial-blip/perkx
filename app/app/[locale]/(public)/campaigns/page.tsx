@@ -122,7 +122,7 @@ export default async function CampaignPage({ searchParams }: Props) {
           <div className="row justify-content-center mb-5">
             <div className="col-md-3 col-4">
               <div className="mb-3 position-relative">
-                <label htmlFor="holderInput" className="form-label">
+                <label htmlFor="exchangeInput" className="form-label">
                   {t('campaign.campaign_holder')}
                 </label>
                 <SelectSearch name='exchange' options={exchangeOptions} />
