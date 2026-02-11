@@ -267,19 +267,32 @@ export default function ExchangesManagerPage() {
     return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
   };
 
-  // Format date time to UTC+8 timezone
+  // Format date time that is already in UTC+8 (just format, no timezone conversion)
   const formatDateTimeUTC8 = (dateString?: string) => {
     if (!dateString) return '-';
-    // Parse the UTC date
+    
+    // If the date string is already in UTC+8, parse it directly without conversion
+    // Expected format: "2024-01-15T18:30:00" or "2024-01-15 18:30:00"
+    const cleanedString = dateString.replace(' ', 'T').split('.')[0]; // Normalize format
+    const match = cleanedString.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);
+    
+    if (match) {
+      const [, year, monthNum, day, hours, minutes, seconds] = match;
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const month = months[parseInt(monthNum) - 1];
+      
+      return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds} (UTC+8)`;
+    }
+    
+    // Fallback: use Date parsing but with local time (not UTC)
     const date = new Date(dateString);
-    // Extract date components in UTC
-    const day = String(date.getUTCDate()).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = months[date.getUTCMonth()];
-    const year = date.getUTCFullYear();
-    const hours = String(date.getUTCHours()).padStart(2, '0');
-    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
     
     return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds} (UTC+8)`;
   };
