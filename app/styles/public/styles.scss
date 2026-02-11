@@ -196,6 +196,7 @@ header {
   background-image: url("../../public/images/bg-source-new.png");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .img-bg-exchanges {
@@ -203,6 +204,7 @@ header {
   background-image: url("../../public/images/bg-source-new.png");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .img-bg-calculator {
@@ -210,6 +212,7 @@ header {
   background-image: url("../../public/images/bg-source-new.png");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 .homepage {
   .banner-section {
@@ -996,7 +999,7 @@ header {
 
     background: rgba(219, 159, 207, 0.16);
     backdrop-filter: blur(6px);
-    padding: 32px 40px;
+    padding: 12px;
 
     table {
       overflow: hidden;
@@ -2028,7 +2031,7 @@ header {
   &.exchange-avatar-binance {
     left: 255px;
     top: 114px;
-    background: url('../../public/images/exchanges/binance.svg');
+    background: url('../../public/images/exchanges/binance.png');
   }
 
   &.exchange-avatar-bingx {
