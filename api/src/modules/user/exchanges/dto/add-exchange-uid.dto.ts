@@ -15,11 +15,11 @@ export class AddExchangeUidDto {
 
   @ApiProperty({
     description: 'Exchange UID from the exchange platform',
-    example: 'abc123xyz',
-    maxLength: 100,
+    example: 'abc123xyz7890123456',
+    maxLength: 20,
   })
   @IsString()
   @IsNotEmpty({ message: 'Exchange UID is required' })
-  @MaxLength(100, { message: 'Exchange UID must not exceed 100 characters' })
+  @MaxLength(100, { message: 'Exchange UID must not exceed 20 characters' })
   exchange_uid: string;
 }
