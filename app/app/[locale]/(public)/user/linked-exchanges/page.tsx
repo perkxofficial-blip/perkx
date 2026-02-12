@@ -505,7 +505,7 @@ export default function LinkedExchangesPage() {
                     <div className="flex items-center justify-between flex-1 min-w-0">
                       <div className="flex flex-col gap-1 min-w-0">
                         <h3 className="!text-[#FCFCFC] text-sm font-bold leading-tight truncate">{exchange.exchange_name}</h3>
-                        <p className="!text-[#FCFCFC] text-sm font-normal leading-5 tracking-normal m-0 mb-1">{t('uid')}: {exchange.exchange_uid}</p>
+                        <p className="!text-[#FCFCFC] text-sm font-normal leading-5 tracking-normal m-0 mb-1 break-all">{t('uid')}: {exchange.exchange_uid}</p>
                         <div
                           className="inline-flex items-center justify-center px-2 py-0.5 rounded-[60px] self-start"
                           style={{ background: statusBadge.bg }}
