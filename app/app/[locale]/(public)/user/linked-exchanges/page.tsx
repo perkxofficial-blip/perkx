@@ -49,6 +49,7 @@ export default function LinkedExchangesPage() {
   const [modalMounted, setModalMounted] = useState(false);
   const [deleteModalMounted, setDeleteModalMounted] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [linkErrors, setLinkErrors] = useState<Record<string, string>>({});
   const [open, setOpen] = useState(false);
   const asideRef = useRef<HTMLDivElement | null>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -92,6 +93,21 @@ export default function LinkedExchangesPage() {
       setDeleteModalMounted(false);
     }
   }, [showDeleteModal]);
+
+  // Helper function to parse field errors from API response
+  const parseFieldErrors = (error: any): Record<string, string> => {
+    const fieldErrors: Record<string, string> = {};
+
+    if (error.response?.message && Array.isArray(error.response.message)) {
+      error.response.message.forEach((item: any) => {
+        if (typeof item === 'object' && item.field && item.message) {
+          fieldErrors[item.field] = item.message;
+        }
+      });
+    }
+
+    return fieldErrors;
+  };
 
   const loadExchanges = async () => {
     try {
@@ -199,6 +215,7 @@ export default function LinkedExchangesPage() {
     await loadAvailableExchanges();
     setSelectedExchange(exchange.exchange_id.toString());
     setUidCode('');
+    setLinkErrors({});
     setIsRelinking(true);
     setShowLinkModal(true);
   };
@@ -230,6 +247,7 @@ export default function LinkedExchangesPage() {
       // Reset form and close modal
       setSelectedExchange('');
       setUidCode('');
+      setLinkErrors({});
       setShowLinkModal(false);
       setIsRelinking(false);
       
@@ -247,9 +265,19 @@ export default function LinkedExchangesPage() {
         return;
       }
       
-      // Show error toast with message from server if available
-      const errorMessage = error.response?.message || error.message || t('link_error');
-      setToast({ message: errorMessage, type: 'error' });
+      // Parse field-specific errors
+      const fieldErrors = parseFieldErrors(error);
+
+      if (Object.keys(fieldErrors).length > 0) {
+        // Has field-specific errors - display them below fields
+        setLinkErrors(fieldErrors);
+        setToast({ message: t('link_error'), type: 'error' });
+      } else {
+        // General error - display as toast only
+        const errorMessage = error.response?.message || error.message || t('link_error');
+        setToast({ message: errorMessage, type: 'error' });
+        setLinkErrors({});
+      }
     }
   };
 
@@ -471,6 +499,7 @@ export default function LinkedExchangesPage() {
                     setIsRelinking(false);
                     setSelectedExchange('');
                     setUidCode('');
+                    setLinkErrors({});
                     setShowLinkModal(true);
                   }}
                   className="le-btn flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] transition"
@@ -585,6 +614,7 @@ export default function LinkedExchangesPage() {
                 setIsRelinking(false);
                 setSelectedExchange('');
                 setUidCode('');
+                setLinkErrors({});
               }}
               className="absolute top-6 right-6 text-white hover:text-gray-300 transition"
             >
@@ -605,7 +635,13 @@ export default function LinkedExchangesPage() {
                 <div className="relative">
                   <select
                     value={selectedExchange}
-                    onChange={(e) => setSelectedExchange(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedExchange(e.target.value);
+                      // Clear error when user selects exchange
+                      if (linkErrors.exchange_id) {
+                        setLinkErrors({ ...linkErrors, exchange_id: '' });
+                      }
+                    }}
                     disabled={isRelinking}
                     className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm appearance-none focus:outline-none focus:border-purple-500 [&>option]:bg-[#18163C] [&>option]:text-white disabled:opacity-60 disabled:cursor-not-allowed"
                   >
@@ -624,6 +660,9 @@ export default function LinkedExchangesPage() {
                     <path d="M10.0001 10.8785L13.7126 7.16602L14.7731 8.22652L10.0001 12.9995L5.22705 8.22652L6.28755 7.16602L10.0001 10.8785Z" />
                   </svg>
                 </div>
+                {linkErrors.exchange_id && (
+                  <p className="text-red-400 text-sm mt-1">{linkErrors.exchange_id}</p>
+                )}
               </div>
 
               {/* UID Code Input */}
@@ -632,10 +671,20 @@ export default function LinkedExchangesPage() {
                 <input
                   type="text"
                   value={uidCode}
-                  onChange={(e) => setUidCode(e.target.value)}
+                  onChange={(e) => {
+                    setUidCode(e.target.value);
+                    // Clear error when user types
+                    if (linkErrors.exchange_uid) {
+                      setLinkErrors({ ...linkErrors, exchange_uid: '' });
+                    }
+                  }}
                   placeholder={t('uid_code_placeholder')}
+                  maxLength={20}
                   className="w-full h-10 px-3 py-2 rounded-[10px] border-[0.5px] border-[#595959] bg-white/12 shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-purple-500"
                 />
+                {linkErrors.exchange_uid && (
+                  <p className="text-red-400 text-sm mt-1">{linkErrors.exchange_uid}</p>
+                )}
               </div>
 
               {/* View Exchange Info Link */}
