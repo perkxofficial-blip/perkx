@@ -20,6 +20,6 @@ export class AddExchangeUidDto {
   })
   @IsString()
   @IsNotEmpty({ message: 'Exchange UID is required' })
-  @MaxLength(100, { message: 'Exchange UID must not exceed 20 characters' })
+  @MaxLength(20, { message: 'Exchange UID must not exceed 20 characters' })
   exchange_uid: string;
 }
