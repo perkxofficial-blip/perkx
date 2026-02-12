@@ -144,6 +144,12 @@
   height: 86px !important;
 }
 @media (max-width: 992px) {
+  .calculator-main-content {
+    display: inline-block;
+  }
+  .calculator-left-section{
+    margin-bottom: 30px;
+  }
   .homepage .banner-section {
     height: calc(100vh - 86px);
   }
@@ -336,7 +342,7 @@
   .footer{
     padding: 24px 4px;
     .footer-title, ul {
-      padding-left: 0;
+      padding-left: 0 !important;
     }
     .footer-info {
       padding-bottom: 20px;
@@ -417,12 +423,15 @@
   }
   .calculator-card-body {
     padding: 16px;
+    display: flex;
+    justify-content: center;
   }
   .calculator-inputs .input-group .input-label {
     font-size: 12px;
   }
   .calculator-main-content {
     gap: 30px;
+    width: 100%;
   }
   .campaign-page{
     h1, span.perkx {
@@ -538,6 +547,12 @@
       margin-bottom: 8px;
     }
   }
+  .calculator-left-section, .calculator-right-section {
+    max-width: unset !important;
+  }
+  .object-cover{
+    height: auto !important;
+  }
 }
 @media (min-width: 993px) {
 
@@ -648,9 +663,7 @@
   .result-divider {
     display: none;
   }
-  .object-cover{
-    height: auto !important;
-  }
+
 }
 
 @media (max-width: 480px) {
