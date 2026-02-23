@@ -1,3 +1,9 @@
+const path = require('path');
+const dotenv = require('dotenv');
+
+const envFromFile =
+  dotenv.config({ path: path.resolve(__dirname, '.env') }).parsed || {};
+
 module.exports = {
   apps: [
     {
@@ -7,9 +13,8 @@ module.exports = {
       exec_mode: "cluster",
       instances: "1",
       env: {
-        NODE_ENV: "production",
-        PORT: 3000
-      }
+        ...envFromFile,
+      },
     }
   ]
 }
