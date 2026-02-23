@@ -7,7 +7,6 @@ import { apiClient } from '@/services/api/client';
 import { endpoints } from '@/services/endpoints';
 import { auth } from '@/services/auth';
 import { COUNTRIES } from '@/lib/countries';
-import Toast from '@/components/admin/Toast';
 
 const LANGUAGES = [
   { code: 'en', key: 'language.en' },
@@ -74,6 +73,12 @@ export default function UserProfilePage() {
   const hideToast = () => {
     setToast(null);
   };
+
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(null), 5000);
+    return () => clearTimeout(timer);
+  }, [toast]);
 
   // Field-level errors
   const [profileErrors, setProfileErrors] = useState<Record<string, string>>({});
@@ -452,29 +457,30 @@ export default function UserProfilePage() {
         <main className="flex-1 p-[20px] profile-main">
           <div className="flex flex-col gap-6">
             {/* Page Header */}
-            <div className="d-flex align-items-center justify-content-between profile-menu">
-              <button
-                ref={btnRef}
-                className="navbar-toggler show-xs"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                onClick={() => setOpen(!open)}
-              >
-                <span className="navbar-toggler-icon" />
-              </button>
+            <div>
+              <div className="d-flex align-items-center justify-content-between profile-menu">
+                <button
+                  ref={btnRef}
+                  className="navbar-toggler show-xs"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                  onClick={() => setOpen(!open)}
+                >
+                  <span className="navbar-toggler-icon" />
+                </button>
 
-              <h1 className="text-white text-2xl font-bold m-0">
-                {t('title')}
-              </h1>
+                <h1 className="text-[#FFFFFF!important] text-base font-normal m-0">
+                  {t('title')}
+                </h1>
+              </div>
+              <p className="text-[#B8BCC6] text-sm font-normal leading-7 m-0 hidden-xs">
+                {t('subtitle')}
+              </p>
             </div>
-
-            <p className="text-white text-sm leading-7 m-0 hidden-xs">
-              {t('subtitle')}
-            </p>
 
 
             {/* Content Grid */}
@@ -872,12 +878,43 @@ export default function UserProfilePage() {
 
       {/* Toast Notification */}
       {toast && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={hideToast}
-          duration={5000}
-        />
+        <div className="fixed bottom-6 right-6 z-[9999]" style={{ animation: 'slideUp 0.3s ease-out' }}>
+          <div className={`flex items-center gap-3 px-5 py-3 rounded-xl border shadow-[0_8px_32px_rgba(0,0,0,0.4)] min-w-[360px] max-w-md ${
+            toast.type === 'success' ? 'bg-[#0d2818] border-[#22c55e]'
+            : toast.type === 'error' ? 'bg-[#2a0f0f] border-[#ef4444]'
+            : toast.type === 'warning' ? 'bg-[#2a2008] border-[#eab308]'
+            : 'bg-[#0c1a2e] border-[#3b82f6]'
+          }`}>
+            <span className={
+              toast.type === 'success' ? 'text-[#4ade80]'
+              : toast.type === 'error' ? 'text-[#f87171]'
+              : toast.type === 'warning' ? 'text-[#facc15]'
+              : 'text-[#60a5fa]'
+            }>
+              {toast.type === 'success' ? (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+              ) : (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" /></svg>
+              )}
+            </span>
+            <p className={`text-sm font-medium mb-0 flex-1 ${
+              toast.type === 'success' ? 'text-[#4ade80]'
+              : toast.type === 'error' ? 'text-[#f87171]'
+              : toast.type === 'warning' ? 'text-[#facc15]'
+              : 'text-[#60a5fa]'
+            }`}>
+              {toast.message}
+            </p>
+            <button onClick={hideToast} className={`flex-shrink-0 hover:opacity-70 transition-opacity ${
+              toast.type === 'success' ? 'text-[#4ade80]'
+              : toast.type === 'error' ? 'text-[#f87171]'
+              : toast.type === 'warning' ? 'text-[#facc15]'
+              : 'text-[#60a5fa]'
+            }`}>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
