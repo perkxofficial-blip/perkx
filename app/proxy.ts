@@ -22,6 +22,11 @@ export default function proxy(request: NextRequest) {
     } else {
       baseDomain = hostname.split('.').slice(-2).join('.');
     }
+    if (maybeLocale === 'en') {
+      const redirectUrl = `${protocol}://${baseDomain}${cleanPath}`;
+      return NextResponse.redirect(redirectUrl);
+    }
+
     const redirectUrl = `${protocol}://${maybeLocale}.${baseDomain}${cleanPath}`;
     return NextResponse.redirect(redirectUrl);
   }
