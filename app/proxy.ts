@@ -6,6 +6,26 @@ const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
   const {pathname} = request.nextUrl;
+  const host = request.headers.get('host') || '';
+  const protocol = request.headers.get('x-forwarded-proto') || 'https';
+
+  const segments = pathname.split('/');
+  const maybeLocale = segments[1];
+  const locales = ['ko', 'ja', 'zh', 'en', 'es', 'id'];
+  if (locales.includes(maybeLocale)) {
+    const newPath = '/' + segments.slice(2).join('/');
+    const cleanPath = newPath === '/' ? '' : newPath;
+    const hostname = host.replace(/^www\./, '');
+    let baseDomain;
+    if (hostname.includes('localhost')) {
+      baseDomain = hostname.split('.').slice(-1)[0];
+    } else {
+      baseDomain = hostname.split('.').slice(-2).join('.');
+    }
+    const redirectUrl = `${protocol}://${maybeLocale}.${baseDomain}${cleanPath}`;
+    return NextResponse.redirect(redirectUrl);
+  }
+
   // Skip i18n for admin routes
   if (pathname.startsWith('/admin')) {
     // Auth check for admin
@@ -32,22 +52,6 @@ export default function proxy(request: NextRequest) {
   
   return response;
 }
-
-// export const config = {
-//   matcher: [
-//     '/',
-//     '/(en|ko)/:path*',
-//     '/login',
-//     '/register',
-//     '/verify-email',
-//     '/verify',
-//     '/verify-otp',
-//     '/forgot-password',
-//     '/reset-password',
-//     '/user/:path*',
-//     '/admin/:path*'
-//   ]
-// };
 
 export const config = {
   matcher: [
