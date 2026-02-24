@@ -73,7 +73,7 @@
       "register": "Registrarse"
     },
     "view_all_partners": "Ver Todos los Socios",
-    "exchange_footnote_1": "*Las tarifas mostradas se basan en la tarifa para no VIP. Para los traders VIP, se aplicarán tasas de descuento según su respectivo perfil VIP.",
+    "exchange_footnote_1": "*Las tarifas mostradas se basan en la tarifa para no VIP. Para los traders VIP, <br></br>se aplicarán tasas de descuento según su respectivo perfil VIP.",
     "exchange_footnote_2": "**Para un volumen de 1M."
   },
   "footer": {
