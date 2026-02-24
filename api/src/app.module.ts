@@ -29,7 +29,13 @@ import { MailModule } from './mail/mail.module';
         password: configService.get<string>('database.password'),
         database: configService.get<string>('database.database'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: false, // Set to false in production
+        synchronize: false,
+        ssl: process.env.NODE_ENV === 'production' ? true : false, // Enable SSL for secure connection to AWS RDS
+        extra: {
+          ssl: {
+            rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true,
+          },
+        },
       }),
       inject: [ConfigService],
     }),

@@ -15,7 +15,6 @@ async function bootstrap() {
 
   // Enable trust proxy to get correct IP addresses behind proxy/load balancer
   app.set('trust proxy', true);
-
   // Enable CORS
   app.enableCors({
     origin: process.env.FRONTEND_URL || 'http://localhost:3001',
