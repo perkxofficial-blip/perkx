@@ -15,11 +15,17 @@ export default function proxy(request: NextRequest) {
   if (locales.includes(maybeLocale)) {
     const newPath = '/' + segments.slice(2).join('/');
     const cleanPath = newPath === '/' ? '' : newPath;
-    const baseDomain = host.replace(/^www\./, '').split('.').slice(-2).join('.');
+    const hostname = host.replace(/^www\./, '');
+    let baseDomain;
+    if (hostname.includes('localhost')) {
+      baseDomain = hostname.split('.').slice(-1)[0];
+    } else {
+      baseDomain = hostname.split('.').slice(-2).join('.');
+    }
     const redirectUrl = `${protocol}://${maybeLocale}.${baseDomain}${cleanPath}`;
     return NextResponse.redirect(redirectUrl);
   }
-  
+
   // Skip i18n for admin routes
   if (pathname.startsWith('/admin')) {
     // Auth check for admin
