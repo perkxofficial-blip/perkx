@@ -73,7 +73,7 @@
       "register": "注册"
     },
     "view_all_partners": "查看所有合作伙伴",
-    "exchange_footnote_1": "*所显示的费用基于非VIP费率。对于VIP交易者，将根据各自的VIP等级适用相应的折扣率。",
+    "exchange_footnote_1": "*所显示的费用基于非VIP费率。对于VIP交易者，<br></br>将根据各自的VIP等级适用相应的折扣率。",
     "exchange_footnote_2": "**基于1M交易量。"
   },
   "footer": {
