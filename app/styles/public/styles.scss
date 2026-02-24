@@ -2476,3 +2476,24 @@ header {
 iframe#launcher {
   border-radius: 50% !important;
 }
+
+.text-secondary {
+  color: var(--secondary-text) !important;
+  font-size: 48px;
+  font-weight: 700;
+  font-family: var(--font-inter), sans-serif;
+  background: var(--primary-text);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  align-self: stretch;
+  font-style: normal;
+  line-height: normal;
+}
+
+.text-muted {
+  color: var(--muted-text) !important;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

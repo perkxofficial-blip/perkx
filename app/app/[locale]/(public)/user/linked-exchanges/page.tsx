@@ -475,11 +475,11 @@ export default function LinkedExchangesPage() {
                     <span className="navbar-toggler-icon" />
                   </button>
 
-                  <h1 className="text-[#FFFFFF!important] text-base font-normal m-0">
+                  <h1 className="text-secondary m-0">
                     {t('title')}
                   </h1>
                 </div>
-                <p className="text-[#B8BCC6] text-sm font-normal leading-7 m-0 hidden-xs">{t('subtitle')}</p>
+                <p className="text-muted leading-7 m-0 hidden-xs">{t('subtitle')}</p>
               </div>
 
               <div className="flex items-center gap-4 le-box">
