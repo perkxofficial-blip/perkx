@@ -32,13 +32,13 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
       <table className="table">
         <thead>
         <tr>
-          <th style={{ width: '14%' }}>{t('exchanges')}</th>
-          <th style={{ width: '18%' }}>{t('product')}</th>
-          <th style={{ width: '10%' }}>{t('discount_rate')}</th>
-          <th style={{ width: '14%' }}>{t('default_taker')}</th>
-          <th style={{ width: '14%' }}>{t('final_taker')}</th>
-          <th style={{ width: '14%' }}>{t('ave_rebate')}</th>
-          <th className="text-center" style={{ width: '14%' }}>{t('action')}</th>
+          <th className="text-start" style={{ width: '14%' }}>{t('exchanges')}</th>
+          <th className="text-start" style={{ width: '18%' }}>{t('product')}</th>
+          <th className="text-end" style={{ width: '10%' }}>{t('discount_rate')}</th>
+          <th className="text-end" style={{ width: '14%' }}>{t('default_taker')}</th>
+          <th className="text-end" style={{ width: '14%' }}>{t('final_taker')}</th>
+          <th className="text-end" style={{ width: '14%' }}>{t('ave_rebate')}</th>
+          <th className="text-center" style={{ width: '14%', paddingLeft: '5%' }}>{t('action')}</th>
         </tr>
         </thead>
 
@@ -48,7 +48,7 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
           
           return (
             <tr className={index < 3 ? 'pe-top' : ''} key={exchange.id}>
-              <td>
+              <td className="text-start">
                 <div className='d-flex align-items-center gap-2'>
                   <Image
                     src={exchange.logo_url}
@@ -61,7 +61,7 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
                  {exchange.name}
                 </div>
               </td>
-              <td>
+              <td className="text-start">
                 <div className="btn-group">
                   <button
                     type="button"
@@ -97,10 +97,10 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
                   </ul>
                 </div>
               </td>
-              <td>{selectedProduct?.discount || 0}%</td>
-              <td>{selectedProduct?.default_fee_maker || 0}% / {selectedProduct?.default_fee_taker || 0}%</td>
-              <td>{selectedProduct?.final_fee_maker || 0}% / {selectedProduct?.final_fee_taker || 0}%</td>
-              <td>${selectedProduct?.ave_rebate?.toLocaleString() || 0}</td>
+              <td className="text-end" >{selectedProduct?.discount || 0}%</td>
+              <td className="text-end" >{selectedProduct?.default_fee_maker || 0}% / {selectedProduct?.default_fee_taker || 0}%</td>
+              <td className="text-end" >{selectedProduct?.final_fee_maker || 0}% / {selectedProduct?.final_fee_taker || 0}%</td>
+              <td className="text-end" >${selectedProduct?.ave_rebate?.toLocaleString() || 0}</td>
               <td className="d-flex justify-content-end">
                 <a 
                   href={selectedProduct?.exchange_signup_link || exchange.affiliate_link || '#'} 

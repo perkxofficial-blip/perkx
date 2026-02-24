@@ -201,6 +201,7 @@ header {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  height: 588px;
 }
 
 .img-bg-exchanges {
@@ -212,7 +213,7 @@ header {
 }
 
 .img-bg-calculator {
-  height: 480px;
+  height: 588px;
   background-image: url("../../public/images/bg-source-new.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -1009,7 +1010,7 @@ header {
 
     background: rgba(219, 159, 207, 0.16);
     backdrop-filter: blur(6px);
-    padding: 12px;
+    padding: 12px 0;
 
     table {
       overflow: hidden;
@@ -1027,7 +1028,7 @@ header {
       font-style: normal;
       font-weight: 400;
       line-height: 18px; /* 128.571% */
-      padding-bottom: 15px;
+      padding-bottom: 8px;
     }
 
     td {
@@ -1080,15 +1081,7 @@ header {
     background: rgba(255, 255, 255, 0.12);
     overflow: visible !important;
   }
-  .pe-top td:first-child {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-  }
 
-  .pe-top td:last-child {
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-  }
   .pe-dropdown {
     border: none;
     color: #FCFCFC;
@@ -1096,6 +1089,7 @@ header {
     font-style: normal;
     font-weight: 700;
     line-height: 18px; /* 128.571% */
+    padding-left: 0;
   }
   .pe-dropdown::after {
     display: none !important;
@@ -1530,7 +1524,7 @@ header {
         -webkit-text-fill-color: transparent;
         font-size: 68px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 700;
         line-height: normal;
         background: var(--gr3, linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%));
         background-clip: text;
@@ -1543,13 +1537,13 @@ header {
         font-weight: 400;
         line-height: normal;
       }
-      padding-top: 100px !important;
+      padding-top: 150px !important;
       padding-bottom: 100px !important;
     }
   }
 }
 .campaign-section {
-  padding: 80px 0;
+  padding-bottom: 80px;
   .img-icon {
     position: absolute;
     top: 47px;
@@ -2071,7 +2065,7 @@ header {
 
 
 .calculator-hero-content {
-  padding: 80px 0;
+  padding: 150px 0 80px 0;
   max-width: 925px;
   margin: 0 auto;
 }
@@ -2108,7 +2102,7 @@ header {
 
 .calculator-card {
   position: relative;
-  margin: -32px auto 80px;
+  margin: -100px auto 80px;
   max-width: 1200px;
   border-radius: 30px;
   overflow: hidden;
@@ -2495,4 +2489,9 @@ iframe#launcher {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.terms-of-use-page {
+  .get-started {
+    padding-top: 150px !important;
+  }
 }
