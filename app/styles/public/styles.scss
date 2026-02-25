@@ -1018,7 +1018,8 @@ header {
     table {
       overflow: hidden;
       border-collapse: separate;
-      border-spacing: 0 10px
+      border-spacing: 0 10px;
+      margin-bottom: 0;
     }
 
     th {
@@ -2479,8 +2480,9 @@ iframe#launcher {
   font-size: 48px;
   font-weight: 700;
   font-family: var(--font-inter), sans-serif;
-  background: var(--primary-text);
   -webkit-text-fill-color: transparent;
+  text-align: center;
+  background: linear-gradient(270deg, #c2c1c8 6.15%, #fcfbfc 98.98%);
   background-clip: text;
   align-self: stretch;
   font-style: normal;
@@ -2488,7 +2490,7 @@ iframe#launcher {
 }
 
 .text-muted {
-  color: var(--muted-text) !important;
+  color: var(--secondary-text) !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -2498,4 +2500,10 @@ iframe#launcher {
   .get-started {
     padding-top: 150px !important;
   }
+}
+.pt-80px {
+  padding-top: 80px !important;
+}
+.fz-14px {
+  font-size: 14px !important;
 }

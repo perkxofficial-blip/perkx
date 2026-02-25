@@ -503,7 +503,7 @@ export default function UserProfilePage() {
                       <p className="!text-[#FCFCFC] text-sm leading-[21px]">{t('affiliate_subtitle')}</p>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-[8px] border-[0.5px] border-[#9FABED] bg-white/10 p-3 self-start">
+                    <div className="flex items-center gap-3 rounded-[8px] border-[1px] border-[#9FABED] bg-white/10 p-3 self-start">
                       <div className="inline-flex flex-col gap-2 rounded-lg px-4 py-0">
                         <label className="text-[#C9C9C9] text-sm font-medium leading-5 tracking-normal uppercase">
                           {t('my_referrer_id')}
@@ -667,7 +667,7 @@ export default function UserProfilePage() {
                         disabled={saving || !passwordForm.current_password || !passwordForm.new_password || !passwordForm.confirm_new_password}
                         className="btn-w-100 inline-flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50 self-start"
                       >
-                        <span className="text-white text-center text-lg font-medium leading-5 tracking-[-0.108px]">
+                        <span className="text-white text-center text-lg font-medium leading-5 tracking-[-0.108px] fz-14px">
                           {saving ? t('updating') : t('update_password')}
                         </span>
                       </button>
@@ -854,7 +854,7 @@ export default function UserProfilePage() {
                         disabled={saving || !profileForm.first_name.trim() || !profileForm.last_name.trim()}
                         className="btn-w-50 flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50"
                       >
-                        <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px]">
+                        <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px] fz-14px">
                           {saving ? t('saving') : t('save_changes')}
                         </span>
                       </button>
@@ -863,7 +863,7 @@ export default function UserProfilePage() {
                         onClick={loadProfile}
                         className="btn-w-50 flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-white/10 hover:bg-white/20 shadow-[0_1px_2px_0_rgba(55,93,251,0.08)]"
                       >
-                        <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px]">
+                        <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px] fz-14px">
                           {t('cancel')}
                         </span>
                       </button>
