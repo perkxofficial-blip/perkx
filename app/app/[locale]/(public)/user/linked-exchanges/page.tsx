@@ -511,7 +511,7 @@ export default function LinkedExchangesPage() {
                   <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 20 20">
                     <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M4.16675 10.0003H15.8334M10.0001 4.16699V15.8337" />
                   </svg>
-                  <span className="text-white text-center text-lg font-medium leading-5 tracking-[-0.108px]">{t('link_new_exchange')}</span>
+                  <span className="text-white text-center text-lg font-medium leading-5 tracking-[-0.108px] fz-14px">{t('link_new_exchange')}</span>
                 </button>
               </div>
             </div>
@@ -705,7 +705,7 @@ export default function LinkedExchangesPage() {
               <button
                 onClick={handleSubmitLink}
                 disabled={!selectedExchange || !uidCode}
-                className="w-full py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] text-white text-lg font-medium leading-5 tracking-[-0.108px] disabled:opacity-50 disabled:cursor-not-allowed transition"
+                className="fz-14px w-full py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] text-white text-lg font-medium leading-5 tracking-[-0.108px] disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
                 {t('submit')}
               </button>

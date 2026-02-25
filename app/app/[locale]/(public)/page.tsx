@@ -259,7 +259,7 @@ export default async function LandingPage() {
         </div>
       </section>
       {data.campaigns && data.campaigns.length > 0 && (
-        <section className="campaign-section">
+        <section className="campaign-section pt-80px">
           <div className="container">
             <div className="row">
               <div className="col-md-8">
