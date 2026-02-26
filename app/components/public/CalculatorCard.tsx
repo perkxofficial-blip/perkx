@@ -202,9 +202,9 @@ export default function CalculatorCard({ exchanges }: CalculatorCardProps) {
               </div>
             </div>
 
-            <Link href="/exchanges" className="calculator-cta-btn">
+            <a href="/exchanges" className="calculator-cta-btn">
               {t('calculator.claim_rebate_btn')}
-            </Link>
+            </a>
           </div>
         </div>
       </div>
