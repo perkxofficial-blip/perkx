@@ -1,106 +1,284 @@
 # System Architecture
 
 ## Overview
-The Perkx system follows a modern **Monorepo-style Client-Server Architecture**, separating the frontend presentation layer from the backend business logic. The system is designed for scalability, security, and internationalization, utilizing **Next.js** for the frontend and **NestJS** for the backend, deployed on **AWS**.
-
-## High-Level Architecture
-1.  **Frontend (Client):** A Next.js application that serves as the user interface for both public users and administrators. It consumes RESTful APIs exposed by the backend.
-2.  **Backend (Server):** A NestJS application acting as the core API service, handling business logic, data persistence, and external integrations (Email, S3).
-3.  **Database:** A relational PostgreSQL database managing all application data, utilizing TypeORM for object-relational mapping.
-4.  **Storage:** AWS S3 is used for storing uploaded user content and public assets, served via CloudFront CDN.
+The Perkx system is a **Full-Stack Web Application** built on a client-server architecture. The system manages user exchanges, campaigns, and administrative operations with support for multiple languages and user roles (Guest, User, Admin).
 
 ---
 
-## Technology Stack
+## Architecture Diagram
 
-### Frontend (`/app`)
-*   **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
-*   **Language:** TypeScript
-*   **Styling:**
-    *   **Tailwind CSS v4** (Utility-first CSS)
-    *   **Sass/SCSS** (Custom styles)
-    *   **Bootstrap 5** (Component library)
-*   **Internationalization:** `next-intl` (Supports EN, ES, ID, JA, KO, ZH)
-*   **State Management:** React Hooks (`useAuth`, `useUser`)
-*   **Key Libraries:** `swiper` (Carousels), `react-dom`
-
-### Backend (`/api`)
-*   **Framework:** [NestJS](https://nestjs.com/)
-*   **Language:** TypeScript
-*   **Database ORM:** TypeORM
-*   **Documentation:** Swagger / OpenAPI
-*   **Authentication:** Passport.js (JWT Strategy)
-*   **Validation:** `class-validator`, `class-transformer`
-*   **File Handling:** Multer + AWS SDK v3 (S3)
-*   **Email:** Nodemailer
-
-### Database
-*   **Engine:** PostgreSQL 16+
-*   **Management:** TypeORM Migrations
+```
+User/Admin/DevOps
+      ↓
+  Firewall (WAF)
+      ↓
+  Loadbalancer (ALB)
+      ↓
+  ┌─────────────────────────────────────┐
+  │            Perkx System             │
+  │                                     │
+  │  ┌─────────────────┐  ┌──────────┐ │
+  │  │  APP            │→→│ Storage  │ │
+  │  │  (NextJS-SSR)   │  │ (S3+CDN) │ │
+  │  └─────────────────┘  └──────────┘ │
+  │                                     │
+  │  ┌─────────────────┐  ┌──────────┐ │
+  │  │  API            │→→│ Database │ │
+  │  │  (NestJS)       │  │ (RDS PG) │ │
+  │  └─────────────────┘  └──────────┘ │
+  └─────────────────────────────────────┘
+```
 
 ---
 
-## Core Modules & Features
+## Core Components
 
-### 1. User Module (`/api/src/modules/user`)
-Handles end-user functionality:
-*   **Authentication:** Registration, Login (OTP, Password), Email Verification.
-*   **Profile:** Management of user details and preferences.
-*   **Exchange:** Logic for product exchanges and transactions.
-
-### 2. Admin Module (`/api/src/modules/admin`)
-Provides back-office capabilities:
-*   **Dashboards:** System overview and metrics.
-*   **User Management:** Control over user accounts and permissions.
-*   **Campaign Management:** Creation and monitoring of marketing campaigns.
-*   **Content Management:** Managing Wiki/Pages.
-
-### 3. Public Module (`/api/src/modules/public`)
-*   Exposes public-facing endpoints that do not require authentication (e.g., initial configuration, public catalogs).
-
-### 4. Common Utilities (`/api/src/common`)
-Shared logic across the backend:
-*   **Guards:** Role-based access control (Admin/User).
-*   **Interceptors:** Response formatting and logging.
-*   **Decorators:** Custom parameter extraction (e.g., `@CurrentUser`).
+### 1. Firewall (AWS WAF)
+**Role:** First line of defense
+- Filters malicious traffic before reaching the application
+- Protects against common web exploits (SQL injection, XSS, DDoS)
+- Attached to Application Load Balancers
 
 ---
 
-## Data Flow
-1.  **User Request:** A user interacts with the Next.js frontend.
-2.  **API Call:** The frontend sends a request to `api.perkx.co` (routed via Route 53 -> ALB).
-3.  **Processing:**
-    *   The NestJS API validates the JWT token (if protected).
-    *   The request is routed to the appropriate Controller/Service.
-    *   Business logic is executed.
-4.  **Persistence:** The service interacts with the PostgreSQL DB via TypeORM repositories.
-5.  **Response:** The data is transformed and sent back to the client as JSON.
+### 2. Loadbalancer (Application Load Balancer)
+**Role:** Traffic distribution and SSL termination
 
-## User Roles & Access Control
+**Frontend ALB** (`perkx.co`):
+- Routes HTTPS traffic to APP component (port 80)
+- Handles SSL/TLS termination
+- Health checks on Next.js instances
 
-The system supports three distinct user roles with different access levels:
-
-### 1. Guest (Public Access)
-*   **Access Path:** `perkx.co`
-*   **Permissions:** Can view public content, browse catalogs, and access marketing pages.
-*   **Authentication:** Not required.
-
-### 2. User (Authenticated)
-*   **Access Path:** `perkx.co/user`
-*   **Permissions:** Full access to user features including profile management, product exchanges, and transactions.
-*   **Authentication:** JWT-based authentication required.
-
-### 3. Admin (Privileged)
-*   **Access Path:** `perkx.co/admin`
-*   **Permissions:** Complete administrative access including user management, campaign creation, and system configuration.
-*   **Authentication:** Separate JWT token with shorter expiration (1 day vs 7 days for users).
+**Backend ALB** (`api.perkx.co`):
+- Routes HTTPS traffic to API component (port 8080)
+- Handles SSL/TLS termination
+- Health checks on NestJS instances
 
 ---
 
-## Security & Auth
-*   **JWT (JSON Web Tokens):** Used for stateless authentication.
-*   **Dual JWT Secrets:** Separate secrets for User and Admin authentication.
-    *   User JWT: 7-day expiration
-    *   Admin JWT: 1-day expiration
-*   **RBAC (Role-Based Access Control):** Enforced via Guards at the API level.
-*   **Encryption:** Passwords hashed using `bcrypt`.
+### 3. APP Component (Next.js SSR)
+**Technology:** Next.js 16 + TypeScript  
+**Runtime:** Node.js (port 3000) managed by PM2  
+**Access:** Via Nginx reverse proxy on port 80
+
+**Role:** Frontend application layer
+- **Server-Side Rendering (SSR)** for optimal SEO and performance
+- **Multi-language support** (EN, ES, ID, JA, KO, ZH) using `next-intl`
+- **Three user interfaces:**
+  - **Guest** (`/`): Public landing pages, catalogs
+  - **User** (`/user/*`): Authenticated user dashboard, profile, exchanges
+  - **Admin** (`/admin/*`): Administrative management interface
+
+**Tech Stack:**
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS v4 + Sass + Bootstrap 5
+- Custom hooks: `useAuth`, `useUser`
+
+**File Structure:**
+```
+/app
+├── components/
+│   ├── public/    # Guest components
+│   ├── user/      # User dashboard components
+│   └── admin/     # Admin panel components
+├── services/      # API client services
+├── i18n/          # Internationalization
+└── [locale]/      # Localized routes
+```
+
+**Connection to Storage:**
+- Loads images from CloudFront CDN (`cdn.perkx.co`)
+- Displays user-uploaded content
+- Static assets delivery
+
+---
+
+### 4. API Component (NestJS)
+**Technology:** NestJS + TypeScript  
+**Runtime:** Node.js (port 3001) managed by PM2  
+**Access:** Via Nginx reverse proxy on port 8080
+
+**Role:** Backend business logic and data management
+- **RESTful API** endpoints for all operations
+- **JWT authentication** with separate tokens for Users/Admins
+- **Database operations** via TypeORM
+- **File upload handling** to S3
+- **Email notifications** via Nodemailer
+
+**Module Structure:**
+
+**User Module** (`/api/src/modules/user`):
+- Authentication (registration, login, OTP, email verification)
+- Profile management
+- Exchange operations
+
+**Admin Module** (`/api/src/modules/admin`):
+- Admin authentication (separate JWT secret, 1-day expiration)
+- User account management
+- Campaign management
+- Content management (pages/wiki)
+- Exchange oversight
+
+**Public Module** (`/api/src/modules/public`):
+- Public endpoints (no authentication required)
+- Public exchange catalogs
+- Public content pages
+
+**Common Utilities** (`/api/src/common`):
+- Guards: `AdminGuard`, `UserGuard` (RBAC)
+- Interceptors: Response formatting, logging
+- Decorators: `@CurrentUser`, `@CurrentAdmin`
+- Validators: Custom validation rules
+
+**Tech Stack:**
+- NestJS framework
+- Passport.js (JWT Strategy)
+- TypeORM (database ORM)
+- Swagger/OpenAPI (documentation)
+- AWS SDK v3 (S3 integration)
+- Nodemailer (email)
+- bcrypt (password hashing)
+
+**Connection to Database:**
+- All CRUD operations via TypeORM repositories
+- Transaction management
+- Migration-based schema changes
+
+---
+
+### 5. Storage (AWS S3 + CloudFront)
+**AWS S3 Bucket:**
+- User-uploaded images
+- Static product images
+- Marketing assets
+
+**CloudFront CDN** (`cdn.perkx.co`):
+- Global content delivery
+- Caches images for fast access
+- Reduces latency worldwide
+
+**Integration:**
+- API uploads files using AWS SDK v3 + Multer
+- APP loads images via CloudFront URLs
+- Automatic cache invalidation when needed
+
+---
+
+### 6. Database (AWS RDS PostgreSQL)
+**Technology:** PostgreSQL 16+  
+**Access:** Internal only (Security Group restrictions)
+
+**Role:** Persistent data storage
+
+**Entities:**
+- **Users:** `user`, `user_login_otp`, `user_email_verification`, `user_password_reset`
+- **Admins:** `admin`, `admin_password_reset`
+- **Exchanges:** `exchange`, `exchange_product`, `user_exchange`
+- **Content:** `page`, `campaign`
+- **Security:** `access_log`, `access_block_rule`
+
+**Management:**
+- TypeORM migrations for schema changes
+- Automated backups via AWS Backup
+- Security Group allows EC2 access only
+
+---
+
+## Request Flow
+
+### Guest User Flow
+```
+User → WAF → Frontend ALB → Nginx:80 → Next.js:3000
+                              ↓
+                    Fetch data from API
+                              ↓
+User ← HTML (SSR) ← Next.js:3000 ← Backend ALB ← Nginx:8080 ← NestJS:3001 ← Database
+```
+
+### Authenticated User Flow
+```
+User login → WAF → Backend ALB → Nginx:8080 → NestJS:3001
+                                                   ↓
+                                            Validate credentials
+                                                   ↓
+                                            Generate JWT (7 days)
+                                                   ↓
+User ← JWT token ← Backend ALB ← Nginx:8080 ← NestJS:3001
+```
+
+### File Upload Flow
+```
+User → Upload → WAF → Backend ALB → Nginx:8080 → NestJS:3001
+                                                      ↓
+                                                  Multer + AWS SDK
+                                                      ↓
+                                                   S3 Bucket
+                                                      ↓
+User ← CDN URL ← Backend ALB ← Nginx:8080 ← NestJS:3001 ← Database (save URL)
+```
+
+### Image Loading Flow
+```
+User → Request image → CloudFront CDN → S3 Bucket → Image returned to User
+```
+
+---
+
+## Deployment Architecture
+
+**EC2 Instance Structure:**
+```
+┌─────────────────────────────────────┐
+│          EC2 Instance               │
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  Nginx (Reverse Proxy)       │  │
+│  │  - Port 80  → Next.js:3000   │  │
+│  │  - Port 8080 → NestJS:3001   │  │
+│  └──────────────────────────────┘  │
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  PM2 (Process Manager)       │  │
+│  │  - Next.js SSR process       │  │
+│  │  - NestJS API process        │  │
+│  └──────────────────────────────┘  │
+│                                     │
+│  ┌──────────────────────────────┐  │
+│  │  Application Code            │  │
+│  │  - /app (Next.js)            │  │
+│  │  - /api (NestJS)             │  │
+│  └──────────────────────────────┘  │
+└─────────────────────────────────────┘
+```
+
+**Deployment Process:**
+1. SSH to EC2 instance
+2. `git pull` latest code
+3. `npm install` (install dependencies)
+4. `npm run build` (build applications)
+5. `pm2 restart ecosystem.config.js` (restart processes)
+
+**Scaling:** Manual provisioning of additional EC2 instances and ALB target group registration
+
+---
+
+## Security Architecture
+
+**Authentication:**
+- JWT-based stateless authentication
+- Separate secrets for User (7-day) and Admin (1-day) tokens
+- Password hashing with bcrypt
+- OTP login support
+- Email verification tokens
+
+**Authorization:**
+- Role-Based Access Control (RBAC)
+- Guard-protected routes (`AdminGuard`, `UserGuard`)
+- Controller-level permission checks
+
+**Infrastructure:**
+- WAF filtering at application edge
+- HTTPS-only communication
+- Security Group network isolation
+- Public subnet with controlled access
