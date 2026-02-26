@@ -158,7 +158,7 @@ export default function LinkedExchangesPage() {
 
   const handleLogout = () => {
     auth.clearUserToken();
-    router.push('/');
+    window.location.href = '/'
   };
 
   const handleDeleteClick = (exchange: Exchange) => {

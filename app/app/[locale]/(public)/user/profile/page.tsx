@@ -318,7 +318,7 @@ export default function UserProfilePage() {
 
   const handleLogout = () => {
     auth.clearUserToken();
-    router.push('/');
+    window.location.href = '/'
   };
 
   if (loading) {
