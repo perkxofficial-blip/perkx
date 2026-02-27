@@ -342,45 +342,6 @@ export class CreateTableOthers1768289140356 implements MigrationInterface {
       }),
     );
 
-    // access_block_rules
-    await queryRunner.createTable(
-      new Table({
-        name: 'access_block_rules',
-        columns: [
-          {
-            name: 'id',
-            type: 'int',
-            isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'increment',
-          },
-          {
-            name: 'ip_address',
-            type: 'varchar',
-            length: '45',
-            isNullable: true,
-          },
-          { name: 'reason', type: 'varchar', length: '255', isNullable: true },
-          {
-            name: 'is_active',
-            type: 'boolean',
-            default: true,
-          },
-          {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'updated_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-        ],
-      }),
-      true,
-    );
-
     // ALTER users / admins
     await queryRunner.query(
       `ALTER TABLE "users" ALTER COLUMN "first_name" DROP NOT NULL`,
@@ -403,7 +364,6 @@ export class CreateTableOthers1768289140356 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('access_block_rules');
     await queryRunner.dropTable('access_logs');
     await queryRunner.dropTable('campaigns');
     await queryRunner.dropTable('exchanges');
