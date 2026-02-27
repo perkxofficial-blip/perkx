@@ -11,7 +11,6 @@ module.exports = {
       script: 'build/main.js',
       exec_mode: 'cluster',
       instances: 2,
-      watch: true,
 
       env: {
         ...envFromFile,
