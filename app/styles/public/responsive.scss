@@ -4,6 +4,23 @@
 .le-header{
   display: flex;
 }
+
+.navbar-toggler-icon {
+  background-image: url("../../public/images/mobile/menu.svg");
+}
+.navbar-toggler{
+  border:none !important;
+  box-shadow: none;
+}
+.navbar-toggler:focus{
+  box-shadow: none !important;
+}
+.show-xs{
+  display: none !important;
+}
+#hero-sentinel{
+  height: 86px !important;
+}
 @media (max-width: 768px) {
   .campaign-slide {
     padding: 0 40px;
@@ -127,23 +144,10 @@
   }
 }
 
-.navbar-toggler-icon {
-  background-image: url("../../public/images/mobile/menu.svg");
-}
-.navbar-toggler{
-  border:none !important;
-  box-shadow: none;
-}
-.navbar-toggler:focus{
-  box-shadow: none !important;
-}
-.show-xs{
-  display: none !important;
-}
-#hero-sentinel{
-  height: 86px !important;
-}
 @media (max-width: 992px) {
+  .hp-banner{
+    top: calc(50vh - 200px);
+  }
   .calculator-main-content {
     display: inline-block;
   }
@@ -245,9 +249,7 @@
   .img-bg {
     height: auto !important;
   }
-  .partner-section{
-    margin-top: 50px;
-  }
+
   .how-perk-work{
     background-position: right -150px bottom -40px;
     padding-bottom: 30px;
