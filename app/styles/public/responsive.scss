@@ -479,8 +479,8 @@
     }
   }
   .pe-top {
-    border: 1px solid #FFE680;
-    padding: 0px;
+    background: rgba(255,255,255, 0.12);
+    padding: 0;
   }
   .exchange-title {
     color: #FCFCFC;
@@ -561,14 +561,18 @@
   .text-muted{
     font-size: 16px !important;
   }
-}
-@media (min-width: 993px) {
-
+  .how-it-works-page {
+    height: 350px;
+  }
+  .partner-section{
+    margin-bottom: 50px;
+  }
 }
 .show-mb{
   display: none !important;
 }
 @media (max-width: 768px) {
+
   .campaign-view {
     display: flex !important;
     align-items: center !important;
@@ -585,6 +589,12 @@
     display: none !important;
   }
   .show-mb {
+    display: block !important;
+  }
+  .hidden-xs {
+    display: none !important;
+  }
+  .show-xs{
     display: block !important;
   }
   .campaign-slide-item {
@@ -651,13 +661,12 @@
   .footer-title {
     padding-left: 0 !important;
   }
-  .img-bg-exchanges {
-    height: 435px;
+  .img-bg-exchanges, .how-it-works-page, .img-bg-calculator, .campaign-page, .page-img-bg {
+    height: 350px !important;
   }
-  .img-bg-calculator {
-    height: 390px;
-  }
+
   .calculator-card {
+    margin: 25px auto 80px;
     margin-bottom: 30px !important;
   }
   .otp-input input {
