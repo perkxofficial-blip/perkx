@@ -205,30 +205,3 @@
     }
   }
 }
-
-@media (max-width: 480px) {
-  .how-it-works-page {
-    .get-started {
-      h1 {
-        font-size: 44px;
-      }
-
-      p {
-        font-size: 20px;
-      }
-    }
-  }
-
-  .steps-section {
-    .step-item {
-      .step-content {
-        p {
-          font-size: 14px;
-        }
-        p.step-title {
-          font-size: 20px;
-        }
-      }
-    }
-  }
-}
