@@ -285,15 +285,17 @@ export default async function LandingPage() {
             </div>
             <CampaignSection campaigns={data.campaigns || []}/>
             <div className="row">
-              <div className="col-md-12 campaign-view show-xs">
-                <a href="/campaigns">{t('home.view_all_campaigns')}</a>
-                <Image
-                  src="/images/arrow-right-s-line.svg"
-                  alt="arrow right line"
-                  width={20}
-                  height={20}
-                  aria-hidden="true"
-                />
+              <div className="show-xs">
+                <div className="col-md-12 campaign-view">
+                  <a href="/campaigns">{t('home.view_all_campaigns')}</a>
+                  <Image
+                    src="/images/arrow-right-s-line.svg"
+                    alt="arrow right line"
+                    width={20}
+                    height={20}
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
             </div>
           </div>

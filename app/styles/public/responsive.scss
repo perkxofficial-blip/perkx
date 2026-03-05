@@ -569,6 +569,7 @@
   display: none !important;
 }
 @media (max-width: 768px) {
+
   .campaign-view {
     display: flex !important;
     align-items: center !important;
@@ -585,6 +586,12 @@
     display: none !important;
   }
   .show-mb {
+    display: block !important;
+  }
+  .hidden-xs {
+    display: none !important;
+  }
+  .show-xs{
     display: block !important;
   }
   .campaign-slide-item {
