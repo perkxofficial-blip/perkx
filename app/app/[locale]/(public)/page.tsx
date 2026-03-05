@@ -399,9 +399,15 @@ export default async function LandingPage() {
                 </div>
               </div>
               <div className="pe-footnote offset-md-8 col-md-4 col-12">
-                <p>{t.rich('home.exchange_footnote_1', {
+                <div className="hidden-xs"><p>{t.rich('home.exchange_footnote_1', {
                   br: () => <br />,
                 })}</p>
+                </div>
+                <div className="show-xs">
+                  <p>{t.rich('home.exchange_footnote_1', {
+                    br: () => '',
+                  })}</p>
+                </div>
                 <p>{t('home.exchange_footnote_2')}</p>
               </div>
             </div>
