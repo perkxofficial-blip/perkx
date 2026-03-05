@@ -591,7 +591,7 @@ header {
     line-height: normal;
     margin-top: 30px;
     margin-bottom: 25px;
-
+    font-family: var(--font-inter), sans-serif;
   }
   span.perkx {
     background: linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%);
@@ -602,6 +602,7 @@ header {
     font-style: normal;
     font-weight: var(--hero-title-weight);
     line-height: normal;
+    font-family: var(--font-inter), sans-serif;
   }
   p {
     color: var(--secondary-text);
@@ -611,6 +612,7 @@ header {
     font-weight: 300;
     line-height: normal;
     margin-bottom: 32px;
+    font-family: var(--font-inter), sans-serif;
   }
   a.calc-btn {
     color: #FFF;
@@ -633,6 +635,7 @@ header {
     box-shadow: 0 1px 2px 0 rgba(55, 93, 251, 0.08);
     backdrop-filter: blur(6px);
     margin-bottom: 30px;
+    font-family: var(--font-inter), sans-serif;
     transition:
             background 0.3s ease,
             box-shadow 0.3s ease,
@@ -679,6 +682,7 @@ header {
       font-weight: 500;
       line-height: 20px; /* 142.857% */
       letter-spacing: -0.084px;
+      font-family: var(--font-inter), sans-serif;
     }
   }
   .campaign-slide {
@@ -1010,6 +1014,7 @@ header {
     font-weight: 400;
     line-height: normal;
     margin-bottom: 60px;
+    font-family: var(--font-inter), sans-serif;
   }
   .pe-table {
     border-radius: 16px;
