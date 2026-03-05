@@ -13,10 +13,10 @@ export const AppDataSource = new DataSource({
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   migrations: ['src/database/migrations/*.ts'],
   synchronize: false,
-  ssl: process.env.NODE_ENV === 'production' ? true : false, // Enable SSL for secure connection to AWS RDS
-  extra: {
-    ssl: {
-      rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true,
-    },
-  },
+  // ssl: process.env.NODE_ENV === 'production' ? true : false, // Enable SSL for secure connection to AWS RDS
+  // extra: {
+  //   ssl: {
+  //     rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true,
+  //   },
+  // },
 });

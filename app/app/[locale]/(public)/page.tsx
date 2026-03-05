@@ -67,7 +67,7 @@ export default async function LandingPage() {
       <div className="img-bg homepage">
         <Header/>
         <section className="banner-section" aria-label="Hero Section - Trade Global Market">
-          <div className="container-fluid">
+          <div className="container-fluid hp-banner">
             <div className="row position-relative">
               {/* Decorative coins */}
               <Image
@@ -104,9 +104,9 @@ export default async function LandingPage() {
                 aria-hidden="true"
               />
 
-              <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
+              <div className="bitcoin-left col-md-2 col-lg-3" aria-hidden="true"></div>
 
-              <div className="get-started col-md-6 text-center">
+              <div className="get-started col-md-8 col-lg-6 text-center">
                 <h2>{t("home.intro_1")}</h2>
                 <h1>{t("home.intro_2")}</h1>
                 <p>
@@ -130,7 +130,7 @@ export default async function LandingPage() {
                 </div>
               </div>
 
-              <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
+              <div className="bitcoin-left col-md-2 col-lg-3" aria-hidden="true"></div>
             </div>
           </div>
 
@@ -184,6 +184,13 @@ export default async function LandingPage() {
                 alt={`${t('home.coin')}`}
                 width={51}
                 height={51}
+              />
+              <Image
+                className="how_perkx_works-bg"
+                src="/images/Group 11017.png"
+                alt={`${t('home.coin')}`}
+                width={466}
+                height={535}
               />
               <div className="timeline-block">
                 <div className="d-flex timeline-item">

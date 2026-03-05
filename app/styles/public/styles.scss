@@ -8,6 +8,7 @@
   --sky: #88EEFE;
   --gray: #fcfcfc;
   --hero-title-weight: 700;
+  --hero-title-color: linear-gradient(270deg, #c2c1c8 6.15%, #fcfbfc 98.98%);
 }
 body {
   background: #000030;
@@ -239,7 +240,7 @@ header {
       text-align: center;
       font-size: 68px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: var(--hero-title-weight);
       line-height: normal;
     }
     h1 {
@@ -248,7 +249,7 @@ header {
       text-align: center;
       font-size: 68px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: var(--hero-title-weight);
       line-height: normal;
     }
     p {
@@ -309,7 +310,7 @@ header {
       -webkit-text-fill-color: transparent;
       font-size: 68px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: var(--hero-title-weight);
       line-height: normal;
     }
 
@@ -321,7 +322,7 @@ header {
       text-align: center;
       font-size: 68px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: var(--hero-title-weight);
       line-height: normal;
     }
     .exchange-hero_p {
@@ -373,7 +374,7 @@ header {
 .partner-section {
   height: 85px;
   overflow: hidden;
-  margin-bottom: 35px;
+  margin-bottom: 100px;
   
   .partner-slide-wrapper {
     width: 100%;
@@ -425,10 +426,6 @@ header {
 }
 
 .how-perk-work {
-  background-image: url("../../public/images/Group 11017.png");
-  background-size: initial;
-  background-position: right 175px bottom -30px;
-  background-repeat: no-repeat;
   padding-bottom: 80px;
   margin-top: 5%;
   .timeline-wrapper {
@@ -527,12 +524,13 @@ header {
       text-align: center;
       font-size: 48px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: var(--hero-title-weight);
       line-height: normal;
       background: linear-gradient(270deg, #C2C1C8 6.15%, #FCFBFC 98.98%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-family: var(--font-inter), sans-serif;
     }
     span.perkx {
       background: linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%);
@@ -541,8 +539,9 @@ header {
       -webkit-text-fill-color: transparent;
       font-size: 48px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: var(--hero-title-weight);
       line-height: normal;
+      font-family: var(--font-inter), sans-serif;
     }
     p {
       color: var(--secondary-text);
@@ -551,6 +550,7 @@ header {
       font-weight: 400;
       line-height: normal;
       margin-bottom: 60px;
+      font-family: var(--font-inter), sans-serif;
     }
   }
 }
@@ -580,11 +580,14 @@ header {
     left: -115px;
   }
   h2 {
-    color: #FFF;
+    background: var(--hero-title-color);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-align: center;
     font-size: 48px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--hero-title-weight);
     line-height: normal;
     margin-top: 30px;
     margin-bottom: 25px;
@@ -597,11 +600,11 @@ header {
     -webkit-text-fill-color: transparent;
     font-size: 48px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--hero-title-weight);
     line-height: normal;
   }
   p {
-    color: #FFF;
+    color: var(--secondary-text);
     text-align: center;
     font-size: 20px;
     font-style: normal;
@@ -659,14 +662,14 @@ header {
     font-size: 48px;
     font-family: var(--font-inter), sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: var(--hero-title-weight);
     line-height: 42px; /* 105% */
   }
   .campaign-view {
     display: flex;
     padding: 8px 10px;
     justify-content: end;
-    align-items: center;
+    align-items: end;
     a {
       color: var(--secondary-text);
       text-align: center;
@@ -993,7 +996,7 @@ header {
     font-size: 48px;
     font-family: var(--font-inter), sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: var(--hero-title-weight);
     line-height: normal;
     background: var(--primary-text);
     background-clip: text;
@@ -1013,7 +1016,7 @@ header {
 
     background: rgba(219, 159, 207, 0.16);
     backdrop-filter: blur(6px);
-    padding: 12px 0;
+    padding: 12px 24px;
 
     table {
       overflow: hidden;
@@ -1079,7 +1082,7 @@ header {
     gap: 16px;
     align-self: stretch;
     border-radius: 12px;
-    font-weight: 700;
+    font-weight: var(--hero-title-weight);
   }
   .pe-top td {
     background: rgba(255, 255, 255, 0.12);
@@ -1091,7 +1094,7 @@ header {
     color: #FCFCFC;
     font-size: 14px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: var(--hero-title-weight);
     line-height: 18px; /* 128.571% */
     padding-left: 0;
   }
@@ -1195,7 +1198,7 @@ header {
     font-feature-settings: 'liga' off, 'calt' off;
     font-size: 18px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: var(--hero-title-weight);
     line-height: 20px; /* 111.111% */
     letter-spacing: -0.108px;
 
@@ -1528,7 +1531,7 @@ header {
         -webkit-text-fill-color: transparent;
         font-size: 68px;
         font-style: normal;
-        font-weight: 700;
+        font-weight: var(--hero-title-weight);
         line-height: normal;
         background: var(--gr3, linear-gradient(270deg, #89EFFF 6.15%, #ED73D2 53.9%, #8AAFFF 98.98%));
         background-clip: text;
@@ -1770,7 +1773,7 @@ header {
 
     .exchanges-title {
       font-size: 68px;
-      font-weight: 700;
+      font-weight: var(--hero-title-weight);
       line-height: 1.2;
       margin-bottom: 26px;
       background: linear-gradient(to right, #fcfbfc 6.15%, #c2c1c8 98.982%);
@@ -1792,7 +1795,7 @@ header {
         font-family: "DM Sans";
         font-size: 68px;
         font-style: normal;
-        font-weight: 700;
+        font-weight: var(--hero-title-weight);
         line-height: normal;
       }
     }
@@ -1926,12 +1929,12 @@ header {
 
       .exchange-name {
         font-size: 16px;
-        font-weight: 700;
+        font-weight: var(--hero-title-weight);
         color: #fcfcfc;
       }
 
       .highlighted .exchange-name {
-        font-weight: 700;
+        font-weight: var(--hero-title-weight);
       }
 
       .product-cell {
@@ -1942,7 +1945,7 @@ header {
 
         .product-name {
           font-size: 14px;
-          font-weight: 700;
+          font-weight: var(--hero-title-weight);
           color: #fcfcfc;
         }
 
@@ -1960,7 +1963,7 @@ header {
       .data-cell {
         flex: 1;
         font-size: 14px;
-        font-weight: 700;
+        font-weight: var(--hero-title-weight);
         color: #fcfcfc;
 
         &.hidden-data {
@@ -1969,7 +1972,7 @@ header {
       }
 
       .highlighted .data-cell {
-        font-weight: 700;
+        font-weight: var(--hero-title-weight);
       }
 
       .action-cell {
@@ -2478,7 +2481,7 @@ iframe#launcher {
 .text-secondary {
   color: var(--secondary-text) !important;
   font-size: 48px;
-  font-weight: 700;
+  font-weight: var(--hero-title-weight);
   font-family: var(--font-inter), sans-serif;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -2506,4 +2509,13 @@ iframe#launcher {
 }
 .fz-14px {
   font-size: 14px !important;
+}
+.hp-banner{
+  position: absolute;
+  top: calc(50vh - 380px);
+}
+.how_perkx_works-bg {
+  position: absolute;
+  bottom: -130px;
+  right: -100px;
 }

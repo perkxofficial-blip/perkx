@@ -41,7 +41,6 @@ export default async function ForgotPasswordPage() {
       <main className="login">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-md-1 col-lg-1"></div>
             <div className="col-md-8 col-lg-5 login-form">
               <div className="text-center">
                 <a href="/">
@@ -88,7 +87,6 @@ export default async function ForgotPasswordPage() {
                 </p>
               </form>
             </div>
-            <div className="col-md-3 col-lg-6"></div>
           </div>
         </div>
       </main>
