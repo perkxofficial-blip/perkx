@@ -49,7 +49,7 @@ export default async function VerifyOtpPage() {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-1 col-lg-1"></div>
-            <div className="col-md-8 col-lg-5 login-form">
+            <div className=" login-form">
              <div className="text-center">
                <a href="/">
                  <Image

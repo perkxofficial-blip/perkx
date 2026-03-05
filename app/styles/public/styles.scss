@@ -580,11 +580,14 @@ header {
     left: -115px;
   }
   h2 {
-    color: #FFF;
+    background: var(--hero-title-color);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-align: center;
     font-size: 48px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--hero-title-weight);
     line-height: normal;
     margin-top: 30px;
     margin-bottom: 25px;
@@ -597,11 +600,11 @@ header {
     -webkit-text-fill-color: transparent;
     font-size: 48px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--hero-title-weight);
     line-height: normal;
   }
   p {
-    color: #FFF;
+    color: var(--secondary-text);
     text-align: center;
     font-size: 20px;
     font-style: normal;
@@ -666,7 +669,7 @@ header {
     display: flex;
     padding: 8px 10px;
     justify-content: end;
-    align-items: center;
+    align-items: end;
     a {
       color: var(--secondary-text);
       text-align: center;
@@ -1013,7 +1016,7 @@ header {
 
     background: rgba(219, 159, 207, 0.16);
     backdrop-filter: blur(6px);
-    padding: 12px 0;
+    padding: 12px 24px;
 
     table {
       overflow: hidden;
