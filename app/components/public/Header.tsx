@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
+import { headers } from 'next/headers';
 import AuthButtons from "./AuthButtons";
 import Navigation from "./Navigation";
 
@@ -14,6 +15,18 @@ const LANGUAGES = [
 
 export default async function Header() {
   const t = await getTranslations();
+  const headersList = await headers();
+  const pathname = headersList.get('x-pathname') || '/';
+  const languages = LANGUAGES.map(lang => {
+    const targetUrl = lang.code === 'en' 
+      ? `${process.env.FRONTEND_URL}${pathname}`
+      : `${process.env.FRONTEND_URL}/${lang.code}${pathname}`;
+    return {
+      ...lang,
+      url: targetUrl
+    };
+  });
+
   return (
     <>
       <div id="hero-sentinel"></div>
@@ -103,13 +116,19 @@ export default async function Header() {
 
 
                            <ul className="dropdown-menu" aria-label="Language selection">
-                             {LANGUAGES.map((lang) => (
-                               <li key={lang.code}>
-                                 <a className="dropdown-item" href={`/${lang.code}`}>
-                                   {t(lang.key)}
-                                 </a>
-                               </li>
-                             ))}
+                             {languages.map((lang) => {
+                               // Tạo URL với subdomain locale
+                               const targetUrl = lang.url;
+                               
+
+                               return (
+                                 <li key={lang.code}>
+                                   <a className="dropdown-item" href={targetUrl}>
+                                     {t(lang.key)}
+                                   </a>
+                                 </li>
+                               );
+                             })}
                            </ul>
                          </div>
                        </div>
@@ -142,13 +161,18 @@ export default async function Header() {
 
 
                 <ul className="dropdown-menu" aria-label="Language selection">
-                  {LANGUAGES.map((lang) => (
-                    <li key={lang.code}>
-                      <a className="dropdown-item" href={`/${lang.code}`}>
-                        {t(lang.key)}
-                      </a>
-                    </li>
-                  ))}
+                  {languages.map((lang) => {
+                    // Tạo URL với subdomain locale
+                    const targetUrl = lang.url;
+                    
+                    return (
+                      <li key={lang.code}>
+                        <a className="dropdown-item" href={targetUrl}>
+                          {t(lang.key)}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 

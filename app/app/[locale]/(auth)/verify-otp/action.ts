@@ -32,10 +32,24 @@ export async function verifyOtpAction(formData: FormData) {
   }
 
   const result: any = await res.json()
+  
+  // Get base domain from host header to share cookie across subdomains
+  const host = h.get('host') || '';
+  const hostname = host.replace(/^www\./, '').split(':')[0];
+  let baseDomain;
+  if (hostname.includes('localhost')) {
+    baseDomain = '.localhost';
+  } else {
+    // Extract base domain (e.g., example.com from ko.example.com)
+    const parts = hostname.split('.');
+    baseDomain = '.perkx.co';
+  }
+
   // Set token cookie with httpOnly: false so client-side JavaScript can access it
   await cookieUtil.set('token', result?.data?.accessToken, {
     httpOnly: false,
-    ttl: 7 * 24 * 60 * 60 // 7 days
+    ttl: 7 * 24 * 60 * 60, // 7 days
+    domain: baseDomain
   })
   redirect(`/user/linked-exchanges`);
 }
