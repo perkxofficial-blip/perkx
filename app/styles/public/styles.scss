@@ -2485,7 +2485,7 @@ iframe#launcher {
 
 .text-secondary {
   color: var(--secondary-text) !important;
-  font-size: 48px;
+  font-size: 24px;
   font-weight: var(--hero-title-weight);
   font-family: var(--font-inter), sans-serif;
   -webkit-text-fill-color: transparent;
@@ -2523,4 +2523,7 @@ iframe#launcher {
   position: absolute;
   bottom: -130px;
   right: -100px;
+}
+.text-xl {
+  font-size: var(--text-xl) !important;
 }

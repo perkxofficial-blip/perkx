@@ -6,6 +6,7 @@ type CookieOptions = {
   httpOnly?: boolean
   secure?: boolean
   sameSite?: 'lax' | 'strict' | 'none'
+  domain?: string
 }
 
 export const cookieUtil = {
@@ -30,6 +31,7 @@ export const cookieUtil = {
       httpOnly: options?.httpOnly ?? false,
       secure: options?.secure ?? process.env.NODE_ENV === 'production',
       sameSite: options?.sameSite ?? 'lax',
+      domain: options?.domain,
     }
 
     if (typeof options?.ttl === 'number') {
