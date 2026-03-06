@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {getTranslations} from "next-intl/server";
+import {getTranslations, getLocale} from "next-intl/server";
 import { headers } from 'next/headers';
 import AuthButtons from "./AuthButtons";
 import Navigation from "./Navigation";
@@ -15,6 +15,8 @@ const LANGUAGES = [
 
 export default async function Header() {
   const t = await getTranslations();
+  const locale = await getLocale();
+  const currentLang = LANGUAGES.find(lang => lang.code === locale) || LANGUAGES[0];
   const headersList = await headers();
   const pathname = headersList.get('x-pathname') || '/';
   const languages = LANGUAGES.map(lang => {
@@ -107,11 +109,11 @@ export default async function Header() {
                            >
                              <Image
                                src="/images/global-line.png"
-                               alt="Language: English"
+                               alt={`Language: ${t(currentLang.key)}`}
                                width={20}
                                height={20}
                              />
-                             <span className="ms-1">{t("language.en")}</span>
+                             <span className="ms-1">{t(currentLang.key)}</span>
                            </button>
 
 
@@ -119,8 +121,6 @@ export default async function Header() {
                              {languages.map((lang) => {
                                // Tạo URL với subdomain locale
                                const targetUrl = lang.url;
-                               
-
                                return (
                                  <li key={lang.code}>
                                    <a className="dropdown-item" href={targetUrl}>
@@ -152,11 +152,11 @@ export default async function Header() {
                 >
                   <Image
                     src="/images/global-line.png"
-                    alt="Language: English"
+                    alt={`Language: ${t(currentLang.key)}`}
                     width={20}
                     height={20}
                   />
-                  <span className="ms-1">{t("language.en")}</span>
+                  <span className="ms-1">{t(currentLang.key)}</span>
                 </button>
 
 
