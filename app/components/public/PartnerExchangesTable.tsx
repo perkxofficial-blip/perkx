@@ -38,7 +38,7 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
           <th className="text-end" style={{ width: '14%' }}>{t('default_taker')}</th>
           <th className="text-end" style={{ width: '14%' }}>{t('final_taker')}</th>
           <th className="text-end" style={{ width: '14%' }}>{t('ave_rebate')}</th>
-          <th className="text-center" style={{ width: '14%', paddingLeft: '5%' }}>{t('action')}</th>
+          <th className="text-end" style={{ width: '14%' }}>{t('action')}</th>
         </tr>
         </thead>
 
@@ -101,7 +101,7 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
               <td className="text-end" >{selectedProduct?.default_fee_maker || 0}% / {selectedProduct?.default_fee_taker || 0}%</td>
               <td className="text-end" >{selectedProduct?.final_fee_maker || 0}% / {selectedProduct?.final_fee_taker || 0}%</td>
               <td className="text-end" >${selectedProduct?.ave_rebate?.toLocaleString() || 0}</td>
-              <td className="d-flex justify-content-end">
+              <td className="d-flex justify-content-end text-end">
                 <a 
                   href={selectedProduct?.exchange_signup_link || exchange.affiliate_link || '#'} 
                   className="pe-link"
