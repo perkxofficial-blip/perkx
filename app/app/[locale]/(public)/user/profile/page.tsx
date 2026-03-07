@@ -306,10 +306,7 @@ export default function UserProfilePage() {
     }
   };
 
-  const handleLogout = () => {
-    auth.clearUserToken();
-    window.location.href = '/'
-  };
+
 
   if (loading) {
     return (
@@ -338,7 +335,6 @@ export default function UserProfilePage() {
           asideRef={asideRef}
           open={open}
           setOpen={setOpen}
-          onLogout={handleLogout}
         />
 
         {/* Main Content */}

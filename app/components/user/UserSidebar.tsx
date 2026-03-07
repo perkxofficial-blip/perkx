@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { RefObject, useState } from 'react';
+import { logoutAction } from '@/components/public/logoutAction';
 
 const LANGUAGES = [
   { code: 'en', key: 'language.en' },
@@ -17,14 +18,12 @@ interface UserProfileSidebarProps {
   asideRef: RefObject<HTMLDivElement | null>;
   open: boolean;
   setOpen: (open: boolean) => void;
-  onLogout: () => void;
 }
 
 export default function UserSidebar({
   asideRef,
   open,
   setOpen,
-  onLogout,
 }: UserProfileSidebarProps) {
   const locale = useLocale();
   const pathname = usePathname();
@@ -34,6 +33,10 @@ export default function UserSidebar({
 
   const isActive = (path: string) => {
     return pathname.includes(path);
+  };
+
+  const handleLogout = async () => {
+    await logoutAction();
   };
 
   // Hàm tạo URL đổi ngôn ngữ giữ nguyên pathname hiện tại
@@ -176,7 +179,7 @@ export default function UserSidebar({
           {/* Logout Button */}
           <div className="px-3">
             <button
-              onClick={onLogout}
+              onClick={handleLogout}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-[#C9C9C9] hover:bg-white/5 transition w-full"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
