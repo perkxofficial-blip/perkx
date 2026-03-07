@@ -157,10 +157,7 @@ export default function LinkedExchangesPage() {
     }
   };
 
-  const handleLogout = () => {
-    auth.clearUserToken();
-    window.location.href = '/'
-  };
+
 
   const handleDeleteClick = (exchange: Exchange) => {
     setExchangeToDelete(exchange);
@@ -351,7 +348,6 @@ export default function LinkedExchangesPage() {
           asideRef={asideRef}
           open={open}
           setOpen={setOpen}
-          onLogout={handleLogout}
         />
 
         {/* Main Content */}
