@@ -4,7 +4,9 @@ import {headers} from 'next/headers'
 
 export default getRequestConfig(async ({requestLocale}) => {
   const h = await headers();
-  
+  console.log('[i18n/request] Headers:', Object.fromEntries(h.entries()));
+  const localeValue = await requestLocale;
+  console.log('[i18n/request] Detected locale from header:', localeValue);
   // Detect locale from host header (subdomain-based)
   const host = h.get('host') || '';
   const hostname = host.replace(/^www\./, '').split(':')[0];
@@ -26,6 +28,10 @@ export default getRequestConfig(async ({requestLocale}) => {
     }
   }
   
+  if (locale != localeValue) {
+    locale = locale || localeValue as string;
+    console.log(`[i18n/request] Locale from host (${hostname}): ${locale}, differs from header locale: ${localeValue}`);
+  }
   // Use default if not found or invalid
   if (!locale || !routing.locales.includes(locale as any)) {
     locale = routing.defaultLocale;
