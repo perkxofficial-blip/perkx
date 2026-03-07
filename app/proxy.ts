@@ -9,6 +9,36 @@ const intlMiddleware = createMiddleware({
   localeDetection: true,
 });
 
+function getLocaleFromHost(host: string): string {
+  const hostname = host.replace(/^www\./, '').split(':')[0];
+  const validLocales = ['ko', 'zh', 'ja', 'id', 'es'];
+  
+  if (hostname.includes('localhost')) {
+    const parts = hostname.split('.');
+    if (parts.length > 1 && validLocales.includes(parts[0])) {
+      return parts[0];
+    }
+  } else {
+    const parts = hostname.split('.');
+    if (parts.length > 2 && validLocales.includes(parts[0])) {
+      return parts[0];
+    }
+  }
+  
+  return 'en'; // default
+}
+
+function getBaseDomain(host: string): string {
+  const hostname = host.replace(/^www\./, '').split(':')[0];
+  
+  if (hostname.includes('localhost')) {
+    return '.localhost';
+  } else {
+    // Extract base domain (e.g., perkx.co from ko.perkx.co)
+    return '.perkx.co';
+  }
+}
+
 export default async function proxy(request: NextRequest) {
   const cookieStore = await cookies();
   const {pathname} = request.nextUrl;
@@ -52,6 +82,22 @@ console.log('Request URL:', request.url);
   
   // Apply i18n middleware for public routes
   const response = intlMiddleware(request);
+  
+  // Detect locale from subdomain and sync with NEXT_LOCALE cookie
+  const detectedLocale = getLocaleFromHost(host);
+  const currentLocaleCookie = request.cookies.get('NEXT_LOCALE')?.value;
+  const baseDomain = getBaseDomain(host);
+  
+  // If locale changed or not set, update NEXT_LOCALE cookie with base domain
+  if (currentLocaleCookie !== detectedLocale) {
+    console.log('[proxy] Locale changed:', currentLocaleCookie, '->', detectedLocale, '| Domain:', baseDomain);
+    response.cookies.set('NEXT_LOCALE', detectedLocale, {
+      path: '/',
+      domain: baseDomain, // Share cookie across all subdomains
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+    });
+  }
   
   // Thêm pathname vào response headers để server component có thể đọc
   response.headers.set('x-pathname', pathname);
