@@ -4,27 +4,11 @@ import * as bcrypt from 'bcrypt';
 export class DropPagesTruncateUsersAndChangeAdminPassword1772679166026 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        // Hash new password for admin
-        const salt = await bcrypt.genSalt(10);
-        const newHashedPassword = await bcrypt.hash('admin123@#$P', salt);
-
-        // Update admin password
-        await queryRunner.query(`
-            UPDATE admins SET password = '${newHashedPassword}' WHERE username = 'admin'
-        `);
-
         // Drop table pages
         await queryRunner.query(`DROP TABLE IF EXISTS pages`);
 
         // Truncate access_logs
         await queryRunner.query(`TRUNCATE TABLE access_logs`);
-
-        // Truncate user-related tables
-        await queryRunner.query(`TRUNCATE TABLE user_email_verifications`);
-        await queryRunner.query(`TRUNCATE TABLE user_exchanges`);
-        await queryRunner.query(`TRUNCATE TABLE user_login_otps`);
-        await queryRunner.query(`TRUNCATE TABLE user_password_resets`);
-        await queryRunner.query(`TRUNCATE TABLE users`);
 
         // Add foreign key constraints
         // Users self-reference for referral
