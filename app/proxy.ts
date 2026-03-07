@@ -4,7 +4,10 @@ import {NextRequest, NextResponse} from 'next/server';
 import {LOCALES} from './app/utils/sitemapUtils';
 import { cookies } from 'next/headers';
 
-const intlMiddleware = createMiddleware(routing);
+const intlMiddleware = createMiddleware({
+  ...routing,
+  localeDetection: true,
+});
 
 export default async function proxy(request: NextRequest) {
   const cookieStore = await cookies();
