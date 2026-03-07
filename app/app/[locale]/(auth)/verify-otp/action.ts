@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import {resendOtp, verifyOtp} from "@/services/api/public/auth";
-import {cookieUtil} from "@/lib/cookieUtil";
+import {cookieUtil, getBaseDomain} from "@/lib/cookieUtil";
 import { headers as nextHeaders } from 'next/headers';
 export async function verifyOtpAction(formData: FormData) {
   const numbers = formData.getAll('numbers[]') as string[];
@@ -12,7 +12,9 @@ export async function verifyOtpAction(formData: FormData) {
     otp: otp
   };
 
+  const baseDomain = await getBaseDomain();
   const h = await nextHeaders();
+
   const headers = {
     'Content-Type': 'application/json',
     'user-agent': h.get('user-agent') ?? '',
@@ -27,23 +29,11 @@ export async function verifyOtpAction(formData: FormData) {
     await cookieUtil.set('verify-otp-message', {
       status: false,
       message: 'message.verify_otp_failed',
-    }, {ttl: 10})
+    }, {ttl: 10, domain: baseDomain})
     redirect(`/verify-otp`);
   }
 
   const result: any = await res.json()
-  
-  // Get base domain from host header to share cookie across subdomains
-  const host = h.get('host') || '';
-  const hostname = host.replace(/^www\./, '').split(':')[0];
-  let baseDomain;
-  if (hostname.includes('localhost')) {
-    baseDomain = '.localhost';
-  } else {
-    // Extract base domain (e.g., example.com from ko.example.com)
-    const parts = hostname.split('.');
-    baseDomain = '.perkx.co';
-  }
 
   // Set token cookie with httpOnly: false so client-side JavaScript can access it
   await cookieUtil.set('token', result?.data?.accessToken, {
