@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers'
+import { cookies, headers as nextHeaders } from 'next/headers'
 
 type CookieOptions = {
   ttl?: number // seconds
@@ -51,4 +51,20 @@ export const cookieUtil = {
       })
     })
   },
+}
+
+/**
+ * Get base domain from host header to share cookies across subdomains
+ */
+export async function getBaseDomain(): Promise<string> {
+  const h = await nextHeaders();
+  const host = h.get('host') || '';
+  const hostname = host.replace(/^www\./, '').split(':')[0];
+  
+  if (hostname.includes('localhost')) {
+    return '.localhost';
+  } else {
+    // Extract base domain (e.g., perkx.co from ko.perkx.co)
+    return '.perkx.co';
+  }
 }
