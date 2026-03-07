@@ -1020,8 +1020,8 @@ header {
 
     background: rgba(219, 159, 207, 0.16);
     backdrop-filter: blur(6px);
-    padding: 12px 24px;
-
+    padding-top: 12px;
+    padding-bottom: 12px;
     table {
       overflow: hidden;
       border-collapse: separate;
@@ -2477,9 +2477,6 @@ header {
   font-size: 14px;
   text-align: end;
 }
-iframe#launcher {
-  border-radius: 50% !important;
-}
 
 .text-secondary {
   color: var(--secondary-text) !important;
@@ -2524,4 +2521,11 @@ iframe#launcher {
 }
 .text-xl {
   font-size: var(--text-xl) !important;
+}
+.partner-exchanges .text-start {
+  padding-left: 32px !important;
+}
+
+.partner-exchanges .text-end {
+  padding-right: 32px !important;
 }
