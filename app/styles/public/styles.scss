@@ -374,7 +374,7 @@ header {
 .partner-section {
   height: 85px;
   overflow: hidden;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   
   .partner-slide-wrapper {
     width: 100%;
@@ -590,7 +590,6 @@ header {
     font-weight: var(--hero-title-weight);
     line-height: normal;
     margin-top: 30px;
-    margin-bottom: 25px;
     font-family: var(--font-inter), sans-serif;
   }
   span.perkx {
@@ -2087,7 +2086,6 @@ header {
   font-size: 68px;
   font-weight: var(--hero-title-weight);
   line-height: 1.2;
-  margin-bottom: 26px;
   font-family: var(--font-inter), sans-serif;
 
   background: linear-gradient(90deg, #FCFBFC 6.15%, #C2C1C8 98.982%);
@@ -2109,7 +2107,7 @@ header {
   font-size: 24px;
   font-weight: 400;
   line-height: normal;
-  margin: 0;
+  margin: 26px 40px;
 }
 
 .calculator-card {
