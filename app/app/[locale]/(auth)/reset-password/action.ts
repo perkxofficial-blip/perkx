@@ -1,7 +1,6 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
 import {resetPassword} from "@/services/api/public/auth";
 import {cookieUtil} from "@/lib/cookieUtil";
 export async function resetAction(formData: FormData) {
