@@ -375,8 +375,8 @@ export default function UserProfilePage() {
                 <div
                   className="relative overflow-hidden rounded-[10px] shadow-[0_1px_2px_0_rgba(228,229,231,0.24)] p-6"
                   style={{
-                    background: 'linear-gradient(90deg, #2E193B 46.43%, rgba(46, 25, 59, 0.00) 100%), url(/images/login-bg.png) no-repeat right, rgba(255, 255, 255, 0.08)',
-                    backgroundSize: '100%, 100% 100%, 100%',
+                    background: 'linear-gradient(90deg, #2E193B 46.43%, rgba(46, 25, 59, 0.00) 100%), url(/images/profile-bg.jpg) no-repeat right, rgba(255, 255, 255, 0.08)',
+                    backgroundSize: 'cover',
                     backdropFilter: 'blur(12px)'
                   }}
                 >
