@@ -46,7 +46,7 @@ export default async function VerifyOtpPage() {
   return (
     <>
       <main className="login">
-        <div className="container-sm">
+        <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-8 col-lg-5 login-form">
              <div className="text-center">
