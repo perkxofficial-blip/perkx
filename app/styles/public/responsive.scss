@@ -347,8 +347,10 @@
   }
   .footer{
     padding: 24px 4px;
-    .footer-title, ul {
+    .footer-title, ul, li, a {
       padding-left: 0 !important;
+      margin-left:  0 !important;
+      text-align: left !important;
     }
     .footer-info {
       padding-bottom: 20px;
