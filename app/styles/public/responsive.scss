@@ -571,8 +571,13 @@
   }
   .partner-section{
     margin-bottom: 50px;
+
+  }
+  .partner-section-bottom {
     position: absolute;
     bottom: 0;
+    width: 100%;
+    overflow: hidden;
   }
 }
 .show-mb{

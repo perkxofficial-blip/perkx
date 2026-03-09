@@ -28,7 +28,7 @@ export default async function Footer() {
           <div className="col-md-4 show-mb">
             <p className="footer-title">{t('footer.platform')}</p>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 d-flex justify-content-start">
             <ul>
               <li><a href="/exchanges">{t('footer.exchange_rebates')}</a></li>
               <li><a href="/calculator">{t('footer.profit_calculator')}</a></li>
@@ -37,7 +37,7 @@ export default async function Footer() {
           <div className="col-md-4 show-mb">
             <p className="footer-title">{t('footer.resources')}</p>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 d-flex justify-content-start">
             <ul>
               <li><a href="/help-center">{t('footer.help_center')}</a></li>
               <li><a href="/term-of-use">{t('footer.terms_of_use')}</a></li>
