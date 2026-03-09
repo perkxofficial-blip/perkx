@@ -735,7 +735,18 @@ export default function UserProfilePage() {
                     <div className="flex items-start gap-2 mt-auto">
                       <button
                         type="submit"
-                        disabled={saving || !profileForm.first_name.trim() || !profileForm.last_name.trim()}
+                        disabled={
+                          saving
+                          ||
+                        !(
+                            profileForm.first_name.trim() ||
+                            profileForm.last_name.trim() ||
+                            profileForm.phone.trim() ||
+                            profileForm.country.trim() ||
+                            profileForm.gender.trim() ||
+                            profileForm.birthday.trim()
+                          )
+                        } 
                         className="btn-w-50 flex items-center justify-center gap-1 px-4 py-[10px] !rounded-[10px] bg-gradient-to-r from-[#EF73D1]/80 to-[#B388F4]/80 hover:from-[#EF73D1] hover:to-[#B388F4] shadow-[0_1px_2px_0_rgba(55,93,251,0.08)] disabled:opacity-50"
                       >
                         <span className="text-[#FCFCFC] text-center text-lg font-medium leading-5 tracking-[-0.108px] fz-14px">
