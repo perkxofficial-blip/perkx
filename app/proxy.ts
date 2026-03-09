@@ -33,10 +33,21 @@ function getBaseDomain(host: string): string {
   
   if (hostname.includes('localhost')) {
     return '.localhost';
-  } else {
-    // Extract base domain (e.g., perkx.co from ko.perkx.co)
+  }
+  
+  if (hostname.includes('perkx.co')) {
     return '.perkx.co';
   }
+  
+  // Extract base domain from hostname (e.g., perkx.co from ko.perkx.co)
+  const parts = hostname.split('.');
+  if (parts.length >= 2) {
+    // Get last 2 parts (domain.tld)
+    const baseDomain = parts.slice(-2).join('.');
+    return '.' + baseDomain;
+  }
+  
+  return '.' + hostname;
 }
 
 export default async function proxy(request: NextRequest) {
