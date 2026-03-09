@@ -381,8 +381,8 @@ export default function LinkedExchangesPage() {
               <div className="flex items-center gap-4 le-box">
                 {/* Total Linked Badge */}
                 <div className="le-box-link flex items-center gap-3 px-3 py-2 border border-white/10" style={{ borderRadius: '12px', background: 'rgba(248, 249, 250, 0.20)' }}>
-                  <div className="flex flex-col gap-1 pr-3 border-r" style={{ borderRightColor: 'rgba(252, 252, 252, 0.20)', borderRightWidth: '1px' }}>
-                    <span className="text-[#FCFCFC] text-sm font-normal uppercase leading-5 tracking-normal">{t('total_linked')}</span>
+                  <div className="flex-col gap-1 pr-3 border-r" style={{ borderRightColor: 'rgba(252, 252, 252, 0.20)', borderRightWidth: '1px' }}>
+                    <span className="text-[#FCFCFC] text-sm font-normal uppercase leading-5 tracking-normal">{t('total_linked')} : </span>
                     <span className="text-[#6EDAFF] text-2xl font-bold leading-tight">{exchanges.length}</span>
                   </div>
                   <div className="flex items-center justify-center w-10 ml-3 h-10 bg-[#89EFFF]" style={{ borderRadius: '6px' }}>

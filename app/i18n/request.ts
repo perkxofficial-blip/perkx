@@ -29,7 +29,7 @@ export default getRequestConfig(async ({requestLocale}) => {
   }
   
   if (locale != localeValue) {
-    locale = locale || localeValue as string;
+    locale = localeValue as string;
     console.log(`[i18n/request] Locale from host (${hostname}): ${locale}, differs from header locale: ${localeValue}`);
   }
   // Use default if not found or invalid
