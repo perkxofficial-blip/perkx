@@ -253,8 +253,12 @@
   .how-perk-work{
     background-position: right -150px bottom -40px;
     padding-bottom: 30px;
+    overflow: hidden;
     .w-coin{
       display: none;
+    }
+    .how_perkx_works-bg{
+      bottom: -60px;
     }
     .how-perk-work-title {
       h2, span.perkx {
@@ -348,6 +352,7 @@
     }
     .footer-info {
       padding-bottom: 20px;
+      text-align: left !important;
     }
     .copyright {
       padding-top: 20px;
@@ -566,13 +571,18 @@
   }
   .partner-section{
     margin-bottom: 50px;
+    position: absolute;
+    bottom: 0;
   }
 }
 .show-mb{
   display: none !important;
 }
 @media (max-width: 768px) {
-
+  .banner-section{
+    padding-top: 50px;
+    padding-bottom: 0 !important;
+  }
   .campaign-view {
     display: flex !important;
     align-items: center !important;
