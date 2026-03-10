@@ -2,6 +2,7 @@ import {
   BadRequestException, HttpStatus,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, IsNull, QueryFailedError, Repository } from 'typeorm';
@@ -119,6 +120,10 @@ export class AuthService {
         token: token
       };
     }
+    if (user.status === UserStatus.DEACTIVATE) {
+      throw new UnauthorizedException('message.account_deactivated');
+    }
+
     await this.twoFatosService.getEmailOtp(user);
     return {
       verified: true,
@@ -141,6 +146,9 @@ export class AuthService {
 
       const user = await userRepo.findOne({ where: { email } });
       if (!user) return;
+      if (user.status === UserStatus.DEACTIVATE) {
+        throw new UnauthorizedException('message.account_deactivated');
+      }
       await passwordResetRepo.delete({ user_id: user.id });
       const token = this.generateToken();
 

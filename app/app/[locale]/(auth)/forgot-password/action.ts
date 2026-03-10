@@ -9,13 +9,19 @@ export async function forgotPasswordAction(formData: FormData) {
   };
   const res = await forgotPassword(payload)
 
-  const message = res.ok ? {
-    status: true,
-    message: 'message.forgot_email_success',
-  } : {
-    status: false,
-    message: 'message.forgot_email_failed',
+  if (!res.ok) {
+    const result: any = await res.json();
+    const message = {
+      status: false,
+      message: result?.message ?? 'message.forgot_email_failed',
+    };
+    await cookieUtil.set('forgot-password-message', message, {ttl: 10})
+  } else {
+    const message = {
+      status: true,
+      message: 'message.forgot_email_success',
+    };
+    await cookieUtil.set('forgot-password-message', message, {ttl: 10})
   }
-  await cookieUtil.set('forgot-password-message', message, {ttl: 10})
   redirect(`/forgot-password`);
 }

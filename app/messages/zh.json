@@ -149,6 +149,7 @@
     "invalid_credentials": "用户凭据不正确。",
     "please_verify_your_email": "请验证您的电子邮件",
     "account_banned": "您的账户已被禁用，请联系管理员获取支持",
+    "account_deactivated": "账户访问受限。请联系我们的支持。",
     "verify_otp_failed": "验证码无效。请重试。",
     "resend_otp_success": "您的新验证码正在发送中。请检查您的收件箱。",
     "resend_otp_failed": "重新发送验证码时出错。请重试。",
