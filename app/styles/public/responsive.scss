@@ -143,6 +143,51 @@
     }
   }
 }
+@media (max-width: 1366px) {
+  .page-header-lv1 {
+    font-size: 44px !important;
+  }
+  .page-header-lv2 {
+    font-size: 44px !important;
+  }
+  
+  .homepage {
+    .banner-section {
+      .get-started {
+        padding: 180px 0 24px 0;
+      }
+      .coin-1 {
+        bottom: 0;
+        left: 12%;
+        animation-delay: 0s;
+        width: 70px;
+      }
+      .coin-2 {
+        bottom: 19%;
+        left: 16%;
+        animation-delay: 1s;
+        width: 120px;
+      }
+      .coin-3 {
+        top: 40%;
+        right: 17%;
+        animation-delay: 1.5s;
+        width: 130px;
+      }
+      .coin-4 {
+        bottom: 18%;
+        right: 13%;
+        animation-delay: 1s;
+        width: 75px;
+      }
+
+      .partner-section {
+        height: 70px;
+        margin-bottom: 58px;
+      }
+    }
+  }
+}
 
 @media (max-width: 992px) {
   .hp-banner{

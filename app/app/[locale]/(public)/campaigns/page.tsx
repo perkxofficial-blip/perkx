@@ -101,9 +101,9 @@ export default async function CampaignPage({ searchParams }: Props) {
 
               <div className="bitcoin-left col-md-3" aria-hidden="true"></div>
               <div className="get-started col-md-6 text-center">
-                <h1>{t.rich('campaign.title', {
+                <h1 className="page-header-lv1">{t.rich('campaign.title', {
                   perkx: (chunks) => (
-                    <span className="perkx">{chunks}</span>
+                    <span className="perkx page-header-lv1">{chunks}</span>
                   ),
                 })}</h1>
                 <p>

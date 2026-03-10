@@ -107,8 +107,8 @@ export default async function LandingPage() {
               <div className="bitcoin-left col-md-2 col-lg-3" aria-hidden="true"></div>
 
               <div className="get-started col-md-8 col-lg-6 text-center">
-                <h2>{t("home.intro_1")}</h2>
-                <h1>{t("home.intro_2")}</h1>
+                <h2 className="page-header-lv2">{t("home.intro_1")}</h2>
+                <h1 className="page-header-lv1">{t("home.intro_2")}</h1>
                 <p>
                   {t("home.hero_section_description")}
                 </p>
