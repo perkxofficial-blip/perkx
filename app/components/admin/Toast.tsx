@@ -56,7 +56,7 @@ export default function Toast({ message, type = 'info', onClose, duration = 3000
   };
 
   return (
-    <div className="fixed top-6 right-6 z-[9999]" style={{ animation: 'slideUp 0.3s ease-out' }}>
+    <div className="fixed top-6 right-8 z-[9999]" style={{ animation: 'slideUp 0.3s ease-out' }}>
       <div className={`flex items-center gap-3 px-5 py-3 rounded-xl border shadow-[0_8px_32px_rgba(0,0,0,0.4)] min-w-[360px] max-w-md ${bgBorderColors[type]}`}>
         <span className={textColors[type]}>
           {icons[type]}
