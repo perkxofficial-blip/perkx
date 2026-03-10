@@ -57,7 +57,9 @@ export class UserExchangesService {
 
     const data = results.map((row) => ({
       id: row.id,
+      user_id: row.user?.id,
       user_email: row.user?.email,
+      exchange_id: row.exchange?.id,
       exchange_name: row.exchange?.name,
       exchange_uid: row.exchange_uid,
       created_at: row.created_at,
