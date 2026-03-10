@@ -33,7 +33,7 @@ export default async function HowItWorksPage({ params }: HowItWorksPageProps) {
           <div className="container-fluid">
             <div className="row position-relative">
               <div className="get-started col-md-12 text-center">
-                <h1>
+                <h1 className="page-header-lv1">
                   <span className="regular-text">{t('hero.title_part1')}</span>
                   <span className="gradient-text">{t('hero.title_gradient')}</span>
                 </h1>

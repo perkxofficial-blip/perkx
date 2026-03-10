@@ -33,7 +33,7 @@ export default async function AboutUsPage({ params }: AboutUsPageProps) {
           <div className="container-fluid">
             <div className="row position-relative">
               <div className="get-started col-md-12 text-center">
-                <h1 className="gradient-title">{t('hero.title')}</h1>
+                <h1 className="gradient-title page-header-lv1">{t('hero.title')}</h1>
                 <p>{t('hero.subtitle')}</p>
               </div>
             </div>

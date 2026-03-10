@@ -39,7 +39,7 @@ export default async function CalculatorPage({ params }: ExchangesPageProps) {
           <div className="container-fluid">
             <div className="row position-relative justify-content-center">
               <div className="col-12 text-center calculator-hero-content">
-                <h1 className="calculator-hero-title">
+                <h1 className="calculator-hero-title page-header-lv1">
                   {t('hero_title_part1')}<span className="gradient-text">{t('hero_title_gradient')}</span>
                 </h1>
                 <p className="calculator-hero-subtitle">
