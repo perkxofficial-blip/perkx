@@ -56,7 +56,7 @@ export default async function ExchangesPage({ params }: ExchangesPageProps) {
 
               <div className="get-started col-md-6 text-center">
                 <h2 className='exchange-hero_title page-header-lv2'>{t('exchanges.hero_title_part1')}</h2>
-                <h1 className='page-header-lv1'><span className="exchange-hero_title_gradient">{t('exchanges.hero_title_gradient')}</span></h1>
+                <h1><span className="exchange-hero_title_gradient page-header-lv1">{t('exchanges.hero_title_gradient')}</span></h1>
                 <p className='exchange-hero_p'>{t('exchanges.hero_subtitle')}</p>
               </div>
 
