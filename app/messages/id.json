@@ -149,6 +149,7 @@
     "invalid_credentials": "Kredensial pengguna salah.",
     "please_verify_your_email": "Silakan verifikasi email Anda",
     "account_banned": "Akun Anda diblokir, silakan hubungi admin untuk bantuan",
+    "account_deactivated": "Akses akun dibatasi. Hubungi dukungan kami.",
     "verify_otp_failed": "Kode verifikasi tidak valid. Silakan coba lagi.",
     "resend_otp_success": "Kode verifikasi baru Anda sedang dikirim. Silakan periksa inbox Anda.",
     "resend_otp_failed": "Terjadi kesalahan saat mengirim ulang kode Anda. Silakan coba lagi.",

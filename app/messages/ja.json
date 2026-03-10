@@ -149,6 +149,7 @@
     "invalid_credentials": "ユーザー認証情報が正しくありません。",
     "please_verify_your_email": "メールアドレスを確認してください",
     "account_banned": "アカウントが禁止されています。サポートについては管理者にお問い合わせください",
+    "account_deactivated": "アカウントアクセスが制限されています。サポートにお問い合わせください。",
     "verify_otp_failed": "確認コードが無効です。もう一度お試しください。",
     "resend_otp_success": "新しい確認コードを送信中です。受信トレイを確認してください。",
     "resend_otp_failed": "確認コードの再送信中に問題が発生しました。もう一度お試しください。",

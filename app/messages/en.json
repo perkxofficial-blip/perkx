@@ -149,6 +149,7 @@
     "invalid_credentials": "The user credentials were incorrect.",
     "please_verify_your_email": "Please verify your email",
     "account_banned": "Your account is banned, please contact to admin for support",
+    "account_deactivated": "Account access is restricted. Reach out to our support.",
     "verify_otp_failed": "The verification code is invalid. Please try again.",
     "resend_otp_success": "Your new verification code is on the way. Please check your inbox.",
     "resend_otp_failed": "Something went wrong while resending your code. Please try again.",

@@ -149,6 +149,7 @@
     "invalid_credentials": "Las credenciales del usuario son incorrectas.",
     "please_verify_your_email": "Por favor, verifica tu correo electrónico",
     "account_banned": "Tu cuenta ha sido bloqueada, por favor contacta al administrador para obtener soporte",
+    "account_deactivated": "El acceso a la cuenta está restringido. Comuníquese con nuestro soporte.",
     "verify_otp_failed": "El código de verificación no es válido. Por favor, inténtalo de nuevo.",
     "resend_otp_success": "Tu nuevo código de verificación está en camino. Por favor, revisa tu bandeja de entrada.",
     "resend_otp_failed": "Algo salió mal al reenviar tu código. Por favor, inténtalo de nuevo.",
