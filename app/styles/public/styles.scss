@@ -183,7 +183,6 @@ header {
 }
 .img-bg {
   flex-direction: column;
-  height: 100vh;
   display: flex;
   background-image: url("../../public/images/bg-final.png");
   background-size: cover;
@@ -2511,7 +2510,6 @@ header {
   font-size: 14px !important;
 }
 .hp-banner{
-  position: absolute;
   top: calc(50vh - 380px);
 }
 .how_perkx_works-bg {
