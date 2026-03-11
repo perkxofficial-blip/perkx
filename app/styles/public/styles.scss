@@ -183,15 +183,15 @@ header {
 }
 .img-bg {
   flex-direction: column;
+  height: 100vh;
   display: flex;
   background-image: url("../../public/images/bg-final.png");
   background-size: cover;
   background-position: 0 -70px;
   background-repeat: no-repeat;
-  height: 900px;
 }
 .partner-section-bottom {
-  margin-top: 50px;
+  margin-top: auto;
   .partner-section-title{
     padding-bottom: 10px;
     color: var(--secondary-text);
@@ -374,7 +374,7 @@ header {
 .partner-section {
   height: 85px;
   overflow: hidden;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   
   .partner-slide-wrapper {
     width: 100%;
@@ -2511,6 +2511,7 @@ header {
   font-size: 14px !important;
 }
 .hp-banner{
+  position: absolute;
   top: calc(50vh - 380px);
 }
 .how_perkx_works-bg {
