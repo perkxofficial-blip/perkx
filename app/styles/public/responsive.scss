@@ -216,6 +216,15 @@
   }
   .language-block {
     padding: 16px 0;
+    text-align: left;
+    .btn-group{
+      button {
+        padding-left: 0;
+      }
+      span {
+        margin-right: 4px;
+      }
+    }
   }
   .navbar-collapse.show {
     transform: translateX(0);
@@ -287,7 +296,7 @@
       z-index: 1;
       bottom: 50%;
     }
-    .coin-3, .coin-4 {
+    .coin-1, .coin-2, .coin-3, .coin-4 {
       display: none;
     }
   }
