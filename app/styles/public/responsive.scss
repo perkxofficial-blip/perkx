@@ -261,6 +261,13 @@
       }
     }
   }
+  .homepage {
+    .banner-section {
+      .get-started {
+        padding: 0 0 24px 0;
+      }
+    }
+  }
   .banner-section {
 
     .get-started {
@@ -299,9 +306,6 @@
     .coin-1, .coin-2, .coin-3, .coin-4 {
       display: none;
     }
-  }
-  .img-bg {
-    height: calc(100vh - 86px) !important;
   }
 
   .how-perk-work{
