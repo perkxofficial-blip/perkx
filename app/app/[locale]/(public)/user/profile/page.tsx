@@ -393,7 +393,7 @@ export default function UserProfilePage() {
                           {t('my_referrer_id')}
                         </label>
                         <div className="text-[#DAB2FF] text-2xl font-medium leading-5 tracking-normal text-referral">
-                          {profile?.referral_code || 'PX-99284'}
+                          {profile?.referral_code || ''}
                         </div>
                       </div>
                       <div className="relative">
