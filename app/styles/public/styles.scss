@@ -483,7 +483,7 @@ header {
       line-height: normal;
       letter-spacing: 0.2px;
     }
-    margin-bottom: 40px;
+    padding-bottom: 40px;
 
     .timeline-icon {
       position: relative;
@@ -492,7 +492,7 @@ header {
       }
     }
     .timeline-bottom {
-      width: 3px;        /* đáy rộng 2px */
+      width: 3px;
       background: linear-gradient(
                       90deg,
                       rgba(56, 235, 255, 0) 0%,
@@ -506,16 +506,10 @@ header {
                       100% 100%
       );
       position: absolute;
-      top: 67px;
-      left: 33px;
-    }
-    .tb-1 {
-        top: 70px;
-        height: 56px;
-      }
-    .tb-2 {
-      top: 67px;
-      height: 65px;
+
+      height: calc(100% - 32px);
+      top: 72px;
+      left: 50%;
     }
   }
   .how-perk-work-title {
