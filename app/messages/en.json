@@ -27,14 +27,6 @@
     "notFound": "Page not found",
     "register": "Register"
   },
-  "language": {
-    "en": "English",
-    "ko": "Korean",
-    "zh": "Chinese",
-    "ja": "Japanese",
-    "id": "Indonesian",
-    "es": "Spanish"
-  },
   "home": {
     "meta": {
       "title": "Home | PerkX",

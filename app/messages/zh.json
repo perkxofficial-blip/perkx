@@ -27,14 +27,6 @@
     "notFound": "页面未找到",
     "register": "注册"
   },
-  "language": {
-    "en": "英语",
-    "ko": "韩语",
-    "zh": "中文",
-    "ja": "日语",
-    "id": "印尼语",
-    "es": "西班牙语"
-  },
   "home": {
     "meta": {
       "title": "首页 | PerkX",

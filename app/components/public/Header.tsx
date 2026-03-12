@@ -3,15 +3,7 @@ import {getTranslations, getLocale} from "next-intl/server";
 import { headers } from 'next/headers';
 import AuthButtons from "./AuthButtons";
 import Navigation from "./Navigation";
-
-const LANGUAGES = [
-  { code: 'en', key: 'language.en' },
-  { code: 'ko', key: 'language.ko' },
-  { code: 'zh', key: 'language.zh' },
-  { code: 'ja', key: 'language.ja' },
-  { code: 'id', key: 'language.id' },
-  { code: 'es', key: 'language.es' },
-] as const;
+import { LANGUAGES } from '@/app/utils/const';
 
 export default async function Header() {
   const t = await getTranslations();
@@ -109,11 +101,11 @@ export default async function Header() {
                            >
                              <Image
                                src="/images/global-line.png"
-                               alt={`Language: ${t(currentLang.key)}`}
+                               alt={`Language: ${currentLang.key}`}
                                width={20}
                                height={20}
                              />
-                             <span className="ms-1">{t(currentLang.key)}</span>
+                             <span className="ms-1">{currentLang.key}</span>
                            </button>
 
 
@@ -124,7 +116,7 @@ export default async function Header() {
                                return (
                                  <li key={lang.code}>
                                    <a className="dropdown-item" href={targetUrl}>
-                                     {t(lang.key)}
+                                     {lang.key}
                                    </a>
                                  </li>
                                );
@@ -152,11 +144,11 @@ export default async function Header() {
                 >
                   <Image
                     src="/images/global-line.png"
-                    alt={`Language: ${t(currentLang.key)}`}
+                    alt={`Language: ${currentLang.key}`}
                     width={20}
                     height={20}
                   />
-                  <span className="ms-1">{t(currentLang.key)}</span>
+                  <span className="ms-1">{currentLang.key}</span>
                 </button>
 
 
@@ -168,7 +160,7 @@ export default async function Header() {
                     return (
                       <li key={lang.code}>
                         <a className="dropdown-item" href={targetUrl}>
-                          {t(lang.key)}
+                          {lang.key}
                         </a>
                       </li>
                     );

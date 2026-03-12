@@ -27,14 +27,6 @@
     "notFound": "Página no encontrada",
     "register": "Registrarse"
   },
-  "language": {
-    "en": "Inglés",
-    "ko": "Coreano",
-    "zh": "Chino",
-    "ja": "Japonés",
-    "id": "Indonesio",
-    "es": "Español"
-  },
   "home": {
     "meta": {
       "title": "Inicio | PerkX",
