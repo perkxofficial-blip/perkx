@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import {LOCALES} from './const';
 
 export const SITEMAP_ROUTES = [
   { path: '', priority: 1, changeFrequency: 'daily' as const },
@@ -10,8 +11,6 @@ export const SITEMAP_ROUTES = [
   { path: '/help-center', priority: 0.6, changeFrequency: 'weekly' as const },
   { path: '/term-of-use', priority: 0.5, changeFrequency: 'monthly' as const },
 ]
-
-export const LOCALES = ['en', 'ko', 'zh', 'ja', 'id', 'es']
 
 export function generateSitemap(baseUrl: string): MetadataRoute.Sitemap {
   const sitemap: MetadataRoute.Sitemap = []

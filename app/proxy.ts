@@ -1,7 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
 import {routing} from './i18n/routing';
 import {NextRequest, NextResponse} from 'next/server';
-import {LOCALES} from './app/utils/sitemapUtils';
+import {LOCALES} from './app/utils/const';
 import { cookies } from 'next/headers';
 
 const intlMiddleware = createMiddleware({
@@ -55,10 +55,17 @@ export default async function proxy(request: NextRequest) {
   const {pathname} = request.nextUrl;
   const host = request.headers.get('host') || '';
   const protocol = request.headers.get('x-forwarded-proto') || 'https';
-
   const segments = pathname.split('/');
   const maybeLocale = segments[1];
   const locales = LOCALES;
+  // Apply i18n middleware for public routes
+  const response = intlMiddleware(request);
+  // Detect locale from subdomain and sync with NEXT_LOCALE cookie
+  const detectedLocale = getLocaleFromHost(host);
+  const currentLocaleCookie = request.cookies.get('NEXT_LOCALE')?.value;
+  const baseDomain = getBaseDomain(host);
+  const userToken = cookieStore.get('token')?.value;
+
   if (locales.includes(maybeLocale)) {
     const newPath = '/' + segments.slice(2).join('/');
     const cleanPath = newPath === '/' ? '' : newPath;
@@ -77,7 +84,7 @@ export default async function proxy(request: NextRequest) {
     const redirectUrl = `${protocol}://${maybeLocale}.${baseDomain}${cleanPath}`;
     return NextResponse.redirect(redirectUrl);
   }
-console.log('Request URL:', request.url);
+
   // Skip i18n for admin routes
   if (pathname.startsWith('/admin')) {
     // Auth check for admin
@@ -90,15 +97,7 @@ console.log('Request URL:', request.url);
     }
     return NextResponse.next();
   }
-  
-  // Apply i18n middleware for public routes
-  const response = intlMiddleware(request);
-  
-  // Detect locale from subdomain and sync with NEXT_LOCALE cookie
-  const detectedLocale = getLocaleFromHost(host);
-  const currentLocaleCookie = request.cookies.get('NEXT_LOCALE')?.value;
-  const baseDomain = getBaseDomain(host);
-  
+
   // If locale changed or not set, update NEXT_LOCALE cookie with base domain
   if (currentLocaleCookie !== detectedLocale) {
     console.log('[proxy] Locale changed:', currentLocaleCookie, '->', detectedLocale, '| Domain:', baseDomain);
@@ -109,17 +108,20 @@ console.log('Request URL:', request.url);
       maxAge: 60 * 60 * 24 * 365, // 1 year
     });
   }
-  
-  // Thêm pathname vào response headers để server component có thể đọc
   response.headers.set('x-pathname', pathname);
   
+  if (pathname.includes('/admin/login') && userToken) {
+    return NextResponse.redirect(new URL('/admin', request.url));
+  }
+
   // Auth check for user routes
   if (pathname.includes('/user')) {
-    const userToken = cookieStore.get('token')?.value;
-    console.log('userToken:', userToken);
     if (!userToken) {
       return NextResponse.redirect(new URL('/', request.url));
     }
+  }
+  if (pathname.includes('/login') && userToken) {
+    return NextResponse.redirect(new URL('/user/profile', request.url));
   }
   
   return response;

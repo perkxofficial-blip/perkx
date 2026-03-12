@@ -4,15 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { RefObject, useState } from 'react';
 import { logoutAction } from '@/components/public/logoutAction';
-
-const LANGUAGES = [
-  { code: 'en', key: 'language.en' },
-  { code: 'ko', key: 'language.ko' },
-  { code: 'zh', key: 'language.zh' },
-  { code: 'ja', key: 'language.ja' },
-  { code: 'id', key: 'language.id' },
-  { code: 'es', key: 'language.es' },
-] as const;
+import { LANGUAGES } from '@/app/utils/const';
 
 interface UserProfileSidebarProps {
   asideRef: RefObject<HTMLDivElement | null>;
@@ -148,7 +140,7 @@ export default function UserSidebar({
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
                     <path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H2M12 22C6.47715 22 2 17.5228 2 12M12 22C9.43223 19.3038 8 15.7233 8 12C8 8.27674 9.43223 4.69615 12 2M12 22C14.5678 19.3038 16 15.7233 16 12C16 8.27674 14.5678 4.69615 12 2M2 12C2 6.47715 6.47715 2 12 2" stroke="#C9C9C9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <span className="text-sm font-medium">{tLang(locale)}</span>
+                  <span className="text-sm font-medium">{LANGUAGES.filter(lang => lang.code === locale)[0]?.key}</span>
                 </div>
                 <svg className={`w-4 h-4 transition-transform ${showLanguageDropdown ? '-rotate-90' : ''}`} fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -168,7 +160,7 @@ export default function UserSidebar({
                       }`}
                       onClick={() => setShowLanguageDropdown(false)}
                     >
-                      {tLang(lang.code)}
+                      {lang.key}
                     </a>
                   ))}
                 </div>

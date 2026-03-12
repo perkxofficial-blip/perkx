@@ -27,14 +27,6 @@
     "notFound": "Halaman tidak ditemukan",
     "register": "Daftar"
   },
-  "language": {
-    "en": "Inggris",
-    "ko": "Korea",
-    "zh": "Mandarin",
-    "ja": "Jepang",
-    "id": "Indonesia",
-    "es": "Spanyol"
-  },
   "home": {
     "meta": {
       "title": "Beranda | PerkX",
