@@ -358,17 +358,10 @@
       height: 480px;
     }
     .timeline-item {
-      margin-bottom: 24px !important;
+      padding-bottom: 24px !important;
       .timeline-bottom {
-        left: 17px;
-      }
-      .tb-1 {
-        top: 36px;
-        height: 120px;
-      }
-      .tb-2 {
-        top: 39px;
-        height: 98px;
+        top: 40px;
+        height: calc(100% - 15px);
       }
     }
   }
@@ -517,7 +510,6 @@
     }
   }
   .campaign-section {
-    padding-top: 0 !important;
     .form-label {
       font-size: 13px !important;
     }
@@ -710,18 +702,6 @@
   .how-perk-work-title {
     p {
       margin-bottom: 30px !important;
-    }
-  }
-  .timeline-item {
-    .timeline-bottom {
-      height: 70px;
-    }
-    .tb-1 {
-      top: 37px;
-    }
-    .tb-2 {
-      top: 38px;
-      height: 63px;
     }
   }
   .timeline-wrapper{
