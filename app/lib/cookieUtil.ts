@@ -63,8 +63,15 @@ export async function getBaseDomain(): Promise<string> {
   
   if (hostname.includes('localhost')) {
     return '.localhost';
-  } else {
+  } else if (hostname.includes('perkx.co')) {
     // Extract base domain (e.g., perkx.co from ko.perkx.co)
     return '.perkx.co';
+  } else {
+    // For other domains, return the base domain (e.g., example.com from www.example.com)
+    const parts = hostname.split('.');
+    if (parts.length >= 2) {
+      return '.' + parts.slice(-2).join('.');
+    }
+    return '.' + hostname; // fallback to the hostname itself
   }
 }
