@@ -1,8 +1,20 @@
 import Image from "next/image";
-import {getTranslations} from "next-intl/server";
+import {getTranslations, getLocale} from "next-intl/server";
+
+const ZENDESK_LOCALE_MAP: Record<string, string> = {
+  en: 'en-us',
+  ko: 'ko',
+  zh: 'zh-cn',
+  ja: 'ja',
+  id: 'id',
+  es: 'es',
+};
 
 export default async function Footer() {
   const t = await getTranslations();
+  const locale = await getLocale();
+  const zendeskLocale = ZENDESK_LOCALE_MAP[locale] ?? 'en-us';
+  const helpCenterUrl = `https://perkx.zendesk.com/hc/${zendeskLocale}`;
   return (
     <footer className="footer">
       <div className="container">
@@ -42,7 +54,7 @@ export default async function Footer() {
           <div className="col-md-4">
             <div className="d-flex justify-content-start">
               <ul className="text-start">
-                <li><a href="/help-center">{t('footer.help_center')}</a></li>
+                <li><a href={helpCenterUrl} target="_blank" rel="noopener noreferrer">{t('footer.help_center')}</a></li>
                 <li><a href="/term-of-use">{t('footer.terms_of_use')}</a></li>
               </ul>
             </div>
