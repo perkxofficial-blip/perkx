@@ -1,9 +1,9 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { RefObject, useState } from 'react';
-import { logoutAction } from '@/components/public/logoutAction';
+import { auth } from '@/services/auth';
 import { LANGUAGES } from '@/app/utils/const';
 
 interface UserProfileSidebarProps {
@@ -19,6 +19,7 @@ export default function UserSidebar({
 }: UserProfileSidebarProps) {
   const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
   const t = useTranslations('user.profile');
   const tLang = useTranslations('language');
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
@@ -27,8 +28,11 @@ export default function UserSidebar({
     return pathname.includes(path);
   };
 
-  const handleLogout = async () => {
-    await logoutAction();
+  const handleLogout = () => {
+    // Clear cookies from client-side (cookies are httpOnly: false)
+    auth.clearUserToken();
+    // Redirect to home page
+    router.push('/');
   };
 
   // Hàm tạo URL đổi ngôn ngữ giữ nguyên pathname hiện tại

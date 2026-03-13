@@ -212,7 +212,8 @@
     "monthly_cashback": "CASHBACK BULANAN",
     "annual_savings": "PENGHEMATAN TAHUNAN",
     "claim_rebate_btn": "Klaim Rebate Ini Sekarang",
-    "choose_exchange": "Pilih bursa"
+    "choose_exchange": "Pilih bursa",
+    "fee_placeholder": "Pilih biaya"
   },
   "about": {
     "meta": {
