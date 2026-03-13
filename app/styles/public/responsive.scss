@@ -190,6 +190,9 @@
 }
 
 @media (max-width: 992px) {
+  .how-it-works-page .get-started p, .about-us-page .get-started p {
+    font-size: 16px;
+  }
   .page-header-lv1 {
     font-size: 36px !important;
   }
@@ -476,7 +479,7 @@
   .img-bg-exchanges {
     height: 525px;
     p {
-      font-size: 20px !important;
+      font-size: 16px !important;
     }
   }
   .calculator-hero-title{
@@ -486,7 +489,7 @@
     padding: 40px 0 !important;
   }
   .calculator-hero-subtitle {
-    font-size: 20px;
+    font-size: 16px;
   }
   .calculator-section {
     padding: 0;
@@ -508,7 +511,7 @@
       font-size: 44px !important;
     }
     p {
-      font-size:20px !important;
+      font-size: 16px !important;
     }
   }
   .campaign-section {
