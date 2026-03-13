@@ -70,18 +70,18 @@ export default async function proxy(request: NextRequest) {
     const newPath = '/' + segments.slice(2).join('/');
     const cleanPath = newPath === '/' ? '' : newPath;
     const hostname = host.replace(/^www\./, '');
-    let baseDomain;
+    let baseDomain2;
     if (hostname.includes('localhost')) {
-      baseDomain = hostname.split('.').slice(-1)[0];
+      baseDomain2 = hostname.split('.').slice(-1)[0];
     } else {
-      baseDomain = hostname.split('.').slice(-2).join('.');
+      baseDomain2 = hostname.split('.').slice(-2).join('.');
     }
     if (maybeLocale === 'en') {
-      const redirectUrl = `${protocol}://${baseDomain}${cleanPath}`;
+      const redirectUrl = `${protocol}://${baseDomain2}${cleanPath}`;
       return NextResponse.redirect(redirectUrl);
     }
 
-    const redirectUrl = `${protocol}://${maybeLocale}.${baseDomain}${cleanPath}`;
+    const redirectUrl = `${protocol}://${maybeLocale}.${baseDomain2}${cleanPath}`;
     return NextResponse.redirect(redirectUrl);
   }
 
