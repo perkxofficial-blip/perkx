@@ -261,7 +261,7 @@ export default function AdminLayoutWrapper({ children }: AdminLayoutWrapperProps
                   </div>
                   <div className="hidden text-left lg:block">
                     <span className="block text-sm font-medium text-gray-900 dark:text-white">Admin User</span>
-                    <span className="block text-xs text-gray-500">Super Admin</span>
+                    <span className="block text-xs text-gray-500">Super Admin ({process.env.NEXT_PUBLIC_VERSION || 'N/A'})</span>
                   </div>
                   <svg className="w-4 h-4 text-gray-500 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

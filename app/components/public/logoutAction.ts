@@ -6,20 +6,14 @@ import { getBaseDomain } from '@/lib/cookieUtil';
 
 export async function logoutAction() {
   const cookieStore = await cookies();
-  const baseDomain = await getBaseDomain();
-  
-  // Clear the token cookie from parent domain
   cookieStore.delete({
     name: 'token',
-    path: '/',
-    domain: baseDomain,
+    path: '/'
   });
   cookieStore.delete({
     name: 'verify-email',
-    path: '/',
-    domain: baseDomain,
+    path: '/'
   });
-  
   // Redirect to home page
   redirect('/');
 }
