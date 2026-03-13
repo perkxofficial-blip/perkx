@@ -212,7 +212,8 @@
     "monthly_cashback": "月間キャッシュバック",
     "annual_savings": "年間節約額",
     "claim_rebate_btn": "このリベートを今すぐ請求",
-    "choose_exchange": "取引所を選択"
+    "choose_exchange": "取引所を選択",
+    "fee_placeholder": "手数料を選択"
   },
   "about": {
     "meta": {
@@ -263,7 +264,7 @@
     },
     "hero": {
       "title_part1": "より良い取引を",
-      "title_gradient": "アンロック",
+      "title_gradient": "Perkx",
       "subtitle": "3つの簡単なステップに従って、すべての取引でより良い手数料と報酬をアンロックします。"
     },
     "steps": {

@@ -14,7 +14,44 @@ export const auth = {
   },
 
   clearUserToken() {
-    document.cookie = 'token=; path=/; max-age=0';
+    // Get the base domain for clearing domain-scoped cookies
+    const hostname = window.location.hostname;
+    let baseDomain = '';
+    
+    if (hostname.includes('localhost')) {
+      baseDomain = '.localhost';
+    } else if (hostname.includes('perkx.co')) {
+      baseDomain = '.perkx.co';
+    } else if (hostname.includes('perk.local')) {
+      baseDomain = '.perk.local';
+    } else {
+      // For other domains, extract base domain
+      const parts = hostname.split('.');
+      if (parts.length >= 2) {
+        baseDomain = '.' + parts.slice(-2).join('.');
+      }
+    }
+    
+    const cookieNames = ['token', 'verify-email'];
+    const expireDate = 'Thu, 01 Jan 1970 00:00:00 GMT';
+    
+    for (const cookieName of cookieNames) {
+      // 1. Clear for current domain
+      document.cookie = `${cookieName}=; path=/; max-age=0; expires=${expireDate}`;
+      
+      // 2. Clear for base domain with dot prefix (e.g., .perk.local)
+      if (baseDomain) {
+        document.cookie = `${cookieName}=; path=/; domain=${baseDomain}; max-age=0; expires=${expireDate}`;
+        
+        // 3. Clear without the leading dot (e.g., perk.local)
+        if (baseDomain.startsWith('.')) {
+          const domainWithoutDot = baseDomain.substring(1);
+          document.cookie = `${cookieName}=; path=/; domain=${domainWithoutDot}; max-age=0; expires=${expireDate}`;
+        }
+      }
+    }
+    
+    console.log('[clearUserToken] Cookies cleared for domain:', baseDomain, '| Remaining:', document.cookie);
   },
 
   // Admin token management

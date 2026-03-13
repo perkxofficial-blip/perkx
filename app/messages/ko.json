@@ -212,7 +212,8 @@
     "monthly_cashback": "월간 캐시백",
     "annual_savings": "연간 절감액",
     "claim_rebate_btn": "지금 리베이트 받기",
-    "choose_exchange": "거래소를 선택하세요"
+    "choose_exchange": "거래소를 선택하세요",
+    "fee_placeholder": "수수료 선택"
   },
   "about": {
     "meta": {

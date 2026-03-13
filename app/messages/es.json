@@ -212,7 +212,8 @@
     "monthly_cashback": "CASHBACK MENSUAL",
     "annual_savings": "AHORRO ANUAL",
     "claim_rebate_btn": "Reclama Este Reembolso Ahora",
-    "choose_exchange": "Seleccionar exchange"
+    "choose_exchange": "Seleccionar exchange",
+    "fee_placeholder": "Seleccionar tarifa"
   },
   "about": {
     "meta": {
@@ -263,7 +264,7 @@
     },
     "hero": {
       "title_part1": "Desbloquea Mejores ",
-      "title_gradient": "Beneficios de Trading",
+      "title_gradient": "Perkx",
       "subtitle": "Sigue tres simples pasos para desbloquear mejores comisiones y recompensas en cada operación."
     },
     "steps": {

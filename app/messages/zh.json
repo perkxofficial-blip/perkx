@@ -212,7 +212,8 @@
     "monthly_cashback": "每月返现",
     "annual_savings": "年度节省",
     "claim_rebate_btn": "立即领取此返佣",
-    "choose_exchange": "选择交易所"
+    "choose_exchange": "选择交易所",
+    "fee_placeholder": "选择费用"
   },
   "about": {
     "meta": {
@@ -263,7 +264,7 @@
     },
     "hero": {
       "title_part1": "解锁更好的交易",
-      "title_gradient": "福利",
+      "title_gradient": "Perkx",
       "subtitle": "按照三个简单步骤，在每笔交易中解锁更好的费用和奖励。"
     },
     "steps": {
