@@ -8,7 +8,6 @@ export const SITEMAP_ROUTES = [
   { path: '/calculator', priority: 0.8, changeFrequency: 'weekly' as const },
   { path: '/campaigns', priority: 0.9, changeFrequency: 'daily' as const },
   { path: '/about-us', priority: 0.7, changeFrequency: 'monthly' as const },
-  { path: '/help-center', priority: 0.6, changeFrequency: 'weekly' as const },
   { path: '/term-of-use', priority: 0.5, changeFrequency: 'monthly' as const },
 ]
 
