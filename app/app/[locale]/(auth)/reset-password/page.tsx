@@ -1,5 +1,3 @@
-import { getPageBySlug } from '@/services/api/pages';
-import { generatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
@@ -9,23 +7,15 @@ import {cookies} from "next/headers";
 import PasswordInput from "@/components/public/login/PasswordInput";
 import SubmitButton from "@/components/public/login/SubmitButton";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8088/api';
 export async function generateMetadata({ params }: {
   params: Promise<{
     locale: string;
   }>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  const page = await getPageBySlug('reset-password', locale);
-
-  if (!page) {
-    return {
-      title: 'Reset Password | PerkX',
-      description: 'Learn more about PerkX and our mission',
-    };
-  }
-
-  return generatePageMetadata({ page, locale });
+  return {
+    title: 'Reset Password | PerkX',
+    description: 'Learn more about PerkX and our mission',
+  };
 }
 interface Props {
   searchParams: { token?: string }

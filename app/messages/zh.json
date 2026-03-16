@@ -148,6 +148,7 @@
     "forgot_email_success": "密码恢复邮件已成功发送。请检查您的收件箱（包括垃圾邮件）。",
     "forgot_email_failed": "发送密码恢复邮件失败。请验证您的电子邮件地址或稍后再试。",
     "reset_password_success": "您的密码已成功重置。您现在可以使用新密码登录。",
+    "email_already_verified": "电子邮件已验证",
     "token_invalid": "此重置令牌无效。请请求新的密码重置。",
     "token_expire": "此重置令牌已过期。请请求新的密码重置。"
   },
@@ -528,7 +529,8 @@
       "placeholder_first_name": "张伟",
       "placeholder_last_name": "张",
       "placeholder_phone": "+86-138-0013-8000",
-      "placeholder_birthday": "2000年1月1日"
+      "placeholder_birthday": "2000年1月1日",
+      "copy_failed": "复制到剪贴板失败"
     },
     "linked_exchanges": {
       "title": "关联交易所",

@@ -149,7 +149,8 @@
     "forgot_email_failed": "Gagal mengirim email pemulihan password. Silakan verifikasi alamat email Anda atau coba lagi nanti.",
     "reset_password_success": "Password Anda telah berhasil direset. Anda sekarang dapat masuk dengan password baru Anda.",
     "token_invalid": "Token reset ini tidak valid. Silakan minta reset password baru.",
-    "token_expire": "Token reset ini telah kedaluwarsa. Silakan minta reset password baru."
+    "token_expire": "Token reset ini telah kedaluwarsa. Silakan minta reset password baru.",
+    "email_already_verified": "Email sudah terverifikasi"
   },
   "campaign": {
     "meta": {
@@ -528,7 +529,8 @@
       "placeholder_first_name": "Budi",
       "placeholder_last_name": "Santoso",
       "placeholder_phone": "+62-812-3456-7890",
-      "placeholder_birthday": "01 Jan 2000"
+      "placeholder_birthday": "01 Jan 2000",
+      "copy_failed": "Gagal menyalin ke clipboard"
     },
     "linked_exchanges": {
       "title": "Exchange Tertaut",

@@ -529,7 +529,8 @@
       "placeholder_first_name": "Jane Thompson",
       "placeholder_last_name": "Thompson",
       "placeholder_phone": "+1-929-376-4893",
-      "placeholder_birthday": "01 Jan 2000"
+      "placeholder_birthday": "01 Jan 2000",
+      "copy_failed": "Failed to copy to clipboard"
     },
     "linked_exchanges": {
       "title": "Linked Exchanges",

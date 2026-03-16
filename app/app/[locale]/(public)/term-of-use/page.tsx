@@ -1,5 +1,4 @@
 import Header from "@/components/public/Header";
-import Footer from "@/components/public/Footer";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from 'next';
 import '@/styles/public/terms-of-use.scss';

@@ -34,10 +34,7 @@ export default function LinkedExchangesPage() {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations('user.linked_exchanges');
-  const tLang = useTranslations('language');
-  const tProfile = useTranslations('user.profile');
   const [loading, setLoading] = useState(true);
-  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [selectedExchange, setSelectedExchange] = useState('');

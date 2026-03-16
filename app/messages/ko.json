@@ -527,7 +527,8 @@
       "placeholder_first_name": "김철수",
       "placeholder_last_name": "김",
       "placeholder_phone": "+82-10-1234-5678",
-      "placeholder_birthday": "2000년 1월 1일"
+      "placeholder_birthday": "2000년 1월 1일",
+      "copy_failed": "클립보드에 복사 실패"
     },
     "linked_exchanges": {
       "title": "연결된 거래소",
