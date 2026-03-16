@@ -192,9 +192,38 @@ export default function UserProfilePage() {
 
   const handleCopyReferralCode = () => {
     if (profile?.referral_code) {
-      navigator.clipboard.writeText(profile.referral_code);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
+      try {
+        // Try modern clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(profile.referral_code);
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 2000);
+        } else {
+          // Fallback for older browsers or non-secure contexts
+          const textArea = document.createElement('textarea');
+          textArea.value = profile.referral_code;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          textArea.style.top = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          
+          try {
+            document.execCommand('copy');
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 2000);
+          } catch (err) {
+            console.error('Fallback copy failed:', err);
+            showToast(t('copy_failed') || 'Failed to copy', 'error');
+          } finally {
+            document.body.removeChild(textArea);
+          }
+        }
+      } catch (error) {
+        console.error('Copy to clipboard failed:', error);
+        showToast(t('copy_failed') || 'Failed to copy', 'error');
+      }
     }
   };
 

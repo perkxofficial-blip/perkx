@@ -1,5 +1,3 @@
-import { getPageBySlug } from '@/services/api/pages';
-import { generatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
@@ -15,16 +13,10 @@ interface RegisterPageProps {
 }
 
 export async function generateMetadata({ params }: RegisterPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  const page = await getPageBySlug('home', locale);
-  if (!page) {
-    return {
-      title: 'Register | PerkX',
-      description: 'Learn more about PerkX and our mission',
-    };
-  }
-
-  return generatePageMetadata({ page, locale });
+  return {
+    title: 'Register | PerkX',
+    description: 'Learn more about PerkX and our mission',
+  };
 }
 function mapErrors(errors?: Array<{ field: string; message: string }>) {
   if (!errors) return {}

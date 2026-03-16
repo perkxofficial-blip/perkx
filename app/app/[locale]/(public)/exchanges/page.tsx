@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 import Header from '@/components/public/Header';
 import type { Metadata } from 'next';
 import { getAllExchanges, Exchange, ExchangeProduct } from '@/services/api/public/exchange';
-import Image from 'next/image';
 import PartnerExchangesTable from '@/components/public/PartnerExchangesTable';
 import PartnerExchangesMobileTable from "@/components/public/PartnerExchangesMobileTable";
 

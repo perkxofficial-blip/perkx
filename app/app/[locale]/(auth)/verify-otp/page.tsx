@@ -1,5 +1,3 @@
-import { getPageBySlug } from '@/services/api/pages';
-import { generatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 import Image from "next/image";
 import {getTranslations} from "next-intl/server";
@@ -14,17 +12,10 @@ export async function generateMetadata({ params }: {
     locale: string;
   }>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  const page = await getPageBySlug('verify-otp', locale);
-
-  if (!page) {
-    return {
-      title: 'Verify OTP | PerkX',
-      description: 'Learn more about PerkX and our mission',
-    };
-  }
-
-  return generatePageMetadata({ page, locale });
+  return {
+    title: 'Verify OTP | PerkX',
+    description: 'Learn more about PerkX and our mission',
+  };
 }
 export default async function VerifyOtpPage() {
   const t = await getTranslations();

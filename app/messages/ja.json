@@ -148,6 +148,7 @@
     "forgot_email_success": "パスワード回復メールが正常に送信されました。受信トレイ（迷惑メールを含む）を確認してください。",
     "forgot_email_failed": "パスワード回復メールの送信に失敗しました。メールアドレスを確認するか、後でもう一度お試しください。",
     "reset_password_success": "パスワードが正常にリセットされました。新しいパスワードでサインインできます。",
+    "email_already_verified": "メールアドレスは既に確認済みです",
     "token_invalid": "このリセットトークンは無効です。新しいパスワードリセットをリクエストしてください。",
     "token_expire": "このリセットトークンは期限切れです。新しいパスワードリセットをリクエストしてください。"
   },
@@ -528,7 +529,8 @@
       "placeholder_first_name": "太郎",
       "placeholder_last_name": "山田",
       "placeholder_phone": "+81-90-1234-5678",
-      "placeholder_birthday": "2000年1月1日"
+      "placeholder_birthday": "2000年1月1日",
+      "copy_failed": "クリップボードへのコピーに失敗しました"
     },
     "linked_exchanges": {
       "title": "リンクされた取引所",

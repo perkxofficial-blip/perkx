@@ -149,7 +149,8 @@
     "forgot_email_failed": "Error al enviar el correo de recuperación de contraseña. Por favor, verifica tu dirección de correo electrónico o inténtalo de nuevo más tarde.",
     "reset_password_success": "Tu contraseña se ha restablecido correctamente. Ahora puedes iniciar sesión con tu nueva contraseña.",
     "token_invalid": "Este token de restablecimiento no es válido. Por favor, solicita un nuevo restablecimiento de contraseña.",
-    "token_expire": "Este token de restablecimiento ha expirado. Por favor, solicita un nuevo restablecimiento de contraseña."
+    "token_expire": "Este token de restablecimiento ha expirado. Por favor, solicita un nuevo restablecimiento de contraseña.",
+    "email_already_verified": "El correo electrónico ya está verificado"
   },
   "campaign": {
     "meta": {
@@ -528,7 +529,8 @@
       "placeholder_first_name": "María",
       "placeholder_last_name": "García",
       "placeholder_phone": "+34-612-345-678",
-      "placeholder_birthday": "01 Ene 2000"
+      "placeholder_birthday": "01 Ene 2000",
+      "copy_failed": "Error al copiar al portapapeles"
     },
     "linked_exchanges": {
       "title": "Exchanges Vinculados",

@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import Header from '@/components/public/Header';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Metadata } from 'next';
 import { getCampaign } from '@/services/api/public/campaign';
 
 interface CampaignDetailPageProps {
