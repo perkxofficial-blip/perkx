@@ -37,7 +37,7 @@ export default function PartnerExchangesTable({ exchanges }: PartnerExchangesTab
           <th className="text-end" style={{ width: '10%' }}>{t('discount_rate')}</th>
           <th className="text-end" style={{ width: '14%' }}>{t('default_taker')}</th>
           <th className="text-end" style={{ width: '14%' }}>{t('final_taker')}</th>
-          <th className="text-end" style={{ width: '14%' }}>{t('ave_rebate')}</th>
+          <th className="text-end" style={{ width: '14%' }}>{t('avg_rebate')}</th>
           <th className="text-center" style={{ width: '14%' }}>{t('action')}</th>
         </tr>
         </thead>

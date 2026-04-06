@@ -90,7 +90,7 @@ export default function PartnerExchangesMobileTable({ exchanges }: PartnerExchan
                 <p>{t('discount_rate')}: <strong>{selectedProduct?.discount || 0}%</strong></p>
                 <p>{t('default_taker')}: <strong>{selectedProduct?.default_fee_maker || 0}% / {selectedProduct?.default_fee_taker || 0}%</strong></p>
                 <p>{t('final_taker')}: <strong>{selectedProduct?.final_fee_maker || 0}% / {selectedProduct?.final_fee_taker || 0}%</strong></p>
-                <p>{t('ave_rebate')}: <strong>${selectedProduct?.ave_rebate?.toLocaleString() || 0}</strong></p>
+                <p>{t('avg_rebate')}: <strong>${selectedProduct?.ave_rebate?.toLocaleString() || 0}</strong></p>
                 <a
                   href={selectedProduct?.exchange_signup_link || exchange.affiliate_link || '#'}
                   className="pe-link"

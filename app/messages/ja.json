@@ -60,7 +60,7 @@
       "discount_rate": "割引率",
       "default_taker": "デフォルト*",
       "final_taker": "最終*",
-      "ave_rebate": "平均リベート**",
+      "avg_rebate": "平均還元**",
       "action": "アクション",
       "register": "登録"
     },

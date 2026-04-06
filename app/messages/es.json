@@ -60,7 +60,7 @@
       "discount_rate": "Tasa de Descuento",
       "default_taker": "Predeterminado*",
       "final_taker": "Final*",
-      "ave_rebate": "Reembolso Promedio**",
+      "avg_rebate": "Rebate prom.**",
       "action": "acción",
       "register": "Registrarse"
     },

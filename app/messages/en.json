@@ -60,7 +60,7 @@
       "discount_rate": "Discount Rate",
       "default_taker": "Default*",
       "final_taker": "Final*",
-      "ave_rebate": "Ave Rebate**",
+      "avg_rebate": "Avg Rebate**",
       "action": "action",
       "register": "Register"
     },

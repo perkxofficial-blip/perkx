@@ -60,7 +60,7 @@
       "discount_rate": "할인율",
       "default_taker": "기본값*",
       "final_taker": "최종*",
-      "ave_rebate": "평균 리베이트**",
+      "avg_rebate": "평균 환급**",
       "action": "액션",
       "register": "회원가입"
     },
