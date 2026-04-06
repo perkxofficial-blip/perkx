@@ -89,7 +89,7 @@ export default async function AboutUsPage({ params }: AboutUsPageProps) {
 
               <h2>{t('sections.partner_offers.title')}</h2>
               <ol>
-                {t.raw('sections.partner_offers.items').slice(0, 3).map((item: string, index: number) => (
+                {t.raw('sections.partner_offers.items').slice(0, 2).map((item: string, index: number) => (
                   <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
                 ))}
                 <li>

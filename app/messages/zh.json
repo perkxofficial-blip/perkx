@@ -60,7 +60,7 @@
       "discount_rate": "折扣率",
       "default_taker": "默认*",
       "final_taker": "最终*",
-      "ave_rebate": "平均返佣**",
+      "avg_rebate": "平均返利**",
       "action": "操作",
       "register": "注册"
     },

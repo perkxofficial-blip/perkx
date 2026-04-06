@@ -60,7 +60,7 @@
       "discount_rate": "Tingkat Diskon",
       "default_taker": "Default*",
       "final_taker": "Final*",
-      "ave_rebate": "Rabat Rata-rata*",
+      "avg_rebate": "Rebate rata**",
       "action": "aksi",
       "register": "Daftar"
     },
