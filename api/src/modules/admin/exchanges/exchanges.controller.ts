@@ -75,10 +75,10 @@ export class AdminExchangesController {
   @Get('list')
   @ApiOperation({
     summary: 'Get list of active exchanges',
-    description: 'Returns list of active exchanges with id and name. Optionally includes a special PerkX item with id: 0 based on is_extention query parameter.',
+    description: 'Returns list of active exchanges with id and name. Optionally includes a special PerkX item with id: 0 based on is_extension query parameter.',
   })
   @ApiQuery({
-    name: 'is_extention',
+    name: 'is_extension',
     required: false,
     description: 'If true, includes PerkX item (id: 0) as the first item. If false or not provided, excludes PerkX item.',
     type: Boolean,
@@ -103,10 +103,10 @@ export class AdminExchangesController {
     description: 'Unauthorized - invalid or missing admin token',
   })
   async getExchangeList(
-    @Query('is_extention', new DefaultValuePipe(false), ParseBoolPipe)
-    isExtention: boolean,
+    @Query('is_extension', new DefaultValuePipe(false), ParseBoolPipe)
+    isExtension: boolean,
   ) {
-    return await this.exchangesService.getExchangeList(isExtention);
+    return await this.exchangesService.getExchangeList(isExtension);
   }
 
   @Post('import-products')
