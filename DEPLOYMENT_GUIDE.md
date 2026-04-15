@@ -28,6 +28,11 @@ ssh -i ~/.ssh/perkx-server.pem ubuntu@<server-ip>
 cd /var/www/perkx
 ```
 
+Change to root user.
+```bash
+sudo -s
+```
+
 ### 3. Pull Latest Code
 
 Pull code from master branch:
